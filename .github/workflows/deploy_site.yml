@@ -46,9 +46,8 @@ jobs:
         
       - name: Install dependencies
         run: |
-          pnpm setup
           pnpm i
-        working-directory: ${{ env.BUILD_PATH }}
+          pnpm setup
 
       - name: Install Astro CLI
         run: pnpm install -g astro@latest
