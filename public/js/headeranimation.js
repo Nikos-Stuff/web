@@ -3,24 +3,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let targetMouseX = 0, targetMouseY = 0, targetScrollY = 0;
     const easing = 0.075;
 
-    function throttle(fn, wait) {
-        let time = Date.now();
-        return function (...args) {
-            if ((time + wait - Date.now()) < 0) {
-                fn(...args);
-                time = Date.now();
-            }
-        }
-    }
-
-    document.addEventListener('mousemove', throttle(function (e) {
+    document.addEventListener('mousemove', function (e) {
         targetMouseX = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
         targetMouseY = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
-    }, 150));
+    });
 
-    window.addEventListener('scroll', throttle(function () {
+    window.addEventListener('scroll', function () {
         targetScrollY = window.scrollY;
-    }, 150));
+    });
 
     function ease(current, target, easeFactor) {
         const delta = target - current;
@@ -59,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Fade out animation based on scroll position
-        const threshold = 250;
+        const threshold = 650;
         const opacity = Math.max(1 - (scrollY / threshold), 0);
         animate.style.opacity = opacity.toFixed(2);
 

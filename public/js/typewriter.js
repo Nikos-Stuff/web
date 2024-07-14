@@ -1,5 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const texts = ["Creativity unleashed", "100% random stuff", "Xiro Cute"];
+    const texts = [
+        "Creativity unleashed",
+        "100% random stuff",
+        "Caution: May contain traces of unicorn giggles",
+        "Spontaneous bursts of brilliance",
+        "Chaos with a dash of glitter",
+        "Nonsense with a side of whimsy",
+        "Unleashing the inner goofball",
+        "Thoughts from the absurdity dimension",
+        "Serious lack of seriousness",
+        "Just add imagination and stir",
+        "Powered by caffeinated daydreams",
+        "Eureka moments in the making"
+    ];
+
     let currentIndex = 0;
     let isDeleting = false;
     let text = '';

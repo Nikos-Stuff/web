@@ -1,7 +1,7 @@
 import type { CollectionEntry } from "astro:content"
 import { createEffect, createSignal, For } from "solid-js"
-import ArrowCard from "@components/ArrowCard"
 import { cn } from "@lib/utils"
+import TeamCard from "@components/TeamCard.tsx";
 
 type Props = {
     tags: string[]
@@ -61,7 +61,7 @@ export default function Teams({ data, tags }: Props) {
                     <ul class="flex flex-col gap-3">
                         {teams().map((project) => (
                             <li>
-                                <ArrowCard entry={project} />
+                                <TeamCard entry={project} />
                             </li>
                         ))}
                     </ul>
