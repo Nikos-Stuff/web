@@ -1,0 +1,29 @@
+---
+import { getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import TopLayout from "@layouts/TopLayout.astro"
+import BottomLayout from "@layouts/BottomLayout.astro"
+import Projects from "@components/Teams"
+import { PROJECTS } from "@consts"
+import {TEAM} from "../../consts";
+
+const teams = (await getCollection("team"))
+  .filter(team => !team.data.draft)
+  // .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+
+const tags = [...new Set(teams.flatMap(team => team.data.tags))]
+  .sort((a, b) => a.localeCompare(b))
+---
+
+<PageLayout title={TEAM.TITLE} description={TEAM.DESCRIPTION}>
+  <TopLayout>
+    <div class="animate page-heading">
+      {TEAM.TITLE}
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <div class="animate">
+      <Projects client:load tags={tags} data={teams} />
+    </div>
+  </BottomLayout>
+</PageLayout>

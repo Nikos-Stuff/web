@@ -1,0 +1,35 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content"
+import PageLayout from "@layouts/PageLayout.astro"
+import TopLayout from "@layouts/TopLayout.astro"
+import BottomLayout from "@layouts/BottomLayout.astro"
+import ArticleTopLayout from "@layouts/TeamTopLayout.astro"
+import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
+
+// Create the static projects pages
+export async function getStaticPaths() {
+	const teams = await getCollection("team")
+	return teams.map((team) => ({
+		params: { slug: team.slug },
+		props: team,
+	}))
+}
+
+// Get the requested project
+type member = CollectionEntry<"team">
+const member = Astro.props
+const { title, summary } = member.data
+---
+
+<PageLayout title={title} description={summary}>
+  <TopLayout>
+    <div class="animate">
+      <ArticleTopLayout entry={member} />
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <div class="animate">
+      <ArticleBottomLayout entry={member} />
+    </div>
+  </BottomLayout>
+</PageLayout>
