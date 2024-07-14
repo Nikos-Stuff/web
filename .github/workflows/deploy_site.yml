@@ -26,6 +26,7 @@ concurrency:
 
 env:
   BUILD_PATH: "." # default value when not using subfolders
+  SHELL: /bin/bash
   # BUILD_PATH: subfolder
 
 jobs:
