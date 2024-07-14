@@ -13,26 +13,13 @@ const { Content } = await entry.render()
 // Get all non-draft entries
 const items = (await getCollection(collection)).filter(post => !post.data.draft)
 
-// Ensure there are at least two entries
-if (items.length < 2) {
-  throw new Error('Not enough entries to select prev and next.')
-}
+// Find the current entry index
+const currentIndex = items.findIndex(x => x.slug === entry.slug)
 
-// Helper function to get a random index
-function getRandomIndex(excludeIndex: number): number {
-  let randomIndex: number;
-  do {
-    randomIndex = Math.floor(Math.random() * items.length)
-  } while (randomIndex === excludeIndex)
-  return randomIndex
-}
+// Calculate the next index (circular, wraps around)
+const nextIndex = (currentIndex + 1) % items.length
 
-const index = items.findIndex(x => x.slug === entry.slug)
-
-// Get two random indices, ensuring they are different from each other and the current entry
-const prevIndex = getRandomIndex(index)
-const nextIndex = getRandomIndex(prevIndex === index ? getRandomIndex(index) : index)
-
+// Get the next item
 const next = items[nextIndex]
 
 ---
