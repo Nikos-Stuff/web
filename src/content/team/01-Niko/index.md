@@ -8,7 +8,7 @@ tags:
 - Dev
 demoUrl:
 repoUrl: https://github.com/Nikos-Stuff
-imageUrl: https://nikostuff.com/wp-content/uploads/2024/04/image.png
+imageUrl: /imgs/niko.jpg
 otherUrls:
   - { name: "YouTube", url: https://www.youtube.com/@NikoPL }
 ---
