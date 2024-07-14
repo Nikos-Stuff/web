@@ -46,6 +46,10 @@ jobs:
       - name: Install dependencies
         run: pnpm i 
         working-directory: ${{ env.BUILD_PATH }}
+
+      - name: Install Astro CLI
+        run: pnpm install -g astro@latest
+        
       - name: Build with Astro
         run: |
           ${{ steps.detect-package-manager.outputs.runner }} astro build \
