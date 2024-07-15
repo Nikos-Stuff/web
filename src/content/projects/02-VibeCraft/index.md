@@ -1,6 +1,6 @@
 ---
 title: "VibeCraft"
-summary: "RTV AGD Shop Website"
+summary: "Minecraft Vanilla+ Server"
 date: "Jan 05 2016"
 draft: false
 tags:
