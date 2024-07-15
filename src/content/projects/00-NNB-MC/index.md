@@ -5,9 +5,8 @@ date: "Jan 6 2024"
 draft: false
 tags:
     - Game Replica
-    - Minecraft - Java
+    - Minecraft - J-1.20.6
     - Vanilla - Server
-    - 1.20.6
     - OG DP
 demoUrl: /mc_nnb
 repoUrl: https://github.com/Nikos-Stuff/nikosnextbots

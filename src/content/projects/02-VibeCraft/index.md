@@ -4,9 +4,8 @@ summary: "Minecraft Vanilla+ Server"
 date: "Jan 05 2016"
 draft: false
 tags:
-  - Minecraft - Java
+  - Minecraft - J-1.20.6
   - Vanilla - Server
-  - 1.20.6
 demoUrl: https://vbc.nikostuff.com
 repoUrl: ""
 ---
