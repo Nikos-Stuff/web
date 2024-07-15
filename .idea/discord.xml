@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DiscordProjectSettings">
-    <option name="show" value="PROJECT" />
-    <option name="description" value="" />
-    <option name="applicationTheme" value="default" />
-    <option name="iconsTheme" value="default" />
-    <option name="button1Title" value="" />
-    <option name="button1Url" value="" />
-    <option name="button2Title" value="" />
-    <option name="button2Url" value="" />
+    <option name="show" value="PROJECT_FILES" />
+    <option name="nameOverrideEnabled" value="true" />
+    <option name="nameOverrideText" value="H" />
+    <option name="description" value="when the imposter is H!" />
+    <option name="applicationTheme" value="atom" />
+    <option name="iconsTheme" value="atom" />
+    <option name="button1Title" value="✨ Breakin code" />
+    <option name="button1Url" value="https://nikostuff.com" />
+    <option name="button2Title" value="💾 Cuz why not" />
+    <option name="button2Url" value="https://nikostuff.com" />
     <option name="customApplicationId" value="" />
   </component>
 </project>

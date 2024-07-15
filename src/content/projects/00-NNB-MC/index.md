@@ -6,8 +6,9 @@ draft: false
 tags:
     - Game Replica
     - Minecraft - Java
+    - Vanilla - Server
     - 1.20.6
-    - McFunction
+    - OG DP
 demoUrl: /mc_nnb
 repoUrl: https://github.com/Nikos-Stuff/nikosnextbots
 ---
