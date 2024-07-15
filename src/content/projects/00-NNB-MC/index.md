@@ -7,7 +7,6 @@ tags:
     - Game Replica
     - Minecraft - J-1.20.6
     - Vanilla - Server
-    - OG DP
 demoUrl: /mc_nnb
 repoUrl: https://github.com/Nikos-Stuff/nikosnextbots
 ---
