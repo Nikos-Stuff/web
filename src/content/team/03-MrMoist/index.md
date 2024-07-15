@@ -6,7 +6,7 @@ tags:
 - Moist
 demoUrl:
 repoUrl:
-imageUrl: https://pbs.twimg.com/media/CD90MX5VEAATRTQ.jpg
+imageUrl: /imgs/moistman.jpg
 otherUrls:
 ---
 
