@@ -29,14 +29,13 @@ jobs:
         run: pnpm build
 
       - name: SFTP Deploy
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_LOGIN }}
           password: ${{ SECRETS.FTP_PASSWD }}
-          sftp_only: 'true'
           port: 22
-          local_path: 'dist/*'
-          remote_path: "public"
+          local-dir: 'dist/*'
+          server-dir: "public"
 
 
