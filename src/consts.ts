@@ -65,29 +65,35 @@ export const LINKS: Links = [
 
 // Socials
 export const SOCIALS: Socials = [
-  { 
-    NAME: "Email",
-    ICON: "email", 
-    TEXT: "",
-    HREF: "mailto:",
-  },
-  { 
-    NAME: "Github",
-    ICON: "github",
-    TEXT: "",
-    HREF: ""
-  },
-  { 
-    NAME: "LinkedIn",
-    ICON: "linkedin",
-    TEXT: "",
-    HREF: "",
-  },
-  { 
-    NAME: "Twitter",
-    ICON: "twitter-x",
-    TEXT: "",
-    HREF: "",
-  },
+  // {
+  //   NAME: "Email",
+  //   ICON: "email",
+  //   TEXT: "",
+  //   HREF: "mailto:",
+  // },
+  // {
+  //   NAME: "Github",
+  //   ICON: "github",
+  //   TEXT: "",
+  //   HREF: ""
+  // },
+  // {
+  //   NAME: "LinkedIn",
+  //   ICON: "linkedin",
+  //   TEXT: "",
+  //   HREF: "",
+  // },
+  // {
+  //   NAME: "Twitter",
+  //   ICON: "twitter-x",
+  //   TEXT: "",
+  //   HREF: "",
+  // },
+  {
+    NAME: "Discord",
+    ICON: "discord",
+    TEXT: "nikodaproot",
+    HREF: "https://dc.nikostuff.com",
+  }
 ]
 
