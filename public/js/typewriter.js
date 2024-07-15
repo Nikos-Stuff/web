@@ -11,7 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
         "Serious lack of seriousness",
         "Just add imagination and stir",
         "Powered by caffeinated daydreams",
-        "Eureka moments in the making"
+        "Eureka moments in the making",
+        "1% sugar free!"
     ];
 
     let currentIndex = 0;
