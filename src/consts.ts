@@ -31,6 +31,12 @@ export const TEAM: Page = {
   DESCRIPTION: "See our team.",
 }
 
+// Other Page
+export const OTHERPROJECTS: Page = {
+  TITLE: "Other Stuff",
+  DESCRIPTION: "Random unfinished projects.",
+}
+
 // Search Page
 export const SEARCH: Page = {
   TITLE: "Search",
@@ -44,8 +50,8 @@ export const LINKS: Links = [
     HREF: "/", 
   },
   { 
-    TEXT: "Work", 
-    HREF: "/work", 
+    TEXT: "Team",
+    HREF: "/team",
   },
   { 
     TEXT: "Blog", 
