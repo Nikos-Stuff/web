@@ -4,9 +4,10 @@ summary: "Game Replica"
 date: "Jan 6 2024"
 draft: false
 tags:
-- Game Replica
-- Minecraft
-- McFunction
+    - Game Replica
+    - Minecraft - Java
+    - 1.20.6
+    - McFunction
 demoUrl: /mc_nnb
 repoUrl: https://github.com/Nikos-Stuff/nikosnextbots
 ---
