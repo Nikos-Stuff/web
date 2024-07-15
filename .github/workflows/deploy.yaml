@@ -34,7 +34,7 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_LOGIN }}
           password: ${{ SECRETS.FTP_PASSWD }}
-          port: 22
+          port: 21
           local-dir: 'dist/'
           server-dir: "public/"
 
