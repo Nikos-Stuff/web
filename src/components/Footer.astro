@@ -15,7 +15,7 @@ import { Image } from 'astro:assets';
               <polyline points="12 19 5 12 12 5" class="translate-x-1 group-hover:translate-x-0 transition-all duration-300 ease-in-out" />
             </svg>
             <div class="w-full group-hover:text-black group-hover:dark:text-white transition-colors duration-300 ease-in-out">
-              Back to top
+               Back to top
             </div>
           </button>
         </div>
@@ -31,13 +31,11 @@ import { Image } from 'astro:assets';
               {SITE.TITLE}
             </a>
           </div>
-          <div class="flex gap-2 justify-center sm:justify-end items-center">
+          <div class="flex gap-2 justify-center sm:justify-end items-center hover:scale-95 transition-all duration-300 ease-in-out" >
             <iframe src="https://status.nikostuff.com/badge?theme=white"
                     width="250"
                     height="30"
                     title="Status"
-                    frameborder="0"
-                    scrolling="no"
                     style="border-radius: 9999px; overflow: hidden;"></iframe>
 
           </div>
@@ -49,12 +47,9 @@ import { Image } from 'astro:assets';
       <Container size="md">
         <div class="h-full grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="order-2 sm:order-1 flex flex-col items-center justify-center sm:items-start">
-            <div class="legal">
-              <a href="/legal/terms" class="text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
-                Terms
-              </a> |
-              <a href="/legal/privacy" class="text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
-                Privacy
+            <div class="legal hover:scale-125 transition-all duration-300 ease-in-out">
+              <a class="text-current hover:text-black dark:hover:text-white transition-all duration-300 ease-in-out">
+                Created & Built with ❤️ by Niko / M.F.
               </a>
             </div>
             <div class="text-sm mt-2">
