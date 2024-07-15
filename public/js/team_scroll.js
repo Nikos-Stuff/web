@@ -3,9 +3,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function handleParallaxScroll() {
         const scrollY = window.scrollY;
-        const limitedScrollY = Math.min(Math.max(scrollY * 0.05, -250), 250);
 
         parallaxImages.forEach(parallaxImage => {
+            const imageHeight = parallaxImage.offsetHeight;
+            const containerHeight = parallaxImage.parentElement.offsetHeight;
+
+            // Calculate the maximum translation based on container and image height
+            const maxTranslateY = Math.max(0, containerHeight - imageHeight);
+
+            // Limit the scroll effect
+            const limitedScrollY = Math.min(scrollY * 0.05, maxTranslateY);
+
             parallaxImage.style.transition = 'transform 0.8s ease-out';
             parallaxImage.style.transform = `translateY(-${limitedScrollY}px)`;
         });
