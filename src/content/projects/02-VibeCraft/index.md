@@ -8,7 +8,7 @@ tags:
   - Vanilla - Server
   - 1.20.6
 demoUrl: https://vbc.nikostuff.com
-repoUrl:
+repoUrl: ""
 ---
 
 ## Quick Info
