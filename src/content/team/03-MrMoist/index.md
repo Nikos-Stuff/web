@@ -3,11 +3,11 @@ title: "Mr.Moist"
 summary: "The Moistiest Co-Owner"
 draft: true
 tags:
-- Moist
-demoUrl:
-repoUrl:
+    - Moist
+demoUrl: ""
+repoUrl: ""
 imageUrl: /imgs/moistman.jpg
-otherUrls:
+otherUrls: ""
 ---
 
 Just moist

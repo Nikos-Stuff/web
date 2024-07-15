@@ -4,10 +4,10 @@ summary: "T"
 draft: false
 tags:
   - TEST
-demoUrl:
-repoUrl:
-imageUrl:
-otherUrls:
+demoUrl: ""
+repoUrl: ""
+imageUrl: ""
+otherUrls: ""
 ---
 
 YOOO

@@ -4,7 +4,7 @@ summary: "New page, new look"
 date: "July 14 2024"
 draft: false
 tags:
-- News
+    - News
 ---
 # Hi and Welcome!
 

@@ -6,7 +6,7 @@ tags:
 - Owner
 - Main Scripter
 - Dev
-demoUrl:
+demoUrl: ""
 repoUrl: https://github.com/Nikos-Stuff
 imageUrl: /imgs/niko.jpg
 otherUrls:

@@ -3,11 +3,11 @@ title: "Foofie"
 summary: "yyy yes, idk what I'm doing here. I'm just a dum wolf..."
 draft: false
 tags:
-- Goober
-demoUrl:
-repoUrl:
+    - Goober
+demoUrl: ""
+repoUrl: ""
 imageUrl: /imgs/fuf.png
-otherUrls:
+otherUrls: ""
 ---
 
 Random furry wolf/husky hubrid
