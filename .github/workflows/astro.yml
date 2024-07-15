@@ -65,9 +65,9 @@ jobs:
           node-version: "20"
       - name: Setup pnpm
         if: steps.detect-package-manager.outputs.manager == 'pnpm'
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
-          version: 7 # or the version you are using
+          version: 9 # or the version you are using
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
