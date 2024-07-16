@@ -1,0 +1,73 @@
+---
+import PageLayout from "@layouts/PageLayout.astro"
+import { SITE } from "@consts"
+---
+
+<PageLayout title="Nico's Nextbots" description={SITE.DESCRIPTION}>
+
+
+    <div class="relative bg-white dark:bg-black">
+        <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16 ">
+            <!-- Spacer -->
+            <section>
+            </section>
+
+
+            <section class="animate text-center">
+                <article>
+                    <h1>Work in progress bot creator.</h1>
+                    <h2>Total custom bots: 0/5</h2>
+                </article>
+            </section>
+
+            <div class="animate w-full space-y-4"> <!-- Container for centered items -->
+
+                <!-- Bot Sound -->
+                <div class="relative">
+                    <label for="uploadInput" class="w-full group p-4 gap-3 flex items-center justify-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
+                <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
+                    Select Bot Sound (Ambient)
+                </span>
+                        <input type="file" id="uploadInput" class="hidden">
+                    </label>
+                </div>
+
+
+                <div class="relative">
+                    <label for="uploadInput" class="w-full group p-4 gap-3 flex items-center justify-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
+                <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
+                    Select Bot Sound (Jumpscare)
+                </span>
+                        <input type="file" id="uploadInput2" class="hidden">
+                    </label>
+                </div>
+
+                <!-- Styled Input Box -->
+                <div class="relative">
+                    <label class="block w-full">
+                        <input type="text" placeholder="Bot Name" class="w-full bg-white dark:bg-black p-4 border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
+                    </label>
+                </div>
+
+                <!-- Styled Button -->
+                <button class="w-full group p-4 gap-3 flex items-center justify-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
+            <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
+                Upload
+            </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                         class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10">
+                        <line x1="5" y1="12" x2="19" y2="12"
+                              class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"/>
+                        <polyline points="12 5 19 12 12 19"
+                                  class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"/>
+                    </svg>
+                </button>
+
+            </div>
+
+
+
+        </div>
+    </div>
+</PageLayout>

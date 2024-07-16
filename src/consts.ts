@@ -43,6 +43,12 @@ export const SEARCH: Page = {
   DESCRIPTION: "Search all posts and projects by keyword.",
 }
 
+// NNB Workshop
+export const NNB_WORKSHOP: Page = {
+  TITLE: "NNB Workshop",
+  DESCRIPTION: "Explore modded content.",
+}
+
 // Links
 export const LINKS: Links = [
   { 
