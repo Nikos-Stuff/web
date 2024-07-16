@@ -3,6 +3,8 @@ import { type CollectionEntry, getCollection } from "astro:content"
 import PageLayout from "../../../layouts/PageLayout.astro"
 import TopLayout from "../../../layouts/TopLayout.astro"
 import ArticleTopLayout from "../../../layouts/nnb/nnbTopLayout.astro"
+import BottomLayout from "../../../layouts/BottomLayout.astro";
+import ArticleBottomLayout from "../../../layouts/nnb/nnbBottomLayout.astro";
 
 
 // Create the static blog pages
@@ -50,11 +52,11 @@ const { title, summary } = post.data
     </div>
 
 
-    <!--<BottomLayout>-->
-    <!--    <div class="animate">-->
-    <!--        <ArticleBottomLayout entry={post} />-->
-    <!--    </div>-->
-    <!--</BottomLayout>-->
+    <BottomLayout>
+        <div class="animate">
+            <ArticleBottomLayout entry={post} />
+        </div>
+    </BottomLayout>
 
 
 
