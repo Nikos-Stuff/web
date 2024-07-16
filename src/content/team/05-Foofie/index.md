@@ -6,7 +6,7 @@ tags:
     - Goober
 demoUrl: ""
 repoUrl: ""
-imageUrl: /imgs/fuf.png
+imageUrl: /imgs/fuf.webp
 otherUrls: ""
 ---
 

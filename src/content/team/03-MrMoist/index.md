@@ -6,7 +6,7 @@ tags:
     - Moist
 demoUrl: ""
 repoUrl: ""
-imageUrl: /imgs/moistman.jpg
+imageUrl: /imgs/moistman.webp
 otherUrls: ""
 ---
 

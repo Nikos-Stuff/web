@@ -6,7 +6,7 @@ tags:
     - Roblox Dev
 demoUrl: ""
 repoUrl: ""
-imageUrl: /imgs/zozoboblox.png
+imageUrl: /imgs/zozoboblox.webp
 otherUrls:
   - { name: "Page", url: https://montidaproot.xyz/ }
 ---
