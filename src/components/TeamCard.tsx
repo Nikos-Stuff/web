@@ -1,5 +1,5 @@
 // components/ArrowCard.astro
-import { Image } from 'astro:assets';
+
 
 import { formatDate } from "@lib/utils";
 import type { CollectionEntry } from "astro:content";
