@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         parallaxImages.forEach(parallaxImage => {
             const scrollY = window.scrollY;
             parallaxImage.style.transition = 'transform 0.8s ease-out';
-            parallaxImage.style.transform = `translateY(-${scrollY * 0.03}px)`;
+            parallaxImage.style.transform = `translateY(-${scrollY * 0.01}px)`;
         });
         requestAnimationFrame(handleParallaxScroll);
     }
