@@ -21,8 +21,8 @@ And since I have Discord, I finally have people to show them to !
 
 ## 🔥 WHAT I CAN DO 1!!1!1!11!
 
--Minecraft maps (depend on the size and the details)
--Blockbench models + texture (except for large model textures)
--Roblox maps (also depend on the size and details lol)
--Designer
--Concept arts (Only IRL)
+- Minecraft maps (depend on the size and the details)
+- Blockbench models + texture (except for large model textures)
+- Roblox maps (also depend on the size and details lol)
+- Designer
+- Concept arts (Only IRL)
