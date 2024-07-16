@@ -1,7 +1,7 @@
 ---
 title: "✨ First Update"
 summary: "Fresh stuff!"
-date: "July 16 2024"
+date: "July 15 2024"
 draft: false
 tags:
     - News
