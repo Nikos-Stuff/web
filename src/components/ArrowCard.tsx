@@ -5,7 +5,7 @@ import { formatDate } from "@lib/utils";
 import type { CollectionEntry } from "astro:content";
 
 type Props = {
-    entry: CollectionEntry<"blog"> | CollectionEntry<"projects">;
+    entry: CollectionEntry<"blog"> | CollectionEntry<"projects"> | CollectionEntry<"team">;
     pill?: boolean;
 };
 
@@ -16,6 +16,8 @@ export default function ArrowCard({ entry, pill }: Props) {
                 return `/blog/${entry.slug}`;
             case "projects":
                 return `/projects/${entry.slug}`;
+            case "team":
+                return `/team/${entry.slug}`;
             default:
                 return "/";
         }
