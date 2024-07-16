@@ -8,11 +8,14 @@ import ArticleBottomLayout from "../../../layouts/ArticleBottomLayout.astro"
 
 // Create the static blog pages
 export async function getStaticPaths() {
-    const posts = await getCollection("nnb_workshop")
+    const posts = await getCollection("nnb_workshop");
     return posts.map((post) => ({
         params: { slug: post.slug },
-        props: post,
-    }))
+        props: {
+            ...post,
+            downUrl: post.data.downUrl
+        },
+    }));
 }
 
 // Get the requested post
@@ -29,7 +32,9 @@ const { title, summary } = post.data
     </TopLayout>
 
     <div class="animate flex items-center justify-center">
-        <a href=`https://api.nikostuff.com/` class="w-1/4 group p-4 gap-3 flex items-center justify-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
+        {post.data.tags.map((tag: string) => (
+        <a href=`https://api.nikostuff.com/v1/nnb_config/setup?s_name=${title}&s_type=${tag}&s_url=${post.data.downUrl}` class="w-1/4 group p-4 gap-3 flex items-center justify-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
+
         <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
             Install "{title}"
         </span>
@@ -42,6 +47,7 @@ const { title, summary } = post.data
                           class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"/>
             </svg>
         </a>
+        ))}
     </div>
 
 
