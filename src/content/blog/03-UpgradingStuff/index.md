@@ -27,4 +27,4 @@ That task is kinda long and painful to do, because it contains a bunch of steps:
 - Explaining how the page operates and how to add new stuff (like posts) to it
 - Optimizing and updating content regularly 
 
-And that's all for now. Thanks for reading and have a great day!
+And that's all for now. Thanks for reading and have a great day.
