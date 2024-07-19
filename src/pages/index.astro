@@ -9,6 +9,8 @@ import TwinklingStars from "@components/TwinklingStars.astro"
 import MeteorShower from "@components/MeteorShower.astro"
 import { Image } from 'astro:assets';
 
+
+
 import DynamicTitle from "@components/TitleHeader.astro"
 
 const posts = (await getCollection("blog"))
@@ -238,7 +240,8 @@ const stack = [
       <section class="animate flex justify-center items-center">
         <div class="flex justify-ubetween">
           <a target="_blank" href="https://uptime.betterstack.com" rel="noopener">
-            <Image src="https://uptime.betterstack.com/assets/static_assets/badges/blue.png" alt="BetterStack." width={150} height={150} loading="eager"/>
+
+              <Image src="/betterstack.webp" alt="BetterStack." width={150} height={150} loading="eager"/>
 
 
           </a>
