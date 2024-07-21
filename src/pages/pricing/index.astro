@@ -1,0 +1,411 @@
+---
+import PageLayout from "@layouts/PageLayout.astro"
+import {SITE} from "@consts"
+import MeteorShower from "../../components/MeteorShower.astro";
+import TwinklingStars from "../../components/TwinklingStars.astro";
+import PriceTitle from "../../components/PricingHeader.astro";
+---
+
+<PageLayout title="Pricing" description={SITE.DESCRIPTION}>
+
+
+    <!-- Light Mode: Particles -->
+    <div class='absolute inset-0 block dark:hidden'>
+        <div id='particles1' class='fixed inset-0'></div>
+        <div id='particles2' class='fixed inset-0'></div>
+        <div id='particles3' class='fixed inset-0'></div>
+    </div>
+
+    <!-- Dark Theme: Stars -->
+    <div class='absolute inset-0 bg-black hidden dark:block'>
+        <div id='stars1' class='fixed inset-0'></div>
+        <div id='stars2' class='fixed inset-0'></div>
+        <div id='stars3' class='fixed inset-0'></div>
+    </div>
+
+    <!-- Dark Theme: Twinkling Stars / Meteors -->
+    <div id="galaxy" class="fixed inset-0">
+        <div class="hidden dark:block">
+            <TwinklingStars/>
+            <MeteorShower/>
+        </div>
+    </div>
+
+    <script is:inline src="/js/bg.js"></script>
+
+
+    <!-- HERO -->
+    <section class="relative h-[400px] w-full">
+        <div id="planetcont" class='animate absolute inset-0 top-2/4 overflow-hidden'>
+            <div id="crescent"
+                 class='absolute top-0 left-1/2 -translate-x-1/2 w-[250vw] min-h-[100vh] aspect-square rounded-full p-[1px] bg-gradient-to-b from-black/25 dark:from-white/75 from-0% to-transparent to-5%'>
+                <div id="planet"
+                     class='w-full h-full bg-white dark:bg-black rounded-full p-[1px] overflow-hidden flex justify-center'>
+                    <div id="blur" class='w-full h-10 rounded-full bg-neutral-900/25 dark:bg-white/25 blur-2xl'/>
+                </div>
+            </div>
+        </div>
+        <PriceTitle/>
+    </section>
+
+    <!-- Pricing - Web Design-->
+    <div class="relative bg-white dark:bg-black">
+        <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+
+
+            <!-- About Section -->
+            <section class="animate">
+                <article>
+                    <p>Basic plans for services. Prices may change. Questions? Feel free to ask!</p>
+                </article>
+
+            </section>
+
+
+            <section class="animate">
+                <div class="space-y-4">
+                    <div class="flex justify-between">
+                        <p class="font-semibold text-black dark:text-white">Web Development</p>
+                    </div>
+                    <ul class="space-y-4 transition-all duration-300 ease-in-out">
+                        <!-- Basic Plan -->
+                        <div class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
+                            <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
+                                        ✏️ Web
+                                    </div>
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    ✨ Simple Website
+                                </div>
+                                <div class="text-sm">
+                                    Our <strong>Simple Website</strong> plan, priced at <strong>150 PLN</strong>,
+                                    provides a solid foundation for your online presence. Built on WordPress, this plan
+                                    is perfect for:
+                                    <ul class="list-disc ml-5 mt-2">
+                                        <li><strong>Blogs:</strong> Share your thoughts and ideas with ease.</li>
+                                        <li><strong>LinkTree Alternatives:</strong> Create a centralized hub for your
+                                            links.
+                                        </li>
+                                        <li><strong>Basic Landing Pages:</strong> Establish a simple and effective
+                                            online introduction.
+                                        </li>
+                                    </ul>
+                                    This plan offers a modern theme and essential features, making it an ideal choice
+                                    for a straightforward and functional website.
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    <span class="text-xl">150 PLN</span>
+                                </div>
+                                <ul class="flex flex-wrap mt-2 gap-1">
+                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75">
+                                        BASIC
+                                    </li>
+                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75">
+                                        WORDPRESS
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Standard Plan -->
+                        <div class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
+                            <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
+                                        ✏️ Web
+                                    </div>
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    ✨ Standard Website
+                                </div>
+                                <div class="text-sm">
+                                    The <strong>Standard Website</strong> plan, available for <strong>300 PLN</strong>,
+                                    upgrades your site with enhanced features and customizations. Built using Astro,
+                                    this plan is suited for:
+                                    <ul class="list-disc ml-5 mt-2">
+                                        <li><strong>Business Websites:</strong> Create a professional and visually
+                                            appealing site.
+                                        </li>
+                                        <li><strong>Portfolio Sites:</strong> Showcase your work with style and
+                                            functionality.
+                                        </li>
+                                        <li><strong>Advanced Landing Pages:</strong> Build sophisticated pages with
+                                            enhanced features.
+                                        </li>
+                                    </ul>
+                                    Enjoy improved SEO, responsive design, and customization options that make your site
+                                    stand out.
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    <span class="text-xl">300 PLN</span>
+                                </div>
+                                <ul class="flex flex-wrap mt-2 gap-1">
+                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75">
+                                        STANDARD
+                                    </li>
+                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75">
+                                        ASTRO
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Premium Plan -->
+                        <div class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
+                            <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
+                                        ✏️ Web
+                                    </div>
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    ✨ Premium Website
+                                </div>
+                                <div class="text-sm">
+                                    Our <strong>Premium Website</strong> plan, priced at <strong>600 PLN</strong>,
+                                    delivers exceptional performance with top-notch speed and reliability. Built on
+                                    Astro, this plan is ideal for:
+                                    <ul class="list-disc ml-5 mt-2">
+                                        <li><strong>High-Traffic Sites:</strong> Designed to handle large volumes of
+                                            visitors effortlessly.
+                                        </li>
+                                        <li><strong>Complex Projects:</strong> Perfect for sites requiring advanced
+                                            performance and scalability.
+                                        </li>
+                                        <li><strong>High-End Design:</strong> Merges cutting-edge technology with
+                                            exquisite visual appeal.
+                                        </li>
+                                    </ul>
+                                    Elevate your online presence with a site that ensures peak performance and a
+                                    seamless user experience.
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    <span class="text-xl">600 PLN</span>
+                                </div>
+                                <ul class="flex flex-wrap mt-2 gap-1">
+                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75">
+                                        PREMIUM
+                                    </li>
+                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75">
+                                        ASTRO
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+
+
+    <!-- Pricing - Video Video Editing-->
+    <div class="relative bg-white dark:bg-black">
+        <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+
+
+            <!-- Spacer -->
+            <div class="h-20"/>
+
+
+
+            <section class="animate">
+                <div class="space-y-4">
+                    <div class="flex justify-between">
+                        <p class="font-semibold text-black dark:text-white">Video Video Editing Services</p>
+                    </div>
+                    <ul class="space-y-4 transition-all duration-300 ease-in-out">
+                        <!-- Lite Video Editing -->
+                        <div class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
+                            <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
+                                        🎬 Video Editing
+                                    </div>
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    ✨ Lite Video Editing
+                                </div>
+                                <div class="text-sm">
+                                    Our <strong>Lite Video Editing</strong> package, priced at <strong>25 PLN</strong>, provides
+                                    a solid Video Editing foundation for your video projects. Perfect for quick Video Edits and
+                                    straightforward needs, this plan includes:
+                                    <ul class="list-disc ml-5 mt-2">
+                                        <li><strong>720p60 Quality:</strong> Clear and smooth visuals.</li>
+                                        <li><strong>Smooth Animations & Effects:</strong> Basic but polished
+                                            enhancements.
+                                        </li>
+                                        <li><strong>Color Grading:</strong> Enhance the visual appeal of your footage.
+                                        </li>
+                                        <li><strong>Sound Design & Mixing:</strong> Clear and balanced audio.</li>
+                                        <li><strong>Motion Graphics:</strong> Add dynamic elements to your video.</li>
+                                        <li><strong>Subtitles:</strong> Easy-to-read text for accessibility.</li>
+                                        <li><strong>Source File:</strong> Included for your records.</li>
+                                    </ul>
+                                    Delivery in 2 days with up to 3 revisions. Covers up to 15 minutes of footage and
+                                    results in a video up to 10 minutes long.
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    <span class="text-xl">25 PLN</span>
+                                </div>
+                                <ul class="flex flex-wrap mt-2 gap-1">
+                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75">
+                                        LITE
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Video Editing -->
+                        <div class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
+                            <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
+                                        🎬 Video Editing
+                                    </div>
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    ✨ Advanced Video Editing
+                                </div>
+                                <div class="text-sm">
+                                    The <strong>Advanced Video Editing</strong> package, priced at <strong>90 PLN</strong>,
+                                    offers a comprehensive Video Edit solution for more detailed projects. Ideal for
+                                    professional needs, this plan includes:
+                                    <ul class="list-disc ml-5 mt-2">
+                                        <li><strong>1080p60 Quality:</strong> High-definition visuals with sound effects
+                                            and 3D animations.
+                                        </li>
+                                        <li><strong>Sound Effects:</strong> Enrich your video with various audio
+                                            elements.
+                                        </li>
+                                        <li><strong>Color Grading:</strong> Professional adjustments for enhanced visual
+                                            impact.
+                                        </li>
+                                        <li><strong>Sound Design & Mixing:</strong> Refined audio experience.</li>
+                                        <li><strong>Motion Graphics:</strong> Advanced graphic elements to elevate your
+                                            video.
+                                        </li>
+                                        <li><strong>Subtitles:</strong> Customizable text for accessibility.</li>
+                                        <li><strong>Source File:</strong> Included for flexibility.</li>
+                                    </ul>
+                                    Delivery in 4 days with up to 6 revisions. Covers up to 30 minutes of footage and
+                                    results in a video up to 20 minutes long.
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    <span class="text-xl">90 PLN</span>
+                                </div>
+                                <ul class="flex flex-wrap mt-2 gap-1">
+                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75">
+                                        ADVANCED
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Professional Video Editing -->
+                        <div class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
+                            <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
+                                        🎬 Video Editing
+                                    </div>
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    ✨ Professional Video Editing
+                                </div>
+                                <div class="text-sm">
+                                    Our <strong>Professional Video Editing</strong> package, priced at <strong>100 PLN</strong>,
+                                    provides the ultimate Video Editing experience with top-tier quality and extensive
+                                    features. Perfect for extensive projects and high-end needs, this plan includes:
+                                    <ul class="list-disc ml-5 mt-2">
+                                        <li><strong>2160p60 Quality:</strong> Ultra-high-definition with unlimited
+                                            footage time.
+                                        </li>
+                                        <li><strong>Color Grading:</strong> Superior visual adjustments for a polished
+                                            look.
+                                        </li>
+                                        <li><strong>Sound Design & Mixing:</strong> Expert audio treatment for clarity
+                                            and depth.
+                                        </li>
+                                        <li><strong>Motion Graphics:</strong> Premium graphics for a professional touch.
+                                        </li>
+                                        <li><strong>Subtitles:</strong> Accessible and customizable text.</li>
+                                        <li><strong>Source File:</strong> Included for full flexibility.</li>
+                                    </ul>
+                                    Delivery in 4 days with up to 8 revisions. Covers unlimited minutes of footage and
+                                    results in a video up to 60 minutes long.
+                                </div>
+                                <div class="font-semibold mt-3 text-black dark:text-white">
+                                    <span class="text-xl">100 PLN</span>
+                                </div>
+                                <ul class="flex flex-wrap mt-2 gap-1">
+                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75">
+                                        PROFESSIONAL
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+            </section>
+
+
+        </div>
+    </div>
+
+
+    <!-- Ending -->
+    <div id="contentWrapper" class='p-5 text-center'>
+        <div class="relative h-[400px] justify-center content-center w-full">
+            <p id="touch-tite"
+               class='animate text-2xl md:text-3xl lg:text-7xl font-bold uppercase text-black dark:text-white'>
+                Let's be in touch.
+            </p>
+
+
+            <!-- Buttons -->
+            <div class="animate flex items-center justify-center space-x-3">
+
+                <!-- Fiverr -->
+                <a href="https://www.fiverr.com/niko_fx/do-professional-video-Video Editinging" target="_blank"
+                   class="group p-4 gap-3 flex w-1/5 items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
+
+        <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
+            Fiverr
+        </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                         class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10">
+                        <line x1="5" y1="12" x2="19" y2="12"
+                              class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"/>
+                        <polyline points="12 5 19 12 12 19"
+                                  class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"/>
+                    </svg>
+                </a>
+
+                <!-- Facebook -->
+                <a href="https://www.facebook.com/maciek.fraczek.965" target="_blank"
+                   class="group p-4 gap-3 flex w-1/5 items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
+
+        <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
+            Facebook
+        </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
+                         class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10">
+                        <line x1="5" y1="12" x2="19" y2="12"
+                              class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"/>
+                        <polyline points="12 5 19 12 12 19"
+                                  class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"/>
+                    </svg>
+                </a>
+            </div>
+
+
+        </div>
+    </div>
+</PageLayout>
