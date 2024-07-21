@@ -1,3 +1,5 @@
+
+
 (function () {
     function getOSVersion() {
         const userAgent = window.navigator.userAgent;
@@ -16,7 +18,7 @@
         } else if (userAgent.indexOf("Windows NT 5.1") !== -1) {
             osVersion = "Windows XP";
         }
-
+        console.log(osVersion);
         return osVersion;
     }
 
