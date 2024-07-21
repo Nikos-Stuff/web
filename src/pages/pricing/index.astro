@@ -363,24 +363,20 @@ import PriceTitle from "../../components/PricingHeader.astro";
 
     <!-- Ending -->
 
-    <div class='p-5 text-center h-[600px]'>
-        <div class="relative h-full justify-center content-center w-full">
-            <p id="touch-tite"
-               class='animate text-2xl md:text-3xl lg:text-7xl font-bold uppercase text-black dark:text-white'>
+    <div class='p-5 text-center min-h-[600px] flex items-center justify-center'>
+        <div class="relative flex flex-col items-center justify-center w-full">
+            <p id="touch-tite" class='text-xl md:text-2xl lg:text-5xl font-bold uppercase text-black dark:text-white'>
                 Let's be in touch.
             </p>
 
-
             <!-- Buttons -->
-            <div class="animate flex items-center justify-center space-x-3">
-
+            <div class="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-x-3">
                 <!-- Fiverr -->
                 <a href="https://www.fiverr.com/niko_fx/do-professional-video-Video Editing" target="_blank"
-                   class="group w-80  p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
-
-        <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
-            Fiverr
-        </span>
+                   class="group w-80 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
+                <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
+                    Fiverr
+                </span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                          class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10">
@@ -394,10 +390,9 @@ import PriceTitle from "../../components/PricingHeader.astro";
                 <!-- Facebook -->
                 <a href="https://www.facebook.com/maciek.fraczek.965" target="_blank"
                    class="group w-80 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
-
-        <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
-            Facebook
-        </span>
+                <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
+                    Facebook
+                </span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                          stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                          class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10">
@@ -408,9 +403,8 @@ import PriceTitle from "../../components/PricingHeader.astro";
                     </svg>
                 </a>
             </div>
-
-
         </div>
     </div>
+
 
 </PageLayout>
