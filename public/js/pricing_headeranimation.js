@@ -22,19 +22,9 @@ document.addEventListener('DOMContentLoaded', function () {
         mouseY = ease(mouseY, targetMouseY, easing);
         scrollY = ease(scrollY, targetScrollY, easing);
 
-        const animate = document.getElementById('animate');
         const subtitle = document.getElementById('subtitle');
         const title = document.getElementById('title');
-        const ctaButtons = document.getElementById('ctaButtons');
-        const typewriterc = document.getElementById('typewriter-text');
 
-        if (animate) {
-            animate.style.transform = `translate(${mouseX * 15}px, ${mouseY * 15}px)`;
-        }
-
-        if (typewriterc) {
-            typewriterc.style.transform = `translate(${mouseX * 15}px, ${mouseY * 15}px) translateY(-${scrollY * 0.15}px)`;
-        }
 
         if (subtitle) {
             subtitle.style.transform = `translate(${mouseX * 15}px, ${mouseY * 15}px) translateY(-${scrollY * 0.15}px)`;
@@ -44,16 +34,6 @@ document.addEventListener('DOMContentLoaded', function () {
             title.style.transform = `translate(${mouseX * 15}px, ${mouseY * 15}px) translateY(-${scrollY * 0.1}px)`;
         }
 
-        if (ctaButtons) {
-            ctaButtons.style.transform = `translate(${mouseX * 15}px, ${mouseY * 15}px) translateY(-${scrollY * 0.05}px)`;
-        }
-
-
-
-        // Fade out animation based on scroll position
-        const threshold = 200;
-        const opacity = Math.max(1 - (scrollY / threshold), 0);
-        animate.style.opacity = opacity.toFixed(2);
 
         requestAnimationFrame(smoothMove);
     }
