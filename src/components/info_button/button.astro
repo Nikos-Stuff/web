@@ -1,0 +1,37 @@
+---
+import './button_c.css';
+---
+
+<!-- Info Button -->
+<div class="info-button" onClick="toggleModal('info-modal')"></div>
+
+<!-- Modal for Info -->
+<div class="modal" id="info-modal">
+    <div class="modal-content">
+        <button class="close-button" onClick="closeModal('info-modal')">×</button>
+        <h2>📶 Quick WebInfo</h2>
+        <p>Dane dotyczące strony</p>
+        <div class="container-inner">
+            <div class="active-services">
+                <strong>Aktywne uslugi:</strong>
+                <ul>
+                    <li>Monitorowanie wydajnosci</li>
+                    <li>Cotygodniowe aktualizacje</li>
+                    <li>Anycast Load Balancing</li>
+                    <li>GitHub Building</li>
+                </ul>
+            </div>
+            <div class="active-services">
+                <strong>Platforma:</strong> Astro
+                <strong>Plan:</strong> -
+            </div>
+        </div>
+        <div class="codeblock">
+            <strong>Strona zarządzana przez:</strong> nikostuff.com
+            <strong>Hosting:</strong> Prywatny
+            <strong>Wersja:</strong> EX.4.12
+        </div>
+    </div>
+</div>
+
+<script is:inline src="/js/info_button.js"></script>

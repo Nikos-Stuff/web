@@ -1,0 +1,198 @@
+.info-button {
+    position: fixed;
+    bottom: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.4); /* Dark background with transparency */
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.info-button:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: scale(1.1);
+}
+
+.info-button:after {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.info-button {
+    right: 20px;
+}
+
+.info-button:after {
+    content: "i";
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+    overflow-y: auto;
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px); /* Background blur */
+}
+
+.modal.show {
+    display: flex;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal.hide {
+    animation: fadeOut 0.3s ease-out;
+}
+
+.modal-content {
+    background-color: rgba(30, 30, 30, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    width: 90%;
+    max-width: 800px;
+    position: relative;
+    animation: zoomIn 0.3s ease-out;
+}
+
+.modal.hide .modal-content {
+    animation: zoomOut 0.3s ease-out;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+.close-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.container-inner {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.amount,
+.active-services {
+    background-color: rgba(255, 255, 255, 0.1);
+    font-family: monospace;
+    color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.codeblock {
+    background-color: rgba(255, 255, 255, 0.1);
+    font-family: monospace;
+    color: #f0f0f0;
+    padding: 10px 10px;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.amount {
+    color: #ff6347;
+}
+
+.active-services ul {
+    list-style-type: disc; /* Ensure bullet points are displayed */
+    padding-left: 20px; /* Add some padding to indent the list */
+}
+
+.active-services li {
+    margin: 5px 0;
+}
+
+.button {
+    background-color: rgba(0, 0, 0, 0.4); /* Match button style to info-button */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.button:hover {
+    background-color: rgba(0, 0, 0, 0.6);
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes zoomOut {
+    from {
+        transform: scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+}
