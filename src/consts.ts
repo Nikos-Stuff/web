@@ -71,6 +71,11 @@ export const LINKS: Links = [
     TEXT: "Pricing",
     HREF: "/pricing",
 
+  },
+  {
+    TEXT: "Status",
+    HREF: "https://status.nikostuff.com",
+
   }
 ]
 
