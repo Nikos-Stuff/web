@@ -1,50 +1,36 @@
 ---
-title: "☕ Improving and developing"
-summary: "Something big is coming"
-date: "July 24 2024"
+title: "☕ Enhancements and Developments"
+summary: "Exciting changes are on the horizon"
+date: "July 24, 2024"
 draft: false
 tags:
     - Weekly Chill
 ---
 
-Greetings! It has been a while since we posted that type of post. 
-So, since im as for now chilling and having a small break from anything, there's nothing much happening
+Hello everyone!
 
-# New Pricing
-You know that one.
-Since my services are well uh somewhat professional, I needed to come up with good and manageable prices.
-Leave a message in our Discord and tell us what do you think about it.
+It's been a while since our last update, and I’m currently enjoying a brief break. There’s not much going on right now, but here are some key updates:
+
+# New Pricing Structure
+As our services are becoming more refined, we’ve introduced a new pricing model to better reflect their professional quality. Feel free to drop a message in our Discord to share your thoughts on the new pricing.
 
 # Quick WebInfo Panel
-Custom-made pages has evolved a little bit. Now you can see basic information and health of your site.
-Note that they're available for everyone to see, but don't worry - nothing important is displayed in that
-simple panel.
+Our custom-made pages have received a few updates. You can now view basic site information and health status. While this panel is publicly accessible, rest assured that no sensitive details are displayed.
 
 ### Main Page
-In the main page you will see most important info, like Active Plans, Health Lookup and info about hosting
-provider.
+The main page offers crucial information such as Active Plans, Health Lookup, and details about your hosting provider.
 
 ### Updater Page
-This page contains changelog and status of your site compatibility with the new patch.
-Every update related to main components will be executed in extremely safe way.
-(Stuff that will need to change in order to smoothly update will be modified.)
+This page provides the changelog and status of your site’s compatibility with the latest patch. Updates to main components will be handled with utmost care, ensuring smooth transitions and minimal disruptions.
 
 ### Security Page
-This is the last (for now) page for our small panel.
-It will contain security state of your product.
-Security related patches / Optimization will be applied when possible
-(If there's a compatibility issue, site won't be patched until the major update will be applied etc.)
+The Security Page, our latest addition, displays the current security state of your product. Security patches and optimizations will be applied as needed, with compatibility issues addressed before major updates are implemented.
 
+### Additional Notes:
+- For those opting for annual payments instead of a one-time fee, a payment button (via PayPal) will appear in the quick panel.
+- The entire WebInfo Panel can be disabled if you prefer, although this is not recommended as it provides useful insights into your site’s status.
 
-### Extra notes:
-- If you choose yearly payment instead of one time, button for payment will appear in the quick panel. (PayPal)
-- This extra panel can be hidden or removed if you don't like it - Not recommended
+# That's all for now!
+We've also resolved numerous bugs and made other minor improvements. Notably, we are now operating on the latest version of Astro with experimental Server-Side components, enabling us to introduce dynamic features like comments.
 
-
-
-# That's kinda it for now!
-Obviously, a bunch of bugfixes and other minor stuff has been fixed. The biggest one is now that we
-run now on the latest version of astro + with enabled experimental Server-Side components that will allow
-us to make a bit of dynamic stuff like comments, etc.
-
-See ya soon!
+Catch you soon!
