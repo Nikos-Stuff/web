@@ -3,6 +3,15 @@ document.addEventListener('DOMContentLoaded', function () {
     let targetMouseX = 0, targetMouseY = 0, targetScrollY = 0;
     const easing = 0.075;
 
+
+    const multipliers = {
+        animate: { mouse: 10, scroll: 0.05 },
+        subtitle: { mouse: 15, scroll: 0.15 },
+        title: { mouse: 15, scroll: 0.1 },
+        ctaButtons: { mouse: 15, scroll: 0.05 },
+        typewriter: { mouse: 15, scroll: 0.15 }
+    };
+
     document.addEventListener('mousemove', function (e) {
         targetMouseX = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
         targetMouseY = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
@@ -13,8 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function ease(current, target, easeFactor) {
-        const delta = target - current;
-        return current + delta * easeFactor;
+        return current + (target - current) * easeFactor;
     }
 
     function smoothMove() {
@@ -22,18 +30,27 @@ document.addEventListener('DOMContentLoaded', function () {
         mouseY = ease(mouseY, targetMouseY, easing);
         scrollY = ease(scrollY, targetScrollY, easing);
 
-        const subtitle = document.getElementById('subtitle');
-        const title = document.getElementById('title');
+        const elements = {
+            animate: document.getElementById('animate'),
+            subtitle: document.getElementById('subtitle'),
+            title: document.getElementById('title'),
+            ctaButtons: document.getElementById('ctaButtons'),
+            typewriter: document.getElementById('typewriter-text')
+        };
 
-
-        if (subtitle) {
-            subtitle.style.transform = `translate(${mouseX * 15}px, ${mouseY * 15}px) translateY(-${scrollY * 0.15}px)`;
+        for (const [id, elem] of Object.entries(elements)) {
+            if (elem) {
+                const { mouse, scroll } = multipliers[id];
+                elem.style.transform = `translate(${mouseX * mouse}px, ${mouseY * mouse}px) translateY(-${scrollY * scroll}px)`;
+            }
         }
 
-        if (title) {
-            title.style.transform = `translate(${mouseX * 15}px, ${mouseY * 15}px) translateY(-${scrollY * 0.1}px)`;
-        }
 
+        const threshold = 150;
+        const opacity = Math.max(1 - (scrollY / threshold), 0);
+        if (elements.animate) {
+            elements.animate.style.opacity = opacity.toFixed(2);
+        }
 
         requestAnimationFrame(smoothMove);
     }
