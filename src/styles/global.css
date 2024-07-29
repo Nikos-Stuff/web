@@ -10,7 +10,7 @@
     font-style: normal;
     font-display: swap;
   }
-  
+
   @font-face {
     font-family: "Atkinson";
     src: url("/fonts/atkinson-bold.woff") format("woff");
@@ -161,7 +161,6 @@ article img {
 
 .typewriter {
   display: inline-block;
-  white-space: nowrap;
   overflow: hidden;
   border-right: 0.15em solid #ffffff; /* Cursor color */
   animation: blink-caret 0.75s step-end infinite;
@@ -169,7 +168,6 @@ article img {
 
 .typewriter-container {
   height: 1.5em; /* Set a fixed height that fits your design */
-  overflow: hidden; /* Hide any overflow text */
 }
 
 
