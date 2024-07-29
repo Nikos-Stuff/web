@@ -171,10 +171,6 @@ article img {
 }
 
 
-.review-container {
-  height: 1.5em; /* Set a fixed height that fits your design */
-}
-
 
 @keyframes flip-in-hor-bottom {
   0% {
