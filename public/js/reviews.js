@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewItem.innerHTML = `
             <div class="text-content flex-1">
                 <p class="review-name mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"></p>
-                <div class="review-text typewriter-container">
+                <div class="review-text review-container">
                     <p class="mt-0 mb-0"></p>
                 </div>
             </div>
