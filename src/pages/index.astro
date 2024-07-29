@@ -10,6 +10,9 @@ import MeteorShower from "@components/MeteorShower.astro"
 import { Image } from 'astro:assets';
 
 
+import Reviews from "@components/Reviews.astro"
+
+
 
 import DynamicTitle from "@components/TitleHeader.astro"
 
@@ -107,6 +110,83 @@ const stack = [
 
       </section>
 
+      <!--  Start Your Own Stuff! -->
+      <section class="animate">
+        <article>
+          <div class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
+            <div class="text-content flex-1">
+              <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
+                Start Your Own Stuff
+              </p>
+              <p class="mt-0 mb-0">
+                Want to start your own small business without overpaying?
+                Our solutions are tailored just for you, offering adjusted prices to fit your needs!
+              </p>
+            </div>
+            <div class="text-right">
+              <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white">
+                ✏️
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!--  Optimization & Design in Mind -->
+      <section class="animate">
+        <article>
+          <div class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
+            <div class="text-right">
+              <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white">
+                🖌️
+              </p>
+            </div>
+            <div class="text-content flex-1 ml-4">
+              <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
+                Optimized & Beautiful
+              </p>
+              <p class="mt-0 mb-0">
+                We ensure the latest sleek, minimalistic,
+                and modern designs for your videos, pages, and more,
+                with optimization and readability at the forefront.
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!--  Growing and Improving -->
+      <section class="animate">
+        <article>
+          <div class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
+            <div class="text-content flex-1">
+              <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
+                Growing & Improving
+              </p>
+              <p class="mt-0 mb-0">
+                As a fresh team, we are constantly learning and improving.
+                We are committed to creating new services and solutions that are useful and suitable for you.
+              </p>
+            </div>
+            <div class="text-right">
+              <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white">
+                📈
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!--  Review Section -->
+      <section class="space-y-4 animate">
+        <p class="font-semibold text-black dark:text-white">
+          What Our Members Say
+        </p>
+
+        <!-- Review One -->
+        <Reviews/>
+      </section>
+
       <!-- Team Section -->
 
       <section class="animate">
@@ -114,7 +194,7 @@ const stack = [
         <div class="space-y-4">
           <div class="flex justify-between">
             <p class="font-semibold text-black dark:text-white">
-              Our Team
+              Meet Our Team
             </p>
             <a href="/team" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
               <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
@@ -140,7 +220,7 @@ const stack = [
         <div class="space-y-4">
           <div class="flex justify-between">
             <p class="font-semibold text-black dark:text-white">
-              Recent posts
+              What's New?
             </p>
             <a href="/blog" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
               <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
@@ -189,7 +269,7 @@ const stack = [
         <div class="space-y-4">
           <div class="flex justify-between">
             <p class="font-semibold text-black dark:text-white">
-              Recent projects
+              Fresh Projects:
             </p>
             <a href="/projects" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
               <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">

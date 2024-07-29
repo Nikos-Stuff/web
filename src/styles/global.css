@@ -171,3 +171,38 @@ article img {
   height: 1.5em; /* Set a fixed height that fits your design */
   overflow: hidden; /* Hide any overflow text */
 }
+
+
+
+@keyframes flip-in-hor-bottom {
+  0% {
+    transform: rotateX(80deg);
+    opacity: 0;
+  }
+  100% {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flip-out-hor-top {
+  0% {
+    transform: rotateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateX(70deg);
+    opacity: 0;
+  }
+}
+
+
+
+
+.flip-in-hor-bottom {
+  animation: flip-in-hor-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.flip-out-hor-top {
+  animation: flip-out-hor-top 0.45s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
