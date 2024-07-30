@@ -50,11 +50,11 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <link rel="alternate" type="application/rss+xml" title={title} href={`${Astro.site}rss.xml`}/>
 
 <!-- Global Scripts -->
-<script is:inline src="/js/theme.js"  />
-<script is:inline src="/js/scroll.js"  />
-<script is:inline src="/js/animate.js"  />
+<script is:inline src="/js/theme.js"></script>
+<script is:inline src="/js/scroll.js"></script>
+<script is:inline src="/js/animate.js"></script>
 
-<!--<ViewTransitions/>-->
+<!-- <ViewTransitions  /> -->
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client"

@@ -1,4 +1,4 @@
-function RUN () {
+document.addEventListener('DOMContentLoaded', () => {
     const reviewItem = document.getElementById('review-item');
     const reviews = [
         { name: "Katzby", review: "This beautiful service & website is officially lynx-approved. Mrawr.", icon: "🐈" },
@@ -52,7 +52,7 @@ function RUN () {
                 </div>
             </div>
             <div class="review-icon text-right flip-in-hor-bottom">
-                <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0">${review.icon}</p>
+                <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white">${review.icon}</p>
             </div>
         `;
         reviewItem.classList.remove('active');
@@ -86,6 +86,4 @@ function RUN () {
     }
 
     console.log('Reviews Loaded');
-}
-
-RUN();
+});

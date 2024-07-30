@@ -1,4 +1,4 @@
-function initializeTypewriter() {
+document.addEventListener('DOMContentLoaded', () => {
     const texts = [
         "Creativity unleashed",
         "100% random stuff",
@@ -51,7 +51,4 @@ function initializeTypewriter() {
     }
 
     type();
-}
-
-// Ensure the typewriter effect initializes with Astro's lifecycle event
-initializeTypewriter()
+});
