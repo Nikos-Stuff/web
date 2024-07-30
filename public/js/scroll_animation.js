@@ -23,7 +23,7 @@ document.addEventListener("astro:page-load", function () {
         });
     }, {
         root: null, // Use the viewport as the root
-        rootMargin: '-200px 0px', // Add a 200px margin at the top and bottom
+        rootMargin: '-250px 0px', // Add a 200px margin at the top and bottom
         threshold: [0] // Trigger callback when element is fully out or in view
     });
 

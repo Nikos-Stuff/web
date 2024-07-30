@@ -52,7 +52,7 @@ document.addEventListener('astro:page-load', () => {
                 </div>
             </div>
             <div class="review-icon text-right flip-in-hor-bottom">
-                <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white">${review.icon}</p>
+                <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0">${review.icon}</p>
             </div>
         `;
         reviewItem.classList.remove('active');

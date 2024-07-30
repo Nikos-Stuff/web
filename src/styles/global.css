@@ -209,25 +209,31 @@ article img {
 @keyframes scale-out-top {
   0% {
     transform: scale(1.1);
+    box-shadow: 0 0 20px 0px rgba(129, 129, 129, 0.35);
   }
   100% {
     transform: scale(1);
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0);
   }
 }
+
 
 @keyframes scale-in-bottom {
   0% {
     transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
   100% {
     transform: scale(1.1);
+    box-shadow: 0 0 20px 0px rgba(129, 129, 129, 0.35);
   }
 }
+
 
 .scale-in-bottom {
   animation: scale-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 .scale-out-top {
-  animation: scale-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  animation: scale-out-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
