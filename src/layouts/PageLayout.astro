@@ -4,7 +4,6 @@ import BaseHead from "@components/BaseHead.astro"
 import Header from "@components/Header.astro"
 import Footer from "@components/Footer.astro"
 import Drawer from "@components/Drawer.astro"
-import { ViewTransitions } from 'astro:transitions';
 const { title, description } = Astro.props
 import { SITE } from "@consts"
 ---
@@ -14,7 +13,6 @@ import { SITE } from "@consts"
   <head>
     <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
   </head>
-  <ViewTransitions/>
   <body>
     <Header />
     <Drawer />
