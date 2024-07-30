@@ -17,14 +17,14 @@ import Reviews from "@components/Reviews.astro"
 import DynamicTitle from "@components/TitleHeader.astro"
 
 const posts = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0,3)
+    .filter(post => !post.data.draft)
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0,3)
 
 const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0,3)
+    .filter(project => !project.data.draft)
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+    .slice(0,3)
 
 const teammembers = (await getCollection("team"))
     .filter(teammember => !teammember.data.draft)
@@ -60,7 +60,7 @@ const stack = [
 ---
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
-
+  <script is:inline src="/js/scroll_animation.js"/>
   <!-- Light Mode: Particles -->
   <div class='absolute inset-0 block dark:hidden'>
     <div id='particles1' class='fixed inset-0'></div>
@@ -103,9 +103,14 @@ const stack = [
     <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
 
       <!-- About Section -->
-      <section class="animate">
+      <section class="animate pt-0 pb-60">
         <article>
-          <p><strong>Niko's Stuff</strong> is your gateway to a world of creativity, innovation, and shared passion. We are a close-knit community of enthusiasts dedicated to exploring ideas, developing projects, and exchanging insights. Our goal is not only to achieve success but also to embrace challenges and take decisive action that yields extraordinary outcomes. Join us on this journey where every idea, every project, and every comment contributes to our collective pursuit of excellence and meaningful impact.</p>
+          <p><strong>Niko's Stuff</strong> is your gateway to a world of creativity,
+            innovation, and shared passion. We are a close-knit community of enthusiasts
+            dedicated to exploring ideas, developing projects, and exchanging insights
+            Our goal is not only to achieve success but also to embrace challenges and
+            take decisive action that yields extraordinary outcomes. Join us on this journey where every idea,
+            every project, and every comment contributes to our collective pursuit of excellence and meaningful impact.</p>
         </article>
 
       </section>
@@ -113,7 +118,7 @@ const stack = [
       <!--  Start Your Own Stuff! -->
       <section class="animate">
         <article>
-          <div class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
+          <div fancy-scroll="true"  class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
             <div class="text-content flex-1">
               <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
                 Start Your Own Stuff
@@ -124,7 +129,7 @@ const stack = [
               </p>
             </div>
             <div class="text-right">
-              <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white">
+              <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0">
                 ✏️
               </p>
             </div>
@@ -135,9 +140,9 @@ const stack = [
       <!--  Optimization & Design in Mind -->
       <section class="animate">
         <article>
-          <div class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
+          <div fancy-scroll="true"  class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
             <div class="text-right">
-              <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white">
+              <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0">
                 🖌️
               </p>
             </div>
@@ -158,7 +163,7 @@ const stack = [
       <!--  Growing and Improving -->
       <section class="animate">
         <article>
-          <div class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
+          <div fancy-scroll="true"  class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
             <div class="text-content flex-1">
               <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
                 Growing & Improving
@@ -169,7 +174,7 @@ const stack = [
               </p>
             </div>
             <div class="text-right">
-              <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white">
+              <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0">
                 📈
               </p>
             </div>
@@ -177,13 +182,35 @@ const stack = [
         </article>
       </section>
 
+      <!-- Open For You -->
+      <section class="animate pb-20">
+        <article>
+          <div fancy-scroll="true"  class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
+            <div class="text-content flex-1">
+              <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
+                Open For You
+              </p>
+              <p class="mt-0 mb-0">
+                We are currently looking for developers and other professionals with exceptional skills.
+                If you are interested in joining our team,
+                please contact us.
+              </p>
+            </div>
+            <div class="text-right">
+              <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0">
+                🚪
+              </p>
+            </div>
+          </div>
+        </article>
+      </section>
+
+
       <!--  Review Section -->
-      <section class="space-y-4 animate">
+      <section class="space-y-4 animate pb-20">
         <p class="font-semibold text-black dark:text-white">
           What Our Members Say
         </p>
-
-        <!-- Review One -->
         <Reviews/>
       </section>
 
@@ -215,6 +242,32 @@ const stack = [
 
       <script is:inline src="/js/team_scroll.js"></script>
 
+      <!-- Tech Stack Section -->
+      <section class="animate">
+        <div class="space-y-4">
+          <p class="font-semibold text-black dark:text-white">
+            We're dealing with
+          </p>
+          <div class="flex flex-wrap items-center gap-2 mt-5">
+            {stack.map(item => (
+                <StackCard
+                    text={item.text}
+                    icon={item.icon}
+                    href={item.href}
+                />
+            ))}
+          </div>
+          <!--<div>-->
+          <!--  Performing reactivity and statefulness, special guest-->
+          <!--  <a href="https://www.solidjs.com/" target="_blank" class="w-fit group underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">-->
+          <!--    <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">-->
+          <!--      SolidJS-->
+          <!--    </span>-->
+          <!--  </a>-->
+          <!--</div>-->
+        </div>
+      </section>
+
       <!-- Blog Preview Section -->
       <section class="animate">
         <div class="space-y-4">
@@ -230,37 +283,11 @@ const stack = [
           </div>
           <ul class="space-y-4">
             {posts.map((post) => (
-              <li>
-                <ArrowCard entry={post} />
-              </li>
+                <li>
+                  <ArrowCard entry={post} />
+                </li>
             ))}
           </ul>
-        </div>
-      </section>
-
-      <!-- Tech Stack Section -->
-      <section class="animate">
-        <div class="space-y-4">
-          <p class="font-semibold text-black dark:text-white">
-            We're dealing with
-          </p>
-          <div class="flex flex-wrap items-center gap-2 mt-5">
-            {stack.map(item => (
-              <StackCard
-                text={item.text}
-                icon={item.icon}
-                href={item.href}
-              />
-            ))}
-          </div>
-          <!--<div>-->
-          <!--  Performing reactivity and statefulness, special guest-->
-          <!--  <a href="https://www.solidjs.com/" target="_blank" class="w-fit group underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">-->
-          <!--    <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">-->
-          <!--      SolidJS-->
-          <!--    </span>-->
-          <!--  </a>-->
-          <!--</div>-->
         </div>
       </section>
 
@@ -269,7 +296,7 @@ const stack = [
         <div class="space-y-4">
           <div class="flex justify-between">
             <p class="font-semibold text-black dark:text-white">
-              Fresh Projects:
+              Fresh Projects
             </p>
             <a href="/projects" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
               <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
@@ -279,9 +306,9 @@ const stack = [
           </div>
           <ul class="space-y-4">
             {projects.map((project) => (
-              <li>
-                <ArrowCard entry={project} />
-              </li>
+                <li>
+                  <ArrowCard entry={project} />
+                </li>
             ))}
           </ul>
         </div>
@@ -290,14 +317,14 @@ const stack = [
       <!-- Contact Section -->
       <section class="animate">
         <div>
-            <p class="font-semibold text-black dark:text-white">
-              Let's Connect
-            </p>
-            <p>
-              Reach out to me & us!
-            </p>
-            <div class="grid grid-cols-4 gap-y-2 mt-4 auto-cols-min">
-              {SOCIALS.map(social => (
+          <p class="font-semibold text-black dark:text-white">
+            Let's Connect
+          </p>
+          <p>
+            Reach out to me & us!
+          </p>
+          <div class="grid grid-cols-4 gap-y-2 mt-4 auto-cols-min">
+            {SOCIALS.map(social => (
                 <div class="col-span-1 flex items-center gap-1">
                   <span class="whitespace-nowrap truncate">
                     {social.NAME}
@@ -310,7 +337,7 @@ const stack = [
                     </span>
                   </a>
                 </div>
-              ))}
+            ))}
           </div>
         </div>
       </section>
@@ -322,7 +349,7 @@ const stack = [
         <div class="flex justify-ubetween">
           <a target="_blank" href="https://uptime.betterstack.com" rel="noopener">
 
-              <Image src="/betterstack.webp" alt="BetterStack." width={150} height={150} loading="eager"/>
+            <Image src="/betterstack.webp" alt="BetterStack." width={150} height={150} loading="eager"/>
 
 
           </a>
