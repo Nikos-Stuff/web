@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+function run () {
     // Select elements with the attribute fancy-scroll="true"
     const elements = document.querySelectorAll('[fancy-scroll="true"]');
 
@@ -29,4 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Observe each element with the custom attribute
     elements.forEach(element => observer.observe(element));
-});
+}
+
+run()

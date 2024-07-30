@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+function run () {
     const parallaxImages = document.querySelectorAll('[id^="parallaxImage"]');
 
     function handleParallaxScroll() {
@@ -11,4 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     handleParallaxScroll();
-});
+}
+
+run()

@@ -1,12 +1,12 @@
-document.addEventListener('DOMContentLoaded', () => {
+function run () {
     const reviewItem = document.getElementById('review-item');
     const reviews = [
-        { name: "Katzby", review: "This beautiful service & website is officially lynx-approved. Mrawr.", icon: "🐈" },
-        { name: "lilbigwhiteowl", review: "Video Editing | Recommended.", icon: "🎥" },
-        { name: "giljacek", review: "Video Editing | Fast and perfect execution.", icon: "⏰" },
-        { name: "codewizard", review: "Web Development | Outstanding code quality and support.", icon: "🧙‍♂️" },
-        { name: "filmfanatic", review: "Video Editing | Exceptional quality and attention to detail.", icon: "🎬" },
-        { name: "devmaster", review: "Web Development | Professional and efficient service.", icon: "💼" }
+        {name: "Katzby", review: "This beautiful service & website is officially lynx-approved. Mrawr.", icon: "🐈"},
+        {name: "lilbigwhiteowl", review: "Video Editing | Recommended.", icon: "🎥"},
+        {name: "giljacek", review: "Video Editing | Fast and perfect execution.", icon: "⏰"},
+        {name: "codewizard", review: "Web Development | Outstanding code quality and support.", icon: "🧙‍♂️"},
+        {name: "filmfanatic", review: "Video Editing | Exceptional quality and attention to detail.", icon: "🎬"},
+        {name: "devmaster", review: "Web Development | Professional and efficient service.", icon: "💼"}
     ];
 
 
@@ -86,4 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     console.log('Reviews Loaded');
-});
+}
+
+
+run()

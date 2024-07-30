@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+function run ()  {
     const texts = [
         "Creativity unleashed",
         "100% random stuff",
@@ -51,4 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     type();
-});
+}
+
+run()
