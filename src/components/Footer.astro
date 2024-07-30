@@ -35,7 +35,7 @@ import { Image } from 'astro:assets';
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="flex flex-col items-center sm:items-start">
             <a href="/" class="flex gap-1 place-items-center w-fit font-semibold text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out">
-              <Image src="/favicon.webp" alt="Logo" height="35" width="35" loading="eager"/>
+              <Image src="/favicon.webp" alt="Logo" height={35} width={35} loading="eager"/>
               {SITE.TITLE}
             </a>
           </div>
