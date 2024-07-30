@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("astro:page-load", function () {
     // Select elements with the attribute fancy-scroll="true"
     const elements = document.querySelectorAll('[fancy-scroll="true"]');
 
