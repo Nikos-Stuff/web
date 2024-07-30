@@ -1,12 +1,16 @@
 function animate() {
-  const animateElements = document.querySelectorAll('.animate')
+  const animateElements = document.querySelectorAll('.animate');
 
-  animateElements.forEach((element, index) => {
-    setTimeout(() => {
-      element.classList.add('show')
-    }, index * 150)
-  });
+  const addClass = (element, index) => {
+    window.requestAnimationFrame(() => {
+      setTimeout(() => {
+        element.classList.add('show');
+      }, index * 150);
+    });
+  };
+
+  animateElements.forEach(addClass);
 }
 
-document.addEventListener("astro:page-load", animate)
-document.addEventListener("astro:after-swap", animate)
+document.addEventListener("astro:page-load", animate);
+document.addEventListener("astro:after-swap", animate);
