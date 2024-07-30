@@ -25,7 +25,7 @@ html {
   color-scheme: light;
   background-color: white;
   font-family: "Atkinson", sans-serif;
-  
+
 }
 
 html.dark {
@@ -108,7 +108,7 @@ article img {
  * TWINKLE STARS
  */
 
- #twinkle-star.template {
+#twinkle-star.template {
   @apply absolute -left-full; /* hide offscreen */
 }
 
@@ -203,4 +203,37 @@ article img {
 
 .flip-out-hor-top {
   animation: flip-out-hor-top 0.45s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+
+@keyframes scale-out-top {
+  0% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px 0 rgba(129, 129, 129, 0.35);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0);
+  }
+}
+
+
+@keyframes scale-in-bottom {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+  100% {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px 0 rgba(129, 129, 129, 0.35);
+  }
+}
+
+
+.scale-in-bottom {
+  animation: scale-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.scale-out-top {
+  animation: scale-out-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
