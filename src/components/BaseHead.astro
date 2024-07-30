@@ -10,7 +10,6 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site)
 
 const { title, description, image = "/open-graph.jpg" } = Astro.props
-import { ViewTransitions } from 'astro:transitions';
 ---
 
 <!-- Global Metadata -->
@@ -55,7 +54,7 @@ import { ViewTransitions } from 'astro:transitions';
 <script is:inline src="/js/scroll.js" data-astro-rerun/>
 <script is:inline src="/js/animate.js" data-astro-rerun/>
 
-<ViewTransitions  />
+<!--<ViewTransitions/>-->
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client"
