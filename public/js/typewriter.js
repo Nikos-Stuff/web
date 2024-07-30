@@ -54,4 +54,4 @@ function initializeTypewriter() {
 }
 
 // Ensure the typewriter effect initializes with Astro's lifecycle event
-document.addEventListener('astro:page-load', initializeTypewriter);
+initializeTypewriter()

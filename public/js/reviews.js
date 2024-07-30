@@ -1,4 +1,4 @@
-document.addEventListener('astro:page-load', () => {
+function RUN () {
     const reviewItem = document.getElementById('review-item');
     const reviews = [
         { name: "Katzby", review: "This beautiful service & website is officially lynx-approved. Mrawr.", icon: "🐈" },
@@ -86,4 +86,6 @@ document.addEventListener('astro:page-load', () => {
     }
 
     console.log('Reviews Loaded');
-});
+}
+
+RUN();
