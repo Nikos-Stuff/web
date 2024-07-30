@@ -204,3 +204,40 @@ article img {
 .flip-out-hor-top {
   animation: flip-out-hor-top 0.45s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
+
+
+@keyframes scale-out-top {
+  0% {
+    transform: scale(1);
+    transform-origin: 50% 0%;
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    transform-origin: 50% 0%;
+    opacity: 0; /* Hide element by reducing opacity */
+    visibility: hidden; /* Ensure element is not interactable */
+  }
+}
+
+@keyframes scale-in-bottom {
+  0% {
+    visibility: visible; /* Ensure element is visible from start */
+    transform: scale(0);
+    transform-origin: 50% 100%;
+    opacity: 0; /* Start hidden */
+  }
+  100% {
+    transform: scale(1);
+    transform-origin: 50% 100%;
+    opacity: 1; /* Fully visible */
+  }
+}
+
+.scale-in-bottom {
+  animation: scale-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+.scale-out-top {
+  animation: scale-out-top 0.5s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
