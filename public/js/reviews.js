@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('astro:page-load', () => {
     const reviewItem = document.getElementById('review-item');
     const reviews = [
         { name: "Katzby", review: "This beautiful service & website is officially lynx-approved. Mrawr.", icon: "🐈" },
