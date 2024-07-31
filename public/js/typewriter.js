@@ -58,4 +58,5 @@ function run() {
     type();
 }
 
+run()
 document.addEventListener('DOMContentLoaded', run);
