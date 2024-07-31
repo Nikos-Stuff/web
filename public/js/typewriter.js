@@ -1,4 +1,4 @@
-function run ()  {
+function run() {
     const texts = [
         "Creativity unleashed",
         "100% random stuff",
@@ -21,7 +21,12 @@ function run ()  {
 
     function type() {
         const typewriterElement = document.querySelector('.typewriter');
-        if (!typewriterElement) return;
+        
+        if (!typewriterElement) {
+            // If the element is not available, retry after 500ms
+            setTimeout(type, 500);
+            return;
+        }
 
         const currentText = texts[currentIndex];
         if (isDeleting) {
@@ -53,4 +58,4 @@ function run ()  {
     type();
 }
 
-run()
+document.addEventListener('DOMContentLoaded', run);
