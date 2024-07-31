@@ -1,4 +1,4 @@
-let typewriterTimeout;
+let typingInterval;
 
 function run() {
     const texts = [
@@ -49,16 +49,14 @@ function run() {
             typeSpeed = 500; // Pause before typing next text
         }
 
-        typewriterTimeout = setTimeout(type, typeSpeed);
+        typingInterval = setTimeout(type, typeSpeed);
     }
 
-    // Clear any existing timeout before starting a new one
-    if (typewriterTimeout) {
-        clearTimeout(typewriterTimeout);
+    if (typingInterval) {
+        clearTimeout(typingInterval);
     }
 
     type();
 }
 
-// Start the typing effect
 run();
