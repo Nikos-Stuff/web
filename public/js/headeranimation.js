@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+function run () {
     let mouseX = 0, mouseY = 0, scrollY = 0;
     let targetMouseX = 0, targetMouseY = 0, targetScrollY = 0;
     const easing = 0.075;
@@ -56,4 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     smoothMove();
-});
+}
+
+run()
+document.addEventListener('DOMContentLoaded', run);
