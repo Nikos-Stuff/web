@@ -6,7 +6,8 @@ function run () {
         {name: "giljacek", review: "Video Editing | Fast and perfect execution.", icon: "⏰"},
         {name: "codewizard", review: "Web Development | Outstanding code quality and support.", icon: "🧙‍♂️"},
         {name: "filmfanatic", review: "Video Editing | Exceptional quality and attention to detail.", icon: "🎬"},
-        {name: "devmaster", review: "Web Development | Professional and efficient service.", icon: "💼"}
+        {name: "devmaster", review: "Web Development | Professional and efficient service.", icon: "💼"},
+        {name: "Anidala", review: "Highly recommended! I see how much time, heart and passion he puts into it.", icon: "🧈"}
     ];
 
 
@@ -52,7 +53,7 @@ function run () {
                 </div>
             </div>
             <div class="review-icon text-right flip-in-hor-bottom">
-                <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white">${review.icon}</p>
+                <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0">${review.icon}</p>
             </div>
         `;
         reviewItem.classList.remove('active');
