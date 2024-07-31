@@ -1,4 +1,6 @@
-function run ()  {
+let typewriterTimeout;
+
+function run() {
     const texts = [
         "Creativity unleashed",
         "100% random stuff",
@@ -47,10 +49,16 @@ function run ()  {
             typeSpeed = 500; // Pause before typing next text
         }
 
-        setTimeout(type, typeSpeed);
+        typewriterTimeout = setTimeout(type, typeSpeed);
+    }
+
+    // Clear any existing timeout before starting a new one
+    if (typewriterTimeout) {
+        clearTimeout(typewriterTimeout);
     }
 
     type();
 }
 
-run()
+// Start the typing effect
+run();
