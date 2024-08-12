@@ -1,6 +1,6 @@
 ---
 title: "ZozoVidal1234"
-summary: "Epik Builder"
+summary: "Epic Builder"
 draft: false
 tags:
     - Roblox Dev
