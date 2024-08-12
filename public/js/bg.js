@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function initBG() {
+    console.log('BG Loaded');
     const particlesSmall = generateParticles(500, '#000');
     const particlesMedium = generateParticles(250, '#000');
     const particlesLarge = generateParticles(100, '#000');

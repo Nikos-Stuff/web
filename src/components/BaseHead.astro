@@ -55,11 +55,13 @@ import { ViewTransitions } from  "astro:transitions"
 <script is:inline src="/js/theme.js"/>
 <script is:inline src="/js/scroll.js"/>
 <script is:inline data-astro-rerun async src="/js/animate.js"/>
+<script is:inline async src="/js/bg.js"/>
+<script is:inline data-astro-rerun async src="/js/typewriter.js"/>
 
  <ViewTransitions  />
 
 <!-- AdSense - Nonsense -->
-<script is:inline data-astro-rerun src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4276395829672450" crossorigin="anonymous"/>
+<script is:inline data-astro-rerun async src="/js/adsense.js"/>
 
 <script>
   import type { TransitionBeforeSwapEvent } from "astro:transitions/client"
