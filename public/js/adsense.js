@@ -4,7 +4,7 @@
 (function() {
     var adsbygoogle = window.adsbygoogle || [];
     adsbygoogle.push({
-        google_ad_client: "ca-pub-4276395829672450",
+        client: "ca-pub-4276395829672450",
         enable_page_level_ads: true
     });
 
