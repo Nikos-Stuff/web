@@ -1,6 +1,6 @@
 ---
 title: "JustAston"
-summary: "Builder"
+summary: "Modeler & Builder"
 draft: false
 tags:
     - Roblox Dev
