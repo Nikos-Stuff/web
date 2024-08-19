@@ -38,10 +38,8 @@ import { Image } from 'astro:assets';
         </svg>
       </a>
 
-      <a href="https://nikostuff-com.translate.goog/?_x_tr_sl=en&_x_tr_tl=pl&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" aria-label={`Rss feed for ${SITE.TITLE}`} class={cn("hidden md:flex", "size-9 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")}>
-        <svg class="size-full">
-          <use href="/ui.svg#book-open"></use>
-        </svg>
+      <a href="/pl"  aria-label={`Translation for ${SITE.TITLE}`} class={cn("hidden md:flex", "language-toggle size-9 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")}>
+        <p class="hover:scale-110 transition-all duration-300 ease-in-out" id="language-toggle"></p>
       </a>
 
       <button id="header-theme-button" aria-label={`Toggle light and dark theme`} class={cn("hidden md:flex", "size-9 rounded-full p-2 items-center justify-center", "bg-transparent hover:bg-black/5 dark:hover:bg-white/20", "stroke-current hover:stroke-black hover:dark:stroke-white", "border border-black/10 dark:border-white/25", "transition-colors duration-300 ease-in-out")}>
@@ -65,6 +63,9 @@ import { Image } from 'astro:assets';
   </div>
   </Container>
 </header>
+
+<!--Lang manager-->
+<script src="/js/lang_swtch.js" is:inline async/>
 
 <style>
   #header-drawer-button > #drawer-open {
@@ -100,3 +101,6 @@ import { Image } from 'astro:assets';
   document.addEventListener("astro:after-swap", initializeDrawerButton)
   initializeDrawerButton()
 </script>
+
+
+

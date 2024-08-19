@@ -23,11 +23,11 @@ const subpath = pathname.match(/[^/]+/g)
       </svg>
     </a>
 
-    <a href="https://nikostuff-com.translate.goog/?_x_tr_sl=en&_x_tr_tl=pl&_x_tr_hl=en&_x_tr_pto=wapp" target="_blank" aria-label={`Rss feed for ${SITE.TITLE}`} class="size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out">
-      <svg class="size-full">
-        <use href="/ui.svg#book-open"></use>
-      </svg>
+    <a href="/pl"  aria-label={`Translation for ${SITE.TITLE}`} class="language-toggle size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out">
+      <p class="hover:scale-110 transition-all duration-300 ease-in-out" id="m-language-toggle">PL</p>
     </a>
+
+
 
     <button id="drawer-theme-button" aria-label={`Toggle light and dark theme`} class="size-9 rounded-full p-2 items-center justify-center bg-transparent hover:bg-black/5 dark:hover:bg-white/20 stroke-current hover:stroke-black hover:dark:stroke-white border border-black/10 dark:border-white/25 transition-colors duration-300 ease-in-out">
       <svg class="block dark:hidden size-full">
@@ -45,3 +45,4 @@ const subpath = pathname.match(/[^/]+/g)
     @apply h-full;
   }
 </style>
+
