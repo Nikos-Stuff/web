@@ -2,5 +2,5 @@
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
   },
-  "cSpell.words": ["Nextbots", "Niko's"]
+  "cSpell.words": ["astro", "Nextbots", "Niko's"]
 }
