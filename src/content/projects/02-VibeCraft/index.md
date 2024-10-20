@@ -6,7 +6,7 @@ draft: false
 tags:
   - Minecraft - J-1.20.6
   - Vanilla - Server
-demoUrl: https://vbc.nikostuff.com
+demoUrl: https://mc.nikostuff.com
 repoUrl: ""
 ---
 
