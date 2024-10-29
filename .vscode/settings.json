@@ -2,5 +2,12 @@
   "[astro]": {
     "editor.defaultFormatter": "astro-build.astro-vscode"
   },
-  "cSpell.words": ["astro", "Nextbots", "Niko's"]
+  "cSpell.words": ["astro", "Nextbots", "Niko's"],
+  "spellright.language": ["en"],
+  "spellright.documentTypes": ["markdown", "latex", "plaintext"],
+  "spellright.parserByClass": {
+    "astro": {
+      "parser": "markdown"
+    }
+  }
 }
