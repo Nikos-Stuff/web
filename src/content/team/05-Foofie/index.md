@@ -1,7 +1,7 @@
 ---
 title: "Foofie"
 summary: "yyy yes, idk what I'm doing here. I'm just a dum wolf..."
-draft: false
+draft: true
 tags:
     - Goober
 demoUrl: ""
