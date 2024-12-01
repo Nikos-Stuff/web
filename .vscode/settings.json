@@ -4,7 +4,7 @@
   },
   "cSpell.words": ["astro", "Nextbots", "Niko's"],
   "spellright.language": ["en"],
-  "spellright.documentTypes": ["markdown", "latex", "plaintext"],
+  "spellright.documentTypes": ["latex", "plaintext"],
   "spellright.parserByClass": {
     "astro": {
       "parser": "markdown"
