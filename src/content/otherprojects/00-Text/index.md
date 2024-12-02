@@ -7,7 +7,7 @@ tags:
 demoUrl: ""
 repoUrl: ""
 imageUrl: ""
-otherUrls: ""
+# otherUrls: ""
 ---
 
 YOOO
