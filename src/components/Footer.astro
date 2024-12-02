@@ -3,6 +3,8 @@ import { SITE, SOCIALS } from "@consts"
 import Container from "@components/Container.astro"
 import { Image } from 'astro:assets';
 
+const Version = "4.0.0";
+
 
 // import InfoButton from '@components/info_button/button.astro';
 ---
@@ -61,7 +63,7 @@ import { Image } from 'astro:assets';
               </a>
             </div>
             <div class="text-sm mt-2">
-              &copy; 2024
+              &copy; 2024 | <code>v{Version}</code>
             </div>
           </div>
   
