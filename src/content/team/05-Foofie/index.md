@@ -7,7 +7,7 @@ tags:
 demoUrl: ""
 repoUrl: ""
 imageUrl: /imgs/fuf.webp
-otherUrls: ""
+# otherUrls: ""
 ---
 
 Random furry wolf/husky hubrid

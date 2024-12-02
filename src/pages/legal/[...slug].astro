@@ -5,12 +5,13 @@ import TopLayout from "@layouts/TopLayout.astro"
 import BottomLayout from "@layouts/BottomLayout.astro"
 import { formatDate } from "@lib/utils"
 import { SITE } from "@consts"
+import { render } from "astro:content"
 
 // Create the static pages for legal docs
 export async function getStaticPaths() {
 	const docs = await getCollection("legal")
 	return docs.map((doc) => ({
-		params: { slug: doc.slug },
+		params: { slug: doc.id },
 		props: doc,
 	}))
 }
@@ -19,7 +20,7 @@ export async function getStaticPaths() {
 type Props = CollectionEntry<"legal">;
 const doc = Astro.props
 const { title, date } = doc.data
-const { Content } = await doc.render();
+const { Content } = await render(doc);
 
 ---
 

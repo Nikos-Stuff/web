@@ -10,7 +10,7 @@ import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
 export async function getStaticPaths() {
     const mps = await getCollection("otherprojects")
     return mps.map((mp) => ({
-        params: { slug: mp.slug },
+        params: { slug: mp.id },
         props: mp,
     }))
 }

@@ -7,7 +7,7 @@ tags:
 demoUrl: ""
 repoUrl: ""
 imageUrl: /imgs/zozoboblox.webp
-otherUrls: ""
+# otherUrls: ""
 ---
 
 Bonjo- uhm, hello !

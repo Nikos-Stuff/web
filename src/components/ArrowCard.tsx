@@ -13,11 +13,11 @@ export default function ArrowCard({ entry, pill }: Props) {
     const getEntryLink = () => {
         switch (entry.collection) {
             case "blog":
-                return `/blog/${entry.slug}`;
+                return `/blog/${entry.id}`;
             case "projects":
-                return `/projects/${entry.slug}`;
+                return `/projects/${entry.id}`;
             case "team":
-                return `/team/${entry.slug}`;
+                return `/team/${entry.id}`;
             default:
                 return "/";
         }
@@ -37,7 +37,7 @@ export default function ArrowCard({ entry, pill }: Props) {
                         </div>
                     )}
                     <div class="text-sm uppercase">
-                        {formatDate(entry.data.date)}
+                        {entry.data.date ? formatDate(entry.data.date) : "No date available"}
                     </div>
                 </div>
                 <div class="font-semibold mt-3 text-black dark:text-white">

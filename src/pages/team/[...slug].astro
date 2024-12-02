@@ -10,7 +10,7 @@ import ArticleBottomLayout from "@layouts/ArticleBottomLayout.astro"
 export async function getStaticPaths() {
 	const teams = await getCollection("team")
 	return teams.map((team) => ({
-		params: { slug: team.slug },
+		params: { slug: team.id },
 		props: team,
 	}))
 }

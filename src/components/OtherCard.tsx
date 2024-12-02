@@ -12,7 +12,7 @@ export default function TeamCard({ entry, pill }: Props) {
     const getEntryLink = () => {
         switch (entry.collection) {
             case "otherprojects":
-                return `/otherprojects/${entry.slug}`;
+                return `/otherprojects/${entry.id}`;
             default:
                 return "/";
         }
@@ -46,7 +46,7 @@ export default function TeamCard({ entry, pill }: Props) {
                         </div>
                     )}
                     <div class="text-sm uppercase">
-                        {entry.collection === "otherprojects" ? "" : formatDate(entry.data.date)}
+                        {entry.collection === "otherprojects" ? "" : entry.data.date ? formatDate(entry.data.date) : "No date available"}
                     </div>
                 </div>
                 <div class="font-semibold mt-3 text-white">

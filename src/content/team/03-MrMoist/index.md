@@ -7,7 +7,7 @@ tags:
 demoUrl: ""
 repoUrl: ""
 imageUrl: /imgs/moistman.webp
-otherUrls: ""
+# otherUrls: ""
 ---
 
 Just moist

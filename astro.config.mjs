@@ -12,7 +12,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), solidJs(), tailwind({
     applyBaseStyles: false
   }), critters()],
-  legacy: {
-    collections: true
-  }
+  // legacy: {
+  //   collections: true
+  // }
 });

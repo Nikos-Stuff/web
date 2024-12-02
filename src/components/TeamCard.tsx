@@ -13,7 +13,7 @@ export default function TeamCard({ entry, pill }: Props) {
     const getEntryLink = () => {
         switch (entry.collection) {
             case "team":
-                return `/team/${entry.slug}`;
+                return `/team/${entry.id}`;
             default:
                 return "/";
         }
@@ -46,9 +46,9 @@ export default function TeamCard({ entry, pill }: Props) {
                             class="text-sm capitalize px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25">
                         </div>
                     )}
-                    <div class="text-sm uppercase">
+                    {/* <div class="text-sm uppercase">
                         {entry.collection === "team" ? "" : formatDate(entry.data.date)}
-                    </div>
+                    </div> */}
                 </div>
                 <div class="font-semibold mt-3 text-white">
                     {entry.data.title}

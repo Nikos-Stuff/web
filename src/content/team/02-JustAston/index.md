@@ -7,7 +7,7 @@ tags:
 demoUrl: ""
 repoUrl: ""
 imageUrl: /imgs/aston.webp
-otherUrls: ""
+# otherUrls: ""
 ---
 
 Builder, Modeler, Scripter & Cheese Lover 👀

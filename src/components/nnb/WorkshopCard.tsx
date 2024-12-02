@@ -15,7 +15,7 @@ export default function ArrowCard({ entry }: Props) {
     const getEntryLink = () => {
         switch (entry.collection) {
             case "nnb_workshop":
-                return `./${entry.slug}`;
+                return `./${entry.id}`;
             default:
                 return "/";
         }
@@ -34,7 +34,7 @@ export default function ArrowCard({ entry }: Props) {
                         💾 Click to add
                     </div>
                     <div class="text-sm uppercase">
-                        {formatDate(entry.data.date)}
+                         {entry.data.date ? formatDate(entry.data.date) : "No date available"}
                     </div>
                 </div>
                 <div class="font-semibold mt-3 text-black dark:text-white">
@@ -53,7 +53,7 @@ export default function ArrowCard({ entry }: Props) {
             </div>
 
 
-            <svg id={entry.slug} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            <svg id={entry.id} xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                  stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"
                  class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10">
                 <line x1="5" y1="12" x2="19" y2="12"
