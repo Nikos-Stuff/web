@@ -11,5 +11,8 @@ export default defineConfig({
   site: "https://nikostuff.com",
   integrations: [mdx(), sitemap(), solidJs(), tailwind({
     applyBaseStyles: false
-  }), critters()]
+  }), critters()],
+  legacy: {
+    collections: true
+  }
 });
