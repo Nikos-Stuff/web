@@ -29,13 +29,13 @@ const repoUrl = collection === "projects" ? data.repoUrl : null
       <svg class="size-5 stroke-current">
         <use href="/ui.svg#calendar"/>
       </svg>
-      {formatDate(date)}
+      {date ? formatDate(date) : "No date available"}
     </div>
     <div class="flex items-center gap-2">
       <svg class="size-5 stroke-current">
         <use href="/ui.svg#book-open"/>
       </svg>
-      {readingTime(body)}
+      {body ? readingTime(body) : "No date available"}
     </div>
   </div>
   <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">

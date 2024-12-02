@@ -29,7 +29,7 @@ const repoUrl = collection === "nnb_workshop" ? data.repoUrl : null
       <svg class="size-5 stroke-current">
         <use href="/ui.svg#calendar"/>
       </svg>
-      {formatDate(date)}
+      {date ? formatDate(date) : "No date available"}
     </div>
     <!--<div class="flex items-center gap-2">-->
     <!--  <svg class="size-5 stroke-current">-->

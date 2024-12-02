@@ -61,6 +61,7 @@ const nnb_workshop = defineCollection({
     demoUrl: z.string().optional(),
     repoUrl: z.string().optional(),
     imageUrl: z.string().optional(),
+    downUrl: z.string().optional(),
     otherUrls: z.array(z.object({ name: z.string(), url: z.string().url(),})).optional(),
   }),
 })
