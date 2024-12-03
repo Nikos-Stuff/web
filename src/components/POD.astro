@@ -24,6 +24,8 @@ try {
             alt={apodData.title}
             class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
             onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+            decoding="async"
+            loading="eager"
           />
         ) : (
           <iframe
