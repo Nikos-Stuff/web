@@ -32,6 +32,9 @@ importers:
       '@tailwindcss/typography':
         specifier: ^0.5.14
         version: 0.5.14(tailwindcss@3.4.15)
+      '@types/js-yaml':
+        specifier: ^4.0.9
+        version: 4.0.9
       astro:
         specifier: 5.0.0-beta.12
         version: 5.0.0-beta.12(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.5.0)
@@ -44,6 +47,9 @@ importers:
       fuse.js:
         specifier: ^7.0.0
         version: 7.0.0
+      js-yaml:
+        specifier: ^4.1.0
+        version: 4.1.0
       sharp:
         specifier: ^0.33.4
         version: 0.33.4
@@ -860,6 +866,9 @@ packages:
   '@types/hast@3.0.4':
     resolution: {integrity: sha512-WPs+bbQw5aCj+x6laNGWLH3wviHtoCv/P3+otBhbOhJgG8qtpdAMlTCxLtsTWA7LH1Oh/bFCHsBn0TPS5m30EQ==}
 
+  '@types/js-yaml@4.0.9':
+    resolution: {integrity: sha512-k4MGaQl5TGo/iipqb2UDG2UwjXziSWkh0uysQelTlJpX1qGlpUZYm8PnO4DxG1qBomtJUdYJ6qR6xdIah10JLg==}
+
   '@types/mdast@4.0.4':
     resolution: {integrity: sha512-kGaNbPh1k7AFzgpud/gMdvIm5xuECykRR+JnWKQno9TAXVa6WIVCGTPvYGekIDL4uwCZQSYbUxNBSb1aUo79oA==}
 
@@ -1148,10 +1157,6 @@ packages:
   cookie@0.7.2:
     resolution: {integrity: sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==}
     engines: {node: '>= 0.6'}
-
-  critters@0.0.19:
-    resolution: {integrity: sha512-Fm4ZAXsG0VzWy1U30rP4qxbaWGSsqXDgSupJW1OUJGDAs0KWC+j37v7p5a2kZ9BPJvhRzWm3be+Hc9WvQOBUOw==}
-    deprecated: Please upgrade to the latest version. There is a potential XSS vulnerability in this version
 
   critters@0.0.24:
     resolution: {integrity: sha512-Oyqew0FGM0wYUSNqR0L6AteO5MpMoUU0rhKRieXeiKs+PmRTxiJMyaunYB2KF6fQ3dzChXKCpbFOEJx3OQ1v/Q==}
@@ -3369,7 +3374,7 @@ snapshots:
 
   '@otterlord/astro-critters@1.1.41':
     dependencies:
-      critters: 0.0.19
+      critters: 0.0.24
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -3519,6 +3524,8 @@ snapshots:
   '@types/hast@3.0.4':
     dependencies:
       '@types/unist': 3.0.2
+
+  '@types/js-yaml@4.0.9': {}
 
   '@types/mdast@4.0.4':
     dependencies:
@@ -3976,16 +3983,6 @@ snapshots:
   convert-source-map@2.0.0: {}
 
   cookie@0.7.2: {}
-
-  critters@0.0.19:
-    dependencies:
-      chalk: 4.1.2
-      css-select: 5.1.0
-      dom-serializer: 2.0.0
-      domhandler: 5.0.3
-      htmlparser2: 8.0.2
-      postcss: 8.4.49
-      pretty-bytes: 5.6.0
 
   critters@0.0.24:
     dependencies:
