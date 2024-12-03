@@ -1,0 +1,40 @@
+---
+//export const prerender = false; 
+
+import { NASA_API } from "astro:env/server";
+const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
+
+let apodData = null;
+
+try {
+  const response = await fetch(apiUrl);
+  apodData = await response.json();
+} catch (error) {
+  console.error("Error fetching NASA APOD:", error);
+}
+---
+
+<div id="pod" class="fixed inset-0 w-full h-full bg-black ">
+    {apodData ? (
+      <>
+        {apodData.media_type === "image" ? (
+          <img
+            id="apod-image"
+            src={apodData.url}
+            alt={apodData.title}
+            class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
+            onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+          />
+        ) : (
+          <iframe
+            title="APOD Video"
+            src={apodData.url}
+            class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
+          ></iframe>
+        )}
+      </>
+    ) : (
+      <p class="hidden">Loading...</p>
+    )}
+  </div>
+  

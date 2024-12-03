@@ -1,4 +1,6 @@
 ---
+// export const prerender = false;
+
 import {getCollection} from "astro:content"
 import PageLayout from "@layouts/PageLayout.astro"
 import ArrowCard from "@components/ArrowCard"
@@ -57,10 +59,14 @@ const stack = [
         href: "https://www.php.net"
     }
 ]
----
 
+import POD from "@components/POD.astro"
+
+---
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
     <script is:inline data-astro-rerun async src="/js/scroll_animation.js"/>
+
+
     <!-- Light Mode: Particles -->
     <div class='absolute inset-0 block dark:hidden'>
         <div id='particles1' class='fixed inset-0'></div>
@@ -69,7 +75,8 @@ const stack = [
     </div>
 
     <!-- Dark Theme: Stars -->
-    <div class='absolute inset-0 bg-black hidden dark:block'>
+    <div class='absolute inset-0 hidden dark:block'>
+        <POD/>
         <div id='stars1' class='fixed inset-0'></div>
         <div id='stars2' class='fixed inset-0'></div>
         <div id='stars3' class='fixed inset-0'></div>
@@ -84,7 +91,6 @@ const stack = [
     </div>
 
     <script is:inline src="/js/bg.js"/>
-
     <!-- HERO -->
     <section class="relative h-[2000px] w-full">
         <div id="planetcont" class='animate absolute inset-0 top-3/4 overflow-hidden'>

@@ -10,7 +10,8 @@ document.addEventListener('DOMContentLoaded', function () {
     particles3: { mouse: 2, scroll: 0.15 },
     stars1: { mouse: 3, scroll: 0.05 },
     stars2: { mouse: 5, scroll: 0.1 },
-    stars3: { mouse: 2, scroll: 0.15 }
+    stars3: { mouse: 2, scroll: 0.15 },
+    pod: { mouse: 1, scroll: 0.05 },
   };
 
   // Mouse and scroll event listeners
@@ -38,7 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
       particles3: document.getElementById('particles3'),
       stars1: document.getElementById('stars1'),
       stars2: document.getElementById('stars2'),
-      stars3: document.getElementById('stars3')
+      stars3: document.getElementById('stars3'),
+      pod: document.getElementById('pod'),
     };
 
     for (const [id, elem] of Object.entries(elements)) {
