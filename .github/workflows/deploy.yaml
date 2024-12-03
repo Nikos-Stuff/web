@@ -4,6 +4,8 @@ on:
   push:
     branches: ["main"]
   workflow_dispatch:
+  schedule:
+    - cron: "0 */12 * * *" # This runs the workflow every 12 hours
 
 concurrency:
   group: ${{ github.workflow }}
@@ -39,7 +41,7 @@ jobs:
         with:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_LOGIN }}
-          password: ${{ SECRETS.FTP_PASSWD }}
+          password: ${{ secrets.FTP_PASSWD }}
           port: 21
           local-dir: 'dist/'
           server-dir: "/"
