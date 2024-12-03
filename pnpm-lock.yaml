@@ -29,9 +29,9 @@ importers:
       '@astrojs/tailwind':
         specifier: ^5.1.3
         version: 5.1.3(astro@5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.5.0))(tailwindcss@3.4.15)
-      '@otterlord/astro-critters':
-        specifier: ^1.1.41
-        version: 1.1.41
+      '@playform/inline':
+        specifier: ^0.1.0
+        version: 0.1.0(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.5.0)
       '@tailwindcss/typography':
         specifier: ^0.5.14
         version: 0.5.14(tailwindcss@3.4.15)
@@ -41,9 +41,6 @@ importers:
       astro:
         specifier: 5.0.1
         version: 5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.5.0)
-      astro-critters:
-        specifier: ^2.2.0
-        version: 2.2.0(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.5.0)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -693,12 +690,12 @@ packages:
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
 
-  '@otterlord/astro-critters@1.1.41':
-    resolution: {integrity: sha512-OMTP1taxiWoxxBYxzJKmBnH82AEYR/GC485Hi9rDhtbjOoAjJhUOJFJStMSH60hFvB3SyDemtETI1WLaLEPTLg==}
-
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
+
+  '@playform/inline@0.1.0':
+    resolution: {integrity: sha512-IDy8oH1UH9qFz2swmL6sgODWrvNltf0L3VrHCoDemW9GjDNbdEIoDafDMdC5gw3C92Fn/jUBA+tYvy+j7/mqFw==}
 
   '@playform/pipe@0.1.0':
     resolution: {integrity: sha512-EiY5y81BKSIBduFDM9UAN9RISQptYd8TR1UWTx1H/5Tm86AHxjAm/fiGqUuWwZShBqc5K1TY4ynkT6dpp1r7UQ==}
@@ -970,9 +967,6 @@ packages:
     resolution: {integrity: sha512-ISvCdHdlTDlH5IpxQJIex7BWBywFWgjJSVdwst+/iQCoEYnyOaQ95+X1JGshuBjGp6nxKUy1jMgE3zPqN7fQdg==}
     hasBin: true
 
-  astro-critters@2.2.0:
-    resolution: {integrity: sha512-Ieuu4uR8nas2KT3RogITH41BCdEr3Ro8712S4Lm5xnaI1iEGZA+ajqpj2jgll6HjWm1LzlehRWH1ituUn4X/Cg==}
-
   astro@5.0.1:
     resolution: {integrity: sha512-7XzFq3eFdSkeT/aCNealVv4klwmKoOYb6LZymbyZQrdUA9vEoUCKFcujVo4YbJJ8WXyEm515ZHPCxHTdDneEug==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
@@ -1123,13 +1117,8 @@ packages:
     resolution: {integrity: sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==}
     engines: {node: '>= 0.6'}
 
-  critters@0.0.19:
-    resolution: {integrity: sha512-Fm4ZAXsG0VzWy1U30rP4qxbaWGSsqXDgSupJW1OUJGDAs0KWC+j37v7p5a2kZ9BPJvhRzWm3be+Hc9WvQOBUOw==}
-    deprecated: Please upgrade to the latest version. There is a potential XSS vulnerability in this version
-
   critters@0.0.24:
     resolution: {integrity: sha512-Oyqew0FGM0wYUSNqR0L6AteO5MpMoUU0rhKRieXeiKs+PmRTxiJMyaunYB2KF6fQ3dzChXKCpbFOEJx3OQ1v/Q==}
-    deprecated: Ownership of Critters has moved to the Nuxt team, who will be maintaining the project going forward. If you'd like to keep using Critters, please switch to the actively-maintained fork at https://github.com/danielroe/beasties
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
@@ -2045,10 +2034,6 @@ packages:
     resolution: {integrity: sha512-yPngTo3aXUUmyuTjeTUT75txrf+aMh9FiD7q9ZE/i6r0bPb22g4FsE6Y338PQX1bmfy08i9QQCB7/rcUAVntfw==}
     engines: {node: '>=10.13.0'}
     hasBin: true
-
-  pretty-bytes@5.6.0:
-    resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
-    engines: {node: '>=6'}
 
   prismjs@1.29.0:
     resolution: {integrity: sha512-Kx/1w86q/epKcmte75LNrEoT+lX8pBpavuAbvJWRXar7Hz8jrtF+e3vY751p0R8H9HdArwaCTNDDzHg/ScJK1Q==}
@@ -3284,12 +3269,29 @@ snapshots:
 
   '@oslojs/encoding@1.1.0': {}
 
-  '@otterlord/astro-critters@1.1.41':
-    dependencies:
-      critters: 0.0.19
-
   '@pkgjs/parseargs@0.11.0':
     optional: true
+
+  '@playform/inline@0.1.0(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.5.0)':
+    dependencies:
+      '@playform/pipe': 0.1.0
+      astro: 5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.5.0)
+      critters: 0.0.24
+    transitivePeerDependencies:
+      - '@types/node'
+      - jiti
+      - less
+      - lightningcss
+      - rollup
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - typescript
+      - yaml
 
   '@playform/pipe@0.1.0':
     dependencies:
@@ -3563,27 +3565,6 @@ snapshots:
 
   astring@1.8.6: {}
 
-  astro-critters@2.2.0(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.5.0):
-    dependencies:
-      '@playform/pipe': 0.1.0
-      astro: 5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.5.0)
-      critters: 0.0.24
-    transitivePeerDependencies:
-      - '@types/node'
-      - jiti
-      - less
-      - lightningcss
-      - rollup
-      - sass
-      - sass-embedded
-      - stylus
-      - sugarss
-      - supports-color
-      - terser
-      - tsx
-      - typescript
-      - yaml
-
   astro@5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.5.0):
     dependencies:
       '@astrojs/compiler': 2.10.3
@@ -3802,16 +3783,6 @@ snapshots:
   convert-source-map@2.0.0: {}
 
   cookie@0.7.2: {}
-
-  critters@0.0.19:
-    dependencies:
-      chalk: 4.1.2
-      css-select: 5.1.0
-      dom-serializer: 2.0.0
-      domhandler: 5.0.3
-      htmlparser2: 8.0.2
-      postcss: 8.4.49
-      pretty-bytes: 5.6.0
 
   critters@0.0.24:
     dependencies:
@@ -5060,8 +5031,6 @@ snapshots:
 
   prettier@2.8.7:
     optional: true
-
-  pretty-bytes@5.6.0: {}
 
   prismjs@1.29.0: {}
 

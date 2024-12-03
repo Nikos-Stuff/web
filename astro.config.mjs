@@ -3,7 +3,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import tailwind from "@astrojs/tailwind";
 import solidJs from "@astrojs/solid-js";
-import critters from "astro-critters";
+import playformInline from "@playform/inline";
 //import node from "@astrojs/node";
 //
 
@@ -20,7 +20,7 @@ export default defineConfig({
 
   integrations: [mdx(), sitemap(), solidJs(), tailwind({
     applyBaseStyles: false
-  }), critters()],
+  }), playformInline()],
 
   // adapter: node({
   //   mode: "standalone"
