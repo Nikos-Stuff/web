@@ -20,7 +20,7 @@ try {
         {apodData.media_type === "image" ? (
           <img
             id="apod-image"
-            src={apodData.url}
+            src={`https://api.nikostuff.com/v1/web/live_optimize?target=${apodData.url}`}
             alt={apodData.title}
             class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
             onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
