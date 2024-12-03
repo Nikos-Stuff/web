@@ -60,7 +60,21 @@ const stack = [
     }
 ]
 
+
 import POD from "@components/POD.astro"
+
+import { NASA_API } from "astro:env/server";
+const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
+
+let apodData = null;
+
+try {
+  const response = await fetch(apiUrl);
+  apodData = await response.json();
+} catch (error) {
+  console.error("Error fetching NASA APOD:", error);
+}
+
 
 ---
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
@@ -108,6 +122,22 @@ import POD from "@components/POD.astro"
 
     <div class="relative bg-white dark:bg-black">
         <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16 -mt-[25rem]">
+
+          <!--  About  Image Section  -->
+            <section class="animate pb-0">
+                <article class="pb-0">
+                    <p class="font-bold text-sm mb-2">{apodData.title}</p>
+                    <p class="text-xs mb-2">{apodData.date}</p>
+                    <p class="text-sm max-w-3xl">{apodData.explanation}</p>
+                </article>
+                
+                
+                
+
+            </section>
+
+
+
 
             <!--  About Section  -->
             <section class="animate pb-0">
