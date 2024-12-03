@@ -194,6 +194,42 @@ article img {
   }
 }
 
+@keyframes gradient-animation {
+  to {
+    background-position: -200% 0; /* Move the gradient horizontally */
+  }
+}
+
+.rainbow {
+  background: linear-gradient(
+    to right,
+    rgba(228, 3, 3, 1) 0%,     /* Red */
+    rgba(255, 140, 0, 1) 16.67%, /* Orange */
+    rgba(255, 237, 0, 1) 33.33%, /* Yellow */
+    rgba(0, 129, 31, 1) 50%,   /* Green */
+    rgba(0, 68, 255, 1) 66.67%, /* Blue */
+    rgba(118, 0, 137, 1) 83.33%, /* Purple */
+    rgba(228, 3, 3, 1) 100%    /* Red loop */
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-animation 5s linear infinite;
+}
+
+.transparency-gr {
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0) 0%,  /* Fully transparent */
+    rgba(0, 0, 0, 0.5) 50%, /* Semi-transparent */
+    rgba(0, 0, 0, 0) 100%   /* Fully transparent again */
+  );
+  background-size: 200% 100%; /* Extend background horizontally for animation */
+  background-clip: text; /* Makes the background apply to text */
+  -webkit-text-fill-color: transparent; /* Ensures the text is transparent to show the background */
+  animation: gradient-animation 2s linear infinite; /* Smooth animation */
+}
+
 
 
 
