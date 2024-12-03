@@ -25,6 +25,16 @@ jobs:
           cache: "pnpm"
       - name: Install Dependencies
         run: pnpm i
+
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v2.0
+        with:
+          envkey_NASA_API: ${{ secrets.NASA_API }}
+          directory: "/"
+          file_name: .env
+          fail_on_empty: false
+          sort_keys: false
+        
       - name: Build Astro Website
         run: pnpm build
 
