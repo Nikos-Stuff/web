@@ -13,10 +13,10 @@ importers:
         version: 0.9.4(typescript@5.7.2)
       '@astrojs/mdx':
         specifier: 4.0.1
-        version: 4.0.1(astro@5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: 4.0.1(astro@5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       '@astrojs/node':
         specifier: ^9.0.0
-        version: 9.0.0(astro@5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
+        version: 9.0.0(astro@5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))
       '@astrojs/rss':
         specifier: ^4.0.9
         version: 4.0.9
@@ -28,7 +28,7 @@ importers:
         version: 5.0.0(@types/node@20.14.12)(jiti@1.21.6)(solid-js@1.9.3)(yaml@2.6.1)
       '@astrojs/tailwind':
         specifier: ^5.1.3
-        version: 5.1.3(astro@5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.16)
+        version: 5.1.3(astro@5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.16)
       '@playform/inline':
         specifier: ^0.1.0
         version: 0.1.0(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
@@ -39,8 +39,8 @@ importers:
         specifier: ^4.0.9
         version: 4.0.9
       astro:
-        specifier: 5.0.1
-        version: 5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
+        specifier: 5.0.2
+        version: 5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -959,8 +959,8 @@ packages:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
     hasBin: true
 
-  astro@5.0.1:
-    resolution: {integrity: sha512-7XzFq3eFdSkeT/aCNealVv4klwmKoOYb6LZymbyZQrdUA9vEoUCKFcujVo4YbJJ8WXyEm515ZHPCxHTdDneEug==}
+  astro@5.0.2:
+    resolution: {integrity: sha512-MKf82vUiTZ2aK+c/8EDnLYIsToBdVVk4PuhhGdE8F/PcuUyS+oIcuCPf30iVf8WCQwXOfnYGnv1JbRjzkqUc3w==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -1111,6 +1111,7 @@ packages:
 
   critters@0.0.24:
     resolution: {integrity: sha512-Oyqew0FGM0wYUSNqR0L6AteO5MpMoUU0rhKRieXeiKs+PmRTxiJMyaunYB2KF6fQ3dzChXKCpbFOEJx3OQ1v/Q==}
+    deprecated: Ownership of Critters has moved to the Nuxt team, who will be maintaining the project going forward. If you'd like to keep using Critters, please switch to the actively-maintained fork at https://github.com/danielroe/beasties
 
   cross-spawn@7.0.6:
     resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
@@ -2743,12 +2744,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/mdx@4.0.1(astro@5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
+  '@astrojs/mdx@4.0.1(astro@5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
     dependencies:
       '@astrojs/markdown-remark': 6.0.0
       '@mdx-js/mdx': 3.1.0(acorn@8.14.0)
       acorn: 8.14.0
-      astro: 5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
+      astro: 5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
       es-module-lexer: 1.5.4
       estree-util-visit: 2.0.0
       hast-util-to-html: 9.0.3
@@ -2762,9 +2763,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/node@9.0.0(astro@5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
+  '@astrojs/node@9.0.0(astro@5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))':
     dependencies:
-      astro: 5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
+      astro: 5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
       send: 1.1.0
       server-destroy: 1.0.1
     transitivePeerDependencies:
@@ -2805,9 +2806,9 @@ snapshots:
       - tsx
       - yaml
 
-  '@astrojs/tailwind@5.1.3(astro@5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.16)':
+  '@astrojs/tailwind@5.1.3(astro@5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.16)':
     dependencies:
-      astro: 5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
+      astro: 5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
       autoprefixer: 10.4.20(postcss@8.4.49)
       postcss: 8.4.49
       postcss-load-config: 4.0.2(postcss@8.4.49)
@@ -3260,7 +3261,7 @@ snapshots:
   '@playform/inline@0.1.0(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)':
     dependencies:
       '@playform/pipe': 0.1.0
-      astro: 5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
+      astro: 5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1)
       critters: 0.0.24
     transitivePeerDependencies:
       - '@types/node'
@@ -3550,7 +3551,7 @@ snapshots:
 
   astring@1.9.0: {}
 
-  astro@5.0.1(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1):
+  astro@5.0.2(@types/node@20.14.12)(jiti@1.21.6)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.2
