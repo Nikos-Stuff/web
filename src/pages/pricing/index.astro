@@ -1,9 +1,10 @@
 ---
 import PageLayout from "@layouts/PageLayout.astro"
 import {SITE} from "@consts"
-import MeteorShower from "../../components/MeteorShower.astro";
-import TwinklingStars from "../../components/TwinklingStars.astro";
-import PriceTitle from "../../components/PricingHeader.astro";
+import MeteorShower from "@components/MeteorShower.astro";
+import TwinklingStars from "@components/TwinklingStars.astro";
+import PriceTitle from "@components/PricingHeader.astro";
+import Carousel from "@components/pricing_carousel.astro"
 ---
 
 <PageLayout title="Pricing" description={SITE.DESCRIPTION}>
@@ -281,6 +282,14 @@ import PriceTitle from "../../components/PricingHeader.astro";
                                 We'll definitely figure something out!
                             </p>
                         </div>
+
+
+                                        <!-- Fiverr -->
+                <a href="https://www.fiverr.com/s/xXEvD2l" target="_blank" class="group p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
+                    <span class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center">
+                        View more offerts on Fiverr
+                    </span>
+                </a>
                         
 
 
@@ -289,167 +298,13 @@ import PriceTitle from "../../components/PricingHeader.astro";
                 </div>
             </section>
 
-
+            <Carousel/>
+            <script defer is:inline src="/js/carousel.js"></script>
         </div>
     </div>
 
 
-    <!-- Pricing - Video Video Editing-->
-    <div class="relative bg-white dark:bg-black">
-        <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
-
-
-            <!-- Spacer -->
-            <div class="h-5"/>
-
-
-            <section class="animate">
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <p class="font-semibold text-black dark:text-white">Video Editing Services</p>
-                    </div>
-                    <ul class="space-y-4 transition-all duration-300 ease-in-out">
-                        <!-- Lite Video Editing -->
-                        <div class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
-                            <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
-                                <div class="flex flex-wrap items-center gap-2">
-                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
-                                        🎬 Video Editing
-                                    </div>
-                                </div>
-                                <div class="font-semibold mt-3 text-black dark:text-white">
-                                    ✨ Lite Video Editing
-                                </div>
-                                <div class="text-sm">
-                                    Our <strong>Lite Video Editing</strong> package, priced at <strong>25 PLN</strong>,
-                                    provides
-                                    a solid Video Editing foundation for your video projects. Perfect for quick Video
-                                    Edits and
-                                    straightforward needs, this plan includes:
-                                    <ul class="list-disc ml-5 mt-2">
-                                        <li><strong>720p60 Quality:</strong> Clear and smooth visuals.</li>
-                                        <li><strong>Smooth Animations & Effects:</strong> Basic but polished
-                                            enhancements.
-                                        </li>
-                                        <li><strong>Color Grading:</strong> Enhance the visual appeal of your footage.
-                                        </li>
-                                        <li><strong>Sound Design & Mixing:</strong> Clear and balanced audio.</li>
-                                        <li><strong>Motion Graphics:</strong> Add dynamic elements to your video.</li>
-                                        <li><strong>Subtitles:</strong> Easy-to-read text for accessibility.</li>
-                                        <li><strong>Source File:</strong> Included for your records.</li>
-                                    </ul>
-                                    Delivery in 2 days with up to 3 revisions. Covers up to 15 minutes of footage and
-                                    results in a video up to 10 minutes long.
-                                </div>
-                                <div class="font-semibold mt-3 text-black dark:text-white">
-                                    <span class="text-xl">25 PLN</span>
-                                </div>
-                                <ul class="flex flex-wrap mt-2 gap-1">
-                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75">
-                                        LITE
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Advanced Video Editing -->
-                        <div class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
-                            <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
-                                <div class="flex flex-wrap items-center gap-2">
-                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
-                                        🎬 Video Editing
-                                    </div>
-                                </div>
-                                <div class="font-semibold mt-3 text-black dark:text-white">
-                                    ✨ Advanced Video Editing
-                                </div>
-                                <div class="text-sm">
-                                    The <strong>Advanced Video Editing</strong> package, priced at <strong>90
-                                    PLN</strong>,
-                                    offers a comprehensive Video Edit solution for more detailed projects. Ideal for
-                                    professional needs, this plan includes:
-                                    <ul class="list-disc ml-5 mt-2">
-                                        <li><strong>1080p60 Quality:</strong> High-definition visuals with sound effects
-                                            and 3D animations.
-                                        </li>
-                                        <li><strong>Sound Effects:</strong> Enrich your video with various audio
-                                            elements.
-                                        </li>
-                                        <li><strong>Color Grading:</strong> Professional adjustments for enhanced visual
-                                            impact.
-                                        </li>
-                                        <li><strong>Sound Design & Mixing:</strong> Refined audio experience.</li>
-                                        <li><strong>Motion Graphics:</strong> Advanced graphic elements to elevate your
-                                            video.
-                                        </li>
-                                        <li><strong>Subtitles:</strong> Customizable text for accessibility.</li>
-                                        <li><strong>Source File:</strong> Included for flexibility.</li>
-                                    </ul>
-                                    Delivery in 4 days with up to 6 revisions. Covers up to 30 minutes of footage and
-                                    results in a video up to 20 minutes long.
-                                </div>
-                                <div class="font-semibold mt-3 text-black dark:text-white">
-                                    <span class="text-xl">90 PLN</span>
-                                </div>
-                                <ul class="flex flex-wrap mt-2 gap-1">
-                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75">
-                                        ADVANCED
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- Professional Video Editing -->
-                        <div class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
-                            <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
-                                <div class="flex flex-wrap items-center gap-2">
-                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
-                                        🎬 Video Editing
-                                    </div>
-                                </div>
-                                <div class="font-semibold mt-3 text-black dark:text-white">
-                                    ✨ Professional Video Editing
-                                </div>
-                                <div class="text-sm">
-                                    Our <strong>Professional Video Editing</strong> package, priced at <strong>100
-                                    PLN</strong>,
-                                    provides the ultimate Video Editing experience with top-tier quality and extensive
-                                    features. Perfect for extensive projects and high-end needs, this plan includes:
-                                    <ul class="list-disc ml-5 mt-2">
-                                        <li><strong>2160p60 Quality:</strong> Ultra-high-definition with unlimited
-                                            footage time.
-                                        </li>
-                                        <li><strong>Color Grading:</strong> Superior visual adjustments for a polished
-                                            look.
-                                        </li>
-                                        <li><strong>Sound Design & Mixing:</strong> Expert audio treatment for clarity
-                                            and depth.
-                                        </li>
-                                        <li><strong>Motion Graphics:</strong> Premium graphics for a professional touch.
-                                        </li>
-                                        <li><strong>Subtitles:</strong> Accessible and customizable text.</li>
-                                        <li><strong>Source File:</strong> Included for full flexibility.</li>
-                                    </ul>
-                                    Delivery in 4 days with up to 8 revisions. Covers unlimited minutes of footage and
-                                    results in a video up to 60 minutes long.
-                                </div>
-                                <div class="font-semibold mt-3 text-black dark:text-white">
-                                    <span class="text-xl">100 PLN</span>
-                                </div>
-                                <ul class="flex flex-wrap mt-2 gap-1">
-                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75">
-                                        PROFESSIONAL
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </ul>
-                </div>
-            </section>
-
-
-        </div>
-    </div>
+    <!-- Pricing - Video Video Editing -->
 
 
     <!-- Realizing your order -->
@@ -457,31 +312,31 @@ import PriceTitle from "../../components/PricingHeader.astro";
         <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
             <article>
             <span class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                Our Order Fulfillment Process
+                Order Fulfillment Process
             </span>
                 <ol class="list-decimal list-inside mt-4 space-y-4 text-black dark:text-white">
                     <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
                         Initial Consultation
                         <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            We'll discuss your needs and goals.
+                            The main discussion will take place here.
                         </p>
                     </li>
                     <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
                         Project Planning
                         <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            We outline the project scope, timeline, and deliverables.
+                            Outlining the project scope, timeline, and deliverables.
                         </p>
                     </li>
                     <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
                         Design Phase
                         <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            Our team creates design concepts tailored to your specifications.
+                            First design concepts tailored to your specifications.
                         </p>
                     </li>
                     <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
                         Development
                         <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            We bring the designs to life with careful coding and integration.
+                            Bringing the designs to life with careful coding and integration.
                         </p>
                     </li>
                     <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
@@ -499,7 +354,7 @@ import PriceTitle from "../../components/PricingHeader.astro";
                     <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
                         Feedback & Revisions
                         <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            We gather your feedback and make any necessary adjustments.
+                            Necessary adjustments based on your feedback.
                         </p>
                     </li>
                 </ol>
