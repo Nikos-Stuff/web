@@ -1,4 +1,11 @@
+let executed = false;
+
 function run() {
+    if (executed) {
+        return; // Exit the function if it has already been executed
+    }
+    executed = true; // Set executed to true once the function starts running
+
     console.log('TW Loaded');
     const texts = [
         "Creativity unleashed",
@@ -65,5 +72,5 @@ function run() {
     type();
 }
 
-run()
+run();
 document.addEventListener('DOMContentLoaded', run);
