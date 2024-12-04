@@ -1,6 +1,4 @@
 ---
-//export const prerender = false; 
-
 import { NASA_API } from "astro:env/server";
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
 
@@ -28,15 +26,18 @@ try {
           loading="eager"
         />
       ) : apodData.url.includes("youtube.com/embed") ? (
-         <iframe
+        <iframe
           id="apod-image"
           title={apodData.title || "APOD Video"}
-          src={`${apodData.url}&autoplay=1&mute=1&loop=1&playlist=${apodData.url.split("/embed/")[1].split("?")[0]}`}
           class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
           loading="eager"
-          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+          onload={`setTimeout(() => {
+            document.getElementById('apod-image').src = '${apodData.url}&autoplay=1&mute=1&loop=1&playlist=${apodData.url.split("/embed/")[1].split("?")[0]}';
+            document.getElementById('apod-image').classList.add('opacity-100');
+            document.getElementById('apod-image').classList.remove('opacity-0');
+          }, 5000);`}
         ></iframe>
       ) : (
         <video
@@ -47,7 +48,11 @@ try {
           loop
           onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
         >
-          <source src={apodData.url} type="video/mp4" />
+          <source
+            id="apod-image"
+            type="video/mp4"
+            onloadstart="setTimeout(() => document.getElementById('apod-image').src = '${apodData.url}', 5000);"
+          />
           Your browser does not support the video tag.
         </video>
       )}
