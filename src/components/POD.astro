@@ -32,17 +32,20 @@ try {
           id="apod-image"
           title={apodData.title || "APOD Video"}
           src={`${apodData.url}&autoplay=1&mute=1&loop=1&playlist=${apodData.url.split("/embed/")[1].split("?")[0]}`}
-          class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-100 transform scale-[1.5]"
+          class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
+          loading="eager"
+          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
         ></iframe>
       ) : (
         <video
           id="apod-image"
-          class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-100 transform scale-[1.5]"
+          class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
           controls
           autoplay
           loop
+          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
         >
           <source src={apodData.url} type="video/mp4" />
           Your browser does not support the video tag.
