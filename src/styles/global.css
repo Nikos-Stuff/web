@@ -276,10 +276,10 @@ article img {
 
 @keyframes shineAnimation {
   0% {
-      left: 400%;
+      left: 500%;
   }
   100% {
-      left: -400%;
+      left: -500%;
   }
 }
 
@@ -288,8 +288,8 @@ article img {
   position: absolute;
   top: -100%;
   left: -100%;
-  width: 250%;
-  height: 200%;
+  width: 350%;
+  height: 300%;
   background: linear-gradient(50deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 174, 0, 0.1) 50%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0) 100%);
   animation: shineAnimation 2s infinite linear;
 }
