@@ -1,0 +1,91 @@
+---
+interface Props {
+  title: string;
+  details: string;
+}
+
+const { title, details } = Astro.props as Props;
+---
+
+<div class="accordion mt-2 group relative border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
+  <button
+    class="accordion__button flex w-full flex-1 items-center justify-between gap-2 p-3 text-left font-medium transition sm:px-4"
+    type="button"
+    id={`${title} accordion menu button`}
+    aria-expanded="false"
+    aria-controls={`${title} accordion menu content`}
+  >
+    {title}
+
+    <svg class="accordion__chevron fill-black dark:fill-white transition-all h-[1.5rem] w-[1.5rem] min-h-[1.5rem] min-w-[1.5rem] mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+        <path d="M481-385q-8 0-14-2.5t-10-7.5L278-574q-5-4-5.5-11.5T278-599q6-5 12.5-5t12.5 5l178 178 177-178q5-4 12-4.5t13 4.5q6 6 6 13t-6 12L504-395q-4 5-10 7.5t-13 2.5Z"/>
+    </svg>
+
+  </button>
+
+  <div
+    id={`${title} accordion menu content`}
+    aria-labelledby={`${title} accordion menu button`}
+    class="accordion__content hidden max-h-0 overflow-hidden px-3 transition-all duration-300 ease-in-out sm:px-4"
+  >
+    <p class="prose mb-4 mt-1 max-w-full text-sm text-gray-500 dark:text-gray-400">
+      {details}
+    </p>
+  </div>
+</div>
+
+<script>
+    function accordionSetup() {
+      const accordionMenus = document.querySelectorAll(
+        ".accordion",
+      ) as NodeListOf<HTMLElement>;
+      accordionMenus.forEach((accordionMenu) => {
+        const accordionButton = accordionMenu.querySelector(
+          ".accordion__button",
+        ) as HTMLElement;
+        const accordionChevron = accordionMenu.querySelector(
+          ".accordion__chevron",
+        ) as HTMLElement;
+        const accordionContent = accordionMenu.querySelector(
+          ".accordion__content",
+        ) as HTMLElement;
+  
+        if (accordionButton && accordionContent && accordionChevron) {
+          accordionButton.addEventListener("click", (event) => {
+            if (!accordionMenu.classList.contains("active")) {
+
+              accordionMenu.classList.add("active");
+              accordionButton.setAttribute("aria-expanded", "true");
+  
+
+              accordionContent.classList.remove("hidden");
+              accordionContent.style.maxHeight =
+                accordionContent.scrollHeight + "px";
+              accordionChevron.classList.add("rotate-180");
+            } else {
+              // accordion is currently open, so close it
+              accordionMenu.classList.remove("active");
+              accordionButton.setAttribute("aria-expanded", "false");
+  
+
+              accordionContent.style.maxHeight = "0px";
+              accordionChevron.classList.remove("rotate-180");
+
+
+              setTimeout(() => {
+                accordionContent.classList.add("hidden");
+              }, 300);
+            }
+            event.preventDefault();
+            return false;
+          });
+        }
+      });
+    }
+  
+    // runs on initial page load
+    accordionSetup();
+  
+    // runs on view transitions navigation
+    document.addEventListener("astro:after-swap", accordionSetup);
+  </script>

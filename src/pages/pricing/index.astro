@@ -6,6 +6,7 @@ import TwinklingStars from "@components/TwinklingStars.astro";
 import PriceTitle from "@components/PricingHeader.astro";
 import Carousel from "@components/pricing_carousel.astro"
 import TimeLine from "@components/pricing_timeline.astro";
+import Accordion from "@components/Accordion.astro";
 ---
 
 <PageLayout title="Pricing" description={SITE.DESCRIPTION}>
@@ -308,37 +309,19 @@ import TimeLine from "@components/pricing_timeline.astro";
 
     <!-- Important notes -->
     <section class="relative bg-white dark:bg-black">
-        <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16  mt-8">
+        <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16 mt-8">
             <article>
-            <span class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                Important notes
-            </span>
-                <ul class="list-disc list-inside mt-4 space-y-2 text-black dark:text-white">
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        Domain services are not included.
-                    </li>
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        After completion, you have 48 hours to make a payment, otherwise your product will be locked out
-                        and on hold.
-                    </li>
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        Ensure all requirements are clearly communicated during the planning phase to avoid delays.
-                    </li>
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        Revisions are allowed within the first two weeks post-delivery without additional charges.
-                    </li>
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        Any additional features requested after project completion will be treated as new tasks and
-                        billed separately.
-                    </li>
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        Please provide feedback promptly to ensure a smooth and efficient revision process.
-                    </li>
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        Every plan has Quick WebInfo panel enabled on default in order to help delivering site status to you.
-                        It can be disabled on request.
-                    </li>
-                </ul>
+            <p class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white mb-2">
+                FAQ
+            </p>
+
+            <Accordion title="What is included in the price?" details="The listed price covers all design and development work outlined in the package description. Hosting and domain registration are included." />  
+            <Accordion title="Are there any hidden fees?" details="No hidden fees. All costs are communicated upfront, and any additional work will be quoted for approval." />  
+            <Accordion title="Can the packages be customized?" details="Yes, packages can be tailored to meet specific needs. Contact me for a personalized quote." />  
+            <Accordion title="What payment methods do you accept?" details="Payments can be made via credit card, PayPal, or bank transfer." />  
+            
+
+
             </article>
         </div>
     </section>
