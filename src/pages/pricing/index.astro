@@ -5,6 +5,7 @@ import MeteorShower from "@components/MeteorShower.astro";
 import TwinklingStars from "@components/TwinklingStars.astro";
 import PriceTitle from "@components/PricingHeader.astro";
 import Carousel from "@components/pricing_carousel.astro"
+import TimeLine from "@components/pricing_timeline.astro";
 ---
 
 <PageLayout title="Pricing" description={SITE.DESCRIPTION}>
@@ -303,69 +304,11 @@ import Carousel from "@components/pricing_carousel.astro"
         </div>
     </div>
 
-
-    <!-- Pricing - Video Video Editing -->
-
-
-    <!-- Realizing your order -->
-    <section class="relative bg-white dark:bg-black">
-        <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
-            <article>
-            <span class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                Order Fulfillment Process
-            </span>
-                <ol class="list-decimal list-inside mt-4 space-y-4 text-black dark:text-white">
-                    <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
-                        Initial Consultation
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            The main discussion will take place here.
-                        </p>
-                    </li>
-                    <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
-                        Project Planning
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            Outlining the project scope, timeline, and deliverables.
-                        </p>
-                    </li>
-                    <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
-                        Design Phase
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            First design concepts tailored to your specifications.
-                        </p>
-                    </li>
-                    <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
-                        Development
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            Bringing the designs to life with careful coding and integration.
-                        </p>
-                    </li>
-                    <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
-                        Testing
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            Rigorous testing to ensure everything functions smoothly.
-                        </p>
-                    </li>
-                    <li class="text-lg font-medium hover:scale-105 transition-all duration-300 ease-in-out">
-                        Deployment & Payment
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            Final delivery of the project and processing of payment.
-                        </p>
-                    </li>
-                    <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
-                        Feedback & Revisions
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            Necessary adjustments based on your feedback.
-                        </p>
-                    </li>
-                </ol>
-            </article>
-        </div>
-    </section>
-
+    <TimeLine/>
 
     <!-- Important notes -->
     <section class="relative bg-white dark:bg-black">
-        <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+        <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16  mt-8">
             <article>
             <span class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
                 Important notes
