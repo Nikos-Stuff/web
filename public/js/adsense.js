@@ -6,16 +6,20 @@ function run() {
         let adsenseScript = document.createElement('script');
         adsenseScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4276395829672450";
         adsenseScript.crossOrigin = "anonymous";
-        adsenseScript.async = true;
+        adsenseScript.defer = true;
+        adsenseScript.onerror = function() {
+            console.error('Failed to load AdSense script');
+        };
         document.head.appendChild(adsenseScript);
-
-
 
         // Create and add the Funding Choices script
         let fundingChoicesScript1 = document.createElement('script');
         fundingChoicesScript1.src = "https://fundingchoicesmessages.google.com/i/pub-4276395829672450?ers=1";
-        fundingChoicesScript1.async = true;
+        fundingChoicesScript1.defer = true;
         fundingChoicesScript1.nonce = "thd-XSK7RnvUrv4fQ-RARQ";
+        fundingChoicesScript1.onerror = function() {
+            console.error('Failed to load Funding Choices script 1');
+        };
         document.head.appendChild(fundingChoicesScript1);
 
         let fundingChoicesScript2 = document.createElement('script');
@@ -38,6 +42,10 @@ function run() {
             })();
         `;
         fundingChoicesScript2.nonce = "thd-XSK7RnvUrv4fQ-RARQ";
+        fundingChoicesScript2.defer = true;
+        fundingChoicesScript2.onerror = function() {
+            console.error('Failed to load Funding Choices script 2');
+        };
         document.head.appendChild(fundingChoicesScript2);
 
         console.log('G-ADS Loaded');
