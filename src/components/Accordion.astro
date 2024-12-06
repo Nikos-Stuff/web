@@ -36,43 +36,40 @@ const { title, details } = Astro.props as Props;
 
 <script>
   function accordionSetup() {
-    const accordionMenus = document.querySelectorAll(
-      ".accordion"
-    ) as NodeListOf<HTMLElement>;
-    
+    const accordionMenus = document.querySelectorAll(".accordion") as NodeListOf<HTMLElement>;
+
     accordionMenus.forEach((accordionMenu) => {
-      const accordionButton = accordionMenu.querySelector(
-        ".accordion__button"
-      ) as HTMLElement;
-      const accordionChevron = accordionMenu.querySelector(
-        ".accordion__chevron"
-      ) as HTMLElement;
-      const accordionContent = accordionMenu.querySelector(
-        ".accordion__content"
-      ) as HTMLElement;
+      const accordionButton = accordionMenu.querySelector(".accordion__button") as HTMLElement;
+      const accordionChevron = accordionMenu.querySelector(".accordion__chevron") as HTMLElement;
+      const accordionContent = accordionMenu.querySelector(".accordion__content") as HTMLElement;
+
+      let isAnimating = false; // Flag to check if animation is in progress
 
       if (accordionButton && accordionContent && accordionChevron) {
         accordionButton.addEventListener("click", (event) => {
+          // If an animation is in progress, ignore the click
+          if (isAnimating) {
+            event.preventDefault();
+            return false;
+          }
+
+          // Set isAnimating flag to true
+          isAnimating = true;
+
           // If the clicked accordion is not active
           if (!accordionMenu.classList.contains("active")) {
             // Close all other accordions
             accordionMenus.forEach((otherMenu) => {
               if (otherMenu !== accordionMenu && otherMenu.classList.contains("active")) {
-                const otherButton = otherMenu.querySelector(
-                  ".accordion__button"
-                ) as HTMLElement;
-                const otherChevron = otherMenu.querySelector(
-                  ".accordion__chevron"
-                ) as HTMLElement;
-                const otherContent = otherMenu.querySelector(
-                  ".accordion__content"
-                ) as HTMLElement;
+                const otherButton = otherMenu.querySelector(".accordion__button") as HTMLElement;
+                const otherChevron = otherMenu.querySelector(".accordion__chevron") as HTMLElement;
+                const otherContent = otherMenu.querySelector(".accordion__content") as HTMLElement;
 
                 otherMenu.classList.remove("active");
                 otherButton?.setAttribute("aria-expanded", "false");
                 otherContent?.style.setProperty("max-height", "0px");
                 otherChevron?.classList.remove("rotate-180");
-                
+
                 // Hide the content after the animation
                 setTimeout(() => {
                   otherContent?.classList.add("hidden");
@@ -86,6 +83,11 @@ const { title, details } = Astro.props as Props;
             accordionContent.classList.remove("hidden");
             accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
             accordionChevron.classList.add("rotate-180");
+
+            // Set a timeout for the animation duration (e.g., 300ms)
+            setTimeout(() => {
+              isAnimating = false;
+            }, 300);
           } else {
             // Accordion is currently open, so close it
             accordionMenu.classList.remove("active");
@@ -95,8 +97,11 @@ const { title, details } = Astro.props as Props;
 
             setTimeout(() => {
               accordionContent.classList.add("hidden");
+              // Allow interactions after the closing animation
+              isAnimating = false;
             }, 300);
           }
+
           event.preventDefault();
           return false;
         });
@@ -110,3 +115,4 @@ const { title, details } = Astro.props as Props;
   // Runs on view transitions navigation
   document.addEventListener("astro:after-swap", accordionSetup);
 </script>
+
