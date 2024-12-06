@@ -35,57 +35,78 @@ const { title, details } = Astro.props as Props;
 </div>
 
 <script>
-    function accordionSetup() {
-      const accordionMenus = document.querySelectorAll(
-        ".accordion",
-      ) as NodeListOf<HTMLElement>;
-      accordionMenus.forEach((accordionMenu) => {
-        const accordionButton = accordionMenu.querySelector(
-          ".accordion__button",
-        ) as HTMLElement;
-        const accordionChevron = accordionMenu.querySelector(
-          ".accordion__chevron",
-        ) as HTMLElement;
-        const accordionContent = accordionMenu.querySelector(
-          ".accordion__content",
-        ) as HTMLElement;
-  
-        if (accordionButton && accordionContent && accordionChevron) {
-          accordionButton.addEventListener("click", (event) => {
-            if (!accordionMenu.classList.contains("active")) {
+  function accordionSetup() {
+    const accordionMenus = document.querySelectorAll(
+      ".accordion"
+    ) as NodeListOf<HTMLElement>;
+    
+    accordionMenus.forEach((accordionMenu) => {
+      const accordionButton = accordionMenu.querySelector(
+        ".accordion__button"
+      ) as HTMLElement;
+      const accordionChevron = accordionMenu.querySelector(
+        ".accordion__chevron"
+      ) as HTMLElement;
+      const accordionContent = accordionMenu.querySelector(
+        ".accordion__content"
+      ) as HTMLElement;
 
-              accordionMenu.classList.add("active");
-              accordionButton.setAttribute("aria-expanded", "true");
-  
+      if (accordionButton && accordionContent && accordionChevron) {
+        accordionButton.addEventListener("click", (event) => {
+          // If the clicked accordion is not active
+          if (!accordionMenu.classList.contains("active")) {
+            // Close all other accordions
+            accordionMenus.forEach((otherMenu) => {
+              if (otherMenu !== accordionMenu && otherMenu.classList.contains("active")) {
+                const otherButton = otherMenu.querySelector(
+                  ".accordion__button"
+                ) as HTMLElement;
+                const otherChevron = otherMenu.querySelector(
+                  ".accordion__chevron"
+                ) as HTMLElement;
+                const otherContent = otherMenu.querySelector(
+                  ".accordion__content"
+                ) as HTMLElement;
 
-              accordionContent.classList.remove("hidden");
-              accordionContent.style.maxHeight =
-                accordionContent.scrollHeight + "px";
-              accordionChevron.classList.add("rotate-180");
-            } else {
-              // accordion is currently open, so close it
-              accordionMenu.classList.remove("active");
-              accordionButton.setAttribute("aria-expanded", "false");
-  
+                otherMenu.classList.remove("active");
+                otherButton?.setAttribute("aria-expanded", "false");
+                otherContent?.style.setProperty("max-height", "0px");
+                otherChevron?.classList.remove("rotate-180");
+                
+                // Hide the content after the animation
+                setTimeout(() => {
+                  otherContent?.classList.add("hidden");
+                }, 300);
+              }
+            });
 
-              accordionContent.style.maxHeight = "0px";
-              accordionChevron.classList.remove("rotate-180");
+            // Open the clicked accordion
+            accordionMenu.classList.add("active");
+            accordionButton.setAttribute("aria-expanded", "true");
+            accordionContent.classList.remove("hidden");
+            accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
+            accordionChevron.classList.add("rotate-180");
+          } else {
+            // Accordion is currently open, so close it
+            accordionMenu.classList.remove("active");
+            accordionButton.setAttribute("aria-expanded", "false");
+            accordionContent.style.maxHeight = "0px";
+            accordionChevron.classList.remove("rotate-180");
 
+            setTimeout(() => {
+              accordionContent.classList.add("hidden");
+            }, 300);
+          }
+          event.preventDefault();
+          return false;
+        });
+      }
+    });
+  }
 
-              setTimeout(() => {
-                accordionContent.classList.add("hidden");
-              }, 300);
-            }
-            event.preventDefault();
-            return false;
-          });
-        }
-      });
-    }
-  
-    // runs on initial page load
-    accordionSetup();
-  
-    // runs on view transitions navigation
-    document.addEventListener("astro:after-swap", accordionSetup);
-  </script>
+  // Runs on initial page load
+  accordionSetup();
+
+  // Runs on view transitions navigation
+  document.addEventListener("astro:after-swap", accordionSetup);
+</script>
