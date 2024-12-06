@@ -1,5 +1,5 @@
 ---
-title: "VibeCraft"
+title: "Niko's Server"
 summary: "Minecraft Vanilla+ Server"
 date: "Jan 05 2016"
 draft: false

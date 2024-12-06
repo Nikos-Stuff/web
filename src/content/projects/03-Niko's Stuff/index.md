@@ -14,7 +14,7 @@ repoUrl: ""
 Not finished project - Random Roblox mini-games!
 
 ## TO-DO
-1. [ ] Fix Bugs
+1. [x] Fix Bugs
 2. [ ] Add more round types
 3. [ ] Add proper rewards
 4. [ ] Add proper cosmetics and shop stuff
