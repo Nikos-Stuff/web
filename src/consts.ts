@@ -85,12 +85,12 @@ export const LINKS: Links = [
 
 // Socials
 export const SOCIALS: Socials = [
-  // {
-  //   NAME: "Email",
-  //   ICON: "email",
-  //   TEXT: "",
-  //   HREF: "mailto:",
-  // },
+  {
+    NAME: "Email",
+    ICON: "email",
+    TEXT: "team@nikostuff.com",
+    HREF: "mailto:team@nikostuff.com",
+  },
   // {
   //   NAME: "Github",
   //   ICON: "github",
