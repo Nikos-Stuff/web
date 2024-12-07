@@ -1,11 +1,11 @@
-let executed = false;
+let executed_a = false;
 
 function animate() {
-  if (executed) {
+  if (executed_a) {
     return;
   }
 
-  executed = true;
+  executed_a = true;
 
   const animateElements = document.querySelectorAll('.animate');
 
