@@ -1,11 +1,4 @@
-let executed_a = false;
-
 function animate() {
-  if (executed_a) {
-    return;
-  }
-
-  executed_a = true;
 
   const animateElements = document.querySelectorAll('.animate');
 
@@ -13,7 +6,7 @@ function animate() {
    
     setTimeout(() => {
       element.classList.add('show');
-    }, index * 150);
+    }, index * 250); // 150
   });
 }
 
