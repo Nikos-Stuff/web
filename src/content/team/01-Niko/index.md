@@ -8,7 +8,7 @@ tags:
 - Dev
 demoUrl: ""
 repoUrl: https://github.com/Nikos-Stuff
-imageUrl: /imgs/niko.webp
+imageUrl: "/imgs/niko.webp"
 otherUrls:
   - { name: "YouTube", url: https://www.youtube.com/@NikoPL }
 ---

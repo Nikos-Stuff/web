@@ -8,6 +8,7 @@ tags:
   - Roblox
 demoUrl: https://www.roblox.com/groups/34110884/Nikos-Stuff#!/about
 repoUrl: ""
+imageUrl: "/previews/nikostuff.webp"
 ---
 
 ## Quick Info

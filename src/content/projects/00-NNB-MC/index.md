@@ -9,6 +9,7 @@ tags:
     - Vanilla - Server
 demoUrl: /mc_nnb
 repoUrl: https://github.com/Nikos-Stuff/nikosnextbots
+imageUrl: "/previews/nikos_nextbots.webp"
 ---
 
 # A Minecraft replica / fanmade project based on roblox nico's nextbots

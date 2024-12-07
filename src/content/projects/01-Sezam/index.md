@@ -7,6 +7,7 @@ tags:
   - WordPress
 demoUrl: https://limsezam.ovh
 repoUrl: https://github.com/Nik0-0/sezam
+imageUrl: "/previews/sezam_preview.webp"
 ---
 
 ## Quick Info

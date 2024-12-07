@@ -6,7 +6,7 @@ tags:
     - Roblox Dev
 demoUrl: ""
 repoUrl: ""
-imageUrl: /imgs/zozoboblox.webp
+imageUrl: "/imgs/zozoboblox.webp"
 # otherUrls: ""
 ---
 

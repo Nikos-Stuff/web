@@ -8,6 +8,7 @@ tags:
   - Vanilla - Server
 demoUrl: https://mc.nikostuff.com
 repoUrl: ""
+imageUrl: "/previews/nikos_server.webp"
 ---
 
 ## Quick Info

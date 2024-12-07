@@ -33,12 +33,12 @@ export default function TeamCard({ entry, pill }: Props) {
                             decoding="async"
                             loading="eager"
                         />
-                    </div>
+                </div>
 
-                    )}
+            )}
 
 
-                    <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
+                <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
 
                 <div class="flex flex-wrap items-center gap-2">
                     {pill && (

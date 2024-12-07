@@ -12,6 +12,9 @@ const { title, summary, date } = data
 
 const demoUrl = collection === "projects" ? data.demoUrl : null
 const repoUrl = collection === "projects" ? data.repoUrl : null
+
+const imageUrl = collection === "projects" ? data.imageUrl : null
+
 ---
 
 <div>
@@ -69,3 +72,20 @@ const repoUrl = collection === "projects" ? data.repoUrl : null
       </div>
   }
 </div>
+
+{imageUrl && (
+  <div class="mt-14 relative content-center border rounded-lg h-[355px] hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
+    <img
+      src={imageUrl}
+      alt={title}
+      class="transition-all duration-300 ease-in-out object-cover h-full w-full rounded-lg"
+      decoding="async"
+      loading="eager"
+    />
+  </div>
+)}
+
+
+
+
+
