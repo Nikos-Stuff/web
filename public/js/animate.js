@@ -6,7 +6,7 @@ function animate() {
    
     setTimeout(() => {
       element.classList.add('show');
-    }, index * 250); // 150
+    }, index * 450); // 150
   });
 }
 
