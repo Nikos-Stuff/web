@@ -1,4 +1,12 @@
+let executed = false;
+
 function animate() {
+  if (executed) {
+    return;
+  }
+
+  executed = true;
+
   const animateElements = document.querySelectorAll('.animate');
 
   animateElements.forEach((element, index) => {
@@ -8,5 +16,6 @@ function animate() {
   });
 }
 
-animate()
+animate();
+
 document.addEventListener('DOMContentLoaded', animate);
