@@ -1,17 +1,19 @@
 ---
 title: "Sklep Sezam"
 summary: "RTV AGD Shop Website"
-date: "Mar 21 2024"
+date: "Dec 17 2024"
 draft: false
 tags:
-  - WordPress
+  - Astro
 demoUrl: https://limsezam.ovh
-repoUrl: https://github.com/Nik0-0/sezam
+repoUrl: https://github.com/Nikos-Stuff/sezam
 imageUrl: "/previews/sezam_preview.webp"
 ---
 
 ## Quick Info
-Simple website built on top of a WordPress - Simple, Fast, Functional!
+Simple website built on top of a Astro - Simple, Fast, Functional! 
+
+<sub>This project is available as a template.</sub>
 
 ## Project Highlights
 
@@ -19,5 +21,5 @@ Simple website built on top of a WordPress - Simple, Fast, Functional!
 - **Responsive Layout**: Fully responsive, ensuring a seamless browsing experience across all devices, from desktops to smartphones.
 - **Easy Navigation**: Simplified navigation allows users to effortlessly find products and information.
 - **Product Showcase**: The site features a comprehensive product catalog with detailed descriptions and high-quality images.
-- **Custom Coded Features**: Integrated unique functionalities such as a price tag generator and other custom tools to enhance the shopping experience.
+- **Custom Coded Features**: Integrated unique functionalities such as a price tag generator and other custom tools.
 
