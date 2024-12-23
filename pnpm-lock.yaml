@@ -24,8 +24,8 @@ importers:
         specifier: ^3.2.1
         version: 3.2.1
       '@astrojs/solid-js':
-        specifier: 5.0.0
-        version: 5.0.0(@types/node@20.14.12)(jiti@2.4.2)(solid-js@1.9.3)(yaml@2.6.1)
+        specifier: 5.0.1
+        version: 5.0.1(@types/node@20.14.12)(jiti@2.4.2)(solid-js@1.9.3)(yaml@2.6.1)
       '@astrojs/tailwind':
         specifier: ^5.1.4
         version: 5.1.4(astro@5.1.0(@types/node@20.14.12)(jiti@2.4.2)(rollup@4.28.0)(typescript@5.7.2)(yaml@2.6.1))(tailwindcss@3.4.17)
@@ -131,8 +131,8 @@ packages:
   '@astrojs/sitemap@3.2.1':
     resolution: {integrity: sha512-uxMfO8f7pALq0ADL6Lk68UV6dNYjJ2xGUzyjjVj60JLBs5a6smtlkBYv3tQ0DzoqwS7c9n4FUx5lgv0yPo/fgA==}
 
-  '@astrojs/solid-js@5.0.0':
-    resolution: {integrity: sha512-+LH9BNWDzxUESnDCOQ8TDKWtEiWrLBrA3kdY7hl0/kuVQmO4UQSJhwge+Y+kqgVXZUfvMP3A1TDpl0FlgqWpqw==}
+  '@astrojs/solid-js@5.0.1':
+    resolution: {integrity: sha512-8II1SIEgV0uyeijntAmNgUZu/n1e/A7OW2ofzp0MLYoxCRSOuu5QlQB3A4QOSCqRFtgrT03rvhMDmEd/JRPgUA==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=22.0.0}
     peerDependencies:
       solid-devtools: ^0.30.1
@@ -3084,7 +3084,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/solid-js@5.0.0(@types/node@20.14.12)(jiti@2.4.2)(solid-js@1.9.3)(yaml@2.6.1)':
+  '@astrojs/solid-js@5.0.1(@types/node@20.14.12)(jiti@2.4.2)(solid-js@1.9.3)(yaml@2.6.1)':
     dependencies:
       solid-js: 1.9.3
       vite: 6.0.5(@types/node@20.14.12)(jiti@2.4.2)(yaml@2.6.1)
