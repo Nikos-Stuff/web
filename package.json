@@ -22,7 +22,7 @@
     "@astrojs/solid-js": "5.0.1",
     "@astrojs/tailwind": "^5.1.4",
     "@playform/inline": "^0.1.0",
-    "@tailwindcss/typography": "^0.5.15",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/js-yaml": "^4.0.9",
     "astro": "5.1.2",
     "clsx": "^2.1.1",
