@@ -15,8 +15,8 @@ importers:
         specifier: 4.0.5
         version: 4.0.5(astro@5.1.5(@types/node@22.10.5)(jiti@2.4.2)(rollup@4.28.0)(typescript@5.7.3)(yaml@2.6.1))
       '@astrojs/node':
-        specifier: ^9.0.0
-        version: 9.0.0(astro@5.1.5(@types/node@22.10.5)(jiti@2.4.2)(rollup@4.28.0)(typescript@5.7.3)(yaml@2.6.1))
+        specifier: ^9.0.1
+        version: 9.0.1(astro@5.1.5(@types/node@22.10.5)(jiti@2.4.2)(rollup@4.28.0)(typescript@5.7.3)(yaml@2.6.1))
       '@astrojs/rss':
         specifier: ^4.0.11
         version: 4.0.11
@@ -116,8 +116,8 @@ packages:
     peerDependencies:
       astro: ^5.0.0
 
-  '@astrojs/node@9.0.0':
-    resolution: {integrity: sha512-3h/5kFZvpuo+chYAjj75YhtRUxfquxEJrpZRRC7TdiMGp2WhLp2us4VXm2mjezJp/zHKotW2L3qgp0P2ujQ0xw==}
+  '@astrojs/node@9.0.1':
+    resolution: {integrity: sha512-vIKmKYhzK9o3NXANkHyjcFqi9e9N84mhgCESC/+rQ8danWnktu9uR6rGvbj3bdTb9+Dn5LDsmEm123P2Cun9nQ==}
     peerDependencies:
       astro: ^5.0.0
 
@@ -3077,7 +3077,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/node@9.0.0(astro@5.1.5(@types/node@22.10.5)(jiti@2.4.2)(rollup@4.28.0)(typescript@5.7.3)(yaml@2.6.1))':
+  '@astrojs/node@9.0.1(astro@5.1.5(@types/node@22.10.5)(jiti@2.4.2)(rollup@4.28.0)(typescript@5.7.3)(yaml@2.6.1))':
     dependencies:
       astro: 5.1.5(@types/node@22.10.5)(jiti@2.4.2)(rollup@4.28.0)(typescript@5.7.3)(yaml@2.6.1)
       send: 1.1.0
