@@ -28,7 +28,7 @@ const { title, details } = Astro.props as Props;
     aria-labelledby={`${title} accordion menu button`}
     class="accordion__content hidden max-h-0 overflow-hidden px-3 transition-all duration-300 ease-in-out sm:px-4"
   >
-    <p class="prose mb-4 mt-1 max-w-full text-sm text-gray-500 dark:text-gray-400">
+    <p class="not-prose mb-4 mt-1 max-w-full text-sm text-gray-500 dark:text-gray-400">
       {details}
     </p>
   </div>
