@@ -34,7 +34,7 @@ try {
           allowfullscreen
           loading="eager"
           onload={`setTimeout(() => {
-            document.getElementById('apod-image').src = '${apodData.url}&autoplay=1&mute=1&loop=1&playlist=${apodData.url.split("/embed/")[1].split("?")[0]}';
+            document.getElementById('apod-image').src = '${apodData.url}?autoplay=1&mute=1&loop=1&playlist=${apodData.url.split("/embed/")[1].split("?")[0]}';
             document.getElementById('apod-image').classList.add('opacity-100');
             document.getElementById('apod-image').classList.remove('opacity-0');
           }, 5000);`}
