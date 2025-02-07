@@ -21,7 +21,7 @@
     "@astrojs/sitemap": "^3.2.1",
     "@astrojs/solid-js": "5.0.4",
     "@playform/inline": "^0.1.1",
-    "@tailwindcss/vite": "^4.0.3",
+    "@tailwindcss/vite": "^4.0.4",
     "@types/js-yaml": "^4.0.9",
     "astro": "5.2.5",
     "clsx": "^2.1.1",
