@@ -15,8 +15,8 @@ importers:
         specifier: 4.0.8
         version: 4.0.8(astro@5.2.5(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.4)(typescript@5.7.3)(yaml@2.7.0))
       '@astrojs/node':
-        specifier: ^9.0.2
-        version: 9.0.2(astro@5.2.5(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.4)(typescript@5.7.3)(yaml@2.7.0))
+        specifier: ^9.0.3
+        version: 9.0.3(astro@5.2.5(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.4)(typescript@5.7.3)(yaml@2.7.0))
       '@astrojs/rss':
         specifier: ^4.0.11
         version: 4.0.11
@@ -112,8 +112,8 @@ packages:
     peerDependencies:
       astro: ^5.0.0
 
-  '@astrojs/node@9.0.2':
-    resolution: {integrity: sha512-MFFYRa5yQEBegKrSUPMeKnjDMB4okTrkVRA40/mU3ADKrKY5VV3af0LS+NYkH9pFOvj/OsPbdeQVxQ0jI3f6aQ==}
+  '@astrojs/node@9.0.3':
+    resolution: {integrity: sha512-bGTahuMtXglS+xoYL4e9UplrF0eRDMt+ixKePdhy3hVuuYA+px5oRqsVnArAWkYWKMKKnI/X2l9IxSkooLc86Q==}
     peerDependencies:
       astro: ^5.0.0
 
@@ -2158,9 +2158,6 @@ packages:
   tailwind-merge@3.0.1:
     resolution: {integrity: sha512-AvzE8FmSoXC7nC+oU5GlQJbip2UO7tmOhOfQyOmPhrStOGXHU08j8mZEHZ4BmCqY5dWTCo4ClWkNyRNx1wpT0g==}
 
-  tailwindcss@4.0.4:
-    resolution: {integrity: sha512-/ezDLEkOLf1lXkr9F2iI5BHJbexJpty5zkV2B8bGHCqAdbc9vk85Jgdkq+ZOvNkNPa3yAaqJ8DjRt584Bc84kw==}
-
   tailwindcss@4.0.6:
     resolution: {integrity: sha512-mysewHYJKaXgNOW6pp5xon/emCsfAMnO8WMaGKZZ35fomnR/T5gYnRg2/yRTTrtXiEl1tiVkeRt0eMO6HxEZqw==}
 
@@ -2692,8 +2689,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/node@9.0.2(astro@5.2.5(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.4)(typescript@5.7.3)(yaml@2.7.0))':
+  '@astrojs/node@9.0.3(astro@5.2.5(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.4)(typescript@5.7.3)(yaml@2.7.0))':
     dependencies:
+      '@astrojs/internal-helpers': 0.5.1
       astro: 5.2.5(@types/node@22.10.5)(jiti@2.4.2)(lightningcss@1.29.1)(rollup@4.34.4)(typescript@5.7.3)(yaml@2.7.0)
       send: 1.1.0
       server-destroy: 1.0.1
@@ -5258,8 +5256,6 @@ snapshots:
       has-flag: 4.0.0
 
   tailwind-merge@3.0.1: {}
-
-  tailwindcss@4.0.4: {}
 
   tailwindcss@4.0.6: {}
 
