@@ -35,7 +35,7 @@ export default function Teams({ data, tags }: Props) {
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
             <div class="col-span-3 sm:col-span-1">
                 <div class="sticky top-24">
-                    <div class="text-sm font-semibold uppercase mb-2 text-black dark:text-white">Filter</div>
+                    <div class="text-sm font-semibold uppercase mb-2 text-black dark:text-white">Filtr</div>
                     <ul class="flex flex-wrap sm:flex-col gap-1.5">
                         <For each={tags}>
                             {(tag) => (
@@ -56,7 +56,7 @@ export default function Teams({ data, tags }: Props) {
             <div class="col-span-3 sm:col-span-2">
                 <div class="flex flex-col">
                     <div class="text-sm uppercase mb-2">
-                        SHOWING {teams().length} OF {data.length} TEAM MEMBERS
+                        POKAZUJĘ {teams().length} Z {data.length}
                     </div>
                     <ul class="flex flex-col gap-3">
                         {teams().map((project) => (

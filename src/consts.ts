@@ -21,7 +21,7 @@ export const BLOG: Page = {
 
 // Projects Page 
 export const PROJECTS: Page = {
-  TITLE: "Projects",
+  TITLE: "Projekty",
   DESCRIPTION: "Recent projects I have worked on.",
 }
 
@@ -39,7 +39,7 @@ export const OTHERPROJECTS: Page = {
 
 // Search Page
 export const SEARCH: Page = {
-  TITLE: "Search",
+  TITLE: "Wyszukaj",
   DESCRIPTION: "Search all posts and projects by keyword.",
 }
 
@@ -52,7 +52,7 @@ export const NNB_WORKSHOP: Page = {
 // Links
 export const LINKS: Links = [
   { 
-    TEXT: "Home", 
+    TEXT: "Główna", 
     HREF: "/", 
   },
   { 
@@ -64,15 +64,15 @@ export const LINKS: Links = [
     HREF: "/blog", 
   },
   { 
-    TEXT: "Projects",
+    TEXT: "Projekty",
     HREF: "/projects", 
   },
-  { 
-    TEXT: "Downloads",
-    HREF: "/downloads", 
-  },
+  // { 
+  //   TEXT: "Mapy MC",
+  //   HREF: "/downloads", 
+  // },
   {
-    TEXT: "Pricing",
+    TEXT: "Cennik",
     HREF: "/pricing",
 
   },

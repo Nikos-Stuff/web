@@ -8,20 +8,21 @@ function run() {
 
     console.log('TW Loaded');
     const texts = [
-        "Creativity unleashed",
-        "100% random stuff",
-        "Caution: May contain traces of unicorn giggles",
-        "Spontaneous bursts of brilliance",
-        '<span class="rainbow font-semibold">Chaos with a dash of glitter</span>',
-        "Nonsense with a side of whimsy",
-        "Unleashing the inner goofball",
-        "Thoughts from the absurdity dimension",
-        "Serious lack of seriousness",
-        "Just add imagination and stir",
-        "Powered by caffeinated daydreams",
-        "Eureka moments in the making",
-        "1% sugar free!"
+        "Kreatywność bez granic",
+        "100% losowej inspiracji",
+        "Uwaga: Może zawierać ślady magii i błyskotek",
+        "Nagłe przebłyski geniuszu",
+        '<span class="rainbow font-semibold">Porządek w artystycznym chaosie</span>',
+        "Nietuzinkowe pomysły na wyciągnięcie ręki",
+        "Kreatywność w najczystszej postaci",
+        "Myśli z innego wymiaru",
+        "Profesjonalizm z odrobiną szaleństwa",
+        "Wystarczy dodać wyobraźnię i zamieszać",
+        "Napędzane kawą i pasją",
+        "Tu rodzą się wielkie pomysły",
+        "1% formalności, 99% kreatywności."
     ];
+    
 
     let currentIndex = 0;
     let isDeleting = false;

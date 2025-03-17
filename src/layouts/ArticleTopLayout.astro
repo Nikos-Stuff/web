@@ -17,6 +17,7 @@ const imageUrl = collection === "projects" ? data.imageUrl : null
 
 ---
 
+
 <div>
   <a href={`/${collection}`} class="group w-fit p-1.5 gap-1.5 text-sm flex items-center border rounded hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out">
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white">
@@ -24,7 +25,8 @@ const imageUrl = collection === "projects" ? data.imageUrl : null
       <polyline points="12 19 5 12 12 5" class="translate-x-1 group-hover:translate-x-0 transition-all duration-300 ease-in-out" />
     </svg>
     <div class="w-full group-hover:text-black group-hover:dark:text-white transition-colors duration-300 ease-in-out">
-      Back to {collection}
+      Wróć
+      <!-- do {collection} -->
     </div>
   </a>
   <div class="flex flex-wrap text-sm uppercase mt-12 gap-3 opacity-75">
@@ -55,7 +57,7 @@ const imageUrl = collection === "projects" ? data.imageUrl : null
                 <use href="/ui.svg#globe" class="fill-current group-hover:fill-black group-hover:dark:fill-white blend"/>
               </svg>
               <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
-          See Page
+          Zobacz Stronę
         </span>
             </a>
         }
@@ -65,7 +67,7 @@ const imageUrl = collection === "projects" ? data.imageUrl : null
                 <use href="/ui.svg#link" class="fill-current group-hover:fill-black group-hover:dark:fill-white blend"/>
               </svg>
               <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
-          See Repository
+          Zobacz Repozytorium
         </span>
             </a>
         }

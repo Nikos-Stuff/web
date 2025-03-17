@@ -126,6 +126,9 @@ try {
           <!--  About  Image Section  -->
             <section class="animate pb-0">
                 <article class="pb-0">
+                    <p class="font-semibold text-black dark:text-white">
+                        Wyróżniony Obrazek
+                    </p>
                     <p class="font-bold text-sm mb-2">{apodData.title}</p>
                     <p class="text-xs mb-2">{apodData.date} - {apodData.copyright}</p>
                     <p class="text-sm max-w-3xl">{apodData.explanation}</p>
@@ -142,11 +145,10 @@ try {
             <!--  About Section  -->
             <section class="animate pb-0">
                 <article class="pb-0">
-                    <p>Hi! I'm <span class="rainbow font-semibold">Niko</span> <span class="text-xs">(Maciek)</span>.
-                        I'm a programming enthusiast with a passion for video editing, animation, and game development.
-                        I graduated from a vocational school (szkoła wyższa zawodowa) and am now part of a small,
-                        dedicated team creating games and digital experiences.
-                        Always eager to learn and explore new tools and techniques in coding and 3D/2D design!</p>
+                    <p>Hej! Jestem <span class="rainbow font-semibold">Niko</span> <span class="text-xs">(Maciek)</span>.
+                        pasjonat programowania z zamiłowaniem do edycji wideo, animacji i tworzenia gier.  
+                        Ukończyłem szkołę zawodową i obecnie współtworzę gry oraz cyfrowe doświadczenia w małym, zaangażowanym zespole.  
+                        Nieustannie rozwijam się, eksplorując nowe technologie, narzędzia oraz techniki kodowania i projektowania / animowania 2D/3D.  </p>
                 </article>
                 
                 
@@ -161,7 +163,7 @@ try {
             <section class="animate pb-32">
                 <div class="space-y-4">
                     <p class="font-semibold text-black dark:text-white">
-                        Breaking stuff with
+                        Ucze się / Moje umiejętności
                     </p>
                     <div class="flex flex-wrap items-center gap-2 mt-5">
                         {stack.map(item => (
@@ -199,11 +201,11 @@ try {
                         <!-- Main Content on the Right -->
                         <div class="text-content flex-1 ml-4">
                             <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                                Very Random
+                                Łatwy Początek
                             </p>
                             <p class="mt-0 mb-0">
-                                When boredom strikes, you’ll usually find me experimenting with the most random projects imaginable.
-                                You will find every bit of that here!
+                                Potrzebujesz reklamy wideo, profesjonalnego montażu do swojej gry lub nowoczesnej strony WWW?  
+                                Oferuję wszystko, czego potrzebujesz – w świetnej jakości i przystępnej cenie!                                
                             </p>
                         </div>
                     </div>
@@ -220,10 +222,11 @@ try {
                         <!-- Main Content on the Left -->
                         <div class="text-content flex-1">
                             <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                                Learning & Improving
+                                Stworzone pod Ciebie
                             </p>
                             <p class="mt-0 mb-0">
-                                Perfection isn’t the goal—growth is. I'm always learning, evolving, and finding new ways to improve my skills every step of the way.
+                                Minimalistyczny design, płynne animacje, szybki czas dostawy -
+                                Wszystko to w zasięgu ręki, dostosowane pod Twoje wymagania.
                             </p>
                         </div>
                         
@@ -260,10 +263,11 @@ try {
                         <!-- Main Content on the Right -->
                         <div class="text-content flex-1 ml-4">
                             <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                                Wanna Join?
+                                Ciągłe Nowości
                             </p>
                             <p class="mt-0 mb-0">
-                                I’m all ears for your ideas—no matter how silly! Feel free to join my Discord server and let’s chat!
+                                Ciągle się rozwijam w tworzeniu
+                                gierek, stron WWW, animacji, jak i wielu innych nowych rozwiązań!
                             </p>
                         </div>
                     </div>
@@ -275,7 +279,7 @@ try {
             <!--  Review Section -->
             <section class="space-y-4 animate pb-20 not-prose">
                 <p class="font-semibold text-black dark:text-white">
-                    Amazing reviews
+                    Co na to inni
                 </p>
                 <Reviews/>
             </section>
@@ -287,12 +291,12 @@ try {
                 <div class="space-y-4">
                     <div class="flex justify-between">
                         <p class="font-semibold text-black dark:text-white">
-                            Oh and I have a team
+                            Warto o nich wspomnieć
                         </p>
                         <a href="/team"
                            class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
               <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                All members
+                Zobacz wiecej
               </span>
                         </a>
                     </div>
@@ -315,12 +319,12 @@ try {
                 <div class="space-y-4">
                     <div class="flex justify-between">
                         <p class="font-semibold text-black dark:text-white">
-                            What's New?
+                            Co Nowego?
                         </p>
                         <a href="/blog"
                            class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
               <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                All posts
+                Wszystkie Posty
               </span>
                         </a>
                     </div>
@@ -339,12 +343,12 @@ try {
                 <div class="space-y-4">
                     <div class="flex justify-between">
                         <p class="font-semibold text-black dark:text-white">
-                            Fresh Projects
+                            Prosto z pieca
                         </p>
                         <a href="/projects"
                            class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
               <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                All projects
+                Zobacz Wszystko
               </span>
                         </a>
                     </div>
@@ -362,10 +366,10 @@ try {
             <section class="animate">
                 <div>
                     <p class="font-semibold text-black dark:text-white">
-                        Let's Connect
+                        Bądźmy w kontakcie
                     </p>
                     <p>
-                        Reach out to me & us!
+                        Dołącz do społeczności, lub zostaw prywatną wiadomość.
                     </p>
                     <div class="grid grid-cols-4 gap-y-2 mt-4 auto-cols-min">
                         {SOCIALS.map(social => (

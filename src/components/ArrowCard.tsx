@@ -50,7 +50,7 @@ export default function ArrowCard({ entry, pill }: Props) {
             <div class="flex flex-wrap items-center gap-2">
               {pill && (
                 <div class="text-sm capitalize px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25">
-                  projects
+                  Projekty
                 </div>
               )}
               <div class="text-sm uppercase text-gray-200">
@@ -105,13 +105,13 @@ export default function ArrowCard({ entry, pill }: Props) {
             <div class="flex flex-wrap items-center gap-2">
               {pill && (
                 <div class="text-sm capitalize px-2 py-0.5 rounded-full border border-black/15 dark:border-white/25">
-                  {entry.collection === "blog" ? "post" : "team member"}
+                  {entry.collection === "blog" ? "post" : "Członek Teamu"}
                 </div>
               )}
               <div class="text-sm uppercase">
                 {entry.data.date
                   ? formatDate(entry.data.date)
-                  : "No date available"}
+                  : ""}
               </div>
             </div>
             <div class="font-semibold mt-3 text-black dark:text-white">
