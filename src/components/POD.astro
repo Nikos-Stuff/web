@@ -14,50 +14,51 @@ try {
 
 <div id="pod" class="fixed inset-0 w-full h-full bg-black">
   {apodData ? (
-    <>
-      {apodData.media_type === "image" ? (
-        <img
-          id="apod-image"
-          src={`https://api.nikostuff.com/v1/web/live_optimize?target=${apodData.url}`}
-          alt={apodData.title}
-          class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
-          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
-          decoding="async"
-          loading="eager"
+    apodData.media_type === "image" ? (
+      <img
+        id="apod-image"
+        src={`https://api.nikostuff.com/v1/web/live_optimize?target=${apodData.url}`}
+        alt={apodData.title}
+        class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
+        onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+        decoding="async"
+        loading="eager"
+      />
+    ) : apodData.media_type === "video" && apodData.url.includes("youtube.com/embed") ? (
+      <iframe
+        id="apod-image"
+        title={apodData.title || "APOD Video"}
+        class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+        loading="eager"
+        onload={`setTimeout(() => {
+          document.getElementById('apod-image').src = '${apodData.url}?autoplay=1&mute=1&loop=1&playlist=${apodData.url.split("/embed/")[1].split("?")[0]}';
+          document.getElementById('apod-image').classList.add('opacity-100');
+          document.getElementById('apod-image').classList.remove('opacity-0');
+        }, 5000);`}
+      ></iframe>
+    ) : apodData.media_type === "video" ? (
+      <video
+        id="apod-image"
+        class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
+        controls
+        autoplay
+        loop
+        onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+      >
+        <source
+          src={apodData.url}
+          type="video/mp4"
+          onloadstart="setTimeout(() => document.getElementById('apod-image').src = '${apodData.url}', 5000);"
         />
-      ) : apodData.url.includes("youtube.com/embed") ? (
-        <iframe
-          id="apod-image"
-          title={apodData.title || "APOD Video"}
-          class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="eager"
-          onload={`setTimeout(() => {
-            document.getElementById('apod-image').src = '${apodData.url}?autoplay=1&mute=1&loop=1&playlist=${apodData.url.split("/embed/")[1].split("?")[0]}';
-            document.getElementById('apod-image').classList.add('opacity-100');
-            document.getElementById('apod-image').classList.remove('opacity-0');
-          }, 5000);`}
-        ></iframe>
-      ) : (
-        <video
-          id="apod-image"
-          class="w-full h-full object-cover blur-sm brightness-[0.3] saturate-[0.4] transition-opacity duration-500 opacity-0 transform scale-[1.5]"
-          controls
-          autoplay
-          loop
-          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
-        >
-          <source
-            id="apod-image"
-            type="video/mp4"
-            onloadstart="setTimeout(() => document.getElementById('apod-image').src = '${apodData.url}', 5000);"
-          />
-          Your browser does not support the video tag.
-        </video>
-      )}
-    </>
+        Your browser does not support the video tag.
+      </video>
+    ) : apodData.media_type === "other" ? null : (  // Handle "other" media type by rendering nothing
+      <p class="text-white text-center">Unsupported media type</p>
+    )
   ) : (
     <p class="text-white text-center">Loading Astronomy Picture of the Day...</p>
   )}
 </div>
+
