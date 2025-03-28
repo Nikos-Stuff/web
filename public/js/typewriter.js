@@ -9,17 +9,12 @@ function run() {
     console.log('TW Loaded');
     const texts = [
         "Kreatywność bez granic",
-        "100% losowej inspiracji",
-        "Uwaga: Może zawierać ślady magii i błyskotek",
+        "Profesjonalne strony WWW",
         "Nagłe przebłyski geniuszu",
         '<span class="rainbow font-semibold">Porządek w artystycznym chaosie</span>',
-        "Nietuzinkowe pomysły na wyciągnięcie ręki",
         "Kreatywność w najczystszej postaci",
-        "Myśli z innego wymiaru",
         "Profesjonalizm z odrobiną szaleństwa",
-        "Wystarczy dodać wyobraźnię i zamieszać",
         "Napędzane kawą i pasją",
-        "Tu rodzą się wielkie pomysły",
         "1% formalności, 99% kreatywności."
     ];
     
