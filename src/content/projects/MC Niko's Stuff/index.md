@@ -4,7 +4,7 @@ summary: "Minecraft Vanilla+ Server"
 date: "Jan 05 2016"
 draft: false
 tags:
-  - Minecraft - J-1.20.6
+  - Minecraft - J-1.21.4
   - Vanilla - Server
 demoUrl: https://mc.nikostuff.com
 repoUrl: ""
