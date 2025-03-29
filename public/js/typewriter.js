@@ -15,6 +15,7 @@ function run() {
         "Kreatywność w najczystszej postaci",
         "Profesjonalizm z odrobiną szaleństwa",
         "Napędzane kawą i pasją",
+        "Zjadacze Sera 👀🧀",
         "1% formalności, 99% kreatywności."
     ];
     
