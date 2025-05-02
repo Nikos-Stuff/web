@@ -55,7 +55,7 @@ function run () {
         
         if (elements.animate) {
             elements.animate.style.transform = `scale(${scale.toFixed(2)})`;
-            elements.animate.style.filter = `blur(${blur.toFixed(2)}px)`;
+            // elements.animate.style.filter = `blur(${blur.toFixed(2)}px)`; < backdrop blur was breaking because of this
         }
         
         if (other_elemencts.pod_image) {
