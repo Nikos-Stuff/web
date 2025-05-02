@@ -94,7 +94,8 @@ header {
 }
 
 header:not(.scrolled) {
-  @apply bg-transparent border-transparent;
+  @apply bg-white/20 dark:bg-black/20;
+  @apply backdrop-blur-xs border-transparent;
 }
 
 header.scrolled {
