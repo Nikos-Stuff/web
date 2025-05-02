@@ -46,11 +46,11 @@ function run () {
         }
 
 
-        const threshold = 150;
-        const opacity = Math.max(1 - (scrollY / threshold), 0);
-        if (elements.animate) {
-            elements.animate.style.opacity = opacity.toFixed(2);
-        }
+        // const threshold = 150;
+        // const opacity = Math.max(1 - (scrollY / threshold), 0);
+        // if (elements.animate) {
+        //     elements.animate.style.opacity = opacity.toFixed(2);
+        // }
 
         requestAnimationFrame(smoothMove);
     }
