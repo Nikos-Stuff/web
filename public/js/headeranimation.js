@@ -3,6 +3,9 @@ function run () {
     let targetMouseX = 0, targetMouseY = 0, targetScrollY = 0;
     const easing = 0.075;
 
+    const other_elemencts = {
+        pod_image : document.getElementById('pod')
+    }
 
     const multipliers = {
         animate: { mouse: 10, scroll: 0.05 },
@@ -46,11 +49,19 @@ function run () {
         }
 
 
-        // const threshold = 650;
-        // const opacity = Math.max(1 - (scrollY / threshold), 0);
-        // if (elements.animate) {
-        //     elements.animate.style.opacity = opacity.toFixed(2);
-        // }
+        const threshold = 750;
+        const scale = Math.max(1 - (scrollY / threshold), 0);
+        const blur = Math.min((scrollY / threshold) * 10, 10); // Max 10px blur
+        
+        if (elements.animate) {
+            elements.animate.style.transform = `scale(${scale.toFixed(2)})`;
+            elements.animate.style.filter = `blur(${blur.toFixed(2)}px)`;
+        }
+        
+        if (other_elemencts.pod_image) {
+            // Something there will be soon regarding backgroud image
+        }
+        
 
         requestAnimationFrame(smoothMove);
     }
