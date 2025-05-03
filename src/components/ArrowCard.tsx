@@ -53,17 +53,17 @@ export default function ArrowCard({ entry, pill }: Props) {
                   Projekty
                 </div>
               )}
-              <div class="text-sm uppercase text-gray-200">
+              <div class="text-sm uppercase text-gray-200 drop-shadow-md drop-shadow-black">
                 {entry.data.date
                   ? formatDate(entry.data.date)
                   : "No date available"}
               </div>
             </div>
-            <div class="font-semibold mt-3 text-gray-200 dark:text-white">
+            <div class="font-semibold mt-3 text-gray-200 dark:text-white drop-shadow-md drop-shadow-black">
               {entry.data.title}
             </div>
-            <div class="text-sm line-clamp-2 text-gray-200">{entry.data.summary}</div>
-            <ul class="flex flex-wrap mt-2 gap-1">
+            <div class="text-sm line-clamp-2 text-gray-200 drop-shadow-md drop-shadow-black">{entry.data.summary}</div>
+            <ul class="flex flex-wrap mt-2 gap-1 drop-shadow-md drop-shadow-black">
               {entry.data.tags.map((tag: string) => (
                 <li class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-gray-200/75 dark:text-white/75">
                   {tag}

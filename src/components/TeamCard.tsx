@@ -50,13 +50,13 @@ export default function TeamCard({ entry, pill }: Props) {
                         {entry.collection === "team" ? "" : formatDate(entry.data.date)}
                     </div> */}
                 </div>
-                <div class="font-semibold mt-3 text-white">
+                <div class="font-semibold mt-3 text-white drop-shadow-md drop-shadow-black">
                     {entry.data.title}
                 </div>
-                <div class="text-sm line-clamp-2 text-white">
+                <div class="text-sm line-clamp-2 text-white drop-shadow-md drop-shadow-black">
                     {entry.data.summary}
                 </div>
-                <ul class="flex flex-wrap mt-2 gap-1">
+                <ul class="flex flex-wrap mt-2 gap-1 drop-shadow-md drop-shadow-black">
                     {entry.data.tags.map((tag: string) => (
                         <li class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75">
                             {tag}
