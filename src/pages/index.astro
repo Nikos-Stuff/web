@@ -63,18 +63,46 @@ const stack = [
 
 import POD from "@components/POD.astro"
 
-import { NASA_API } from "astro:env/server";
+
+// APOD - Astronomy Picture of the Day
+
+import { NASA_API, AZURE_API } from "astro:env/server";
+
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
 
 let apodData = null;
+let translatedExplanation = null;
+
+const azureRegion = "eastus";
+const azureEndpoint = `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=pl`;
 
 try {
   const response = await fetch(apiUrl);
   apodData = await response.json();
-} catch (error) {
-  console.error("Error fetching NASA APOD:", error);
-}
 
+  // Prepare the text for translation
+  const translationPayload = [{
+    Text: apodData.explanation,
+  }];
+
+  const translateResponse = await fetch(azureEndpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Ocp-Apim-Subscription-Key": AZURE_API,
+      "Ocp-Apim-Subscription-Region": azureRegion,
+    },
+    body: JSON.stringify(translationPayload),
+  });
+
+  const translation = await translateResponse.json();
+  translatedExplanation = translation[0].translations[0].text;
+
+  console.log("Translated Explanation:", translatedExplanation);
+
+} catch (error) {
+  console.error("Error:", error);
+}
 
 ---
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
@@ -132,7 +160,7 @@ try {
                     </p>
                     <p class="font-bold text-sm mb-2">{apodData.title}</p>
                     <p class="text-xs mb-2">{apodData.date} - {apodData.copyright}</p>
-                    <p class="text-sm max-w-3xl">{apodData.explanation}</p>
+                    <p class="text-sm max-w-3xl">{translatedExplanation}</p>
                 </article>
                 
                 

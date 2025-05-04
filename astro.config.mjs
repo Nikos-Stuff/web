@@ -14,6 +14,7 @@ export default defineConfig({
   env: {
     schema: {
       NASA_API: envField.string({ context: "server", access: "secret" }),
+      AZURE_API: envField.string({ context: "server", access: "secret" }),
     }
   },
 
