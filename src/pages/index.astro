@@ -96,12 +96,13 @@ try {
   });
 
   const translation = await translateResponse.json();
-  translatedExplanation = translation[0].translations[0].text;
+  translatedExplanation = translation?.[0]?.translations?.[0]?.text || apodData.explanation;
 
   console.log(" Translated Explanation:", translatedExplanation);
 
 } catch (error) {
-  console.error(" Error:", error);
+  console.error(" Defaulting to og text - Error:", error);
+  translatedExplanation = apodData.explanation;
 }
 
 ---
