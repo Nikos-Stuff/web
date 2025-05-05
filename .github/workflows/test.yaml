@@ -32,7 +32,7 @@ jobs:
         uses: SpicyPizza/create-envfile@v2.0
         with:
           envkey_NASA_API: DEMO_KEY
-          envkey_AZURE_API: ${{ secrets.AZURE_API }}
+          envkey_AZURE_API: DEMO_KEY
         
       - name: Build Astro Website
         run: pnpm build
