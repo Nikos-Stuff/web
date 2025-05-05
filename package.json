@@ -19,7 +19,7 @@
     "@astrojs/node": "^9.2.0",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.0",
-    "@astrojs/solid-js": "5.0.8",
+    "@astrojs/solid-js": "5.0.10",
     "@playform/inline": "^0.1.2",
     "@tailwindcss/vite": "^4.1.4",
     "@types/js-yaml": "^4.0.9",
