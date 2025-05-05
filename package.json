@@ -16,12 +16,12 @@
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "@astrojs/mdx": "4.2.6",
-    "@astrojs/node": "^9.2.0",
+    "@astrojs/node": "^9.2.1",
     "@astrojs/rss": "^4.0.11",
-    "@astrojs/sitemap": "^3.3.0",
+    "@astrojs/sitemap": "^3.3.1",
     "@astrojs/solid-js": "5.0.10",
     "@playform/inline": "^0.1.2",
-    "@tailwindcss/vite": "^4.1.4",
+    "@tailwindcss/vite": "^4.1.5",
     "@types/js-yaml": "^4.0.9",
     "astro": "5.7.4",
     "clsx": "^2.1.1",
@@ -29,14 +29,14 @@
     "js-yaml": "^4.1.0",
     "node-fetch": "^3.3.2",
     "sharp": "^0.34.1",
-    "solid-js": "^1.9.5",
+    "solid-js": "^1.9.6",
     "tailwind-merge": "^3.2.0",
-    "tailwindcss": "^4.1.4",
+    "tailwindcss": "^4.1.5",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16",
-    "vite": "^6.3.2"
+    "vite": "^6.3.5"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
