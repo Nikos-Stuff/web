@@ -11,10 +11,16 @@ try {
   console.error("Error fetching NASA APOD:", error);
 }
 
-const baseUrl = apodData.url.split('?')[0];
-const videoId = baseUrl.split('/embed/')[1];
-const finalUrl = `${baseUrl}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+let finalUrl = apodData?.url;  // default to whatever NASA gave us
 
+// only try to pull a videoId if this really is an embed URL
+if (finalUrl && finalUrl.includes("/embed/")) {
+  const [baseUrl] = finalUrl.split("?");               // strip any existing query
+  const videoId = baseUrl.split("/embed/")[1];         // grab the part after /embed/
+  finalUrl = `${baseUrl}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+}
+
+console.log(" APOD will use URL:", finalUrl);
 ---
 
 <div id="pod" class="fixed inset-0 w-full h-full bg-white dark:bg-black">
