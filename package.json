@@ -29,7 +29,7 @@
     "js-yaml": "^4.1.0",
     "node-fetch": "^3.3.2",
     "sharp": "^0.34.1",
-    "solid-js": "^1.9.6",
+    "solid-js": "^1.9.7",
     "tailwind-merge": "^3.3.0",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3"
