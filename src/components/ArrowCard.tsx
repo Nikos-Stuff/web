@@ -39,7 +39,7 @@ export default function ArrowCard({ entry, pill }: Props) {
                 alt={entry.data.title}
                 class="absolute scale-100 rounded-lg inset-0 w-full h-full object-cover object-center filter grayscale brightness-[0.3] blur-[4px] transition-transform duration-300 ease-in-out"
                 decoding="async"
-                loading="eager"
+                loading="lazy"
               />
             </div>
 

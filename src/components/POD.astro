@@ -1,7 +1,7 @@
 ---
 import { NASA_API } from "astro:env/server";
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
-
+import { Image } from 'astro:assets';
 let apodData = null;
 
 try {
@@ -26,9 +26,10 @@ console.log(" APOD will use URL:", finalUrl);
 <div id="pod" class="fixed inset-0 w-svw h-svh bg-white dark:bg-black">
   {apodData ? (
     apodData.media_type === "image" ? (
-      <img
+      <Image
         id="apod-image"
         src={`https://api.nikostuff.com/v1/web/live_optimize?target=${apodData.url}`}
+        inferSize={true}
         alt={apodData.title}
         class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
         onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}

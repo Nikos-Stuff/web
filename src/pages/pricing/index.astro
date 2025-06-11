@@ -7,9 +7,12 @@ import Carousel from "@components/pricing_carousel.astro";
 import TimeLine from "@components/pricing_timeline.astro";
 import Accordion from "@components/Accordion.astro";
 import TitleHeader from "@components/TitleHeader.astro";
+import OpenPopup from "@components/StripePopup.astro";
 ---
 
 <PageLayout title="Pricing" description={SITE.DESCRIPTION}>
+  <OpenPopup/>
+
   <!-- Light Mode: Particles -->
   <div class="absolute inset-0 block dark:hidden">
     <div id="particles1" class="fixed inset-0"></div>
@@ -202,6 +205,18 @@ import TitleHeader from "@components/TitleHeader.astro";
                     WORDPRESS
                   </li>
                 </ul>
+
+                <a
+                  href="#"
+                  onclick="openStripePopup('https://buy.stripe.com/6oUaEWa7abrm9GSdzBdAk00?locale=pl'); return false;"
+                  class="group p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+                >
+                  <span
+                    class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center"
+                  >
+                    Zamów teraz
+                  </span>
+                </a>
               </div>
             </div>
 
@@ -640,8 +655,8 @@ import TitleHeader from "@components/TitleHeader.astro";
                 </div>
                 <div class="text-sm">
                   Potrzebujesz wydrukować coś w 3D lub stworzyć model? <br />
-                  Różnolite materiały (PLA, PETG, TPU, PVA), precyzyjne wydruki i szybka
-                  realizacja z możliwością projektowania modeli na zamówienie.
+                  Różnolite materiały (PLA, PETG, TPU, PVA), precyzyjne wydruki i
+                  szybka realizacja z możliwością projektowania modeli na zamówienie.
 
                   <div class="flex flex-col items-start mt-3 gap-1">
                     <div class="flex items-center">
@@ -670,7 +685,8 @@ import TitleHeader from "@components/TitleHeader.astro";
                         ></path>
                       </svg>
                       <span>
-                        Wielomateriałowe <strong>Wydruki</strong> <small>(AMS)</small>
+                        Wielomateriałowe <strong>Wydruki</strong>
+                        <small>(AMS)</small>
                       </span>
                     </div>
 
@@ -685,7 +701,9 @@ import TitleHeader from "@components/TitleHeader.astro";
                         ></path>
                       </svg>
                       <span>
-                        Szybka Dostawa <small>(InPost)</small> i <strong>Realizacja</strong>
+                        Szybka Dostawa <small>(InPost)</small> i <strong
+                          >Realizacja</strong
+                        >
                       </span>
                     </div>
                   </div>
@@ -711,7 +729,8 @@ import TitleHeader from "@components/TitleHeader.astro";
                       0.50-1.50 PLN / g - Standardowa stawka za gram
                     </p>
                     <p class="text-xs text-gray-600 dark:text-gray-400">
-                      20-50 PLN - Koszt wysyłki (w zależności od wagi i rozmiaru)
+                      20-50 PLN - Koszt wysyłki (w zależności od wagi i
+                      rozmiaru)
                     </p>
                     <p class="text-xs text-gray-600 dark:text-gray-400">
                       50-100 PLN - Koszt projektowania modelu na zamówienie
@@ -820,7 +839,9 @@ import TitleHeader from "@components/TitleHeader.astro";
       </p>
 
       <!-- Buttons -->
-      <div class="flex items-center justify-center space-x-3">
+      <div
+        class="flex flex-col sm:flex-row items-center justify-center gap-3 mt-4 w-full max-w-xs sm:max-w-none"
+      >
         <!-- Fiverr -->
         <a
           href="https://www.fiverr.com/s/xXEvD2l"
