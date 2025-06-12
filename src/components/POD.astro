@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { NASA_API } from "astro:env/server";
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
 let apodData = null;
@@ -11,6 +12,7 @@ try {
 }
 
 let finalUrl = apodData?.url; // default to whatever NASA gave us
+
 
 // only try to pull a videoId if this really is an embed URL
 if (finalUrl && finalUrl.includes("/embed/")) {
@@ -29,8 +31,10 @@ console.log(" APOD will use URL:", finalUrl);
   {
     apodData ? (
       apodData.media_type === "image" ? (
-        <img
+        <Image
           id="apod-image"
+          inferSize={true}
+          quality = "low"
           src={`https://api.nikostuff.com/v1/web/live_optimize?target=${apodData.url}`}
           alt={apodData.title}
           class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
