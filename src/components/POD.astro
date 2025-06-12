@@ -23,7 +23,7 @@ if (finalUrl && finalUrl.includes("/embed/")) {
 console.log(" APOD will use URL:", finalUrl);
 ---
 
-<div id="pod" class="fixed inset-0 w-dvw h-dvh bg-white dark:bg-black">
+<div id="pod" class="fixed inset-0 w-full h-full bg-white dark:bg-black transition-all">
   {
     apodData ? (
       apodData.media_type === "image" ? (
