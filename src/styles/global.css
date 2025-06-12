@@ -348,7 +348,7 @@ article img {
   width: 350%;
   height: 300%;
   background: linear-gradient(50deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 40%, rgba(255, 174, 0, 0.1) 50%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, 0) 100%);
-  animation: shineAnimation 5s infinite ease-in-out;
+  animation: shineAnimation 5s infinite linear;
   will-change: transform;
 }
 
