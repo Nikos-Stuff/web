@@ -1,20 +1,12 @@
-document.addEventListener('DOMContentLoaded', () => {
-  function animateOnView() {
-    const animateElements = document.querySelectorAll('.animate');
+function animate() {
+  const animateElements = document.querySelectorAll('.animate')
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
-          observer.unobserve(entry.target); // Stop observing once the animation is triggered
-        }
-      });
-    }, { threshold: 0.1 }); // Testing with a threshold of 0.1
+  animateElements.forEach((element, index) => {
+    setTimeout(() => {
+      element.classList.add('show')
+    }, index * 150)
+  });
+}
 
-    animateElements.forEach((element) => {
-      observer.observe(element);
-    });
-  }
-
-  animateOnView();
-});
+document.addEventListener("DOMContentLoaded", animate)
+document.addEventListener("astro:after-swap", animate)
