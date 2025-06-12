@@ -30,8 +30,8 @@ console.log(" APOD will use URL:", finalUrl);
         <Image
           id="apod-image"
           src={`https://api.nikostuff.com/v1/web/live_optimize?target=${apodData.url}`}
-          width={1920}
-          height={1080}
+          width="1920"
+          height="1080"
           alt={apodData.title}
           class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
           onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
