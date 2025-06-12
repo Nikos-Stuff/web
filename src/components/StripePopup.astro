@@ -20,7 +20,6 @@
       <a
         href="#"
         onclick="closeStripePopup(); return false;"
-        style="cursor: default;"
         class="group h-10 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
       >
         <span
@@ -34,7 +33,6 @@
         id="stripe-link-btn"
         href="#"
         target="_blank"
-        style="cursor: default;"
         class="group h-10 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out w-full sm:w-auto whitespace-normal break-words"
       >
         <span
@@ -70,8 +68,10 @@
   </div>
 </div>
 
-<script is:inline async>
+<script is:inline async >
   function openStripePopup(stripeLink) {
+    // Log 
+    console.log("Opening Stripe popup with link:", stripeLink);
     const popup = document.getElementById("stripe-popup");
     const content = document.getElementById("popup-content");
     const stripeBtn = document.getElementById("stripe-link-btn");
@@ -90,6 +90,7 @@
       content.classList.add("scale-100");
     });
   }
+  window.openStripePopup = openStripePopup;
 
   function closeStripePopup() {
     const popup = document.getElementById("stripe-popup");
@@ -105,4 +106,5 @@
       popup.classList.remove("flex"); // Testing
     }, 300);
   }
+  window.closeStripePopup = closeStripePopup;
 </script>
