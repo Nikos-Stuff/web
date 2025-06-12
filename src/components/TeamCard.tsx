@@ -28,7 +28,7 @@ export default function TeamCard({ entry, pill }: Props) {
                         <img
                             src={entry.data.imageUrl}
                             alt={entry.data.title}
-                            class="absolute rounded-lg inset-0 w-full h-max object-cover object-center filter grayscale brightness-[0.3] blur-[4px] transition-transform duration-300 ease-in-out"
+                            class="absolute rounded-lg inset-0 w-full h-max object-cover object-center filter grayscale brightness-[0.3] blur-[4px] transition-transform duration-1000 ease-in-out"
                             id="parallaxImage"
                             decoding="async"
                             loading="lazy"
