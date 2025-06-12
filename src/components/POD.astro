@@ -23,7 +23,10 @@ if (finalUrl && finalUrl.includes("/embed/")) {
 console.log(" APOD will use URL:", finalUrl);
 ---
 
-<div id="pod" class="fixed inset-0 w-svw h-svh bg-white dark:bg-black transition-all">
+<div
+  id="pod"
+  class="fixed inset-0 w-full h-full bg-white dark:bg-black transition-all"
+>
   {
     apodData ? (
       apodData.media_type === "image" ? (
@@ -65,13 +68,7 @@ console.log(" APOD will use URL:", finalUrl);
           />
           Your browser does not support the video tag.
         </video>
-      ) : apodData.media_type === "other" ? null : ( // Handle "other" media type by rendering nothing
-        <p class="text-red-600 text-center">Unsupported media type</p>
-      )
-    ) : (
-      <p class="text-red-600 text-center">
-        Loading Astronomy Picture of the Day...
-      </p>
-    )
+      ) : null
+    ) : null
   }
 </div>
