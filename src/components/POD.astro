@@ -1,7 +1,7 @@
 ---
 import { NASA_API } from "astro:env/server";
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 let apodData = null;
 
 try {
@@ -11,12 +11,12 @@ try {
   console.error("Error fetching NASA APOD:", error);
 }
 
-let finalUrl = apodData?.url;  // default to whatever NASA gave us
+let finalUrl = apodData?.url; // default to whatever NASA gave us
 
 // only try to pull a videoId if this really is an embed URL
 if (finalUrl && finalUrl.includes("/embed/")) {
-  const [baseUrl] = finalUrl.split("?");               // strip any existing query
-  const videoId = baseUrl.split("/embed/")[1];         // grab the part after /embed/
+  const [baseUrl] = finalUrl.split("?"); // strip any existing query
+  const videoId = baseUrl.split("/embed/")[1]; // grab the part after /embed/
   finalUrl = `${baseUrl}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
 }
 
@@ -24,50 +24,59 @@ console.log(" APOD will use URL:", finalUrl);
 ---
 
 <div id="pod" class="fixed inset-0 w-svw h-svh bg-white dark:bg-black">
-  {apodData ? (
-    apodData.media_type === "image" ? (
-      <Image
-        id="apod-image"
-        src={`https://api.nikostuff.com/v1/web/live_optimize?target=${apodData.url}`}
-        inferSize={true}
-        alt={apodData.title}
-        class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
-        onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
-        decoding="async"
-        loading="eager"
-      />
-    ) : apodData.media_type === "video" && apodData.url.includes("youtube.com/embed") ? (
-      <iframe
-        id="apod-image"
-        title={apodData.title || "APOD Video"}
-        src={finalUrl}
-        class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
-        loading="eager"
-        onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
-      ></iframe>
-    ) : apodData.media_type === "video" ? (
-      <video
-        id="apod-image"
-        class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
-        controls
-        autoplay
-        loop
-        onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
-      >
-        <source
-          src={apodData.url}
-          type="video/mp4"
-          onloadstart="setTimeout(() => document.getElementById('apod-image').src = '${apodData.url}', 5000);"
+  {
+    apodData ? (
+      apodData.media_type === "image" ? (
+        <Image
+          id="apod-image"
+          src={`https://api.nikostuff.com/v1/web/live_optimize?target=${apodData.url}`}
+          width={1920}
+          height={1080}
+          alt={apodData.title}
+          class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
+          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+          decoding="async"
+          loading="eager"
         />
-        Your browser does not support the video tag.
-      </video>
-    ) : apodData.media_type === "other" ? null : (  // Handle "other" media type by rendering nothing
-      <p class="text-red-600 text-center">Unsupported media type</p>
+      ) : apodData.media_type === "video" &&
+        apodData.url.includes("youtube.com/embed") ? (
+        <iframe
+          id="apod-image"
+          title={apodData.title || "APOD Video"}
+          src={finalUrl}
+          width="1920"
+          height="1080"
+          class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="eager"
+          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+        />
+      ) : apodData.media_type === "video" ? (
+        <video
+          id="apod-image"
+          width="1920"
+          height="1080"
+          class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
+          controls
+          autoplay
+          loop
+          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+        >
+          <source
+            src={apodData.url}
+            type="video/mp4"
+            onloadstart="setTimeout(() => document.getElementById('apod-image').src = '${apodData.url}', 5000);"
+          />
+          Your browser does not support the video tag.
+        </video>
+      ) : apodData.media_type === "other" ? null : ( // Handle "other" media type by rendering nothing
+        <p class="text-red-600 text-center">Unsupported media type</p>
+      )
+    ) : (
+      <p class="text-red-600 text-center">
+        Loading Astronomy Picture of the Day...
+      </p>
     )
-  ) : (
-    <p class="text-red-600 text-center">Loading Astronomy Picture of the Day...</p>
-  )}
+  }
 </div>
-
