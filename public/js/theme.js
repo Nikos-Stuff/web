@@ -33,9 +33,12 @@ function preloadTheme() {
     const userTheme = localStorage.theme
 
     if (userTheme === "light" || userTheme === "dark") {
+      console.log("User theme found in localStorage:", userTheme)
       return userTheme
     } else {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
+      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+      console.log("No user theme. System prefers:", systemPrefersDark ? "dark" : "light")
+      return systemPrefersDark ? "dark" : "light"
     }
   })()
 
@@ -49,6 +52,7 @@ function preloadTheme() {
 
   localStorage.theme = theme
 }
+
 
 window.onload = () => {
   function initializeThemeButtons() {
