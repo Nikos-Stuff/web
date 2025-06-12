@@ -333,13 +333,12 @@ article img {
 
 @keyframes shineAnimation {
   0% {
-    transform: translateX(500%);
+      left: 500%;
   }
   100% {
-    transform: translateX(-500%);
+      left: -500%;
   }
 }
-
 
 .shine::before {
   content: '';
