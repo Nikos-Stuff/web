@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import { NASA_API } from "astro:env/server";
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
 let apodData = null;
+let isLoaded = false;
 
 try {
   const response = await fetch(apiUrl);
@@ -11,13 +12,11 @@ try {
   console.error("Error fetching NASA APOD:", error);
 }
 
-let finalUrl = apodData?.url; // default to whatever NASA gave us
+let finalUrl = apodData?.url;
 
-
-// only try to pull a videoId if this really is an embed URL
 if (finalUrl && finalUrl.includes("/embed/")) {
-  const [baseUrl] = finalUrl.split("?"); // strip any existing query
-  const videoId = baseUrl.split("/embed/")[1]; // grab the part after /embed/
+  const [baseUrl] = finalUrl.split("?");
+  const videoId = baseUrl.split("/embed/")[1];
   finalUrl = `${baseUrl}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
 }
 
@@ -26,7 +25,8 @@ console.log(" APOD will use URL:", finalUrl);
 
 <div
   id="pod"
-  class="fixed inset-0 w-svw h-svh bg-white dark:bg-black transition-opacity"
+  class="fixed inset-0 w-svw h-svh bg-white dark:bg-black transition-opacity duration-700"
+  style={`opacity: ${isLoaded ? 1 : 0};`}
 >
   {
     apodData ? (
@@ -34,11 +34,11 @@ console.log(" APOD will use URL:", finalUrl);
         <Image
           id="apod-image"
           inferSize={true}
-          quality = "low"
+          quality="low"
           src={`https://api.nikostuff.com/v1/web/live_optimize?target=${apodData.url}`}
           alt={apodData.title}
           class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
-          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0'); document.getElementById('pod').style.opacity = 1;`}
           decoding="async"
           loading="eager"
         />
@@ -52,7 +52,7 @@ console.log(" APOD will use URL:", finalUrl);
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
           loading="eager"
-          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0'); document.getElementById('pod').style.opacity = 1;`}
         />
       ) : apodData.media_type === "video" ? (
         <video
@@ -61,12 +61,11 @@ console.log(" APOD will use URL:", finalUrl);
           controls
           autoplay
           loop
-          onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
+          onloadeddata={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0'); document.getElementById('pod').style.opacity = 1;`}
         >
           <source
             src={apodData.url}
             type="video/mp4"
-            onloadstart="setTimeout(() => document.getElementById('apod-image').src = '${apodData.url}', 5000);"
           />
           Your browser does not support the video tag.
         </video>

@@ -2,7 +2,7 @@ function changeTheme() {
   const element = document.documentElement
   const theme = element.classList.contains("dark") ? "light" : "dark"
 
-  //const css = document.createElement("style")
+  const css = document.createElement("style")
 
   // css.appendChild(
   //   document.createTextNode(
@@ -15,7 +15,7 @@ function changeTheme() {
   //       }`,
   //   ),
   // )
-  //document.head.appendChild(css)
+  document.head.appendChild(css)
 
   if (theme === "dark") {
     element.classList.add("dark")
