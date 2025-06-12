@@ -23,15 +23,14 @@ if (finalUrl && finalUrl.includes("/embed/")) {
 console.log(" APOD will use URL:", finalUrl);
 ---
 
-<div id="pod" class="fixed inset-0 w-full h-full bg-white dark:bg-black transition-all">
+<div id="pod" class="fixed inset-0 w-svw h-svh bg-white dark:bg-black transition-all">
   {
     apodData ? (
       apodData.media_type === "image" ? (
         <Image
           id="apod-image"
+          inferSize={true}
           src={`https://api.nikostuff.com/v1/web/live_optimize?target=${apodData.url}`}
-          width={1920}
-          height={1080}
           alt={apodData.title}
           class="w-full h-full object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
           onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0');`}
@@ -44,8 +43,6 @@ console.log(" APOD will use URL:", finalUrl);
           id="apod-image"
           title={apodData.title || "APOD Video"}
           src={finalUrl}
-          width="1920"
-          height="1080"
           class="w-full h-full object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowfullscreen
@@ -55,8 +52,6 @@ console.log(" APOD will use URL:", finalUrl);
       ) : apodData.media_type === "video" ? (
         <video
           id="apod-image"
-          width="1920"
-          height="1080"
           class="w-full h-full object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
           controls
           autoplay
