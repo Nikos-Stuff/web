@@ -1,5 +1,5 @@
 function run() {
-    let delay = 5000; // 5 seconds delay
+    let delay = 8000; // 8 seconds delay
 
     setTimeout(function() {
         // Create and add the AdSense script
