@@ -13,6 +13,13 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 
 // import { ViewTransitions } from  "astro:transitions"
 ---
+<!-- Global Scripts -->
+<script is:inline src="/js/theme.js"/>
+<script is:inline src="/js/scroll.js"/>
+<script is:inline data-astro-rerun async src="/js/animate.js"/>
+<script defer is:inline src="/js/copy.js"></script>
+<!--<script is:inline async src="/js/bg.js"/>-->
+<!--<script is:inline data-astro-rerun async src="/js/typewriter.js"/>-->
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
@@ -51,13 +58,6 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <!-- RSS Feed -->
 <link rel="alternate" type="application/rss+xml" title={title} href={`${Astro.site}rss.xml`}/>
 
-<!-- Global Scripts -->
-<script is:inline src="/js/theme.js"/>
-<script is:inline src="/js/scroll.js"/>
-<script is:inline data-astro-rerun async src="/js/animate.js"/>
-<script defer is:inline src="/js/copy.js"></script>
-<!--<script is:inline async src="/js/bg.js"/>-->
-<!--<script is:inline data-astro-rerun async src="/js/typewriter.js"/>-->
 
  <!--<ViewTransitions  />-->
 
