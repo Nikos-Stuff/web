@@ -11,8 +11,6 @@ import OpenPopup from "@components/StripePopup.astro";
 ---
 
 <PageLayout title="Pricing" description={SITE.DESCRIPTION}>
-  <OpenPopup/>
-
   <!-- Light Mode: Particles -->
   <div class="absolute inset-0 block dark:hidden">
     <div id="particles1" class="fixed inset-0"></div>
@@ -63,6 +61,9 @@ import OpenPopup from "@components/StripePopup.astro";
     </div>
     <TitleHeader text="Cennik" sub="Usługi, Oferty itp." buttons={false} />
   </section>
+
+  <!-- Popup manager -->
+  <OpenPopup/>
 
   <!-- Pricing - Web Design-->
   <div class="relative bg-white dark:bg-black">

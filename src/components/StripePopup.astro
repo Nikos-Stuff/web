@@ -1,6 +1,6 @@
 <div
   id="stripe-popup"
-  class="invisible h-lvh pointer-events-none fixed inset-0 flex items-center justify-center bg-black/60 z-50 font-sans transition-all ease-in-out"
+  class="hidden h-lvh pointer-events-none fixed inset-0 items-center justify-center bg-black/60 z-50 font-sans transition-all ease-in-out"
 >
   <div
     id="popup-content"
@@ -81,8 +81,9 @@
       stripeBtn.href = stripeLink || "#";
     }
 
-    popup.classList.remove("invisible", "pointer-events-none", "opacity-0");
+    popup.classList.remove("hidden", "pointer-events-none", "opacity-0");
     popup.classList.add("opacity-100");
+    popup.classList.add("flex"); // Testing
 
     requestAnimationFrame(() => {
       content.classList.remove("scale-0");
@@ -100,7 +101,8 @@
     popup.classList.add("opacity-0");
 
     setTimeout(() => {
-      popup.classList.add("invisible", "pointer-events-none");
+      popup.classList.add("hidden", "pointer-events-none");
+      popup.classList.remove("flex"); // Testing
     }, 300);
   }
 </script>
