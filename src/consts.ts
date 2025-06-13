@@ -80,6 +80,10 @@ export const LINKS: Links = [
     TEXT: "Status",
     HREF: "https://status.nikostuff.com",
 
+  },
+  { 
+    TEXT : "Subskrypcje", 
+    HREF: "https://billing.stripe.com/p/login/6oUaEWa7abrm9GSdzBdAk00",
   }
 ]
 
