@@ -116,7 +116,7 @@ export const SOCIALS: Socials = [
   {
     NAME: "Discord",
     ICON: "discord",
-    TEXT: "nikodaproot",
+    TEXT: "niko_fluffer",
     HREF: "https://dc.nikostuff.com",
   }
 ]
