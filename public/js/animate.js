@@ -1,10 +1,4 @@
-let executed = false;
-
-
 function animateOnView() {
-  if (executed) return; 
-  executed = true; 
-  
   const animateElements = document.querySelectorAll(".animate");
 
   const observer = new IntersectionObserver(
@@ -26,5 +20,4 @@ function animateOnView() {
    console.log('Animate stuff Loaded');
 }
 
-animateOnView();
 document.addEventListener("DOMContentLoaded", animateOnView);
