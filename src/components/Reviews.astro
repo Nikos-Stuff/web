@@ -8,17 +8,19 @@
   <div
     id="review-item"
     class="review-item active container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center"
+    style="contain-intrinsic-size: 15rem; contain: layout style;"
   >
-    <div class="text-content flex-1">
-      <p
-        class="review-name mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
-      >
-      </p>
-      <div class="review-text">
-        <p class="mt-0 mb-0"></p>
+    <div class="text-content flex-1 min-h-[6rem] flex flex-col justify-center">
+      <div>
+        <p
+          class="review-name min-h-[2.5rem] text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
+        >&nbsp;</p>
+        <div class="review-text">
+          <p class="min-h-[3.5rem] text-base md:text-lg">&nbsp;</p>
+        </div>
       </div>
     </div>
-    <div class="review-icon text-right">
+    <div class="review-icon flex items-center justify-end h-full">
       <div class="icon-wrapper"></div>
     </div>
   </div>
