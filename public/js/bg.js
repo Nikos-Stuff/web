@@ -13,12 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
   let winWidth = window.innerWidth;
   let winScrollY = window.scrollY;
 
+  // Handle window resize events to update dimensions
+  let resizeTimeout;
   window.addEventListener("resize", () => {
-    // Update dimensions on resize
-    docHeight = document.body.scrollHeight;
-    winHeight = window.innerHeight;
-    winWidth = window.innerWidth;
-    winScrollY = window.scrollY;
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      docHeight = document.body.scrollHeight;
+      winHeight = window.innerHeight;
+      winWidth = window.innerWidth;
+      winScrollY = window.scrollY;
+    }, 500);
   });
 
   // Parallax multipliers for particles and stars
