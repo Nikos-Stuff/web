@@ -32,12 +32,20 @@ document.addEventListener("DOMContentLoaded", function () {
     pod: { mouse: 1, scroll: 0.05 },
   };
 
+  const elements = {
+    particles1: document.getElementById("particles1"),
+    particles2: document.getElementById("particles2"),
+    particles3: document.getElementById("particles3"),
+    stars1: document.getElementById("stars1"),
+    stars2: document.getElementById("stars2"),
+    stars3: document.getElementById("stars3"),
+    pod: document.getElementById("pod"),
+  };
+
   // Mouse and scroll event listeners
   document.addEventListener("mousemove", function (e) {
-    targetMouseX =
-      (e.clientX - winWidth / 2) / (winWidth/ 2);
-    targetMouseY =
-      (e.clientY - winHeight / 2) / (winHeight / 2);
+    targetMouseX = (e.clientX - winWidth / 2) / (winWidth / 2);
+    targetMouseY = (e.clientY - winHeight / 2) / (winHeight / 2);
   });
 
   window.addEventListener("scroll", function () {
@@ -53,17 +61,6 @@ document.addEventListener("DOMContentLoaded", function () {
     mouseX = ease(mouseX, targetMouseX, easing);
     mouseY = ease(mouseY, targetMouseY, easing);
     scrollY = ease(scrollY, targetScrollY, easing);
-
-    const elements = {
-      particles1: document.getElementById("particles1"),
-      particles2: document.getElementById("particles2"),
-      particles3: document.getElementById("particles3"),
-      stars1: document.getElementById("stars1"),
-      stars2: document.getElementById("stars2"),
-      stars3: document.getElementById("stars3"),
-      pod: document.getElementById("pod"),
-    };
-
     for (const [id, elem] of Object.entries(elements)) {
       if (elem) {
         if (id === "pod") {
