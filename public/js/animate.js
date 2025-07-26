@@ -20,4 +20,8 @@ function animateOnView() {
    console.log('Animate stuff Loaded');
 }
 
-document.addEventListener("DOMContentLoaded", animateOnView);
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", animateOnView);
+} else {
+  animateOnView();
+}
