@@ -5,7 +5,7 @@
   <div class="flex items-center justify-center h-full">
     <div class="loader flex flex-col items-center justify-center w-80 min-h-[10rem]">
       <span
-        class="relative block text-sm font-mono italic text-white text-center w-full h-20 flex items-center justify-center px-4"
+        class="relative text-sm font-mono italic text-white text-center w-full h-20 flex items-center justify-center px-4"
       >
         ...
         <span class="invisible absolute w-full px-4 text-center">
@@ -16,34 +16,4 @@
   </div>
 </div>
 
-<script is:inline>
-  const quotes_json = "loading_quotes.json";
-
-  function fetchQuotes() {
-    fetch(quotes_json)
-      .then((response) => response.json())
-      .then((data) => {
-        const quotes = data.quotes;
-        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-        document.querySelector(".loader span").textContent =
-          `"${randomQuote.quote}" - ${randomQuote.author}`;
-      })
-      .catch((error) => {
-        console.error("Error fetching quotes:", error);
-        document.querySelector(".loader span").textContent =
-          "Failed to load quote.";
-      });
-  }
-
-  fetchQuotes();
-
-  window.addEventListener("load", () => {
-    const preloader = document.getElementById("preloader");
-    preloader.style.opacity = "0";
-    preloader.style.pointerEvents = "none";
-
-    setTimeout(() => {
-      preloader.remove();
-    }, 1000);
-  });
-</script>
+<script is:inline src="/js/preloader_text.js"></script>
