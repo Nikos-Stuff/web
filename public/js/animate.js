@@ -20,6 +20,5 @@ function animateOnView() {
    console.log('Animate stuff Loaded');
 }
 
-
-document.addEventListener("astro:after-swap", animateOnView);
 animateOnView();
+document.addEventListener("DOMContentLoaded", animateOnView);
