@@ -7,12 +7,13 @@ document.addEventListener("DOMContentLoaded", function () {
     targetScrollY = 0;
   const easing = 0.075;
 
-  // We now declare these variables without a value
-  // and will initialize them after all styles are applied.
-  let docHeight;
-  let winHeight;
-  let winWidth;
-  let winScrollY;
+  // We only track window dimensions and scroll position now.
+  let winHeight = window.innerHeight;
+  let winWidth = window.innerWidth;
+  let winScrollY = window.scrollY;
+  
+  // Define a constant for the pod scroll range
+  const POD_SCROLL_RANGE = 8000; 
 
   // Handle window resize events to update dimensions
   let resizeTimeout;
@@ -53,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   window.addEventListener("scroll", function () {
-    winScrollY = window.scrollY; // update cached scroll position
-    targetScrollY = winScrollY; // set the easing target to the latest scroll pos
+    winScrollY = window.scrollY;
+    targetScrollY = winScrollY;
   });
 
   function ease(current, target, easeFactor) {
@@ -70,10 +71,8 @@ document.addEventListener("DOMContentLoaded", function () {
         if (id === "pod") {
           const maxScale = 1.3;
           const maxRotation = 10;
-          const scrollFraction = Math.min(
-            1,
-            winScrollY / (docHeight - winHeight)
-          ); // Calculate scroll fraction
+          // Calculate scrollFraction without using docHeight
+          const scrollFraction = Math.min(1, winScrollY / POD_SCROLL_RANGE);
           const podScale = 1 + (maxScale - 1) * scrollFraction;
 
           elem.style.transform = `translate(${
@@ -81,8 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }px, ${mouseY * multipliers[id].mouse}px) scale(${podScale}) rotate(${
             maxRotation * scrollFraction
           }deg)`;
-          elem.style.willChange = "transform"; // Ensure GPU acceleration
-          // elem.style.transition = "transform 1s ease-out"; // Again not sure if this will not bite TailWind CSS styling.
+          elem.style.willChange = "transform";
           continue;
         }
 
@@ -90,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
         elem.style.transform = `translate(${mouseX * mouse}px, ${
           mouseY * mouse
         }px) translateY(-${scrollY * scroll}px)`;
-        elem.style.willChange = "transform"; // Ensure GPU acceleration
+        elem.style.willChange = "transform";
       }
     }
 
@@ -162,23 +160,12 @@ document.addEventListener("DOMContentLoaded", function () {
     return positions.join(", ");
   }
 
-  // New initialization function
+  // The simplified initialization
   function initializeParallax() {
-    initBG(); // First, apply all the styles that change layout.
-    // Now, after all layout changes are complete, we read the dimensions.
-    docHeight = document.body.scrollHeight;
-    winHeight = window.innerHeight;
-    winWidth = window.innerWidth;
-    winScrollY = window.scrollY;
-
-    updateParallax(); // Now we can safely start the animation loop.
+    initBG();
+    updateParallax();
   }
 
-  // document.addEventListener("astro:after-swap", initBG); // Original call
-  // initBG(); // Original call
-  // updateParallax(); // Original call
-
-  // Use the new initialization function instead of the old calls
   document.addEventListener("astro:after-swap", initializeParallax);
   initializeParallax();
 });
