@@ -3,7 +3,7 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 // import tailwind from "@astrojs/tailwind";
 import solidJs from "@astrojs/solid-js";
-import playformInline from "@playform/inline";
+// import playformInline from "@playform/inline";
 import tailwindcss from "@tailwindcss/vite";
 //import node from "@astrojs/node";
 //
@@ -29,7 +29,7 @@ export default defineConfig({
     mdx(),
     sitemap(),
     solidJs(),
-    playformInline(),
+    // playformInline(),
   ],
 
   vite: {
