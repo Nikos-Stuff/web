@@ -1,20 +1,23 @@
-document.addEventListener('DOMContentLoaded', () => {
-  function animateOnView() {
-    const animateElements = document.querySelectorAll('.animate');
+function animateOnView() {
+  const animateElements = document.querySelectorAll(".animate");
 
-    const observer = new IntersectionObserver((entries) => {
+  const observer = new IntersectionObserver(
+    (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('show');
+          entry.target.classList.add("show");
           observer.unobserve(entry.target); // Stop observing once the animation is triggered
         }
       });
-    }, { threshold: 0.1 }); // Testing with a threshold of 0.1
+    },
+    { threshold: 0.1 }
+  ); // Testing with a threshold of 0.1
 
-    animateElements.forEach((element) => {
-      observer.observe(element);
-    });
-  }
+  animateElements.forEach((element) => {
+    observer.observe(element);
+  });
 
-  animateOnView();
-});
+   console.log('Animate stuff Loaded');
+}
+
+animateOnView();
