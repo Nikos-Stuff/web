@@ -1,5 +1,5 @@
 function run() {
-  const parallaxImages = document.querySelectorAll('[id^="parallaxImage"]');
+  const parallaxImages = document.querySelectorAll('.parallaxImage');
 
   function handleParallaxScroll() {
     const scrollY = window.scrollY;
