@@ -1,199 +1,259 @@
 ---
-import PageLayout from "@layouts/PageLayout.astro"
-import {SITE} from "@consts"
+import PageLayout from "@layouts/PageLayout.astro";
+import { SITE } from "@consts";
 import MeteorShower from "../../components/MeteorShower.astro";
 import TwinklingStars from "../../components/TwinklingStars.astro";
 import PriceTitle from "../../components/DownloadsHeader.astro";
 ---
 
 <PageLayout title="Downloads" description={SITE.DESCRIPTION}>
+  <!-- Light Mode: Particles -->
+  <div class="absolute inset-0 block dark:hidden">
+    <div id="particles1" class="fixed inset-0"></div>
+    <div id="particles2" class="fixed inset-0"></div>
+    <div id="particles3" class="fixed inset-0"></div>
+  </div>
 
+  <!-- Dark Theme: Stars -->
+  <div class="absolute inset-0 bg-black hidden dark:block">
+    <div id="stars1" class="fixed inset-0"></div>
+    <div id="stars2" class="fixed inset-0"></div>
+    <div id="stars3" class="fixed inset-0"></div>
+  </div>
 
-    <!-- Light Mode: Particles -->
-    <div class='absolute inset-0 block dark:hidden'>
-        <div id='particles1' class='fixed inset-0'></div>
-        <div id='particles2' class='fixed inset-0'></div>
-        <div id='particles3' class='fixed inset-0'></div>
+  <!-- Dark Theme: Twinkling Stars / Meteors -->
+  <div id="galaxy" class="fixed inset-0">
+    <div class="hidden dark:block">
+      <TwinklingStars />
+      <MeteorShower />
     </div>
+  </div>
 
-    <!-- Dark Theme: Stars -->
-    <div class='absolute inset-0 bg-black hidden dark:block'>
-        <div id='stars1' class='fixed inset-0'></div>
-        <div id='stars2' class='fixed inset-0'></div>
-        <div id='stars3' class='fixed inset-0'></div>
-    </div>
+  <script defer is:inline src="/js/bg.js"></script>
 
-    <!-- Dark Theme: Twinkling Stars / Meteors -->
-    <div id="galaxy" class="fixed inset-0">
-        <div class="hidden dark:block">
-            <TwinklingStars/>
-            <MeteorShower/>
+  <!-- HERO -->
+  <section class="relative h-[400px] w-full overflow-hidden">
+    <div
+      id="planetcont"
+      class="animate absolute inset-0 top-2/4 overflow-hidden"
+    >
+      <div
+        id="crescent"
+        class="absolute top-0 left-1/2 -translate-x-1/2 w-[250vw] min-h-[100vh] aspect-square rounded-full p-[1px] bg-gradient-to-b from-black/25 dark:from-white/75 from-0% to-transparent to-5%"
+      >
+        <div
+          id="planet"
+          class="w-full h-full bg-white dark:bg-black rounded-full p-[1px] overflow-hidden flex justify-center"
+        >
+          <div
+            id="blur"
+            class="w-full h-10 rounded-full bg-neutral-900/25 dark:bg-white/25 blur-2xl"
+          >
+          </div>
         </div>
+      </div>
     </div>
+    <PriceTitle />
+  </section>
 
-    <script is:inline src="/js/bg.js"/>
+  <!-- Main -->
+  <div class="relative bg-white dark:bg-black">
+    <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+      <!-- About Section -->
+      <section class="animate">
+        <article>
+          <p>Get our maps, models, scripts and more!</p>
+        </article>
+      </section>
 
-
-    <!-- HERO -->
-    <section class="relative h-[400px] w-full overflow-hidden">
-        <div id="planetcont" class='animate absolute inset-0 top-2/4 overflow-hidden'>
-            <div id="crescent"
-                 class='absolute top-0 left-1/2 -translate-x-1/2 w-[250vw] min-h-[100vh] aspect-square rounded-full p-[1px] bg-gradient-to-b from-black/25 dark:from-white/75 from-0% to-transparent to-5%'>
-                <div id="planet"
-                     class='w-full h-full bg-white dark:bg-black rounded-full p-[1px] overflow-hidden flex justify-center'>
-                    <div id="blur" class='w-full h-10 rounded-full bg-neutral-900/25 dark:bg-white/25 blur-2xl'/>
+      <section class="animate">
+        <div class="space-y-4">
+          <div class="flex justify-between">
+            <p class="font-semibold text-black dark:text-white">
+              Minecraft Projects
+            </p>
+          </div>
+          <div class="space-y-4 transition-all duration-300 ease-in-out">
+            <!-- Niko's Nextbots -->
+            <div
+              class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative"
+            >
+              <div
+                class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend"
+              >
+                <div class="flex flex-wrap items-center gap-2">
+                  <div
+                    class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25"
+                  >
+                    📂 DataPacks
+                  </div>
+                  <div
+                    class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25"
+                  >
+                    🔌 Plug-Ins Required
+                  </div>
+                  <div
+                    class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25"
+                  >
+                    💵 Freemium
+                  </div>
                 </div>
+                <div class="font-semibold mt-3 text-black dark:text-white">
+                  💀 Niko's Nextbots
+                </div>
+                <div class="text-sm">
+                  A game heavily inspired by gmod where you get chased by loud
+                  png’s - now in Minecraft! Run, gain points, unlock cosmetics,
+                  level up your character! So basically, i recreated nnb in
+                  Minecraft!
+                </div>
+                <div class="text-sm mt-3 font-semibold uppercase">
+                  System Requirements
+                </div>
+                <ul class="list-disc ml-5 mt-2 text-sm">
+                  <li>
+                    <strong>CPU:</strong> Mid-range processor (e.g., Intel Core i5-7400
+                    / AMD Ryzen 3 1300X or better) - 4 cores, 8 threads, 3.5 GHz
+                    base clock recommended.
+                  </li>
+                  <li>
+                    <strong>RAM:</strong> 12GB (dedicated to the server | Yes, that's
+                    actually real, since we're loading/unloading worlds).
+                  </li>
+                  <li>
+                    <strong>Storage:</strong> 10GB free space for server files and
+                    plugins.
+                  </li>
+                </ul>
+
+                <div class="font-semibold text-black dark:text-white mb-5 mt-5">
+                  <a
+                    href="https://mcapi.nikostuff.com/nnb/nnb_server.zip"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-xl hover:text-emerald-300 hover:text-2xl transition-all duration-300 ease-in-out rounded-lg border border-black/15 dark:border-white/25 p-3"
+                  >
+                    💾 DOWNLOAD
+                  </a>
+                </div>
+                <ul class="flex flex-wrap mt-2 gap-1">
+                  <li
+                    class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75"
+                  >
+                    Supported Versions: 1.20.4
+                  </li>
+                </ul>
+              </div>
             </div>
+          </div>
         </div>
-        <PriceTitle/>
-    </section>
-
-    <!-- Main -->
-    <div class="relative bg-white dark:bg-black">
-        <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
-
-
-            <!-- About Section -->
-            <section class="animate">
-                <article>
-                    <p>Get our maps, models, scripts and more!</p>
-                </article>
-
-            </section>
-
-
-            <section class="animate">
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <p class="font-semibold text-black dark:text-white">Minecraft Projects</p>
-                    </div>
-                    <div class="space-y-4 transition-all duration-300 ease-in-out">
-
-                        <!-- Niko's Nextbots -->
-                        <div class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative">
-                            <div class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend">
-                                <div class="flex flex-wrap items-center gap-2">
-                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
-                                        📂 DataPacks
-                                    </div>
-                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
-                                        🔌 Plug-Ins Required
-                                    </div>
-                                    <div class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25">
-                                        💵 Freemium
-                                    </div>
-                                </div>
-                                <div class="font-semibold mt-3 text-black dark:text-white">
-                                    💀 Niko's Nextbots
-                                </div>
-                                <div class="text-sm">
-                                    A game heavily inspired by gmod where you get chased by loud png’s - now in Minecraft!
-                                    Run, gain points, unlock cosmetics, level up your character!
-                                    So basically, i recreated nnb in Minecraft!
-                                </div>
-                                <div class="text-sm mt-3 font-semibold uppercase">
-                                    System Requirements 
-                                </div>
-                                <ul class="list-disc ml-5 mt-2 text-sm">
-                                    <li><strong>CPU:</strong> Mid-range processor (e.g., Intel Core i5-7400 / AMD Ryzen 3 1300X or better)  
-                                        - 4 cores, 8 threads, 3.5 GHz base clock recommended.
-                                    </li>
-                                    <li><strong>RAM:</strong> 12GB (dedicated to the server | Yes, that's actually real, since we're loading/unloading worlds).</li>
-                                    <li><strong>Storage:</strong> 10GB free space for server files and plugins.</li>
-                                </ul>
-                                
-
-
-
-                                <div class="font-semibold text-black dark:text-white mb-5  mt-5">
-                                    <a href="https://mcapi.nikostuff.com/nnb/nnb_server.zip" target="_blank" rel="noopener noreferrer" class="text-xl hover:text-emerald-300 hover:text-2xl transition-all duration-300 ease-in-out  rounded-lg  border border-black/15 dark:border-white/25 p-3">
-                                        💾 DOWNLOAD
-                                    </a>
-                                </div>
-                                <ul class="flex flex-wrap mt-2 gap-1">
-                                    <li class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75">
-                                        Supported Versions: 1.20.4
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </section>
-
-
-        </div>
+      </section>
     </div>
+  </div>
 
-
-
-    <!-- Realizing your order -->
-    <section class="relative bg-white dark:bg-black">
-        <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
-            <article>
-            <span class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                Setup Steps
-            </span>
-                <ol class="list-decimal list-inside mt-4 space-y-4 text-black dark:text-white">
-                    <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
-                        Download the Zip File and Unpack It
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            Download the server files, then extract them to a directory of your choice on your computer.
-                        </p>
-                    </li>
-                    <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
-                        Configure Server Settings
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            Open the server.properties file to configure your server settings such as IP address, port, and other gameplay options.
-                        </p>
-                    </li>
-                    <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
-                        Run the <code>server.jar</code> File
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            <a href="https://docs.papermc.io/paper/getting-started" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 group hover:text-emerald-300 transition-all duration-300 ease-in-out">
-                                More info here
-                            </a>
-                         </p>                                              
-                    </li>
-                    <li class="text-lg font-medium hover:scale-105  transition-all duration-300 ease-in-out">
-                        Share Your Local Server
-                        <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
-                            If you want others to join your server, use a service like playit.gg to create a public address for your local server (Safe Way) / or you can open a port in your router (Advanced Way)
-                    </li>
-                </ol>
-            </article>
-        </div>
-    </section>
-
+  <!-- Realizing your order -->
+  <section class="relative bg-white dark:bg-black">
+    <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+      <article>
+        <span
+          class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
+        >
+          Setup Steps
+        </span>
+        <ol
+          class="list-decimal list-inside mt-4 space-y-4 text-black dark:text-white"
+        >
+          <li
+            class="text-lg font-medium hover:scale-105 transition-all duration-300 ease-in-out"
+          >
+            Download the Zip File and Unpack It
+            <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
+              Download the server files, then extract them to a directory of
+              your choice on your computer.
+            </p>
+          </li>
+          <li
+            class="text-lg font-medium hover:scale-105 transition-all duration-300 ease-in-out"
+          >
+            Configure Server Settings
+            <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
+              Open the server.properties file to configure your server settings
+              such as IP address, port, and other gameplay options.
+            </p>
+          </li>
+          <li
+            class="text-lg font-medium hover:scale-105 transition-all duration-300 ease-in-out"
+          >
+            Run the <code>server.jar</code> File
+            <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
+              <a
+                href="https://docs.papermc.io/paper/getting-started"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-600 dark:text-gray-400 group hover:text-emerald-300 transition-all duration-300 ease-in-out"
+              >
+                More info here
+              </a>
+            </p>
+          </li>
+          <li
+            class="text-lg font-medium hover:scale-105 transition-all duration-300 ease-in-out"
+          >
+            Share Your Local Server
+            <p class="text-sm mt-1 text-gray-600 dark:text-gray-400">
+              If you want others to join your server, use a service like
+              playit.gg to create a public address for your local server (Safe
+              Way) / or you can open a port in your router (Advanced Way)
+            </p>
+          </li>
+        </ol>
+      </article>
+    </div>
 
     <!-- Important notes -->
     <section class="relative bg-white dark:bg-black">
-        <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
-            <article>
-            <span class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                Important notes
-            </span>
-                <ul class="list-disc list-inside mt-4 space-y-2 text-black dark:text-white">
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        Performance may vary depending on your server's hardware.
-                    </li>
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        Premium plugins or mods are not included. You must acquire any required paid resources independently.
-                    </li>
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        Some hosting providers disable command blocks by default. Ensure they are enabled in your server.properties file if needed.
-                    </li>
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        If you experience performance drops, adjust the view distance and simulation distance in your server.properties.
-                    </li>
-                    <li class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out">
-                        Report any console errors or bugs encountered during gameplay or setup.
-                    </li>
-                </ul>
-            </article>
-        </div>
+      <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+        <article>
+          <span
+            class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
+          >
+            Important notes
+          </span>
+          <ul
+            class="list-disc list-inside mt-4 space-y-2 text-black dark:text-white"
+          >
+            <li
+              class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out"
+            >
+              Performance may vary depending on your server's hardware.
+            </li>
+            <li
+              class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out"
+            >
+              Premium plugins or mods are not included. You must acquire any
+              required paid resources independently.
+            </li>
+            <li
+              class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out"
+            >
+              Some hosting providers disable command blocks by default. Ensure
+              they are enabled in your server.properties file if needed.
+            </li>
+            <li
+              class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out"
+            >
+              If you experience performance drops, adjust the view distance and
+              simulation distance in your server.properties.
+            </li>
+            <li
+              class="text-lg hover:scale-105 font-medium transition-all duration-300 ease-in-out"
+            >
+              Report any console errors or bugs encountered during gameplay or
+              setup.
+            </li>
+          </ul>
+        </article>
+      </div>
     </section>
-
-
+  </section>
 </PageLayout>
