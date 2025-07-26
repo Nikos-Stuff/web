@@ -1,15 +1,13 @@
 ---
-
-
 interface Props {
-  title: string
-  description: string
-  image?: string
+  title: string;
+  description: string;
+  image?: string;
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site)
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/open-graph.jpg" } = Astro.props
+const { title, description, image = "/open-graph.jpg" } = Astro.props;
 
 // import { ViewTransitions } from  "astro:transitions"
 ---
@@ -20,8 +18,20 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
 <meta name="generator" content={Astro.generator} />
 
-<link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin>
-<link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin>
+<link
+  rel="preload"
+  href="/fonts/atkinson-regular.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/atkinson-bold.woff"
+  as="font"
+  type="font/woff"
+  crossorigin
+/>
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -49,28 +59,40 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <!-- RSS Feed -->
-<link rel="alternate" type="application/rss+xml" title={title} href={`${Astro.site}rss.xml`}/>
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title={title}
+  href={`${Astro.site}rss.xml`}
+/>
 
 <!-- Global Scripts -->
-<script is:inline data-cfasync="false" src="/js/theme.js"/>
-<script is:inline src="/js/scroll.js"/>
-<script is:inline data-astro-rerun async data-cfasync="false" src="/js/animate.js"/>
+<script is:inline data-cfasync="false" src="/js/theme.js"></script>
+<script is:inline src="/js/scroll.js"></script>
+<script
+  defer
+  is:inline
+  data-astro-rerun
+  async
+  data-cfasync="false"
+  src="/js/animate.js"></script>
 <script defer is:inline src="/js/copy.js"></script>
+<script defer is:inline src="/js/cursor_snap.js"></script>
 <!--<script is:inline async src="/js/bg.js"/>-->
 <!--<script is:inline data-astro-rerun async src="/js/typewriter.js"/>-->
 
- <!--<ViewTransitions  />-->
+<!--<ViewTransitions  />-->
 
 <!-- AdSense - Nonsense -->
-<script is:inline data-astro-rerun async src="/js/adsense.js"/>
+<script is:inline data-astro-rerun async src="/js/adsense.js"></script>
 
 <script>
-  import type { TransitionBeforeSwapEvent } from "astro:transitions/client"
+  import type { TransitionBeforeSwapEvent } from "astro:transitions/client";
   document.addEventListener("astro:before-swap", (e) =>
     [
       ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
-        "link[as=\"font\"]"
+        'link[as="font"]'
       ),
     ].forEach((link) => link.remove())
-  )
+  );
 </script>

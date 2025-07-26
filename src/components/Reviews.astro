@@ -3,11 +3,23 @@
 ---
 
 <script is:inline data-astro-rerun async src="/js/reviews.js"></script>
+
 <div class="reviews-wrapper relative">
   <div
     id="review-item"
-    class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center"
+    class="review-item active container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center"
   >
-    <!-- Content will be updated by JavaScript -->
+    <div class="text-content flex-1">
+      <p
+        class="review-name mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
+      >
+      </p>
+      <div class="review-text">
+        <p class="mt-0 mb-0"></p>
+      </div>
+    </div>
+    <div class="review-icon text-right">
+      <div class="icon-wrapper"></div>
+    </div>
   </div>
 </div>

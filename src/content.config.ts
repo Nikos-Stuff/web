@@ -36,37 +36,6 @@ const projects = defineCollection({
   }),
 })
 
-const otherprojects = defineCollection({
-  loader: glob({ pattern: '**\/[^_]*.md', base: "./src/content/otherprojects" }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string(),
-    date: z.coerce.date().optional(),
-    tags: z.array(z.string()),
-    draft: z.boolean().optional(),
-    demoUrl: z.string().optional(),
-    repoUrl: z.string().optional(),
-    imageUrl: z.string().optional(),
-    otherUrls: z.array(z.object({ name: z.string(), url: z.string().url(),})).optional(),
-  }),
-})
-
-const nnb_workshop = defineCollection({
-  loader: glob({ pattern: '**\/[^_]*.md', base: "./src/content/nnb_workshop" }),
-  schema: z.object({
-    title: z.string(),
-    summary: z.string(),
-    date: z.coerce.date().optional(),
-    tags: z.array(z.string()),
-    draft: z.boolean().optional(),
-    demoUrl: z.string().optional(),
-    repoUrl: z.string().optional(),
-    imageUrl: z.string().optional(),
-    downUrl: z.string().optional(),
-    otherUrls: z.array(z.object({ name: z.string(), url: z.string().url(),})).optional(),
-  }),
-})
-
 
 
 const team = defineCollection({
@@ -93,4 +62,4 @@ const legal = defineCollection({
   }),
 })
 
-export const collections = { work, blog, projects, legal, team, otherprojects, nnb_workshop}
+export const collections = { work, blog, projects, legal, team}
