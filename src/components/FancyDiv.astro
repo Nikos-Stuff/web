@@ -1,0 +1,24 @@
+---
+const { margin_bottom = "10", class: extraClass = "" } = Astro.props;
+
+const validMargins: Record<string, string> = {
+  "0": "mb-0",
+  "10": "mb-10",
+  "24": "mb-24",
+  "50": "mb-50",
+  "100": "mb-100",
+  "250": "mb-[250px]",
+};
+
+const marginBottom = validMargins[String(margin_bottom)] ?? "mb-10";
+---
+
+<div
+  class={`
+    mx-auto max-w-screen-sm p-5 ${marginBottom} space-y-24 backdrop-blur-2xl 
+    backdrop-brightness-150 dark:backdrop-brightness-50 sm:rounded-2xl animate sm:border border-t border-b
+    border-black/25 dark:border-white/25 ${extraClass}
+    `}
+>
+  <slot />
+</div>

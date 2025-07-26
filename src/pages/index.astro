@@ -1,68 +1,64 @@
 ---
 // export const prerender = false;
 
-import {getCollection} from "astro:content"
-import PageLayout from "@layouts/PageLayout.astro"
-import ArrowCard from "@components/ArrowCard"
-import TeamCard from "@components/TeamCard"
-import StackCard from "@components/StackCard.astro"
-import {SITE, SOCIALS} from "@consts"
-import TwinklingStars from "@components/TwinklingStars.astro"
-import MeteorShower from "@components/MeteorShower.astro"
-import { Image } from 'astro:assets';
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import ArrowCard from "@components/ArrowCard";
+import TeamCard from "@components/TeamCard";
+import StackCard from "@components/StackCard.astro";
+import { SITE, SOCIALS } from "@consts";
+import TwinklingStars from "@components/TwinklingStars.astro";
+import MeteorShower from "@components/MeteorShower.astro";
+import { Image } from "astro:assets";
+import FancyDiv from "@components/FancyDiv.astro";
 
+import Reviews from "@components/Reviews.astro";
 
-import Reviews from "@components/Reviews.astro"
-
-
-
-import DynamicTitle from "@components/TitleHeader.astro"
+import DynamicTitle from "@components/TitleHeader.astro";
 
 const posts = (await getCollection("blog"))
-    .filter(post => !post.data.draft)
-    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-    .slice(0, 3)
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
 
 const projects = (await getCollection("projects"))
-    .filter(project => !project.data.draft)
-    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-    .slice(0, 3)
+  .filter((project) => !project.data.draft)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
 
 const teammembers = (await getCollection("team"))
-    .filter(teammember => !teammember.data.draft)
-    .slice(0, 3)
+  .filter((teammember) => !teammember.data.draft)
+  .slice(0, 3);
 
 const stack = [
-    {
-        text: "Lua",
-        icon: "lua",
-        href: "https://www.lua.org/home.html"
-    },
-    {
-        text: "Astro",
-        icon: "astro",
-        href: "https://astro.build"
-    },
-    {
-        text: "Javascript",
-        icon: "javascript",
-        href: "https://www.javascript.com"
-    },
-    {
-        text: "Typescript",
-        icon: "typescript",
-        href: "https://www.typescriptlang.org"
-    },
-    {
-        text: "PHP",
-        icon: "php",
-        href: "https://www.php.net"
-    }
-]
+  {
+    text: "Lua",
+    icon: "lua",
+    href: "https://www.lua.org/home.html",
+  },
+  {
+    text: "Astro",
+    icon: "astro",
+    href: "https://astro.build",
+  },
+  {
+    text: "Javascript",
+    icon: "javascript",
+    href: "https://www.javascript.com",
+  },
+  {
+    text: "Typescript",
+    icon: "typescript",
+    href: "https://www.typescriptlang.org",
+  },
+  {
+    text: "PHP",
+    icon: "php",
+    href: "https://www.php.net",
+  },
+];
 
-
-import POD from "@components/POD.astro"
-
+import POD from "@components/POD.astro";
 
 // APOD - Astronomy Picture of the Day
 
@@ -81,9 +77,11 @@ try {
   apodData = await response.json();
 
   // Prepare the text for translation
-  const translationPayload = [{
-    Text: apodData.explanation,
-  }];
+  const translationPayload = [
+    {
+      Text: apodData.explanation,
+    },
+  ];
 
   const translateResponse = await fetch(azureEndpoint, {
     method: "POST",
@@ -96,48 +94,50 @@ try {
   });
 
   const translation = await translateResponse.json();
-  translatedExplanation = translation?.[0]?.translations?.[0]?.text || apodData.explanation;
+  translatedExplanation =
+    translation?.[0]?.translations?.[0]?.text || apodData.explanation;
 
   console.log(" Translated Explanation:", translatedExplanation);
-
 } catch (error) {
   console.error(" Defaulting to og text - Error:", error);
   translatedExplanation = apodData.explanation;
 }
-
 ---
+
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
-    <script is:inline data-astro-rerun async src="/js/scroll_animation.js"/>
+  <script is:inline data-astro-rerun async src="/js/scroll_animation.js"
+  ></script>
 
-    <POD/>
-    <!-- Light Mode: Particles -->
-    <div class='absolute inset-0 block dark:hidden'>
+  <POD />
+  <!-- Light Mode: Particles -->
+  <div class="absolute inset-0 block dark:hidden">
+    <div id="particles1" class="fixed inset-0"></div>
+    <div id="particles2" class="fixed inset-0"></div>
+    <div id="particles3" class="fixed inset-0"></div>
+  </div>
 
-        <div id='particles1' class='fixed inset-0'></div>
-        <div id='particles2' class='fixed inset-0'></div>
-        <div id='particles3' class='fixed inset-0'></div>
+  <!-- Dark Theme: Stars -->
+  <div class="absolute inset-0 hidden dark:block">
+    <div id="stars1" class="fixed inset-0"></div>
+    <div id="stars2" class="fixed inset-0"></div>
+    <div id="stars3" class="fixed inset-0"></div>
+  </div>
+
+  <!-- Dark Theme: Twinkling Stars / Metors -->
+  <div id="galaxy" class="fixed inset-0">
+    <div class="hidden dark:block">
+      <TwinklingStars />
+      <MeteorShower />
     </div>
+  </div>
 
-    <!-- Dark Theme: Stars -->
-    <div class='absolute inset-0 hidden dark:block'>
-
-        <div id='stars1' class='fixed inset-0'></div>
-        <div id='stars2' class='fixed inset-0'></div>
-        <div id='stars3' class='fixed inset-0'></div>
-    </div>
-
-    <!-- Dark Theme: Twinkling Stars / Metors -->
-    <div id="galaxy" class="fixed inset-0">
-        <div class="hidden dark:block">
-            <TwinklingStars/>
-            <MeteorShower/>
-        </div>
-    </div>
-
-    <script is:inline src="/js/bg.js"/>
-    <!-- HERO -->
-    <section id="hero_fade" class="snap-center grid w-screen h-[150vh] place-items-center relative text-center overflow-hidden transition-all">
-        <div id="planetcont" class='animate absolute inset-0 top-3/4 overflow-hidden z-10'>
+  <script is:inline src="/js/bg.js"></script>
+  <!-- HERO -->
+  <section
+    id="hero_fade"
+    class="snap-center grid w-screen h-svh place-items-center relative text-center overflow-hidden transition-all"
+  >
+    <!-- <div id="planetcont" class='animate absolute inset-0 top-3/4 overflow-hidden z-10'> PLANET HAS BEEN REMOVED FOR A TEST NEW LAYOUT 
             <div id="crescent"
                  class='absolute top-0 left-1/2 -translate-x-1/2 w-[250vw] min-h-[100vh] aspect-square rounded-full p-[1px] bg-gradient-to-b from-black/25 dark:from-white/75 from-0% to-transparent to-5%'>
                 <div id="planet"
@@ -145,293 +145,359 @@ try {
                     <div id="blur" class='w-full h-5 rounded-full bg-neutral-900/25 dark:bg-white/25 blur-2xl'/>
                 </div>
             </div>
+        </div> -->
+    <DynamicTitle
+      text="Niko's Stuff"
+      sub="Składzik Twórczości"
+      buttons={true}
+      typewriter={true}
+    />
+  </section>
+
+  <div class="relative">
+    <!-- <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">  -->
+    <FancyDiv margin_bottom="50">
+      <!--  About  Image Section  -->
+      <section class="animate pb-0">
+        <p class="font-semibold text-black dark:text-white">
+          Obrazek / Informacja Dnia
+        </p>
+        <p class="font-bold text-sm mb-2">{apodData.title}</p>
+        <p class="text-xs mb-2">{apodData.date} - {apodData.copyright}</p>
+        <p class="text-sm max-w-3xl">{translatedExplanation}</p>
+      </section>
+    </FancyDiv>
+
+    <!--  About Section  -->
+    <FancyDiv>
+      <section class="animate pb-0">
+        <p>
+          Hej! Jestem <span class="rainbow font-semibold">Niko</span>
+          <span class="text-xs">(Maciek)</span>. pasjonat programowania z
+          zamiłowaniem do edycji wideo, animacji i tworzenia gier. Ukończyłem
+          szkołę zawodową i obecnie współtworzę gry oraz cyfrowe doświadczenia w
+          małym, zaangażowanym zespole. Nieustannie rozwijam się, eksplorując
+          nowe technologie, narzędzia oraz techniki kodowania i projektowania /
+          animowania 2D/3D.
+        </p>
+      </section>
+    </FancyDiv>
+
+    <!-- Tech Stack Section -->
+    <FancyDiv margin_bottom="50">
+      <section class="animate">
+        <div class="space-y-4">
+          <p class="font-semibold text-black dark:text-white">
+            Ucze się / Moje umiejętności
+          </p>
+          <div class="flex flex-wrap items-center gap-2 mt-5">
+            {
+              stack.map((item) => (
+                <StackCard text={item.text} icon={item.icon} href={item.href} />
+              ))
+            }
+          </div>
         </div>
-        <DynamicTitle text="Niko's Stuff" sub="Składzik Twórczości" buttons={true} typewriter={true}/>
-    </section>
+      </section>
+    </FancyDiv>
 
+    <!--  Collabs TEMP REMOVED -->
 
-    <div class="relative bg-white dark:bg-black">
-        <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16"> <!--  -mt-[25rem] -->
+    <!--  Optimization & Design in Mind -->
+    <FancyDiv>
+      <section class="animate not-prose">
+        <div
+          fancy-scroll="true"
+          class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center"
+        >
+          <!-- Icon on the Left -->
+          <div class="text-right">
+            <p
+              class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0"
+            >
+              <!-- 🖌️ -->
+              <svg
+                class="fill-black dark:fill-white transition-all h-[5rem] w-[5rem] md:h-[6rem] md:w-[6rem] lg:h-[8rem] lg:w-[8rem]"
+                xmlns="http://www.w3.org/2000/svg"
+                height="150px"
+                viewBox="0 -960 960 960"
+                width="150px"
+                fill="#e8eaed"
+              >
+                <path
+                  d="M594-196q-6.4 0-10.2-4.37-3.8-4.36-3.8-10.86 0-5.77 4.01-9.77 4.02-4 9.99-4h124L564-378q-3-3.4-4.04-8.47-1.04-5.06 4.04-10.03 4-4.5 8.77-4.5 4.76 0 10.23 4l153 152v-119q0-5.68 4.02-9.84t10-4.16q5.98 0 9.98 4.16t4 9.84v134q0 14.48-9.75 24.24Q744.5-196 731-196H594Zm-394-4q-5-5-5-9.27t5.45-10.8L716-736H594q-6.4 0-10.2-4.02-3.8-4.02-3.8-10t4.01-9.98q4.02-4 9.99-4h137q13.5 0 23.25 9.75T764-731v134q0 6.4-4.23 10.2-4.23 3.8-10.21 3.8t-9.77-4.01Q736-591.03 736-597v-119L220-200q-5 5-10 5t-10-5Zm0-542q-4-4-3.5-9t4.3-9.5q3.8-4.5 9.17-4.5 5.36 0 10.03 4l171 172q4 5 3.5 9.9t-2.5 8.27q-4.67 4.83-9.83 4.83-5.17 0-9.17-5L200-742Z"
+                ></path>
+              </svg>
+            </p>
+          </div>
 
-          <!--  About  Image Section  -->
-            <section class="animate pb-0">
-                <article class="pb-0">
-                    <p class="font-semibold text-black dark:text-white">
-                        Obrazek / Informacja Dnia
-                    </p>
-                    <p class="font-bold text-sm mb-2">{apodData.title}</p>
-                    <p class="text-xs mb-2">{apodData.date} - {apodData.copyright}</p>
-                    <p class="text-sm max-w-3xl">{translatedExplanation}</p>
-                </article>
-                
-                
-                
+          <!-- Main Content on the Right -->
+          <div class="text-content flex-1 ml-4">
+            <p
+              class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
+            >
+              Łatwy Początek
+            </p>
+            <p class="mt-0 mb-0">
+              Strony WWW, Animacje, Reklamy - wszystko z myślą o wydajności i
+              estetyce.
+            </p>
+          </div>
+        </div>
+      </section>
 
-            </section>
+      <!-- Line -->
+      <hr class="border-black/10 dark:border-white/25 animate" />
 
+      <!-- Growing and Improving -->
+      <section class="animate not-prose">
+        <div
+          fancy-scroll="true"
+          class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center"
+        >
+          <!-- Main Content on the Left -->
+          <div class="text-content flex-1">
+            <p
+              class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
+            >
+              Profesjonalizm
+            </p>
+            <p class="mt-0 mb-0">
+              Minimalistyczny design, płynne animacje, szybki czas dostawy -
+              Wszystko to w zasięgu ręki, dostosowane pod Twoje wymagania.
+            </p>
+          </div>
 
+          <!-- Icon on the Right -->
+          <div class="text-right">
+            <p
+              class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0"
+            >
+              <!-- 📈 -->
+              <svg
+                class="fill-black dark:fill-white transition-all h-[5rem] w-[5rem] md:h-[6rem] md:w-[6rem] lg:h-[8rem] lg:w-[8rem]"
+                xmlns="http://www.w3.org/2000/svg"
+                height="150px"
+                viewBox="0 -960 960 960"
+                width="150px"
+                fill="#e8eaed"
+              >
+                <path
+                  d="M156.77-140q-6.79 0-11.78-5.15Q140-150.3 140-157v-34q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q175-197.7 175-191v34q0 6.7-5.5 11.85-5.51 5.15-12.73 5.15Zm161.52 0q-6.31 0-11.3-5.15Q302-150.3 302-157v-188q0-6.7 5.21-11.85 5.2-5.15 11.98-5.15 5.81 0 11.81 5.15 6 5.15 6 11.85v188q0 6.7-5.99 11.85-5.98 5.15-12.72 5.15Zm161.48 0q-6.79 0-11.78-5.15Q463-150.3 463-157v-124q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q498-287.7 498-281v124q0 6.7-5.5 11.85-5.51 5.15-12.73 5.15Zm161.52 0q-6.32 0-11.3-5.15Q625-150.3 625-157v-206q0-6.7 5.21-11.85 5.2-5.15 11.98-5.15 5.81 0 11.81 5.15 6 5.15 6 11.85v206q0 6.7-5.99 11.85-5.98 5.15-12.72 5.15Zm161.48 0q-6.8 0-11.78-5.15Q786-150.3 786-157v-354q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q821-517.7 821-511v354q0 6.7-5.5 11.85-5.51 5.15-12.73 5.15ZM560.5-510q-12.5 0-24.93-5.13Q523.15-520.26 513-530l-90-90q-9-9-23-9t-23 9L170-414q-5.33 5-13.17 5.5-7.83.5-11.7-5.5-5.13-3-4.96-10.63.16-7.62 4.83-12.37l209-208q9.56-9.74 21.28-14.37Q387-664 400-664q13 0 24.76 4.67Q436.51-654.65 447-645l90 90q9 9 23 9t23-9l208-208q4-4 12-4.5t12.43 4.5q4.57 5 4.4 12.62-.16 7.63-3.83 11.38L607-530q-10.17 10.22-22.09 15.11Q573-510 560.5-510Z"
+                ></path>
+              </svg>
+            </p>
+          </div>
+        </div>
+      </section>
 
+      <!-- Line -->
+      <hr class="border-black/10 dark:border-white/25 animate" />
 
-            <!--  About Section  -->
-            <section class="animate pb-0">
-                <article class="pb-0">
-                    <p>Hej! Jestem <span class="rainbow font-semibold">Niko</span> <span class="text-xs">(Maciek)</span>.
-                        pasjonat programowania z zamiłowaniem do edycji wideo, animacji i tworzenia gier.  
-                        Ukończyłem szkołę zawodową i obecnie współtworzę gry oraz cyfrowe doświadczenia w małym, zaangażowanym zespole.  
-                        Nieustannie rozwijam się, eksplorując nowe technologie, narzędzia oraz techniki kodowania i projektowania / animowania 2D/3D.  </p>
-                </article>
-                
-                
-                
-                
+      <!-- Open For You -->
+      <section class="animate not-prose">
+        <div
+          fancy-scroll="true"
+          class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center"
+        >
+          <!-- Icon on the Left -->
+          <div class="text-right">
+            <p
+              class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0"
+            >
+              <!-- 🚪 -->
+              <svg
+                class="fill-black dark:fill-white transition-all h-[5rem] w-[5rem] md:h-[6rem] md:w-[6rem] lg:h-[8rem] lg:w-[8rem]"
+                xmlns="http://www.w3.org/2000/svg"
+                height="150px"
+                viewBox="0 -960 960 960"
+                width="150px"
+                fill="#e8eaed"
+              >
+                <path
+                  d="M736-546H629q-6.7 0-11.85-5.41-5.15-5.41-5.15-12.5t5.15-12.09q5.15-5 11.85-5h107v-107q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q771-694.7 771-688v107h106q7.13 0 12.56 5.23 5.44 5.23 5.44 12.31 0 7.09-5.44 12.28Q884.13-546 877-546H771v106q0 7.68-5.5 12.84-5.51 5.16-12.73 5.16-6.8 0-11.78-5.16Q736-432.32 736-440v-106Zm-376 28q-50.01 0-83.01-32.99-32.99-33-32.99-83.51 0-50.51 32.99-83.01Q309.99-750 360-750q50.01 0 83.01 32.49Q476-685.01 476-634.5q0 50.51-32.99 83.51Q410.01-518 360-518ZM77-239v-25.25q0-26.01 14.41-47.53Q105.81-333.3 132-345q61-28 116.82-41 55.83-13 111-13Q415-399 471-386q56 13 117 41 26.19 12.7 40.59 33.72Q643-290.26 643-264.25V-239q0 15.75-10.62 26.37Q621.75-202 606-202H114q-15.75 0-26.37-10.63Q77-223.25 77-239Zm35 2h496v-27q0-15-9.33-28.17Q589.35-305.35 572-314q-54-25-106.19-37.5Q413.63-364 360-364t-106.31 12.5Q201-339 149-314q-18.8 8.65-27.9 21.83Q112-279 112-264v27Zm248-316q34 0 57.5-23.5T441-634q0-34-23.5-57.5T360-715q-34 0-57.5 23.5T279-634q0 34 23.5 57.5T360-553Zm0-81Zm0 397Z"
+                ></path>
+              </svg>
+            </p>
+          </div>
 
-            </section>
+          <!-- Main Content on the Right -->
+          <div class="text-content flex-1 ml-4">
+            <p
+              class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
+            >
+              Ciągłe Nowości
+            </p>
+            <p class="mt-0 mb-0">
+              Ciągle się rozwijam w tworzeniu gierek, stron WWW, animacji, jak i
+              wielu innych nowych rozwiązań!
+            </p>
+          </div>
+        </div>
+      </section>
+    </FancyDiv>
 
+    <!--  Review Section -->
+    <FancyDiv margin_bottom="50">
+      <section class="space-y-4 animate not-prose">
+        <p class="font-semibold text-black dark:text-white">Co na to inni</p>
+        <Reviews />
+      </section>
+    </FancyDiv>
 
-            
-            <!-- Tech Stack Section -->
-            <section class="animate pb-32">
-                <div class="space-y-4">
-                    <p class="font-semibold text-black dark:text-white">
-                        Ucze się / Moje umiejętności
-                    </p>
-                    <div class="flex flex-wrap items-center gap-2 mt-5">
-                        {stack.map(item => (
-                                <StackCard
-                                        text={item.text}
-                                        icon={item.icon}
-                                        href={item.href}
-                                />
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-
-            <!--  Collabs TEMP REMOVED -->
-  
-            
-
-            <!--  Optimization & Design in Mind -->
-            <section class="animate not-prose">
-                <article>
-                    <div fancy-scroll="true"
-                         class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
-                        
-                        <!-- Icon on the Left -->
-                        <div class="text-right">
-                            <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0">
-                                <!-- 🖌️ -->
-                                <svg class="fill-black dark:fill-white transition-all h-[5rem] w-[5rem] md:h-[6rem] md:w-[6rem] lg:h-[8rem] lg:w-[8rem]"  xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="150px" fill="#e8eaed">
-                                    <path d="M594-196q-6.4 0-10.2-4.37-3.8-4.36-3.8-10.86 0-5.77 4.01-9.77 4.02-4 9.99-4h124L564-378q-3-3.4-4.04-8.47-1.04-5.06 4.04-10.03 4-4.5 8.77-4.5 4.76 0 10.23 4l153 152v-119q0-5.68 4.02-9.84t10-4.16q5.98 0 9.98 4.16t4 9.84v134q0 14.48-9.75 24.24Q744.5-196 731-196H594Zm-394-4q-5-5-5-9.27t5.45-10.8L716-736H594q-6.4 0-10.2-4.02-3.8-4.02-3.8-10t4.01-9.98q4.02-4 9.99-4h137q13.5 0 23.25 9.75T764-731v134q0 6.4-4.23 10.2-4.23 3.8-10.21 3.8t-9.77-4.01Q736-591.03 736-597v-119L220-200q-5 5-10 5t-10-5Zm0-542q-4-4-3.5-9t4.3-9.5q3.8-4.5 9.17-4.5 5.36 0 10.03 4l171 172q4 5 3.5 9.9t-2.5 8.27q-4.67 4.83-9.83 4.83-5.17 0-9.17-5L200-742Z"/>
-                                </svg>
-                            </p>
-                        </div>
-                        
-                        <!-- Main Content on the Right -->
-                        <div class="text-content flex-1 ml-4">
-                            <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                                Łatwy Początek
-                            </p>
-                            <p class="mt-0 mb-0">
-                                Potrzebujesz reklamy wideo, profesjonalnego montażu video lub nowoczesnej strony WWW?  
-                                Oferuję wszystko, czego potrzebujesz – w świetnej jakości i przystępnej cenie!                                
-                            </p>
-                        </div>
-                    </div>
-                </article>
-            </section>
-            
-
-            <!-- Growing and Improving -->
-            <section class="animate not-prose">
-                <article>
-                    <div fancy-scroll="true"
-                        class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
-                        
-                        <!-- Main Content on the Left -->
-                        <div class="text-content flex-1">
-                            <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                                Profesjonalizm
-                            </p>
-                            <p class="mt-0 mb-0">
-                                Minimalistyczny design, płynne animacje, szybki czas dostawy -
-                                Wszystko to w zasięgu ręki, dostosowane pod Twoje wymagania.
-                            </p>
-                        </div>
-                        
-                        <!-- Icon on the Right -->
-                        <div class="text-right">
-                            <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0">
-                                <!-- 📈 -->
-                                <svg class="fill-black dark:fill-white transition-all h-[5rem] w-[5rem] md:h-[6rem] md:w-[6rem] lg:h-[8rem] lg:w-[8rem]"  xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="150px" fill="#e8eaed">
-                                    <path d="M156.77-140q-6.79 0-11.78-5.15Q140-150.3 140-157v-34q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q175-197.7 175-191v34q0 6.7-5.5 11.85-5.51 5.15-12.73 5.15Zm161.52 0q-6.31 0-11.3-5.15Q302-150.3 302-157v-188q0-6.7 5.21-11.85 5.2-5.15 11.98-5.15 5.81 0 11.81 5.15 6 5.15 6 11.85v188q0 6.7-5.99 11.85-5.98 5.15-12.72 5.15Zm161.48 0q-6.79 0-11.78-5.15Q463-150.3 463-157v-124q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q498-287.7 498-281v124q0 6.7-5.5 11.85-5.51 5.15-12.73 5.15Zm161.52 0q-6.32 0-11.3-5.15Q625-150.3 625-157v-206q0-6.7 5.21-11.85 5.2-5.15 11.98-5.15 5.81 0 11.81 5.15 6 5.15 6 11.85v206q0 6.7-5.99 11.85-5.98 5.15-12.72 5.15Zm161.48 0q-6.8 0-11.78-5.15Q786-150.3 786-157v-354q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q821-517.7 821-511v354q0 6.7-5.5 11.85-5.51 5.15-12.73 5.15ZM560.5-510q-12.5 0-24.93-5.13Q523.15-520.26 513-530l-90-90q-9-9-23-9t-23 9L170-414q-5.33 5-13.17 5.5-7.83.5-11.7-5.5-5.13-3-4.96-10.63.16-7.62 4.83-12.37l209-208q9.56-9.74 21.28-14.37Q387-664 400-664q13 0 24.76 4.67Q436.51-654.65 447-645l90 90q9 9 23 9t23-9l208-208q4-4 12-4.5t12.43 4.5q4.57 5 4.4 12.62-.16 7.63-3.83 11.38L607-530q-10.17 10.22-22.09 15.11Q573-510 560.5-510Z"/>
-                                </svg>
-                            </p>
-                        </div>
-                    </div>
-                </article>
-            </section>
-
-
-            <!-- Open For You -->
-            <section class="animate not-prose">
-                <article>
-                    <div fancy-scroll="true"
-                        class="container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center">
-                        
-                        <!-- Icon on the Left -->
-                        <div class="text-right">
-                            <p class="text-[4rem] md:text-[5rem] lg:text-[7rem] font-bold text-black dark:text-white mt-0 mb-0">
-                                <!-- 🚪 -->
-                                <svg class="fill-black dark:fill-white transition-all h-[5rem] w-[5rem] md:h-[6rem] md:w-[6rem] lg:h-[8rem] lg:w-[8rem]"  xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 -960 960 960" width="150px" fill="#e8eaed">
-                                    <path d="M736-546H629q-6.7 0-11.85-5.41-5.15-5.41-5.15-12.5t5.15-12.09q5.15-5 11.85-5h107v-107q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q771-694.7 771-688v107h106q7.13 0 12.56 5.23 5.44 5.23 5.44 12.31 0 7.09-5.44 12.28Q884.13-546 877-546H771v106q0 7.68-5.5 12.84-5.51 5.16-12.73 5.16-6.8 0-11.78-5.16Q736-432.32 736-440v-106Zm-376 28q-50.01 0-83.01-32.99-32.99-33-32.99-83.51 0-50.51 32.99-83.01Q309.99-750 360-750q50.01 0 83.01 32.49Q476-685.01 476-634.5q0 50.51-32.99 83.51Q410.01-518 360-518ZM77-239v-25.25q0-26.01 14.41-47.53Q105.81-333.3 132-345q61-28 116.82-41 55.83-13 111-13Q415-399 471-386q56 13 117 41 26.19 12.7 40.59 33.72Q643-290.26 643-264.25V-239q0 15.75-10.62 26.37Q621.75-202 606-202H114q-15.75 0-26.37-10.63Q77-223.25 77-239Zm35 2h496v-27q0-15-9.33-28.17Q589.35-305.35 572-314q-54-25-106.19-37.5Q413.63-364 360-364t-106.31 12.5Q201-339 149-314q-18.8 8.65-27.9 21.83Q112-279 112-264v27Zm248-316q34 0 57.5-23.5T441-634q0-34-23.5-57.5T360-715q-34 0-57.5 23.5T279-634q0 34 23.5 57.5T360-553Zm0-81Zm0 397Z"/>
-                                </svg>
-                            </p>
-                        </div>
-                        
-                        <!-- Main Content on the Right -->
-                        <div class="text-content flex-1 ml-4">
-                            <p class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                                Ciągłe Nowości
-                            </p>
-                            <p class="mt-0 mb-0">
-                                Ciągle się rozwijam w tworzeniu
-                                gierek, stron WWW, animacji, jak i wielu innych nowych rozwiązań!
-                            </p>
-                        </div>
-                    </div>
-                </article>
-            </section>
-
-
-
-            <!--  Review Section -->
-            <section class="space-y-4 animate pb-20 not-prose">
-                <p class="font-semibold text-black dark:text-white">
-                    Co na to inni
-                </p>
-                <Reviews/>
-            </section>
-
-            <!-- Team Section -->
-
-            <section class="animate">
-
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <p class="font-semibold text-black dark:text-white">
-                            Warto o nich wspomnieć
-                        </p>
-                        <a href="/team"
-                           class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
+    <!-- Team Section -->
+    <FancyDiv margin_bottom="50">
+      <section class="animate mb-0">
+        <div class="space-y-4">
+          <div class="flex justify-between">
+            <p class="font-semibold text-black dark:text-white">
+              Warto o nich wspomnieć
+            </p>
+            <a
+              href="/team"
+              class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend"
+            >
+              <span
+                class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend"
+              >
                 Zobacz wiecej
               </span>
-                        </a>
-                    </div>
-                    <ul class="space-y-4 ransition-all duration-300 ease-in-out ">
-                        {teammembers.map((teammember) => (
-                                <li>
-                                    <TeamCard entry={teammember}/>
-                                </li>
-                        ))}
-                    </ul>
-                </div>
+            </a>
+          </div>
+          <ul class="space-y-4 transition-all duration-300 ease-in-out">
+            {
+              teammembers.map((teammember) => (
+                <li>
+                  <TeamCard entry={teammember} />
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+      <script is:inline data-astro-rerun async src="/js/team_scroll.js"
+      ></script>
+    </FancyDiv>
 
-            </section>
-
-            <script is:inline data-astro-rerun async src="/js/team_scroll.js"/>
-
-
-            <!-- Blog Preview Section -->
-            <section class="animate">
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <p class="font-semibold text-black dark:text-white">
-                            Co Nowego?
-                        </p>
-                        <a href="/blog"
-                           class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
+    <!-- Blog Preview Section -->
+    <FancyDiv margin_bottom="50">
+      <section class="animate">
+        <div class="space-y-4">
+          <div class="flex justify-between">
+            <p class="font-semibold text-black dark:text-white">Co Nowego?</p>
+            <a
+              href="/blog"
+              class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend"
+            >
+              <span
+                class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend"
+              >
                 Wszystkie Posty
               </span>
-                        </a>
-                    </div>
-                    <ul class="space-y-4">
-                        {posts.map((post) => (
-                                <li>
-                                    <ArrowCard entry={post}/>
-                                </li>
-                        ))}
-                    </ul>
-                </div>
-            </section>
+            </a>
+          </div>
+          <ul class="space-y-4">
+            {
+              posts.map((post) => (
+                <li>
+                  <ArrowCard entry={post} />
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+    </FancyDiv>
 
-            <!-- Project Preview Section -->
-            <section class="animate">
-                <div class="space-y-4">
-                    <div class="flex justify-between">
-                        <p class="font-semibold text-black dark:text-white">
-                            Prosto z pieca
-                        </p>
-                        <a href="/projects"
-                           class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-              <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
+    <!-- Project Preview Section -->
+    <FancyDiv margin_bottom="50">
+      <section class="animate">
+        <div class="space-y-4">
+          <div class="flex justify-between">
+            <p class="font-semibold text-black dark:text-white">
+              Prosto z pieca
+            </p>
+            <a
+              href="/projects"
+              class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend"
+            >
+              <span
+                class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend"
+              >
                 Zobacz Wszystko
               </span>
-                        </a>
-                    </div>
-                    <ul class="space-y-4">
-                        {projects.map((project) => (
-                                <li>
-                                    <ArrowCard entry={project}/>
-                                </li>
-                        ))}
-                    </ul>
-                </div>
-            </section>
-
-            <!-- Contact Section -->
-            <section class="animate">
-                <div>
-                    <p class="font-semibold text-black dark:text-white">
-                        Bądźmy w kontakcie
-                    </p>
-                    <p>
-                        Dołącz do społeczności, lub zostaw prywatną wiadomość.
-                    </p>
-                    <div class="grid grid-cols-4 gap-y-2 mt-4 auto-cols-min">
-                        {SOCIALS.map(social => (
-                        <div class="col-span-1 flex items-center gap-1">
-                            <span class="whitespace-nowrap truncate">
-                                {social.NAME}
-                            </span>
-                             </div>
-                                <div class="col-span-3 truncate">
-                                    <a href={social.HREF} target="_blank" class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend">
-                                     <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
-                                     {social.TEXT}
-                                    </span>
-                                </a>
-                        </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-
-            <section class="animate flex justify-center items-center">
-                <div class="flex justify-ubetween">
-                    <a target="_blank" href="https://uptime.betterstack.com" rel="noopener">
-
-                        <Image src="/betterstack.webp" alt="BetterStack." width={150} height={150} loading="lazy"/>
-                   
-                    </a>
-                </div>
-            </section>
-
-
+            </a>
+          </div>
+          <ul class="space-y-4">
+            {
+              projects.map((project) => (
+                <li>
+                  <ArrowCard entry={project} />
+                </li>
+              ))
+            }
+          </ul>
         </div>
-    </div>
+      </section>
+    </FancyDiv>
+
+    <!-- Contact Section -->
+    <FancyDiv margin_bottom="50">
+      <section class="animate">
+        <div>
+          <p class="font-semibold text-black dark:text-white">
+            Bądźmy w kontakcie
+          </p>
+          <p>Dołącz do społeczności, lub zostaw prywatną wiadomość.</p>
+          <div class="grid grid-cols-4 gap-y-2 mt-4 auto-cols-min">
+            {
+              SOCIALS.map((social) => (
+                <>
+                  <div class="col-span-1 flex items-center gap-1">
+                    <span class="whitespace-nowrap truncate">
+                      {social.NAME}
+                    </span>
+                  </div>
+                  <div class="col-span-3 truncate">
+                    <a
+                      href={social.HREF}
+                      target="_blank"
+                      class="w-fit col-span-3 group flex gap-1 items-center underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend"
+                    >
+                      <span class="text-black/75 dark:text-white/75 group-hover:text-black group-hover:dark:text-white blend">
+                        {social.TEXT}
+                      </span>
+                    </a>
+                  </div>
+                </>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      <!-- Line -->
+      <hr class="border-black/10 dark:border-white/25 animate" />
+
+      <section class="animate flex justify-center items-center">
+        <div class="flex justify-ubetween">
+          <a
+            target="_blank"
+            href="https://uptime.betterstack.com"
+            rel="noopener"
+          >
+            <Image
+              src="/betterstack.webp"
+              alt="BetterStack."
+              width={150}
+              height={150}
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </section>
+    </FancyDiv>
+
+    <!-- </div> -->
+  </div>
 </PageLayout>

@@ -14,7 +14,7 @@ import PageVersion from "@components/GitVer.astro"
 <!-- System detection -->
 <script is:inline async src="/js/system_detection.js"></script>
 
-<footer class="relative bg-white dark:bg-black">
+<footer class="relative"> <!-- Footer  bg-white dark:bg-black -->
   <div> <!-- Footer content | before had animate class -->
     <section class="py-5">
       <Container size="md">
@@ -32,7 +32,7 @@ import PageVersion from "@components/GitVer.astro"
       </Container>
     </section>
   
-    <section class=" py-5 overflow-hidden whitespace-nowrap border-t border-black/10 dark:border-white/25">
+    <section class=" py-5 overflow-hidden whitespace-nowrap border-t border-black/10 dark:border-white/25 backdrop-blur-xl transition-all">
       <Container size="md">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div class="flex flex-col items-center sm:items-start">

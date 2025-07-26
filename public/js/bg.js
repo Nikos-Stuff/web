@@ -45,6 +45,30 @@ document.addEventListener('DOMContentLoaded', function () {
 
     for (const [id, elem] of Object.entries(elements)) {
       if (elem) {
+        
+        if (id === 'pod') {
+          // POD is an image, lets make sure we dont scroll it too much in Y space resultubg black space
+          // const podRect = elem.getBoundingClientRect();
+          // const podHeight = podRect.height;
+          // const maxScrollY = podHeight // Full height of the pod image test
+          // const limitedScrollY = Math.min(scrollY, maxScrollY);
+          // scrollY = limitedScrollY; // Apply the limited scroll effect for the pod
+
+          // Another test - Based on scroll scale
+
+          const maxScale = 1.3;
+          const maxRotation = 10;
+          const scrollFraction = Math.min(1, window.scrollY / (document.body.scrollHeight - window.innerHeight)); // Not sure if this will work.
+          const podScale = 1 + (maxScale - 1) * scrollFraction;
+
+          elem.style.transform = `translate(${mouseX * multipliers[id].mouse}px, ${mouseY * multipliers[id].mouse}px) scale(${podScale}) rotate(${maxRotation * scrollFraction}deg)`;
+          elem.style.willChange = 'transform'; // Ensure GPU acceleration
+          elem.style.transition = 'transform 1s ease-out'; // Again not sure if this will not bite TailWind CSS styling. 
+          continue;
+
+        }
+
+
         const { mouse, scroll } = multipliers[id];
         elem.style.transform = `translate(${mouseX * mouse}px, ${mouseY * mouse}px) translateY(-${scrollY * scroll}px)`;
         elem.style.willChange = 'transform'; // Ensure GPU acceleration
