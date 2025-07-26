@@ -10,12 +10,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // Initialize document height and window height
   let docHeight = document.body.scrollHeight;
   let winHeight = window.innerHeight;
+  let winWidth = window.innerWidth;
   let winScrollY = window.scrollY;
 
   window.addEventListener("resize", () => {
     // Update dimensions on resize
     docHeight = document.body.scrollHeight;
     winHeight = window.innerHeight;
+    winWidth = window.innerWidth;
     winScrollY = window.scrollY;
   });
 
@@ -33,9 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Mouse and scroll event listeners
   document.addEventListener("mousemove", function (e) {
     targetMouseX =
-      (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+      (e.clientX - winWidth / 2) / (winWidth/ 2);
     targetMouseY =
-      (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+      (e.clientY - winHeight / 2) / (winHeight / 2);
   });
 
   window.addEventListener("scroll", function () {
