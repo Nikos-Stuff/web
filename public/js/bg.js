@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const easing = 0.075;
 
   // Initialize document height and window height
-  let docHeight = document.body.scrollHeight;
+  const docHeight = document.body.scrollHeight;
   let winHeight = window.innerHeight;
   let winWidth = window.innerWidth;
   let winScrollY = window.scrollY;
@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(() => {
-      docHeight = document.body.scrollHeight;
       winHeight = window.innerHeight;
       winWidth = window.innerWidth;
       winScrollY = window.scrollY;
