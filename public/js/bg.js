@@ -7,11 +7,12 @@ document.addEventListener("DOMContentLoaded", function () {
     targetScrollY = 0;
   const easing = 0.075;
 
-  // Initialize document height and window height
-  const docHeight = document.body.scrollHeight;
-  let winHeight = window.innerHeight;
-  let winWidth = window.innerWidth;
-  let winScrollY = window.scrollY;
+  // We now declare these variables without a value
+  // and will initialize them after all styles are applied.
+  let docHeight;
+  let winHeight;
+  let winWidth;
+  let winScrollY;
 
   // Handle window resize events to update dimensions
   let resizeTimeout;
@@ -161,7 +162,23 @@ document.addEventListener("DOMContentLoaded", function () {
     return positions.join(", ");
   }
 
-  document.addEventListener("astro:after-swap", initBG);
-  initBG();
-  updateParallax(); // Start the parallax effect
+  // New initialization function
+  function initializeParallax() {
+    initBG(); // First, apply all the styles that change layout.
+    // Now, after all layout changes are complete, we read the dimensions.
+    docHeight = document.body.scrollHeight;
+    winHeight = window.innerHeight;
+    winWidth = window.innerWidth;
+    winScrollY = window.scrollY;
+
+    updateParallax(); // Now we can safely start the animation loop.
+  }
+
+  // document.addEventListener("astro:after-swap", initBG); // Original call
+  // initBG(); // Original call
+  // updateParallax(); // Original call
+
+  // Use the new initialization function instead of the old calls
+  document.addEventListener("astro:after-swap", initializeParallax);
+  initializeParallax();
 });
