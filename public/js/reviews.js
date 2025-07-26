@@ -89,11 +89,15 @@ function run() {
     const review = reviews[nextIndex];
 
     // Swap icon with animation class
-    iconEl.classList.remove("flip-in-hor-bottom", "flip-out-hor-top");
-
+    iconEl.classList.remove("flip-in-hor-bottom");
+    iconEl.classList.remove("flip-out-hor-top");
+    
+    
     requestAnimationFrame(() => {
       iconEl.classList.add("flip-in-hor-bottom");
     });
+
+    iconEl.innerHTML = review.icon;
 
     // Animate text
     typeText(nameEl, review.name, 50, () => {
