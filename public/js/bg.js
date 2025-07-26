@@ -7,6 +7,18 @@ document.addEventListener("DOMContentLoaded", function () {
     targetScrollY = 0;
   const easing = 0.075;
 
+  // Initialize document height and window height
+  let docHeight = document.body.scrollHeight;
+  let winHeight = window.innerHeight;
+  let winScrollY = window.scrollY;
+
+  window.addEventListener("resize", () => {
+    // Update dimensions on resize
+    docHeight = document.body.scrollHeight;
+    winHeight = window.innerHeight;
+    winScrollY = window.scrollY;
+  });
+
   // Parallax multipliers for particles and stars
   const multipliers = {
     particles1: { mouse: 3, scroll: 0.05 },
@@ -27,7 +39,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   window.addEventListener("scroll", function () {
-    targetScrollY = window.scrollY;
+    winScrollY = window.scrollY; // update cached scroll position
+    targetScrollY = winScrollY; // set the easing target to the latest scroll pos
   });
 
   function ease(current, target, easeFactor) {
@@ -52,21 +65,12 @@ document.addEventListener("DOMContentLoaded", function () {
     for (const [id, elem] of Object.entries(elements)) {
       if (elem) {
         if (id === "pod") {
-          // POD is an image, lets make sure we dont scroll it too much in Y space resultubg black space
-          // const podRect = elem.getBoundingClientRect();
-          // const podHeight = podRect.height;
-          // const maxScrollY = podHeight // Full height of the pod image test
-          // const limitedScrollY = Math.min(scrollY, maxScrollY);
-          // scrollY = limitedScrollY; // Apply the limited scroll effect for the pod
-
-          // Another test - Based on scroll scale
-
           const maxScale = 1.3;
           const maxRotation = 10;
           const scrollFraction = Math.min(
             1,
-            window.scrollY / (document.body.scrollHeight - window.innerHeight)
-          ); // Not sure if this will work.
+            winScrollY / (docHeight - winHeight)
+          ); // Calculate scroll fraction
           const podScale = 1 + (maxScale - 1) * scrollFraction;
 
           elem.style.transform = `translate(${
@@ -75,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
             maxRotation * scrollFraction
           }deg)`;
           elem.style.willChange = "transform"; // Ensure GPU acceleration
-          elem.style.transition = "transform 1s ease-out"; // Again not sure if this will not bite TailWind CSS styling.
+          // elem.style.transition = "transform 1s ease-out"; // Again not sure if this will not bite TailWind CSS styling.
           continue;
         }
 
