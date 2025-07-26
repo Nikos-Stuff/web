@@ -1,4 +1,4 @@
-const quotes_json = "loading_quotes.json";
+const quotes_json = "/loading_quotes.json";
 
 function fetchQuotes() {
   fetch(quotes_json)
