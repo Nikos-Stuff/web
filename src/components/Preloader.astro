@@ -1,0 +1,65 @@
+---
+
+---
+
+<div
+  id="preloader"
+  class="fixed inset-0 backdrop-blur-3xl backdrop-brightness-0 z-50 transition-opacity duration-1000 ease-out opacity-100 pointer-events-auto"
+>
+  <div class="flex items-center justify-center h-full">
+    <div class="loader flex flex-col items-center justify-center m-20">
+      <svg
+        class="animate-spin h-12 w-12 mb-3 fill-white"
+        viewBox="0 -960 960 960"
+      >
+        <path
+          d="M479.98-116q-74.81 0-141.26-27.84-66.44-27.84-116.74-78.14t-78.14-116.69Q116-405.06 116-480.15q0-75.09 28-141.47T222-738q50-50 116.6-78 66.59-28 141.4-28 7.93 0 12.96 4.77 5.04 4.78 5.04 12.58 0 7.81-5.04 12.73Q487.93-809 480-809q-136.75 0-232.88 96.17-96.12 96.18-96.12 233Q151-343 247.17-247q96.18 96 233 96Q617-151 713-247.12q96-96.13 96-232.88 0-7.98 4.96-12.99 4.95-5.01 12.76-5.01t12.54 5.04Q844-487.93 844-480q0 74.81-28 141.4Q788-272 738-222t-116.6 78q-66.61 28-141.42 28Z"
+        ></path>
+      </svg>
+      <span class="text-sm font-mono italic text-white wrap-anywhere text-center">...</span>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  var quotes_json =
+    "https://gist.githubusercontent.com/nasrulhazim/54b659e43b1035215cd0ba1d4577ee80/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json";
+
+  // Formatting of the json:
+  // {
+  // 	"quotes": [
+
+  // {
+  //        "quote":"Life isn’t about getting and having, it’s about giving and being.","author":"Kevin Kruse"},
+  // {
+  // ....
+
+  function fetchQuotes() {
+    fetch(quotes_json)
+      .then((response) => response.json())
+      .then((data) => {
+        const quotes = data.quotes;
+        const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+        document.querySelector(".loader span").textContent =
+          `"${randomQuote.quote}" - ${randomQuote.author}`;
+      })
+      .catch((error) => {
+        console.error("Error fetching quotes:", error);
+        document.querySelector(".loader span").textContent =
+          "Failed to load quote.";
+      });
+  }
+
+  // AFter page loads, hide the preloader
+  fetchQuotes();
+  window.addEventListener("load", () => {
+    const preloader = document.getElementById("preloader");
+    preloader.style.opacity = "0";
+    preloader.style.pointerEvents = "none";
+
+    // Optional: Remove the element after the fade-out is done
+    setTimeout(() => {
+      preloader.remove();
+    }, 1000); // Matches the transition duration
+  });
+</script>
