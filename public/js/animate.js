@@ -1,4 +1,10 @@
+let executed = false;
+
+
 function animateOnView() {
+  if (executed) return; 
+  executed = true; 
+  
   const animateElements = document.querySelectorAll(".animate");
 
   const observer = new IntersectionObserver(
