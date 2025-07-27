@@ -9,6 +9,7 @@ import Accordion from "@components/Accordion.astro";
 import TitleHeader from "@components/TitleHeader.astro";
 import OpenPopup from "@components/StripePopup.astro";
 import FancyDiv from "@components/FancyDiv.astro";
+import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 ---
 
 <PageLayout title="Pricing" description={SITE.DESCRIPTION}>
@@ -34,7 +35,8 @@ import FancyDiv from "@components/FancyDiv.astro";
     </div>
   </div>
 
-  <script is:inline defer src="/js/bg.js"></script>
+  <!-- <script is:inline defer src="/js/bg.js"></script> -->
+  <BackgroundFX/>
 
   <!-- HERO -->
   <section

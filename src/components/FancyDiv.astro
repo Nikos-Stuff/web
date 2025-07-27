@@ -1,5 +1,9 @@
 ---
-const { isAnimated = false, margin_bottom = "10", class: extraClass = "" } = Astro.props;
+const {
+  isAnimated = false,
+  margin_bottom = "10",
+  class: extraClass = "",
+} = Astro.props;
 
 const validMargins: Record<string, string> = {
   "0": "mb-0",
@@ -11,15 +15,17 @@ const validMargins: Record<string, string> = {
 };
 
 const marginBottom = validMargins[String(margin_bottom)] ?? "mb-10";
-const isAnimatedClass = isAnimated === true ? "cursor_follow" : "";
 ---
 
 <div
   class={`
-    ${isAnimatedClass} mx-auto max-w-screen-sm p-5 ${marginBottom} space-y-24 backdrop-blur-2xl 
+    mx-auto max-w-screen-sm p-5 ${marginBottom} space-y-24 backdrop-blur-2xl 
     backdrop-brightness-150 dark:backdrop-brightness-50 sm:rounded-2xl animate sm:border border-t border-b
     border-black/25 dark:border-white/25 ${extraClass}
     `}
+  {...isAnimated
+    ? { "data-cursor-hover": true, "data-cursor-parallax": true }
+    : {}}
 >
   <slot />
 </div>

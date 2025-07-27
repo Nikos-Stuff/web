@@ -4,6 +4,7 @@ import { SITE } from "@consts";
 import MeteorShower from "../../components/MeteorShower.astro";
 import TwinklingStars from "../../components/TwinklingStars.astro";
 import PriceTitle from "../../components/DownloadsHeader.astro";
+import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 ---
 
 <PageLayout title="Downloads" description={SITE.DESCRIPTION}>
@@ -29,7 +30,8 @@ import PriceTitle from "../../components/DownloadsHeader.astro";
     </div>
   </div>
 
-  <script is:inline defer src="/js/bg.js"></script>
+  <!-- <script is:inline defer src="/js/bg.js"></script> -->
+  <BackgroundFX/>
 
   <!-- HERO -->
   <section class="relative h-[400px] w-full overflow-hidden">

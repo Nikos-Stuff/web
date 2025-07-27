@@ -1,154 +1,114 @@
 <section class="relative bg-white dark:bg-black">
-    <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
-        <article>
-            <span class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white">
-                Proces realizacji zamówienia
-            </span>
+  <div
+    id="timeline_container"
+    class="mx-auto max-w-screen pb-16 overflow-hidden relative"
+  >
+    <div id="slideshow_root" class="relative h-svh w-full text-center">
+      <section
+        class="slide_element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-5"
+      >
+        <p class="text-xl border p-2 mb-5 rounded-lg">Dzień 1</p>
+        <p class="text-2xl sm:text-4xl font-semibold mb-0">Wstępna konsultacja</p>
+        <p class="max-w-xl text-center mt-0">
+          Rozmowa mająca na celu zrozumienie wizji i celów projektu, aby jak
+          najlepiej dopasować rozwiązania.
+        </p>
+      </section>
 
-            <div class="absolute left-1/2 top-16 bottom-0 w-[0.15rem] bg-gray-300 dark:bg-gray-600 transform -translate-x-1/2 rounded-full"  data-animate="slideDown"></div>
+      <section
+        class="slide_element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-5"
+      >
+        <p class="text-xl border p-2 mb-5 rounded-lg">Dzień 2-7</p>
+        <p class="text-2xl sm:text-4xl font-semibold mt-0 mb-0">Analiza potrzeb</p>
+        <p class="max-w-xl text-center mt-0 mb-0 p-0">
+          Szczegółowa analiza wymagań, tworzenie koncepcji UI oraz animowany
+          podgląd projektu.
+        </p>
+      </section>
 
-            <!-- Etap 1 -->
-            <div class="flex items-center justify-start">
-                <!-- Lewa strona -->
-                <div class="w-full sm:w-1/2 text-right pr-8 group">
-                    <div class="group-hover:scale-105 transition-all duration-300 ease-in-out">
-                        <p class="text-xl font-bold mb-0">
-                            Dzień 1<br />
-                            Wstępna konsultacja
-                        </p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-0">
-                            Rozmowa mająca na celu zrozumienie wizji i celów projektu, aby jak najlepiej dopasować rozwiązania.
-                        </p>
-                    </div>
-                </div>
-                <!-- Kółko z numerem -->
-                <div class="w-12 h-12 bg-gray-500 rounded-full border-4 border-white dark:border-black flex items-center justify-center text-white font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
-                    1
-                </div>
-                <!-- Pusta przestrzeń -->
-                <div class="w-full sm:w-1/2"></div>
-            </div>
+      <section
+        class="slide_element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-5"
+      >
+        <p class="text-xl border p-2 mb-5 rounded-lg">Dzień 8-21</p>
+        <p class="text-2xl sm:text-4xl font-semibold mt-0 mb-0">
+          Projektowanie i optymalizacja
+        </p>
+        <p class="max-w-xl text-center mt-0 mb-0 p-0">
+          Dopracowanie projektu, optymalizacja wydajności oraz wprowadzanie
+          poprawek na podstawie opinii.
+        </p>
+      </section>
 
-            <!-- Etap 2 -->
-            <div class="flex items-center justify-start">
-                <!-- Pusta przestrzeń -->
-                <div class="w-full sm:w-1/2"></div>
-                <!-- Kółko z numerem -->
-                <div class="w-12 h-12 bg-gray-500 rounded-full border-4 border-white dark:border-black flex items-center justify-center text-white font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
-                    2
-                </div>
-                <!-- Prawa strona -->
-                <div class="w-full sm:w-1/2 text-left pl-8 group">
-                    <div class="group-hover:scale-105 transition-all duration-300 ease-in-out">
-                        <p class="text-xl font-bold mb-0">
-                            Dzień 2-7<br />
-                            Analiza potrzeb
-                        </p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-0">
-                            Szczegółowa analiza wymagań, tworzenie koncepcji UI oraz animowany podgląd projektu.
-                        </p>
-                    </div>
-                </div>
-            </div>
+      <section
+        class="slide_element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-5"
+      >
+        <p class="text-xl border p-2 mb-5 rounded-lg">Dzień 22-30</p>
+        <p class="text-2xl sm:text-4xl font-semibold mt-0 mb-0">
+          Ostatnie poprawki i przekazanie projektu
+        </p>
+        <p class="max-w-xl text-center mt-0 mb-0 p-0">
+          Finalizacja projektu, dostarczenie instrukcji obsługi oraz sugestie
+          dotyczące dalszego rozwoju marki.
+        </p>
+      </section>
 
-            <!-- Etap 3 -->
-            <div class="flex items-center justify-start">
-                <!-- Lewa strona -->
-                <div class="w-full sm:w-1/2 text-right pr-8 group">
-                    <div class="group-hover:scale-105 transition-all duration-300 ease-in-out">
-                        <p class="text-xl font-bold mb-0">
-                            Dzień 8-21<br />
-                            Projektowanie i optymalizacja
-                        </p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-0">
-                            Dopracowanie projektu, optymalizacja wydajności oraz wprowadzanie poprawek na podstawie opinii.
-                        </p>
-                    </div>
-                </div>
-                <!-- Kółko z numerem -->
-                <div class="w-12 h-12 bg-gray-500 rounded-full border-4 border-white dark:border-black flex items-center justify-center text-white font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
-                    3
-                </div>
-                <!-- Pusta przestrzeń -->
-                <div class="w-full sm:w-1/2"></div>
-            </div>
-
-            <!-- Etap 4 -->
-            <div class="flex items-center justify-start">
-                <!-- Pusta przestrzeń -->
-                <div class="w-full sm:w-1/2"></div>
-                <!-- Kółko z numerem -->
-                <div class="w-12 h-12 bg-gray-500 rounded-full border-4 border-white dark:border-black flex items-center justify-center text-white font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
-                    4
-                </div>
-                <!-- Prawa strona -->
-                <div class="w-full sm:w-1/2 text-left pl-8 group">
-                    <div class="group-hover:scale-105 transition-all duration-300 ease-in-out">
-                        <p class="text-xl font-bold mb-0">
-                            Dzień 22-30<br />
-                            Ostatnie poprawki i przekazanie projektu
-                        </p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-0">
-                            Finalizacja projektu, dostarczenie instrukcji obsługi oraz sugestie dotyczące dalszego rozwoju marki.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Etap 5 -->
-            <div class="flex items-center justify-start">
-                <!-- Lewa strona -->
-                <div class="w-full sm:w-1/2 text-right pr-8 group">
-                    <div class="group-hover:scale-105 transition-all duration-300 ease-in-out">
-                        <p class="text-xl font-bold mb-0">
-                            Dzień 31<br />
-                            Projekt jest Twój!
-                        </p>
-                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-0">
-                            A teraz pomyślmy o przyszłości projektu!
-                        </p>
-                    </div>
-                </div>
-                <!-- Kółko z numerem -->
-                <div class="w-12 h-12 bg-gray-500 rounded-full border-4 border-white dark:border-black flex items-center justify-center text-white font-semibold text-lg absolute left-1/2 transform -translate-x-1/2">
-                    5
-                </div>
-                <!-- Pusta przestrzeń -->
-                <div class="w-full sm:w-1/2"></div>
-            </div>
-        </article>
+      <section
+        class="slide_element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-5"
+      >
+        <p class="text-xl border p-2 mb-5 rounded-lg">Dzień 31</p>
+        <p class="text-2xl sm:text-4xl font-semibold mt-0 mb-0">Projekt jest Twój!</p>
+        <p class="max-w-xl text-center mt-0 mb-0 p-0">
+          A teraz pomyślmy o przyszłości projektu!
+        </p>
+      </section>
     </div>
+  </div>
 </section>
 
 
-<style>
-    @keyframes slideDown {
-      0% {
-        height: 0;
-      }
-      100% {
-        height: 90%;
-      }
-    }
-    
-    .animate-slideDown {
-      animation: slideDown 5s ease-in-out forwards;
-    }
-</style>
-
 <script>
-    // Observe elements with the data-animate attribute
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-slideDown');
-                observer.unobserve(entry.target); // Stop observing once animated
-            }
-        });
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector<HTMLElement>("#timeline_container");
+    const wrapper = document.querySelector<HTMLElement>("#slideshow_root");
+    const slides = gsap.utils.toArray(".slide_element") as gsap.DOMTarget[];
+
+    if (!container || !wrapper || slides.length === 0) return;
+
+    const scrollLength = 100 * slides.length;
+
+    // Position slides absolutely, stacked
+    slides.forEach((slide) => {
+      gsap.set(slide, { position: "absolute", top: 0, left: 0 });
     });
 
-    // Select elements to observe
-    document.querySelectorAll('[data-animate="slideDown"]').forEach((el) => {
-        observer.observe(el);
+    const tl = gsap.timeline({
+			scrollTrigger: {
+				trigger: container,
+				start: "top top",
+				end: "+=" + scrollLength + "%",
+				scrub: 0.5,
+				pin: wrapper,
+				pinSpacing: true,
+				markers: false
+			},
     });
+
+    slides.forEach((slide, i) => {
+      const enter = { autoAlpha: 1, y: 0, duration: 0.5 };
+      const leave = { autoAlpha: 0, y: -100, duration: 0.5 };
+
+      gsap.set(slide, { autoAlpha: 0, y: 100 });
+
+      tl.to(slide, enter, i);
+      if (i < slides.length - 1) {
+        tl.to(slide, leave, i + 0.75);
+      }
+    });
+  });
 </script>
+

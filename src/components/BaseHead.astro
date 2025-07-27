@@ -10,6 +10,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = "/open-graph.jpg" } = Astro.props;
 
 // import { ViewTransitions } from  "astro:transitions"
+import CursorEffect from '@components/page_effects/CursorHoverEffect.astro';
+import PageAnimations from '@components/page_effects/CustomAnimations.astro';
 ---
 
 <!-- Global Metadata -->
@@ -69,15 +71,10 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props;
 <!-- Global Scripts -->
 <script defer is:inline data-cfasync="false" src="/js/theme.js"></script>
 <script defer is:inline src="/js/scroll.js"></script>
-<script
-  defer
-  is:inline
-  data-astro-rerun
-  async
-  data-cfasync="false"
-  src="/js/animate.js"></script>
 <script defer is:inline src="/js/copy.js"></script>
-<script defer is:inline src="/js/cursor_snap.js"></script>
+
+<PageAnimations/>
+<CursorEffect/>
 <!--<script is:inline async src="/js/bg.js"/>-->
 <!--<script is:inline data-astro-rerun async src="/js/typewriter.js"/>-->
 

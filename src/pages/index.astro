@@ -15,6 +15,7 @@ import FancyDiv from "@components/FancyDiv.astro";
 import Reviews from "@components/Reviews.astro";
 
 import DynamicTitle from "@components/TitleHeader.astro";
+import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -131,7 +132,8 @@ try {
     </div>
   </div>
 
-  <script is:inline defer src="/js/bg.js"></script>
+  <!-- <script is:inline defer src="/js/bg.js"></script> -->
+   <BackgroundFX/>
   <!-- HERO -->
   <section
     id="hero_fade"

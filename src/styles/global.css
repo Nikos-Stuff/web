@@ -127,17 +127,7 @@ article {
   }
 }
 
-/** styles for public /animation.js */
-.animate {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1s ease, transform 1s ease;
-}
-
-.animate.show {
-  opacity: 1;
-  transform: translateY(0);
-}
+/** No more .animate - Been replaced with the new gsap astro component */
 
 article img {
   padding-top: 20px;

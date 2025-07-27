@@ -1,0 +1,63 @@
+<script>
+	import { gsap, Power2 } from "gsap";
+
+	function init() {
+		const isTouchDevice = window.matchMedia("(hover: none)").matches;
+
+		if (isTouchDevice) return;
+
+		var mouse = { x: 0, y: 0 };
+		var pos = { x: 0, y: 0 };
+		var ratio = 0.65;
+
+		document.addEventListener("mousemove", mouseMove);
+
+		function updatePosition() {
+			pos.x += (mouse.x - pos.x) * ratio;
+			pos.y += (mouse.y - pos.y) * ratio;
+		}
+
+		function mouseMove(e: MouseEvent) {
+			var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+			mouse.x = e.pageX;
+			mouse.y = e.pageY - scrollTop;
+		}
+
+		gsap.ticker.add(updatePosition);
+
+		let parallaxWraps = document.querySelectorAll("[data-cursor-hover]");
+
+		parallaxWraps.forEach(function (wrap) {
+			function magneticElement(e: MouseEvent, target: HTMLElement, movement: number) {
+				var boundingRect = target.getBoundingClientRect();
+				var relX = e.pageX - boundingRect.left;
+				var relY = e.pageY - boundingRect.top;
+				var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+				gsap.to(target, {
+					duration: 0.3,
+					x: ((relX - boundingRect.width / 2) / boundingRect.width) * movement,
+					y: ((relY - boundingRect.height / 2 - scrollTop) / boundingRect.height) * movement,
+					ease: Power2.easeOut,
+				});
+			}
+
+
+			wrap.addEventListener("mouseleave", function (e) {
+
+				if (wrap && wrap.hasAttribute("data-cursor-parallax")) {
+					gsap.to(wrap, { duration: 0.3, scale: 1, x: 0, y: 0 });
+				}
+			});
+
+			wrap.addEventListener("mousemove", function (e) {
+				if (wrap && wrap.hasAttribute("data-cursor-parallax")) {
+					magneticElement(e as MouseEvent, wrap as HTMLElement, 10);
+				}
+			});
+		});
+	}
+
+	document.removeEventListener("DOMContentLoaded", init); // astro:page-load
+	document.addEventListener("DOMContentLoaded", init); // astro:page-load
+</script>
