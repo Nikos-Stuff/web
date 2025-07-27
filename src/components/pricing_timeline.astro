@@ -1,63 +1,56 @@
 <section class="relative bg-white dark:bg-black">
-  <div
-    id="timeline_container"
-    class="mx-auto max-w-screen pb-16 overflow-hidden relative"
-  >
-    <div id="slideshow_root" class="relative h-svh w-full text-center">
-      <section
-        class="slide_element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-5"
-      >
-        <p class="text-xl border p-2 mb-5 rounded-lg">Dzień 1</p>
-        <p class="text-2xl sm:text-4xl font-semibold mb-0">Wstępna konsultacja</p>
-        <p class="max-w-xl text-center mt-0">
+  <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16">
+    <div id="slideshow_root" class="relative text-center space-y-16">
+      <section class="slide_element px-5">
+        <p class="text-xl border p-2 mb-5 rounded-lg inline-block">Dzień 1</p>
+        <p class="text-2xl sm:text-4xl font-semibold mb-0">
+          Wstępna konsultacja
+        </p>
+        <p class="max-w-xl mx-auto mt-0">
           Rozmowa mająca na celu zrozumienie wizji i celów projektu, aby jak
           najlepiej dopasować rozwiązania.
         </p>
       </section>
-
-      <section
-        class="slide_element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-5"
-      >
-        <p class="text-xl border p-2 mb-5 rounded-lg">Dzień 2-7</p>
-        <p class="text-2xl sm:text-4xl font-semibold mt-0 mb-0">Analiza potrzeb</p>
-        <p class="max-w-xl text-center mt-0 mb-0 p-0">
+      <section class="slide_element px-5">
+        <p class="text-xl border p-2 mb-5 rounded-lg inline-block">Dzień 2-7</p>
+        <p class="text-2xl sm:text-4xl font-semibold mt-0 mb-0">
+          Analiza potrzeb
+        </p>
+        <p class="max-w-xl mx-auto mt-0 mb-0 p-0">
           Szczegółowa analiza wymagań, tworzenie koncepcji UI oraz animowany
           podgląd projektu.
         </p>
       </section>
-
-      <section
-        class="slide_element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-5"
-      >
-        <p class="text-xl border p-2 mb-5 rounded-lg">Dzień 8-21</p>
+      <section class="slide_element px-5">
+        <p class="text-xl border p-2 mb-5 rounded-lg inline-block">
+          Dzień 8-21
+        </p>
         <p class="text-2xl sm:text-4xl font-semibold mt-0 mb-0">
           Projektowanie i optymalizacja
         </p>
-        <p class="max-w-xl text-center mt-0 mb-0 p-0">
+        <p class="max-w-xl mx-auto mt-0 mb-0 p-0">
           Dopracowanie projektu, optymalizacja wydajności oraz wprowadzanie
           poprawek na podstawie opinii.
         </p>
       </section>
-
-      <section
-        class="slide_element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-5"
-      >
-        <p class="text-xl border p-2 mb-5 rounded-lg">Dzień 22-30</p>
+      <section class="slide_element px-5">
+        <p class="text-xl border p-2 mb-5 rounded-lg inline-block">
+          Dzień 22-30
+        </p>
         <p class="text-2xl sm:text-4xl font-semibold mt-0 mb-0">
           Ostatnie poprawki i przekazanie projektu
         </p>
-        <p class="max-w-xl text-center mt-0 mb-0 p-0">
+        <p class="max-w-xl mx-auto mt-0 mb-0 p-0">
           Finalizacja projektu, dostarczenie instrukcji obsługi oraz sugestie
           dotyczące dalszego rozwoju marki.
         </p>
       </section>
-
-      <section
-        class="slide_element absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center px-5"
-      >
-        <p class="text-xl border p-2 mb-5 rounded-lg">Dzień 31</p>
-        <p class="text-2xl sm:text-4xl font-semibold mt-0 mb-0">Projekt jest Twój!</p>
-        <p class="max-w-xl text-center mt-0 mb-0 p-0">
+      <section class="slide_element px-5">
+        <p class="text-xl border p-2 mb-5 rounded-lg inline-block">Dzień 31</p>
+        <p class="text-2xl sm:text-4xl font-semibold mt-0 mb-0">
+          Projekt jest Twój!
+        </p>
+        <p class="max-w-xl mx-auto mt-0 mb-0 p-0">
           A teraz pomyślmy o przyszłości projektu!
         </p>
       </section>
@@ -65,50 +58,27 @@
   </div>
 </section>
 
-
 <script>
-  import { gsap } from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
-  document.addEventListener("DOMContentLoaded", () => {
-    const container = document.querySelector<HTMLElement>("#timeline_container");
-    const wrapper = document.querySelector<HTMLElement>("#slideshow_root");
-    const slides = gsap.utils.toArray(".slide_element") as gsap.DOMTarget[];
+// Get all animated elements
+let animatedStuff = document.querySelectorAll(".slide_element");
 
-    if (!container || !wrapper || slides.length === 0) return;
-
-    const scrollLength = 100 * slides.length;
-
-    // Position slides absolutely, stacked
-    slides.forEach((slide) => {
-      gsap.set(slide, { position: "absolute", top: 0, left: 0 });
+animatedStuff.forEach((element) => {
+      gsap.from(element, {
+        opacity: 0.5,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: element,
+          start: "top center", 
+          end: "bottom 40%",
+          toggleActions: "play reverse play reverse",
+         // markers: true, 
+        },
+      });
     });
-
-    const tl = gsap.timeline({
-			scrollTrigger: {
-				trigger: container,
-				start: "top top",
-				end: "+=" + scrollLength + "%",
-				scrub: 0.5,
-				pin: wrapper,
-				pinSpacing: true,
-				markers: false
-			},
-    });
-
-    slides.forEach((slide, i) => {
-      const enter = { autoAlpha: 1, y: 0, duration: 0.5 };
-      const leave = { autoAlpha: 0, y: -100, duration: 0.5 };
-
-      gsap.set(slide, { autoAlpha: 0, y: 100 });
-
-      tl.to(slide, enter, i);
-      if (i < slides.length - 1) {
-        tl.to(slide, leave, i + 0.75);
-      }
-    });
-  });
 </script>
-

@@ -43,7 +43,7 @@
 			}
 
 
-			wrap.addEventListener("mouseleave", function (e) {
+			wrap.addEventListener("mouseleave", function () {
 
 				if (wrap && wrap.hasAttribute("data-cursor-parallax")) {
 					gsap.to(wrap, { duration: 0.3, scale: 1, x: 0, y: 0 });
