@@ -1,63 +1,108 @@
 <script>
-	import { gsap, Power2 } from "gsap";
+  import { gsap, Power2 } from "gsap";
 
-	function init() {
-		const isTouchDevice = window.matchMedia("(hover: none)").matches;
+  // Initialize the magnetic effect
+  function init() {
+    const isTouchDevice = window.matchMedia("(hover: none)").matches;
 
-		if (isTouchDevice) return;
+    // Immediately return if it's a touch device, as this effect is mouse-based.
+    if (isTouchDevice) return;
 
-		var mouse = { x: 0, y: 0 };
-		var pos = { x: 0, y: 0 };
-		var ratio = 0.65;
+    // Use gsap.matchMedia() to handle the responsive behavior.
+    let mm = gsap.matchMedia();
 
-		document.addEventListener("mousemove", mouseMove);
+    mm.add("(min-width: 768px)", () => {
+      // These variables and functions are now scoped to the large-screen media query.
+      var mouse = { x: 0, y: 0 };
+      var pos = { x: 0, y: 0 };
+      var ratio = 0.65;
 
-		function updatePosition() {
-			pos.x += (mouse.x - pos.x) * ratio;
-			pos.y += (mouse.y - pos.y) * ratio;
-		}
+      var parallaxWraps = document.querySelectorAll("[data-cursor-hover]");
 
-		function mouseMove(e: MouseEvent) {
-			var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-			mouse.x = e.pageX;
-			mouse.y = e.pageY - scrollTop;
-		}
+      function updatePosition() {
+        pos.x += (mouse.x - pos.x) * ratio;
+        pos.y += (mouse.y - pos.y) * ratio;
+      }
 
-		gsap.ticker.add(updatePosition);
+      function mouseMove(e: MouseEvent) {
+        var scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        mouse.x = e.pageX;
+        mouse.y = e.pageY - scrollTop;
+      }
 
-		let parallaxWraps = document.querySelectorAll("[data-cursor-hover]");
+      function magneticElement(
+        e: MouseEvent,
+        target: HTMLElement,
+        movement: number
+      ) {
+        var boundingRect = target.getBoundingClientRect();
+        var relX = e.pageX - boundingRect.left;
+        var relY = e.pageY - boundingRect.top;
+        var scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
 
-		parallaxWraps.forEach(function (wrap) {
-			function magneticElement(e: MouseEvent, target: HTMLElement, movement: number) {
-				var boundingRect = target.getBoundingClientRect();
-				var relX = e.pageX - boundingRect.left;
-				var relY = e.pageY - boundingRect.top;
-				var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        gsap.to(target, {
+          duration: 0.3,
+          x: ((relX - boundingRect.width / 2) / boundingRect.width) * movement,
+          y:
+            ((relY - boundingRect.height / 2 - scrollTop) /
+              boundingRect.height) *
+            movement,
+          ease: Power2.easeOut,
+        });
+      }
 
-				gsap.to(target, {
-					duration: 0.3,
-					x: ((relX - boundingRect.width / 2) / boundingRect.width) * movement,
-					y: ((relY - boundingRect.height / 2 - scrollTop) / boundingRect.height) * movement,
-					ease: Power2.easeOut,
-				});
-			}
+      // We need to define the handlers separately so we can remove them later.
+      const mouseleaveHandlers = new Map();
+      const mousemoveHandlers = new Map();
 
+      // Set up the listeners and tweens
+      document.addEventListener("mousemove", mouseMove);
+      gsap.ticker.add(updatePosition);
 
-			wrap.addEventListener("mouseleave", function () {
+      parallaxWraps.forEach(function (wrap: Element) {
+        const mouseleaveHandler = () => {
+          if (wrap && wrap.hasAttribute("data-cursor-parallax")) {
+            gsap.to(wrap, { duration: 0.3, scale: 1, x: 0, y: 0 });
+          }
+        };
 
-				if (wrap && wrap.hasAttribute("data-cursor-parallax")) {
-					gsap.to(wrap, { duration: 0.3, scale: 1, x: 0, y: 0 });
-				}
-			});
+        const mousemoveHandler = (e: MouseEvent) => {
+          if (wrap && wrap.hasAttribute("data-cursor-parallax")) {
+            magneticElement(e, wrap as HTMLElement, 10);
+          }
+        };
 
-			wrap.addEventListener("mousemove", function (e) {
-				if (wrap && wrap.hasAttribute("data-cursor-parallax")) {
-					magneticElement(e as MouseEvent, wrap as HTMLElement, 10);
-				}
-			});
-		});
-	}
+        (wrap as HTMLElement).addEventListener("mouseleave", mouseleaveHandler);
+        (wrap as HTMLElement).addEventListener("mousemove", mousemoveHandler);
 
-	document.removeEventListener("DOMContentLoaded", init); // astro:page-load
-	document.addEventListener("DOMContentLoaded", init); // astro:page-load
+        // Store the handlers in the maps to make them easy to remove.
+        mouseleaveHandlers.set(wrap, mouseleaveHandler);
+        mousemoveHandlers.set(wrap, mousemoveHandler);
+      });
+
+      // This is the cleanup function that runs when the media query no longer matches.
+      return () => {
+        // Remove the event listeners to prevent memory leaks and unexpected behavior.
+        document.removeEventListener("mousemove", mouseMove);
+        gsap.ticker.remove(updatePosition);
+
+        parallaxWraps.forEach(function (wrap: Element) {
+          const leaveHandler = mouseleaveHandlers.get(wrap);
+          const moveHandler = mousemoveHandlers.get(wrap);
+
+          if (leaveHandler)
+            wrap.removeEventListener("mouseleave", leaveHandler);
+          if (moveHandler) wrap.removeEventListener("mousemove", moveHandler);
+        });
+
+        // Kill any animations that might still be running.
+        gsap.killTweensOf(parallaxWraps);
+      };
+    });
+  }
+
+  // Call the function once on initial load.
+  document.addEventListener("DOMContentLoaded", init);
 </script>
