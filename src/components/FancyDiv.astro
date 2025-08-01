@@ -1,6 +1,7 @@
 ---
 const {
   isAnimated = false,
+  theme = "default",
   margin_bottom = "10",
   class: extraClass = "",
 } = Astro.props;
@@ -15,17 +16,39 @@ const validMargins: Record<string, string> = {
 };
 
 const marginBottom = validMargins[String(margin_bottom)] ?? "mb-10";
----
 
-<div
-  class={`
+// Universal themes
+const themeVariants: Record<string, string> = {
+  default: `
     mx-auto max-w-screen-sm p-5 ${marginBottom} space-y-24 backdrop-blur-2xl 
     backdrop-brightness-150 dark:backdrop-brightness-50 sm:rounded-2xl animate sm:border border-t border-b
     border-black/25 dark:border-white/25 ${extraClass}
-    `}
-  {...isAnimated
+  `,
+
+  minecraft: `
+    mx-auto max-w-screen-sm p-5 ${marginBottom} space-y-24 backdrop-blur-2xl 
+    backdrop-brightness-150 dark:backdrop-brightness-50 sm:rounded-none animate sm:border border-t border-b
+    border-black/25 dark:border-white/25 ${extraClass}
+    dark:bg-[#00170d]/50
+    dark:bg-[radial-gradient(#ffffff33_1px,transparent_1px)]
+    bg-[radial-gradient(#2e2e2e33_1px,transparent_1px)] bg-[size:20px_20px]
+  `,
+
+  lite: `
+    mx-auto max-w-screen-sm p-5 ${marginBottom} space-y-24
+    bg-white dark:bg-black sm:rounded-2xl animate sm:border border-t border-b
+    border-black/25 dark:border-white/25 ${extraClass}
+  `,
+};
+
+const divClass = themeVariants[theme] ?? themeVariants.default;
+---
+
+<div
+  class={divClass}
+  {...(isAnimated
     ? { "data-cursor-hover": true, "data-cursor-parallax": true }
-    : {}}
+    : {})}
 >
   <slot />
 </div>
