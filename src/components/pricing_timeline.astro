@@ -59,7 +59,7 @@
 </section>
 
 <script>
-import { gsap } from "gsap";
+import { gsap, Power2 } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -70,8 +70,9 @@ let animatedStuff = document.querySelectorAll(".slide_element");
 animatedStuff.forEach((element) => {
       gsap.from(element, {
         opacity: 0.5,
+        scale: 0.9,
         duration: 1,
-        ease: "power2.out",
+        ease: Power2.easeInOut,
         scrollTrigger: {
           trigger: element,
           start: "top center", 
