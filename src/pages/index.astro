@@ -4,7 +4,7 @@
 import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard";
-import TeamCard from "@components/TeamCard";
+// import TeamCard from "@components/TeamCard";
 import StackCard from "@components/StackCard.astro";
 import { SITE, SOCIALS } from "@consts";
 import TwinklingStars from "@components/TwinklingStars.astro";
@@ -27,9 +27,9 @@ const projects = (await getCollection("projects"))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 
-const teammembers = (await getCollection("team"))
-  .filter((teammember) => !teammember.data.draft)
-  .slice(0, 3);
+// const teammembers = (await getCollection("team"))
+//   .filter((teammember) => !teammember.data.draft)
+//   .slice(0, 3);
 
 const stack = [
   {
@@ -158,6 +158,57 @@ try {
 
   <div class="relative">
     <!-- <div class="mx-auto max-w-screen-sm p-5 space-y-24 pb-16">  -->
+
+    <FancyDiv margin_bottom="50" isAnimated={true} theme="alert">
+      <section class="animate pb-0">
+        <p class="font-semibold text-black dark:text-white">Informacja</p>
+        <p class="font-bold text-sm mb-2">Od dnia 24 sierpnia...</p>
+
+        <div class="relative pl-6">
+          <div
+            class="absolute top-0 left-2 w-1 bg-black/15 dark:bg-white/20 rounded-full h-full"
+          >
+          </div>
+          <div class="mb-8 flex items-start relative">
+            <div>
+              <p class="font-semibold">Sierpień 2025 - Przygotowania</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400 max-w-lg">
+                Wszystkie usługi, serwisy itp zostaną przygotowane do migracji.
+              </p>
+            </div>
+          </div>
+
+          <div class="mb-8 flex items-start relative">
+            <div>
+              <p class="font-semibold">Wrzesień 2025 - Migracja</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400 max-w-lg">
+                Stopniowe przenoszenie usług. Możliwe krótkie przerwy w
+                działaniu.
+              </p>
+            </div>
+          </div>
+
+          <div class="mb-8 flex items-start relative">
+            <div>
+              <p class="font-semibold">Październik 2025 - Finalizacja</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400 max-w-lg">
+                Finalne testy, usuwanie błędów, stabilizacja na nowym serwerze.
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start relative">
+            <div>
+              <p class="font-semibold">Listopad 2025 – Wydanie</p>
+              <p class="text-sm text-gray-600 dark:text-gray-400 max-w-lg">
+                Udostępnienie nowej wersji i oficjalne zakończenie procesu.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </FancyDiv>
+
     <FancyDiv margin_bottom="50" isAnimated={true}>
       <!--  About  Image Section  -->
       <section class="animate pb-0">
@@ -226,7 +277,7 @@ try {
 
           <!-- Background SVG -->
           <svg
-            class="absolute right-4 bottom-4 opacity-10 pointer-events-none z-0 h-[8rem] w-[8rem]   fill-black dark:fill-white transition-all"
+            class="absolute right-4 bottom-4 opacity-10 pointer-events-none z-0 h-[8rem] w-[8rem] fill-black dark:fill-white transition-all"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
             fill="currentColor"
@@ -262,7 +313,7 @@ try {
 
           <!-- Background SVG -->
           <svg
-            class="absolute right-4 bottom-4 opacity-10 pointer-events-none z-0 h-[8rem] w-[8rem]   fill-black dark:fill-white transition-all"
+            class="absolute right-4 bottom-4 opacity-10 pointer-events-none z-0 h-[8rem] w-[8rem] fill-black dark:fill-white transition-all"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
             fill="currentColor"
@@ -298,7 +349,7 @@ try {
 
           <!-- Background SVG -->
           <svg
-            class="absolute right-4 bottom-4 opacity-10 pointer-events-none z-0 h-[8rem] w-[8rem]   fill-black dark:fill-white transition-all"
+            class="absolute right-4 bottom-4 opacity-10 pointer-events-none z-0 h-[8rem] w-[8rem] fill-black dark:fill-white transition-all"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 -960 960 960"
             fill="currentColor"
@@ -322,7 +373,7 @@ try {
     </FancyDiv>
 
     <!-- Team Section -->
-    <FancyDiv margin_bottom="50" isAnimated={true}>
+    <!-- <FancyDiv margin_bottom="50" isAnimated={true}>
       <section class="animate mb-0">
         <div class="space-y-4">
           <div class="flex justify-between">
@@ -351,9 +402,9 @@ try {
           </ul>
         </div>
       </section>
-      <!-- <script is:inline defer data-astro-rerun async src="/js/team_scroll.js"
-      ></script> -->
-    </FancyDiv>
+       <script is:inline defer data-astro-rerun async src="/js/team_scroll.js"
+      ></script> 
+    </FancyDiv> -->
 
     <!-- Blog Preview Section -->
     <FancyDiv margin_bottom="50" isAnimated={true}>
