@@ -51,7 +51,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWD }}
           port: 21
           local-dir: 'dist/'
-          server-dir: "/"
+          server-dir: "/pages/nikostuff.com"
       - name: Clear Cloudflare cache
         env:
           ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
