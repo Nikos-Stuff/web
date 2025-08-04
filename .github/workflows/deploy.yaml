@@ -49,7 +49,7 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_LOGIN }}
           password: ${{ secrets.FTP_PASSWD }}
-          port: 21
+          port: 22
           local-dir: 'dist/'
           server-dir: "/pages/nikostuff.com"
 
