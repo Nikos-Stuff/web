@@ -48,15 +48,21 @@ jobs:
       - name: Build Astro Website
         run: pnpm build
 
-      - name: SFTP upload
-        uses: Dylan700/sftp-upload-action@latest
+      - name: Prepare deployment folder
+        run: |
+          mkdir deploy
+          cp -r dist/* deploy/
+      
+      - name: Deploy to SFTP
+        uses: milanmk/actions-file-deployer@master
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_LOGIN }}
-          password: ${{ secrets.FTP_PASSWD }}
-          port: 22
-          uploads: |
-            ./dist/ => /pages/nikostuff.com/
+          remote-protocol: sftp
+          remote-host: ${{ secrets.FTP_HOST }}
+          remote-user: ${{ secrets.FTP_LOGIN }}
+          remote-password: ${{ secrets.FTP_PASSWD }}
+          remote-path: /pages/nikostuff.com
+          local-path: "./deploy"
+          sync: "delta"
 
       - name: Clear Cloudflare cache
         env:
