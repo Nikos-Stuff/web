@@ -48,15 +48,15 @@ jobs:
       - name: Build Astro Website
         run: pnpm build
 
-      - name: Sync Files
-        uses: SamKirkland/web-deploy@v1
+      - name: Sync
+        uses: burnett01/rsync-deployments@7.0.2
         with:
-          target-server: ${{ secrets.FTP_HOST }}
-          ssh-port: 22
-          remote-user: ${{ secrets.FTP_LOGIN }}
-          private-ssh-key: ${{ secrets.FTP_KEY }}
-          source-path: ./dist/
-          destination-path: ~/web/pages/nikostuff.com/
+          switches: -avzr --delete
+          path: dist/
+          remote_path: /web/pages/nikostuff.com
+          remote_host: ${{ secrets.FTP_HOST }}
+          remote_user: ${{ secrets.FTP_LOGIN }}
+          remote_key: ${{ secrets.FTP_KEY }}
 
 
       - name: Clear Cloudflare cache
