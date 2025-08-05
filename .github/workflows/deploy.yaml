@@ -56,31 +56,18 @@ jobs:
 #          server-dir: "/"
 
 
-#      - name: SFTP Deploy
-#        uses: wangyucode/sftp-upload-action@v2.0.4
-#        with:
-#          host: ${{ secrets.FTP_HOST }}
-#          username: ${{ secrets.FTP_LOGIN }}
-#          password: ${{ secrets.FTP_PASSWD }}
-#          compress: true
-#          forceUpload: false
-#          removeExtraFilesOnServer: true
-#          localDir: "dist" 
-#          remoteDir: "/pages/nikostuff.com/"
-#          exclude: ".git,.DS_Store,**/node_modules,.cache"
-
-
-
-      - name: SFTP Deploy
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+      - name: SFTP uploader
+        uses: wangyucode/sftp-upload-action@v2.0.4
         with:
+          host: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_LOGIN }}
-          server: ${{ secrets.FTP_HOST }}
-          port: 22
           password: ${{ secrets.FTP_PASSWD }}
-          local_path: "./dist/*" 
-          remote_path: "/pages/nikostuff.com"
-          sftp_only: true
+          compress: true
+          forceUpload: false
+          removeExtraFilesOnServer: true
+          localDir: "dist" 
+          remoteDir: "/pages/nikostuff.com/"
+          exclude: ".git,.DS_Store,**/node_modules,.cache"
 
 
 
