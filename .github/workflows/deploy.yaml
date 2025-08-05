@@ -56,11 +56,11 @@ jobs:
       - name: Deploy to SFTP
         uses: milanmk/actions-file-deployer@master
         with:
-          remote-protocol: sftp
+          remote-protocol: "sftp"
           remote-host: ${{ secrets.FTP_HOST }}
           remote-user: ${{ secrets.FTP_LOGIN }}
           remote-password: ${{ secrets.FTP_PASSWD }}
-          remote-path: /pages/nikostuff.com
+          remote-path: "/pages/nikostuff.com"
           local-path: "./deploy"
           sync: "delta"
 
