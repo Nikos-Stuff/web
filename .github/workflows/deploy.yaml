@@ -48,20 +48,14 @@ jobs:
       - name: Build Astro Website
         run: pnpm build
 
-      - name: Deploy
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.FTP_KEY }}
-          FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USER: ${{ secrets.FTP_LOGIN }}
-        run: |
-          mkdir -p ~/.ssh
-          chmod 700 ~/.ssh
-          printf "%s\n" "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H "$FTP_HOST" >> ~/.ssh/known_hosts
-          rsync -azv --delete \
-            -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
-            ./dist/ $FTP_USER@$FTP_HOST:/pages/nikostuff.com/
+      - name: Sync Files
+        uses: SamKirkland/web-deploy@v1
+        with:
+          target-server: ${{ secrets.FTP_LOGIN }}
+          remote-user: ${{ secrets.FTP_HOST }}
+          private-ssh-key: ${{ secrets.FTP_KEY }}
+          source-path: ./dist/
+          destination-path: ~/pages/nikostuff.com/
 
       - name: Clear Cloudflare cache
         env:
