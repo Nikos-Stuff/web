@@ -52,7 +52,7 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.FTP_KEY }}
           FTP_HOST: ${{ secrets.FTP_HOST }}
-          FTP_USER: ${{ secrets.FTP_USER }}
+          FTP_USER: ${{ secrets.FTP_LOGIN }}
         run: |
           mkdir -p ~/.ssh
           chmod 700 ~/.ssh
