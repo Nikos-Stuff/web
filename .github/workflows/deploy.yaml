@@ -67,6 +67,7 @@ jobs:
           removeExtraFilesOnServer: true
           localDir: "dist" 
           remoteDir: "/pages/nikostuff.com/"
+          exclude: ".git,.DS_Store,**/node_modules,.cache"
 
 
 
