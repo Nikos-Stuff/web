@@ -45,15 +45,28 @@ jobs:
       - name: Build Astro Website
         run: pnpm build
 
-      - name: SFTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+#      - name: SFTP Deploy
+#        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+#        with:
+#          server: ${{ secrets.FTP_HOST }}
+#          username: ${{ secrets.FTP_LOGIN }}
+#          password: ${{ secrets.FTP_PASSWD }}
+#          port: 22
+#          local-dir: 'dist/'
+#          server-dir: "/"
+
+
+      - name: SFTP uploader
+        uses: wangyucode/sftp-upload-action@v2.0.4
         with:
-          server: ${{ secrets.FTP_HOST }}
+          host: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_LOGIN }}
           password: ${{ secrets.FTP_PASSWD }}
-          port: 22
-          local-dir: 'dist/'
-          server-dir: "/pages/nikostuff.com/"
+          compress: true
+          forceUpload: false
+          removeExtraFilesOnServer: true
+          localDir: "dist" 
+          remoteDir: "/pages/nikostuff.com/"
 
 
 
