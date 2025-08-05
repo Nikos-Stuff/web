@@ -17,10 +17,15 @@ const blog = defineCollection({
     title: z.string(),
     summary: z.string(),
     date: z.coerce.date(),
+    time: z
+      .string()
+      .regex(/^([01]\d|2[0-3]):([0-5]\d)$/, "Invalid time format (HH:MM)")
+      .optional(),
     tags: z.array(z.string()),
     draft: z.boolean().optional(),
   }),
 })
+
 
 const projects = defineCollection({
   loader: glob({ pattern: '**\/[^_]*.md', base: "./src/content/projects" }),

@@ -1,17 +1,30 @@
 ---
-import { getCollection } from "astro:content"
-import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
-import Blog from "@components/Blog"
-import { BLOG } from "@consts"
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import TopLayout from "@layouts/TopLayout.astro";
+import BottomLayout from "@layouts/BottomLayout.astro";
+import Blog from "@components/Blog";
+import { BLOG } from "@consts";
 
 const posts = (await getCollection("blog"))
-  .filter(post => !post.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => {
+    // Sort by date and time
+    const dateA = new Date(a.data.date);
+    const dateB = new Date(b.data.date);
 
-const tags = [...new Set(posts.flatMap(post => post.data.tags))]
-  .sort((a, b) => a.localeCompare(b))
+    const timeA = a.data.time || "00:00";
+    const timeB = b.data.time || "00:00";
+
+    const dateTimeA = new Date(`${dateA.toDateString()} ${timeA}`);
+    const dateTimeB = new Date(`${dateB.toDateString()} ${timeB}`);
+
+    return dateTimeB.getTime() - dateTimeA.getTime();
+  });
+
+const tags = [...new Set(posts.flatMap((post) => post.data.tags))].sort(
+  (a, b) => a.localeCompare(b)
+);
 ---
 
 <PageLayout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
@@ -26,5 +39,3 @@ const tags = [...new Set(posts.flatMap(post => post.data.tags))]
     </div>
   </BottomLayout>
 </PageLayout>
-
-
