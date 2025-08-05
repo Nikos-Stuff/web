@@ -51,7 +51,7 @@ jobs:
       - name: Sync
         uses: burnett01/rsync-deployments@7.0.2
         with:
-          switches: -avzr --delete
+          switches: -avzr --delete --progress
           path: dist/
           remote_path: /web/pages/nikostuff.com
           remote_host: ${{ secrets.FTP_HOST }}
