@@ -23,7 +23,7 @@ Po początkowej konfiguracji nowego serwera udało się wszystko przenieść **p
 
 ### `nikostuff.com`
 Następna w kolejce była strona główna.  
-Po dość... *chaotycznej* walce z CI udało się ogarnąć działający workflow przy użyciu `rsync`.  
+Po dość... *chaotycznej* walce z CLI udało się ogarnąć działający workflow przy użyciu `rsync`.  
 Nie jest to piękne, ale działa™️.
 
 ---
