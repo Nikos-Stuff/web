@@ -48,15 +48,20 @@ jobs:
       - name: Build Astro Website
         run: pnpm build
 
-      - name: SFTP upload
-        uses: Dylan700/sftp-upload-action@latest
-        with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_LOGIN }}
-          password: ${{ secrets.FTP_PASSWD }}
-          port: 22
-          uploads: |
-            ./dist/ => /pages/nikostuff.com/
+      - name: Deploy
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.FTP_KEY }}
+          FTP_HOST: ${{ secrets.FTP_HOST }}
+          FTP_USER: ${{ secrets.FTP_USER }}
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf "%s\n" "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H "$FTP_HOST" >> ~/.ssh/known_hosts
+          rsync -azv --delete \
+            -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" \
+            ./dist/ $FTP_USER@$FTP_HOST:/pages/nikostuff.com/
 
       - name: Clear Cloudflare cache
         env:
