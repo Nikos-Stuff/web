@@ -51,8 +51,8 @@ jobs:
       - name: Sync Files
         uses: SamKirkland/web-deploy@v1
         with:
-          target-server: ${{ secrets.FTP_LOGIN }}
-          remote-user: ${{ secrets.FTP_HOST }}
+          target-server: ${{ secrets.FTP_HOST }}
+          remote-user: ${{ secrets.FTP_LOGIN }}
           private-ssh-key: ${{ secrets.FTP_KEY }}
           source-path: ./dist/
           destination-path: ~/pages/nikostuff.com/
