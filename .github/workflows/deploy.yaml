@@ -48,10 +48,6 @@ jobs:
       - name: Build Astro Website
         run: pnpm build
 
-      - name: Prepare deployment folder
-        run: |
-          mkdir deploy
-          cp -r dist/* deploy/
       
       - name: Deploy to SFTP
         uses: milanmk/actions-file-deployer@master
@@ -60,8 +56,8 @@ jobs:
           remote-host: ${{ secrets.FTP_HOST }}
           remote-user: ${{ secrets.FTP_LOGIN }}
           remote-password: ${{ secrets.FTP_PASSWD }}
-          remote-path: "/pages/nikostuff.com"
-          local-path: "./deploy"
+          remote-path: "/pages/nikostuff.com/"
+          local-path: "./deploy/"
           sync: "delta"
 
       - name: Clear Cloudflare cache
