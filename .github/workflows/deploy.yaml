@@ -57,7 +57,7 @@ jobs:
           remote-user: ${{ secrets.FTP_LOGIN }}
           remote-password: ${{ secrets.FTP_PASSWD }}
           remote-path: "/pages/nikostuff.com/"
-          local-path: "./deploy/"
+          local-path: "./dist/"
           sync: "delta"
 
       - name: Clear Cloudflare cache
