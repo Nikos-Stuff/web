@@ -17,6 +17,10 @@ import Reviews from "@components/Reviews.astro";
 import DynamicTitle from "@components/TitleHeader.astro";
 import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
+import Image1 from "@assets/vid_montage.png";
+import Image2 from "@assets/web_dev.png";
+import Image3 from "@assets/work_in_progress_panel.png";
+
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
   .sort((a, b) => {
@@ -189,7 +193,7 @@ try {
           <div class="mb-8 flex items-start relative">
             <div>
               <p class="font-semibold">Przygotowania</p>
-              <p class="text-sm text-gray-600 dark:text-gray-400 max-w-lg">
+              <p class="text-sm text-gray-800 dark:text-gray-400 max-w-lg">
                 Wszystkie usługi, serwisy itp zostaną przygotowane do migracji.
               </p>
             </div>
@@ -198,7 +202,7 @@ try {
           <div class="mb-8 flex items-start relative">
             <div>
               <p class="font-semibold">Migracja</p>
-              <p class="text-sm text-gray-600 dark:text-gray-400 max-w-lg">
+              <p class="text-sm text-gray-800 dark:text-gray-400 max-w-lg">
                 Stopniowe przenoszenie usług. Możliwe krótkie przerwy w
                 działaniu.
               </p>
@@ -208,7 +212,7 @@ try {
           <div class="mb-8 flex items-start relative">
             <div>
               <p class="font-semibold">Finalizacja</p>
-              <p class="text-sm text-gray-600 dark:text-gray-400 max-w-lg">
+              <p class="text-sm text-gray-800 dark:text-gray-400 max-w-lg">
                 Finalne testy, usuwanie błędów, stabilizacja na nowym serwerze.
               </p>
             </div>
@@ -217,7 +221,7 @@ try {
           <div class="flex items-start relative">
             <div>
               <p class="font-semibold">Wydanie</p>
-              <p class="text-sm text-gray-600 dark:text-gray-400 max-w-lg">
+              <p class="text-sm text-gray-800 dark:text-gray-400 max-w-lg">
                 Udostępnienie nowej wersji i oficjalne zakończenie procesu.
               </p>
             </div>
@@ -235,6 +239,66 @@ try {
         <p class="font-bold text-sm mb-2">{apodData.title}</p>
         <p class="text-xs mb-2">{apodData.date} - {apodData.copyright}</p>
         <p class="text-sm max-w-3xl">{translatedExplanation}</p>
+      </section>
+    </FancyDiv>
+
+    <FancyDiv margin_bottom="24" isAnimated={true}>
+      <section class="animate pb-0">
+        <p class="font-semibold text-2xl">Montaż Video</p>
+        <p class="font-bold text-sm mb-2">
+          Niesamowita jakość w przystępnej cenie.
+        </p>
+
+        <div class="animate">
+          <Image
+            src={Image1}
+            alt="Video Editing"
+            class="rounded-sm border border-black/25 dark:border-white/25 hover:brightness-150 hover:scale-105 transition-[filter,scale] duration-300"
+          />
+        </div>
+      </section>
+    </FancyDiv>
+
+    <FancyDiv margin_bottom="24" isAnimated={true}>
+      <section class="animate pb-0">
+        <p class="font-semibold text-2xl">Strony WWW</p>
+        <p class="font-bold text-sm mb-2">
+          Minimalistyczny design, płynne animacje, szybki czas dostawy.
+        </p>
+
+        <div class="animate">
+          <Image
+            src={Image2}
+            alt="Web Development"
+            class="rounded-sm border border-black/25 dark:border-white/25 hover:brightness-150 hover:scale-105 transition-[filter,scale] duration-300"
+          />
+        </div>
+      </section>
+    </FancyDiv>
+
+    <FancyDiv margin_bottom="24" isAnimated={true}>
+      <section class="animate pb-0">
+        <p class="font-semibold text-2xl">Wysokiej jakości Usługi</p>
+        <p class="font-bold text-sm mb-2">
+          Intuicyjny panel zarządzania twoich serwerów. <small>(wkrótce)</small>
+        </p>
+        <div class="animate">
+          <Image
+            src={Image3}
+            alt="Work in progress panel"
+            class="rounded-sm border border-black/25 dark:border-white/25 hover:brightness-150 hover:scale-105 transition-[filter,scale] duration-300"
+          />
+        </div>
+      </section>
+    </FancyDiv>
+
+    <!--  Review Section -->
+    <FancyDiv margin_bottom="50" isAnimated={true}>
+      <section class="space-y-4 animate not-prose">
+        <p class="font-semibold text-black dark:text-white">Co na to inni</p>
+        <Reviews />
+        <script is:inline defer src="/js/carousel.js"></script>
+        <!-- We use the standard carousel script -->
       </section>
     </FancyDiv>
 
@@ -268,124 +332,6 @@ try {
             }
           </div>
         </div>
-      </section>
-    </FancyDiv>
-
-    <!--  Collabs TEMP REMOVED -->
-    <FancyDiv isAnimated={true}>
-      <!-- Section 1 -->
-      <section class="animate not-prose">
-        <div
-          fancy-scroll="true"
-          class="relative overflow-hidden container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out flex items-center"
-        >
-          <!-- Text Content -->
-          <div class="text-content flex-1 z-10 ml-4">
-            <p
-              class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
-            >
-              Łatwy Początek
-            </p>
-            <p class="mt-0 mb-0">
-              Strony WWW, Animacje, Reklamy - wszystko z myślą o wydajności i
-              estetyce.
-            </p>
-          </div>
-
-          <!-- Background SVG -->
-          <svg
-            class="absolute right-4 bottom-4 opacity-10 pointer-events-none z-0 h-[8rem] w-[8rem] fill-black dark:fill-white transition-all"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 -960 960 960"
-            fill="currentColor"
-          >
-            <path
-              d="M156.77-140q-6.79 0-11.78-5.15Q140-150.3 140-157v-34q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q175-197.7 175-191v34q0 6.7-5.5 11.85-5.51 5.15-12.73 5.15Zm161.52 0q-6.31 0-11.3-5.15Q302-150.3 302-157v-188q0-6.7 5.21-11.85 5.2-5.15 11.98-5.15 5.81 0 11.81 5.15 6 5.15 6 11.85v188q0 6.7-5.99 11.85-5.98 5.15-12.72 5.15Zm161.48 0q-6.79 0-11.78-5.15Q463-150.3 463-157v-124q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q498-287.7 498-281v124q0 6.7-5.5 11.85-5.51 5.15-12.73 5.15Zm161.52 0q-6.32 0-11.3-5.15Q625-150.3 625-157v-206q0-6.7 5.21-11.85 5.2-5.15 11.98-5.15 5.81 0 11.81 5.15 6 5.15 6 11.85v206q0 6.7-5.99 11.85-5.98 5.15-12.72 5.15Zm161.48 0q-6.8 0-11.78-5.15Q786-150.3 786-157v-354q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q821-517.7 821-511v354q0 6.7-5.5 11.85-5.51 5.15-12.73 5.15ZM560.5-510q-12.5 0-24.93-5.13Q523.15-520.26 513-530l-90-90q-9-9-23-9t-23 9L170-414q-5.33 5-13.17 5.5-7.83.5-11.7-5.5-5.13-3-4.96-10.63.16-7.62 4.83-12.37l209-208q9.56-9.74 21.28-14.37Q387-664 400-664q13 0 24.76 4.67Q436.51-654.65 447-645l90 90q9 9 23 9t23-9l208-208q4-4 12-4.5t12.43 4.5q4.57 5 4.4 12.62-.16 7.63-3.83 11.38L607-530q-10.17 10.22-22.09 15.11Q573-510 560.5-510Z"
-            ></path>
-          </svg>
-        </div>
-      </section>
-
-      <!-- Line -->
-      <hr class="border-black/10 dark:border-white/25 animate" />
-
-      <!-- Section 2 -->
-      <section class="animate not-prose">
-        <div
-          fancy-scroll="true"
-          class="relative overflow-hidden container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out flex items-center"
-        >
-          <!-- Text Content -->
-          <div class="text-content flex-1 z-10">
-            <p
-              class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
-            >
-              Profesjonalizm
-            </p>
-            <p class="mt-0 mb-0">
-              Minimalistyczny design, płynne animacje, szybki czas dostawy -
-              Wszystko to w zasięgu ręki, dostosowane pod Twoje wymagania.
-            </p>
-          </div>
-
-          <!-- Background SVG -->
-          <svg
-            class="absolute right-4 bottom-4 opacity-10 pointer-events-none z-0 h-[8rem] w-[8rem] fill-black dark:fill-white transition-all"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 -960 960 960"
-            fill="currentColor"
-          >
-            <path
-              d="M736-546H629q-6.7 0-11.85-5.41-5.15-5.41-5.15-12.5t5.15-12.09q5.15-5 11.85-5h107v-107q0-6.7 5.21-11.85 5.21-5.15 12-5.15t12.29 5.15Q771-694.7 771-688v107h106q7.13 0 12.56 5.23 5.44 5.23 5.44 12.31 0 7.09-5.44 12.28Q884.13-546 877-546H771v106q0 7.68-5.5 12.84-5.51 5.16-12.73 5.16-6.8 0-11.78-5.16Q736-432.32 736-440v-106Zm-376 28q-50.01 0-83.01-32.99-32.99-33-32.99-83.51 0-50.51 32.99-83.01Q309.99-750 360-750q50.01 0 83.01 32.49Q476-685.01 476-634.5q0 50.51-32.99 83.51Q410.01-518 360-518ZM77-239v-25.25q0-26.01 14.41-47.53Q105.81-333.3 132-345q61-28 116.82-41 55.83-13 111-13Q415-399 471-386q56 13 117 41 26.19 12.7 40.59 33.72Q643-290.26 643-264.25V-239q0 15.75-10.62 26.37Q621.75-202 606-202H114q-15.75 0-26.37-10.63Q77-223.25 77-239Zm35 2h496v-27q0-15-9.33-28.17Q589.35-305.35 572-314q-54-25-106.19-37.5Q413.63-364 360-364t-106.31 12.5Q201-339 149-314q-18.8 8.65-27.9 21.83Q112-279 112-264v27Zm248-316q34 0 57.5-23.5T441-634q0-34-23.5-57.5T360-715q-34 0-57.5 23.5T279-634q0 34 23.5 57.5T360-553Zm0-81Zm0 397Z"
-            ></path>
-          </svg>
-        </div>
-      </section>
-
-      <!-- Line -->
-      <hr class="border-black/10 dark:border-white/25 animate" />
-
-      <!-- Section 3 -->
-      <section class="animate not-prose">
-        <div
-          fancy-scroll="true"
-          class="relative overflow-hidden container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out flex items-center"
-        >
-          <!-- Text Content -->
-          <div class="text-content flex-1 z-10 ml-4">
-            <p
-              class="mt-0 mb-0 text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
-            >
-              Ciągłe Nowości
-            </p>
-            <p class="mt-0 mb-0">
-              Ciągle się rozwijam w tworzeniu gierek, stron WWW, animacji, jak i
-              wielu innych nowych rozwiązań!
-            </p>
-          </div>
-
-          <!-- Background SVG -->
-          <svg
-            class="absolute right-4 bottom-4 opacity-10 pointer-events-none z-0 h-[8rem] w-[8rem] fill-black dark:fill-white transition-all"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 -960 960 960"
-            fill="currentColor"
-          >
-            <path
-              d="M594-196q-6.4 0-10.2-4.37-3.8-4.36-3.8-10.86 0-5.77 4.01-9.77 4.02-4 9.99-4h124L564-378q-3-3.4-4.04-8.47-1.04-5.06 4.04-10.03 4-4.5 8.77-4.5 4.76 0 10.23 4l153 152v-119q0-5.68 4.02-9.84t10-4.16q5.98 0 9.98 4.16t4 9.84v134q0 14.48-9.75 24.24Q744.5-196 731-196H594Zm-394-4q-5-5-5-9.27t5.45-10.8L716-736H594q-6.4 0-10.2-4.02-3.8-4.02-3.8-10t4.01-9.98q4.02-4 9.99-4h137q13.5 0 23.25 9.75T764-731v134q0 6.4-4.23 10.2-4.23 3.8-10.21 3.8t-9.77-4.01Q736-591.03 736-597v-119L220-200q-5 5-10 5t-10-5Zm0-542q-4-4-3.5-9t4.3-9.5q3.8-4.5 9.17-4.5 5.36 0 10.03 4l171 172q4 5 3.5 9.9t-2.5 8.27q-4.67 4.83-9.83 4.83-5.17 0-9.17-5L200-742Z"
-            ></path>
-          </svg>
-        </div>
-      </section>
-    </FancyDiv>
-
-    <!--  Optimization & Design in Mind -->
-
-    <!--  Review Section -->
-    <FancyDiv margin_bottom="50" isAnimated={true}>
-      <section class="space-y-4 animate not-prose">
-        <p class="font-semibold text-black dark:text-white">Co na to inni</p>
-        <Reviews />
       </section>
     </FancyDiv>
 

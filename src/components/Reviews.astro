@@ -1,27 +1,169 @@
 ---
-
+import { Image } from "astro:assets";
 ---
 
-<script is:inline defer data-astro-rerun async src="/js/reviews.js"></script>
-
-<div class="reviews-wrapper relative">
+<section class="animate space-y-4 mb-0">
   <div
-    id="review-item"
-    class="review-item active container h-[15rem] p-4 gap-3 text-left border rounded-lg hover:scale-95 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex items-center"
-    style="contain-intrinsic-size: 15rem; contain: layout style;"
+    class="relative w-full h-[268px] overflow-hidden border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
   >
-    <div class="text-content flex-1 min-h-[6rem] flex flex-col justify-center">
-      <div>
+    <!-- Carousel Wrapper -->
+    <div
+      id="carousel"
+      class="flex transition-transform duration-500 ease-in-out w-full h-full"
+    >
+      <!-- 1 ------------------------------------------------------- -->
+      <div
+        class="relative w-full h-full flex-shrink-0 flex flex-col justify-center items-center text-center content-center"
+      >
+        <!-- Stars in background -->
         <p
-          class="review-name min-h-[2.5rem] text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
-        >&nbsp;</p>
-        <div class="review-text">
-          <p class="min-h-[3.5rem] text-base md:text-lg">&nbsp;</p>
+          class="absolute inset-0 flex justify-center items-center dark:text-yellow-300 font-bold text-5xl md:text-9xl opacity-10 z-0 pointer-events-none select-none"
+        >
+          ★★★★★
+        </p>
+
+        <!-- Foreground content -->
+        <div class="z-10">
+          <p class="tracking-[0.1em] font-bold uppercase text-xl">
+            Pachbud Usługi Budowlane
+          </p>
+          <p class="mt-1">"Świetna jakość wykonania"</p>
+          <p class="text-xs">(Strona WWW - pachbud.pl)</p>
         </div>
       </div>
+      <!-- SLIDE ------------------------------------------------------- -->
+
+      <!-- 2 ------------------------------------------------------- -->
+      <div
+        class="relative w-full h-full flex-shrink-0 flex flex-col justify-center items-center text-center content-center"
+      >
+        <!-- Stars in background -->
+        <p
+          class="absolute inset-0 flex justify-center items-center dark:text-yellow-300 font-bold text-5xl md:text-9xl opacity-10 z-0 pointer-events-none select-none"
+        >
+          ★★★★★
+        </p>
+
+        <!-- Foreground content -->
+        <div class="z-10">
+          <p class="tracking-[0.1em] font-bold uppercase text-xl">
+            lilbigwhiteowl
+          </p>
+          <p class="mt-1">"Recommended"</p>
+          <p class="text-xs">(Montaż Video)</p>
+        </div>
+      </div>
+      <!-- SLIDE ------------------------------------------------------- -->
+
+      <!-- 3 ------------------------------------------------------- -->
+      <div
+        class="relative w-full h-full flex-shrink-0 flex flex-col justify-center items-center text-center content-center"
+      >
+        <!-- Stars in background -->
+        <p
+          class="absolute inset-0 flex justify-center items-center dark:text-yellow-300 font-bold text-5xl md:text-9xl opacity-10 z-0 pointer-events-none select-none"
+        >
+          ★★★★★
+        </p>
+
+        <!-- Foreground content -->
+        <div class="z-10">
+          <p class="tracking-[0.1em] font-bold uppercase text-xl">giljacek</p>
+          <p class="mt-1">"Szybka i doskonała realizacja"</p>
+          <p class="text-xs">(Montaż Video)</p>
+        </div>
+      </div>
+      <!-- SLIDE ------------------------------------------------------- -->
+
+      <!-- 4 ------------------------------------------------------- -->
+      <div
+        class="relative w-full h-full flex-shrink-0 flex flex-col justify-center items-center text-center content-center"
+      >
+        <!-- Stars in background -->
+        <p
+          class="absolute inset-0 flex justify-center items-center dark:text-yellow-300 font-bold text-5xl md:text-9xl opacity-10 z-0 pointer-events-none select-none"
+        >
+          ★★★★★
+        </p>
+
+        <!-- Foreground content -->
+        <div class="z-10">
+          <p class="tracking-[0.1em] font-bold uppercase text-xl">Szymulewsky</p>
+          <p class="mt-1">"Polecam tego allegrowicza"</p>
+          <p class="text-xs">(skillhost.pl / icehost.pl - Montaż Video)</p>
+        </div>
+      </div>
+      <!-- SLIDE ------------------------------------------------------- -->
     </div>
-    <div class="review-icon flex items-center justify-end h-full">
-      <div class="icon-wrapper"></div>
+
+    <!-- Navigation Buttons disabled -->
+
+    <!-- 
+    <div
+      class="absolute flex justify-between w-full top-1/2 transform -translate-y-1/2 px-4"
+    >
+      Previous Button (Left Arrow)
+      <button
+        id="prev"
+        aria-label="previous"
+        class="group w-[3rem] p-2 gap-3 flex items-center justify-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10"
+        >
+          <line
+            x1="19"
+            y1="12"
+            x2="5"
+            y2="12"
+            class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+          ></line>
+          <polyline
+            points="12 5 5 12 12 19"
+            class="translate-x-2 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+          ></polyline>
+        </svg>
+      </button>
+
+      Next Button (Right Arrow)
+      <button
+        id="next"
+        aria-label="next"
+        class="group w-[3rem] p-4 gap-3 flex items-center justify-end border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10 min-h-[20px] min-w-[20px]"
+        >
+          <line
+            x1="5"
+            y1="12"
+            x2="19"
+            y2="12"
+            class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+          ></line>
+          <polyline
+            points="12 5 19 12 12 19"
+            class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+          ></polyline>
+        </svg>
+      </button>
     </div>
+     -->
   </div>
-</div>
+</section>
