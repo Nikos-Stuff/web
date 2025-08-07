@@ -2,36 +2,63 @@
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  function init() {
-    gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 
-    // Get all the elements with the .animate class
-    let animatedStuff = document.querySelectorAll(".animate");
+  function animateElement(element: HTMLElement) {
+    if (element.dataset.scroll_animated) return;
+    element.dataset.scroll_animated = "true"; 
 
-    // Loop through each element and create a ScrollTrigger for it
-    animatedStuff.forEach((element) => {
-      gsap.from(element, {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "elastic.out(1, 0.7)",
-        scrollTrigger: {
-          trigger: element,
-          start: "top 70%",
-          end: "bottom 30%",
-          toggleActions: "play none none reverse",
-          //markers: true,
-        },
-      });
+    gsap.from(element, {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "elastic.out(1, 0.7)",
+      scrollTrigger: {
+        trigger: element,
+        start: "top 70%",
+        end: "bottom 30%",
+        toggleActions: "play none none reverse",
+        //markers: true,
+      },
     });
   }
 
-  function timeoundHandle() {
-    setTimeout(() => {
-      console.log("Page Scroll Animations Loaded");
-      init();
-    }, 1000);
+  function initAnimations() {
+    document
+      .querySelectorAll(".animate")
+      .forEach((el) => animateElement(el as HTMLElement));
   }
 
-  document.addEventListener("DOMContentLoaded", timeoundHandle);
+  function setupMutationObserver() {
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
+          mutation.addedNodes.forEach((node) => {
+            if (!(node instanceof HTMLElement)) return;
+
+            if (node.classList.contains("animate")) {
+              animateElement(node);
+            }
+            //console.log("New animated element added:", node);
+            node
+              .querySelectorAll?.(".animate")
+              .forEach((el) => animateElement(el as HTMLElement));
+          });
+        }
+      }
+    });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initAnimations();
+    setupMutationObserver();
+    console.log(
+      "Scroll animations initialized and observing for new elements."
+    );
+  });
 </script>
