@@ -22,12 +22,12 @@
 
     // Parallax multipliers for particles and stars
     const multipliers: Record<string, { mouse: number; scroll: number }> = {
-      // particles1: { mouse: 3, scroll: 0.05 },
-      // particles2: { mouse: 5, scroll: 0.1 },
-      // particles3: { mouse: 2, scroll: 0.15 },
-      // stars1: { mouse: 3, scroll: 0.05 },
-      // stars2: { mouse: 5, scroll: 0.1 },
-      // stars3: { mouse: 2, scroll: 0.15 },
+      particles1: { mouse: 3, scroll: 0.05 },
+      particles2: { mouse: 5, scroll: 0.1 },
+      particles3: { mouse: 2, scroll: 0.15 },
+      stars1: { mouse: 3, scroll: 0.05 },
+      stars2: { mouse: 5, scroll: 0.1 },
+      stars3: { mouse: 2, scroll: 0.15 },
       pod: { mouse: 1, scroll: 0.05 },
     };
 
@@ -54,12 +54,12 @@
       scrollY = ease(scrollY, targetScrollY, easing);
 
       const elements = {
-        // particles1: document.getElementById("particles1"),
-        // particles2: document.getElementById("particles2"),
-        // particles3: document.getElementById("particles3"),
-        // stars1: document.getElementById("stars1"),
-        // stars2: document.getElementById("stars2"),
-        // stars3: document.getElementById("stars3"),
+        particles1: document.getElementById("particles1"),
+        particles2: document.getElementById("particles2"),
+        particles3: document.getElementById("particles3"),
+        stars1: document.getElementById("stars1"),
+        stars2: document.getElementById("stars2"),
+        stars3: document.getElementById("stars3"),
         pod: document.getElementById("pod"),
       };
 
@@ -97,12 +97,12 @@
 
     function initBG() {
       console.log("BG Loaded");
-      const particlesSmall = generateParticles(500, "#000");
-      const particlesMedium = generateParticles(250, "#000");
-      const particlesLarge = generateParticles(100, "#000");
-      const starsSmall = generateParticles(500, "#fff");
-      const starsMedium = generateParticles(250, "#fff");
-      const starsLarge = generateParticles(100, "#fff");
+      const particlesSmall = generateParticles(150, "#000");
+      const particlesMedium = generateParticles(100, "#000");
+      const particlesLarge = generateParticles(50, "#000");
+      const starsSmall = generateParticles(150, "#fff");
+      const starsMedium = generateParticles(100, "#fff");
+      const starsLarge = generateParticles(50, "#fff");
 
       const particles1 = document.getElementById("particles1");
       const particles2 = document.getElementById("particles2");
