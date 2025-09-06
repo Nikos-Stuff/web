@@ -318,7 +318,7 @@ try {
     </FancyDiv>
 
     <!-- Tech Stack Section -->
-    <FancyDiv margin_bottom="50" isAnimated={true}>
+    <FancyDiv isAnimated={true}>
       <section class="animate">
         <div class="space-y-4">
           <p class="font-semibold text-black dark:text-white">
@@ -330,6 +330,24 @@ try {
                 <StackCard text={item.text} icon={item.icon} href={item.href} />
               ))
             }
+          </div>
+        </div>
+      </section>
+    </FancyDiv>
+
+    <!-- Certificates and stuff -->
+    <FancyDiv margin_bottom="50" isAnimated={true}>
+      <section class="animate">
+        <div class="space-y-4">
+          <p class="font-semibold text-black dark:text-white">Osiągnięcia</p>
+          <div class="flex flex-wrap items-center gap-2 mt-5">
+            <a
+              href="https://teb.pl/kierunki/d/technik-programista/nowy-sacz/"
+              target="_blank"
+              rel="noopener"
+            >
+              Pracuję nad tym ;)
+            </a>
           </div>
         </div>
       </section>
