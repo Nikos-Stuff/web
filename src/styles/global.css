@@ -182,28 +182,6 @@ article img {
   @apply rotate-315;
 }
 
-@keyframes typewriter {
-  from { width: 0; }
-  to { width: 100%; }
-}
-
-@keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: #ffffff; }
-}
-
-.typewriter {
-  display: inline-block;
-  /* overflow: hidden; */
-  border-right: 0.15em solid #ffffff; /* Cursor color */
-  animation: blink-caret 0.75s step-end infinite;
-}
-
-.typewriter-container {
-  height: 1.5em; /* Set a fixed height that fits your design */
-}
-
-
 
 @keyframes flip-in-hor-bottom {
   0% {

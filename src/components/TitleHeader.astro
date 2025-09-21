@@ -13,21 +13,21 @@ const { text, sub, buttons, typewriter } = Astro.props;
     <div id="contentWrapper" class="p-5 text-center">
       <p
         id="subtitle"
-        class="animated text-lg md:text-xl lg:text-2xl font-semibold opacity-75"
+        class="text-lg md:text-xl lg:text-2xl font-semibold opacity-75"
       >
         {sub}
       </p>
       <p
         id="title"
-        class="animated text-2xl md:text-3xl lg:text-7xl font-bold uppercase text-black dark:text-white"
+        class="text-2xl md:text-3xl lg:text-7xl font-bold uppercase text-black dark:text-white"
       >
         {text}
       </p>
 
       {
         typewriter == true && (
-          <div id="typewriter-text" class="typewriter-container">
-            <p class="animated text-sm md:text-base lg:text-lg opacity-75 typewriter" />
+          <div id="typewriter-text">
+            <p class="typewriter w-full" />
           </div>
         )
       }
@@ -35,7 +35,7 @@ const { text, sub, buttons, typewriter } = Astro.props;
       <!-- If buttons = true then we show the buttons if not we hide them  -->
       <div
         id="ctaButtons"
-        class="animated flex flex-wrap gap-4 justify-center mt-5 text-shadow-none"
+        class="flex flex-wrap gap-4 justify-center mt-5 text-shadow-none"
       >
         {
           buttons == true && (
@@ -68,4 +68,92 @@ const { text, sub, buttons, typewriter } = Astro.props;
 
 <script is:inline defer data-astro-rerun async src="/js/headeranimation.js"
 ></script>
-<script is:inline defer data-astro-rerun async src="/js/typewriter.js"></script>
+<!-- <script is:inline defer data-astro-rerun async src="/js/typewriter.js"></script> -->
+
+<script>
+  import { gsap } from "gsap";
+
+  function run() {
+  const texts = [
+    "Kreatywność bez granic",
+    "Profesjonalne strony WWW",
+    "Nagłe przebłyski geniuszu",
+    'Porządek w artystycznym chaosie',
+    "Kreatywność w najczystszej postaci",
+    "Profesjonalizm z odrobiną szaleństwa",
+    "Napędzane kawą i pasją",
+    "Zjadacze Sera",
+    "1% formalności, 99% kreatywności.",
+    "Psychodelia w każdym pikselu",
+  ];
+
+    const typewriterElement = document.querySelector(
+      "#typewriter-text .typewriter"
+    );
+    if (!typewriterElement) return;
+
+    let index = 0;
+
+    function showNextText() {
+      const currentText = texts[index];
+
+      if (!typewriterElement) return;
+
+      typewriterElement.innerHTML = currentText
+        .split("")
+        .map(
+          (char) =>
+            `<span class="char transform inline-block">${
+              char === " " ? "&nbsp;" : char
+            }</span>`
+        )
+        .join("");
+
+      const chars = typewriterElement.querySelectorAll<HTMLElement>(".char");
+
+      const tl = gsap.timeline({
+        onComplete: () => {
+          fadeOut(chars, () => {
+            index = (index + 1) % texts.length;
+            showNextText();
+          });
+        },
+      });
+
+      // Fade in with scale + rotation pop
+      tl.from(chars, {
+        opacity: 0,
+        scale: 0.5,
+        rotation: () => gsap.utils.random(-60, 60),
+        y: 20,
+        stagger: { amount: 0.5, from: "start" },
+        duration: 0.5,
+        ease: "back.out(1.7)",
+      });
+
+      // Hold for 2 seconds
+      tl.to({}, { duration: 2 });
+    }
+
+    function fadeOut(chars: NodeListOf<HTMLElement>, onComplete: () => void) {
+      gsap.to(chars, {
+        opacity: 0,
+        scale: 0.5,
+        rotation: () => gsap.utils.random(-60, 60),
+        y: -20,
+        stagger: { amount: 0.5, from: "start" },
+        duration: 0.4,
+        ease: "back.in(1.7)",
+        onComplete,
+      });
+    }
+
+    showNextText();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
+</script>
