@@ -9,7 +9,8 @@
 
 @theme {
   --animate-twinkle: twinkle 2s ease-in-out forwards;
-  --animate-meteor: meteor 3s ease-in-out forwards; 
+  --animate-meteor: meteor 3s ease-in-out forwards;
+  --text-shadow-xl-center: 0 0px 35px rgb(0, 0, 0 / 0.25);  
 
   @keyframes twinkle {
     0% { 
@@ -193,7 +194,7 @@ article img {
 
 .typewriter {
   display: inline-block;
-  overflow: hidden;
+  /* overflow: hidden; */
   border-right: 0.15em solid #ffffff; /* Cursor color */
   animation: blink-caret 0.75s step-end infinite;
 }
