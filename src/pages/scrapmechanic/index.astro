@@ -46,11 +46,11 @@ import POD from "@components/POD.astro";
             We've been waiting for Chapter 2 since:
           </p>
 
-          <h2
-            class="text-5xl md:text-9xl lg:text-9xl font-extrabold text-center mb-2"
+          <p
+            class="text-5xl md:text-9xl lg:text-9xl font-extrabold text-center mb-2 w-full"
           >
             2020
-          </h2>
+          </p>
 
           <!-- Line -->
           <hr class="border-black/10 dark:border-white/25 animate" />
@@ -60,12 +60,12 @@ import POD from "@components/POD.astro";
           </p>
           <p class="font-bold text-sm mb-2">Time passed so far:</p>
 
-          <h2
-            class="text-3xl md:text-5xl lg:text-5xl font-extrabold text-center"
+          <p
+            class="text-3xl md:text-4xl lg:text-4xl font-extrabold text-center w-full"
             id="timeElapsed"
           >
             0y 0d 0h 0m 0s
-          </h2>
+          </p>
         </section>
       </FancyDiv>
     </div>
@@ -73,8 +73,68 @@ import POD from "@components/POD.astro";
 </PageLayout>
 
 <script>
+  import { gsap } from "gsap";
+
   const startDate = new Date("2020-05-07T00:00:00");
-  const timeElapsedElement = document.getElementById("timeElapsed");
+
+  let timeElapsedElement: HTMLElement | null;
+
+  function getTimeElapsedElement() {
+    if (!timeElapsedElement) {
+      timeElapsedElement = document.getElementById("timeElapsed");
+    }
+    return timeElapsedElement;
+  }
+
+  function flipChar(span: HTMLElement, newChar: string) {
+    gsap.to(span, {
+      rotationX: 90,
+      duration: 0.2,
+      ease: "power1.in",
+      transformOrigin: "50% 50%",
+      onComplete: () => {
+        span.textContent = newChar === " " ? "\u00A0" : newChar; // always use nbsp for spaces
+        gsap.fromTo(
+          span,
+          { rotationX: -90 },
+          {
+            rotationX: 0,
+            duration: 0.2,
+            ease: "power1.out",
+            transformOrigin: "50% 50%",
+          }
+        );
+      },
+    });
+  }
+
+  function renderTime(text: string) {
+    const el = getTimeElapsedElement();
+    if (!el) return;
+
+    const oldChars = [...el.querySelectorAll("span")];
+    const newChars = text.split("");
+
+    // First render or length mismatch → rebuild
+    if (oldChars.length !== newChars.length) {
+      el.innerHTML = newChars
+        .map(
+          (char: string) =>
+            `<span class="inline-block backface-hidden min-w-[0.6em]">${char === " " ? "\u00A0" : char}</span>`
+        )
+        .join("");
+      return;
+    }
+
+    // Animate only changed chars
+    newChars.forEach((char: any, i: number) => {
+      const span = oldChars[i];
+      const current = span.textContent === "\u00A0" ? " " : span.textContent;
+      if (current !== char) {
+        flipChar(span, char);
+      }
+    });
+  }
 
   function updateTimeElapsed() {
     const now = new Date();
@@ -85,7 +145,7 @@ import POD from "@components/POD.astro";
     let hours = now.getHours() - startDate.getHours();
     let minutes = now.getMinutes() - startDate.getMinutes();
     let seconds = now.getSeconds() - startDate.getSeconds();
-    
+
     if (seconds < 0) {
       seconds += 60;
       minutes--;
@@ -99,7 +159,11 @@ import POD from "@components/POD.astro";
       days--;
     }
     if (days < 0) {
-      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+      const prevMonth = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        0
+      ).getDate();
       days += prevMonth;
       months--;
     }
@@ -108,13 +172,13 @@ import POD from "@components/POD.astro";
       years--;
     }
 
-    if (!timeElapsedElement) return;
-
-    timeElapsedElement.textContent = 
-      `${years}y ${months}m ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    const newText = `${years}y ${months}m ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    renderTime(newText);
   }
 
-  setInterval(updateTimeElapsed, 1000);
-  updateTimeElapsed();
+  // Wait until DOM is ready
+  window.addEventListener("DOMContentLoaded", () => {
+    updateTimeElapsed();
+    setInterval(updateTimeElapsed, 1000);
+  });
 </script>
-
