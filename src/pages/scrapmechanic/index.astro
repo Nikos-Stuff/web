@@ -39,7 +39,7 @@ import POD from "@components/POD.astro";
 
   <div class="fixed top-0 left-0 w-svw h-svh flex items-center justify-center">
     <div class="w-svw">
-      <FancyDiv margin_bottom="50" isAnimated={true}>
+      <FancyDiv margin_bottom="50" isAnimated={true} theme="default_big">
         <section class="animate pb-0">
           <p class="font-semibold text-black dark:text-white">Scrap Mechanic</p>
           <p class="font-bold text-sm mb-2">
@@ -115,18 +115,18 @@ import POD from "@components/POD.astro";
     const oldChars = [...el.querySelectorAll("span")];
     const newChars = text.split("");
 
-    // First render or length mismatch → rebuild
+    
     if (oldChars.length !== newChars.length) {
       el.innerHTML = newChars
-        .map(
-          (char: string) =>
-            `<span class="inline-block backface-hidden min-w-[0.6em]">${char === " " ? "\u00A0" : char}</span>`
-        )
+        .map((char: string) => {
+          const widthClass = char === " " ? "min-w-[0.3em]" : "min-w-[0.65em]";
+          return `<span class="inline-block backface-hidden ${widthClass} text-center">${char === " " ? "\u00A0" : char}</span>`;
+        })
         .join("");
       return;
     }
 
-    // Animate only changed chars
+
     newChars.forEach((char: any, i: number) => {
       const span = oldChars[i];
       const current = span.textContent === "\u00A0" ? " " : span.textContent;
@@ -134,6 +134,10 @@ import POD from "@components/POD.astro";
         flipChar(span, char);
       }
     });
+  }
+
+  function pad2(num: number) {
+    return num.toString().padStart(2, "0");
   }
 
   function updateTimeElapsed() {
@@ -172,13 +176,19 @@ import POD from "@components/POD.astro";
       years--;
     }
 
-    const newText = `${years}y ${months}m ${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+    const newText = `${years}y ${pad2(months)}m ${pad2(days)}d ${pad2(hours)}h ${pad2(minutes)}m ${pad2(seconds)}s`;
     renderTime(newText);
   }
 
-  // Wait until DOM is ready
-  window.addEventListener("DOMContentLoaded", () => {
+
+
+  function init() {
     updateTimeElapsed();
     setInterval(updateTimeElapsed, 1000);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    init();
   });
 </script>
