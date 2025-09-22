@@ -78,26 +78,43 @@ import POD from "@components/POD.astro";
 
   function updateTimeElapsed() {
     const now = new Date();
-    let elapsed = now.getTime() - startDate.getTime();
 
-    const years = Math.floor(elapsed / (1000 * 60 * 60 * 24 * 365));
-    elapsed -= years * (1000 * 60 * 60 * 24 * 365);
-
-    const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
-    elapsed -= days * (1000 * 60 * 60 * 24);
-
-    const hours = Math.floor(elapsed / (1000 * 60 * 60));
-    elapsed -= hours * (1000 * 60 * 60);
-
-    const minutes = Math.floor(elapsed / (1000 * 60));
-    elapsed -= minutes * (1000 * 60);
-
-    const seconds = Math.floor(elapsed / 1000);
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+    let days = now.getDate() - startDate.getDate();
+    let hours = now.getHours() - startDate.getHours();
+    let minutes = now.getMinutes() - startDate.getMinutes();
+    let seconds = now.getSeconds() - startDate.getSeconds();
+    
+    if (seconds < 0) {
+      seconds += 60;
+      minutes--;
+    }
+    if (minutes < 0) {
+      minutes += 60;
+      hours--;
+    }
+    if (hours < 0) {
+      hours += 24;
+      days--;
+    }
+    if (days < 0) {
+      const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+      days += prevMonth;
+      months--;
+    }
+    if (months < 0) {
+      months += 12;
+      years--;
+    }
 
     if (!timeElapsedElement) return;
 
-    timeElapsedElement.textContent = `${years}y ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    timeElapsedElement.textContent = 
+      `${years}y ${months}m ${days}d ${hours}h ${minutes}m ${seconds}s`;
   }
+
   setInterval(updateTimeElapsed, 1000);
   updateTimeElapsed();
 </script>
+
