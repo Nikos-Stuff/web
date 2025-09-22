@@ -1,0 +1,103 @@
+---
+// export const prerender = false;
+import PageLayout from "@layouts/PageLayout.astro";
+import { SITE } from "@consts";
+import TwinklingStars from "@components/TwinklingStars.astro";
+import MeteorShower from "@components/MeteorShower.astro";
+import FancyDiv from "@components/FancyDiv.astro";
+import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
+import POD from "@components/POD.astro";
+---
+
+<PageLayout title="Home" description={SITE.DESCRIPTION}>
+  <!-- <script is:inline data-astro-rerun async src="/js/scroll_animation.js"
+  ></script> -->
+
+  <POD />
+  <!-- Light Mode: Particles -->
+  <div class="absolute inset-0 block dark:hidden">
+    <div id="particles1" class="fixed inset-0"></div>
+    <div id="particles2" class="fixed inset-0"></div>
+    <div id="particles3" class="fixed inset-0"></div>
+  </div>
+
+  <!-- Dark Theme: Stars -->
+  <div class="absolute inset-0 hidden dark:block">
+    <div id="stars1" class="fixed inset-0"></div>
+    <div id="stars2" class="fixed inset-0"></div>
+    <div id="stars3" class="fixed inset-0"></div>
+  </div>
+
+  <!-- Dark Theme: Twinkling Stars / Metors -->
+  <div id="galaxy" class="fixed inset-0">
+    <div class="hidden dark:block">
+      <TwinklingStars />
+      <MeteorShower />
+    </div>
+  </div>
+  <BackgroundFX />
+
+  <div class="fixed top-0 left-0 w-svw h-svh flex items-center justify-center">
+    <div class="w-svw">
+      <FancyDiv margin_bottom="50" isAnimated={true}>
+        <section class="animate pb-0">
+          <p class="font-semibold text-black dark:text-white">Scrap Mechanic</p>
+          <p class="font-bold text-sm mb-2">
+            We've been waiting for Chapter 2 since:
+          </p>
+
+          <h2
+            class="text-8xl md:text-9xl lg:text-9xl font-extrabold text-center"
+          >
+            2020
+          </h2>
+
+          <!-- Line -->
+          <hr class="border-black/10 dark:border-white/25 animate" />
+
+          <p class="font-semibold text-black dark:text-white mt-5">
+            Still waiting...
+          </p>
+          <p class="font-bold text-sm mb-2">Time passed so far:</p>
+
+          <h2
+            class="text-4xl md:text-5xl lg:text-5xl font-extrabold text-center"
+            id="timeElapsed"
+          >
+            0y 0d 0h 0m 0s
+          </h2>
+        </section>
+      </FancyDiv>
+    </div>
+  </div>
+</PageLayout>
+
+<script>
+  const startDate = new Date("2020-05-07T00:00:00");
+  const timeElapsedElement = document.getElementById("timeElapsed");
+
+  function updateTimeElapsed() {
+    const now = new Date();
+    let elapsed = now.getTime() - startDate.getTime();
+
+    const years = Math.floor(elapsed / (1000 * 60 * 60 * 24 * 365));
+    elapsed -= years * (1000 * 60 * 60 * 24 * 365);
+
+    const days = Math.floor(elapsed / (1000 * 60 * 60 * 24));
+    elapsed -= days * (1000 * 60 * 60 * 24);
+
+    const hours = Math.floor(elapsed / (1000 * 60 * 60));
+    elapsed -= hours * (1000 * 60 * 60);
+
+    const minutes = Math.floor(elapsed / (1000 * 60));
+    elapsed -= minutes * (1000 * 60);
+
+    const seconds = Math.floor(elapsed / 1000);
+
+    if (!timeElapsedElement) return;
+
+    timeElapsedElement.textContent = `${years}y ${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }
+  setInterval(updateTimeElapsed, 1000);
+  updateTimeElapsed();
+</script>
