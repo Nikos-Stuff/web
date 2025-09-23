@@ -64,7 +64,7 @@ import POD from "@components/POD.astro";
             class="text-2xl md:text-4xl lg:text-4xl font-extrabold text-center w-full"
             id="timeElapsed"
           >
-            0y 0d 0h 0m 0s
+            -
           </p>
         </section>
       </FancyDiv>
@@ -177,7 +177,7 @@ import POD from "@components/POD.astro";
     }
 
 
-    const newText = `${years}y ${pad2(months)}m ${pad2(days)}d ${pad2(hours)}h ${pad2(minutes)}m ${pad2(seconds)}s`;
+    const newText = `${years}y ${pad2(months)}mo ${pad2(days)}d ${pad2(hours)}h ${pad2(minutes)}m ${pad2(seconds)}s`;
     renderTime(newText);
   }
 
