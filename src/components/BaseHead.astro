@@ -10,8 +10,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = "/open-graph.jpg" } = Astro.props;
 
 // import { ViewTransitions } from  "astro:transitions"
-import CursorEffect from '@components/page_effects/CursorHoverEffect.astro';
-import PageAnimations from '@components/page_effects/CustomAnimations.astro';
+import CursorEffect from "@components/page_effects/CursorHoverEffect.astro";
+import PageAnimations from "@components/page_effects/CustomAnimations.astro";
 ---
 
 <!-- Global Metadata -->
@@ -73,8 +73,8 @@ import PageAnimations from '@components/page_effects/CustomAnimations.astro';
 <script defer is:inline src="/js/scroll.js"></script>
 <script defer is:inline src="/js/copy.js"></script>
 
-<PageAnimations/>
-<CursorEffect/>
+<PageAnimations />
+<CursorEffect />
 <!--<script is:inline async src="/js/bg.js"/>-->
 <!--<script is:inline data-astro-rerun async src="/js/typewriter.js"/>-->
 
@@ -85,18 +85,20 @@ import PageAnimations from '@components/page_effects/CustomAnimations.astro';
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    const audio = document.getElementById("spooky-audio") as HTMLAudioElement | null;
+    const audio = document.getElementById("spooky-audio");
+    if (!(audio instanceof HTMLAudioElement)) return;
 
-    if (!audio) return;
-
-    const muteButtons = [
+    const muteButtons: (HTMLElement | null)[] = [
       document.getElementById("mute_music"),
       document.getElementById("drawer-mute_music"),
     ];
 
-    let isMuted = sessionStorage.getItem("spooky-audio-muted") === "true";
+    let isMuted: boolean =
+      sessionStorage.getItem("spooky-audio-muted") === "true";
+    let fadeInterval: number | null = null;
+    const targetVolume = 0.3;
 
-    const updateMuteButtons = () => {
+    const updateMuteButtons = (): void => {
       muteButtons.forEach((button) => {
         if (!button) return;
         if (isMuted) {
@@ -111,7 +113,7 @@ import PageAnimations from '@components/page_effects/CustomAnimations.astro';
 
     updateMuteButtons();
 
-    const toggleMute = () => {
+    const toggleMute = (): void => {
       isMuted = !isMuted;
       audio.muted = isMuted;
       sessionStorage.setItem("spooky-audio-muted", isMuted.toString());
@@ -123,36 +125,77 @@ import PageAnimations from '@components/page_effects/CustomAnimations.astro';
     });
 
     audio.muted = isMuted;
-    
-    audio.volume = 0.3;
+    audio.volume = targetVolume;
 
     const savedTime = sessionStorage.getItem("spooky-audio-time");
     if (savedTime) {
       audio.currentTime = parseFloat(savedTime);
 
-      const targetVolume = 0.3;
+      // Fade in on resume
       audio.volume = 0;
-      const fade = setInterval(() => {
+      fadeInterval = window.setInterval(() => {
         if (audio.volume < targetVolume) {
           audio.volume = Math.min(audio.volume + 0.01, targetVolume);
         } else {
-          clearInterval(fade);
+          if (fadeInterval) clearInterval(fadeInterval);
         }
-      }, 100); 
+      }, 100);
     }
 
     audio.play().catch(() => {
       console.log("Autoplay blocked – will play after user interaction.");
-      document.addEventListener("click", () => {
-        audio.play();
-      }, { once: true });
+      document.addEventListener(
+        "click",
+        () => {
+          audio.play();
+        },
+        { once: true }
+      );
     });
 
     setInterval(() => {
       sessionStorage.setItem("spooky-audio-time", audio.currentTime.toString());
     }, 1000);
+
+    const fadeAudio = (fadeOut: boolean, callback?: () => void): void => {
+      if (fadeInterval) clearInterval(fadeInterval);
+
+      const step = 0.03;
+      const interval = 50;
+
+      fadeInterval = window.setInterval(() => {
+        if (fadeOut) {
+          if (audio.volume > 0) {
+            audio.volume = Math.max(audio.volume - step, 0);
+          } else {
+            if (fadeInterval) clearInterval(fadeInterval);
+            if (callback) callback();
+          }
+        } else {
+          if (audio.volume < targetVolume) {
+            audio.volume = Math.min(audio.volume + step, targetVolume);
+          } else {
+            if (fadeInterval) clearInterval(fadeInterval);
+            if (callback) callback();
+          }
+        }
+      }, interval);
+    };
+
+    window.addEventListener("blur", () => {
+      fadeAudio(true, () => {
+        audio.pause();
+      });
+    });
+
+    window.addEventListener("focus", () => {
+      audio.play().then(() => {
+        fadeAudio(false);
+      });
+    });
   });
 </script>
+
 <!-- END OF SPOOKYMONTH -->
 
 <!-- AdSense - Nonsense -->
