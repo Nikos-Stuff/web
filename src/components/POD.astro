@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import { NASA_API } from "astro:env/server";
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
 let apodData = null;
@@ -28,7 +28,7 @@ console.log(" APOD will use URL:", finalUrl);
   class="fixed inset-0 w-svw h-svh bg-white dark:bg-black transition-all duration-1000 ease-out"
   style={`opacity: ${isLoaded ? 1 : 0};`}
 >
-  {
+  <!-- { DISABLED DUE TO SPOOKYMONTH
     apodData ? (
       apodData.media_type === "image" ? (
         <Image
@@ -71,5 +71,18 @@ console.log(" APOD will use URL:", finalUrl);
         </video>
       ) : null
     ) : null
-  }
+  } -->
+
+  <video
+    id="apod-image"
+    class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
+    controls
+    muted
+    autoplay
+    loop
+    onloadeddata={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0'); document.getElementById('pod').style.opacity = 1;`}
+  >
+    <source src="/spooky.webm" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 </div>

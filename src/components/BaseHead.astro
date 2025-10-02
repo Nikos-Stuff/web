@@ -80,6 +80,81 @@ import PageAnimations from '@components/page_effects/CustomAnimations.astro';
 
 <!--<ViewTransitions  />-->
 
+<!-- SPOOKYMONTH -->
+<audio id="spooky-audio" src="/spooktober.ogg" loop></audio>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const audio = document.getElementById("spooky-audio") as HTMLAudioElement | null;
+
+    if (!audio) return;
+
+    const muteButtons = [
+      document.getElementById("mute_music"),
+      document.getElementById("drawer-mute_music"),
+    ];
+
+    let isMuted = sessionStorage.getItem("spooky-audio-muted") === "true";
+
+    const updateMuteButtons = () => {
+      muteButtons.forEach((button) => {
+        if (!button) return;
+        if (isMuted) {
+          button.classList.add("opacity-50");
+          button.classList.remove("opacity-100");
+        } else {
+          button.classList.remove("opacity-50");
+          button.classList.add("opacity-100");
+        }
+      });
+    };
+
+    updateMuteButtons();
+
+    const toggleMute = () => {
+      isMuted = !isMuted;
+      audio.muted = isMuted;
+      sessionStorage.setItem("spooky-audio-muted", isMuted.toString());
+      updateMuteButtons();
+    };
+
+    muteButtons.forEach((button) => {
+      button?.addEventListener("click", toggleMute);
+    });
+
+    audio.muted = isMuted;
+    
+    audio.volume = 0.3;
+
+    const savedTime = sessionStorage.getItem("spooky-audio-time");
+    if (savedTime) {
+      audio.currentTime = parseFloat(savedTime);
+
+      const targetVolume = 0.3;
+      audio.volume = 0;
+      const fade = setInterval(() => {
+        if (audio.volume < targetVolume) {
+          audio.volume = Math.min(audio.volume + 0.01, targetVolume);
+        } else {
+          clearInterval(fade);
+        }
+      }, 100); 
+    }
+
+    audio.play().catch(() => {
+      console.log("Autoplay blocked – will play after user interaction.");
+      document.addEventListener("click", () => {
+        audio.play();
+      }, { once: true });
+    });
+
+    setInterval(() => {
+      sessionStorage.setItem("spooky-audio-time", audio.currentTime.toString());
+    }, 1000);
+  });
+</script>
+<!-- END OF SPOOKYMONTH -->
+
 <!-- AdSense - Nonsense -->
 <script is:inline data-astro-rerun async src="/js/adsense.js"></script>
 
