@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
-    "vite": "^7.1.7"
+    "vite": "^7.1.9"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
