@@ -59,9 +59,11 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
         </p>
 
         <!-- Buttons -->
-        <div class="buttons flex flex-col space-y-4 items-center opacity-0 w-full pr-5 pl-5">
+        <div
+          class="buttons flex flex-col space-y-4 items-center opacity-0 w-full pr-5 pl-5"
+        >
           <button
-            class="tmpl-button-with-arrow backdrop-blur-sm group min-w-[90%] sm:min-w-[50%] p-2 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+            class="tmpl-button-with-arrow backdrop-blur-sm group min-w-full md:min-w-[50%] p-2 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
           >
             <span
               class="button-text w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center"
@@ -160,7 +162,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
         question: "Typ strony?",
         options: [
           { label: "WordPress Starter", price: 1000 },
-          { label: "Strona statyczna / Astro", price: 2800 }, 
+          { label: "Strona statyczna / Astro", price: 2800 },
           { label: "Sklep WooCommerce", price: 1800 },
         ],
       },
@@ -208,6 +210,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       {
         question: "Dodatkowe opcje / wykończenie",
         options: [
+          { label: "Brak wykończenia", price: 0 },
           { label: "Szlifowanie i wygładzanie powierzchni", price: 50 },
           { label: "Malowanie / post-processing", price: 80 },
           { label: "Projektowanie modelu na zamówienie", price: 100 },
@@ -292,7 +295,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       scale: 1,
       filter: "blur(0px)",
       duration: 0.8,
-      ease: "power2.out",
+      ease: "elastic.out(1, 0.7)",
       onComplete: () => {
         fadeInContent(firstSlide);
         firstSlide.style.pointerEvents = "auto";
@@ -324,7 +327,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
     slide.querySelectorAll("button").forEach((b) => {
       b.disabled = true;
-      gsap.set(b, { opacity: 0.9 });
+      // gsap.set(b, { opacity: 0.5 });
     });
 
     gsap.set(elements, { opacity: 0, y: 20, pointerEvents: "none" });
@@ -337,7 +340,11 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       pointerEvents: "auto",
       onComplete: () => {
         slide.querySelectorAll("button").forEach((b) => {
-          gsap.to(b, { opacity: 1, duration: 0.3, ease: "power2.out" });
+          gsap.to(b, {
+            opacity: 1,
+            duration: 0.3,
+            ease: "elastic.out(1, 0.7)",
+          });
           b.disabled = false;
         });
       },
@@ -430,7 +437,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       scale: 0.95,
       filter: "blur(5px)",
       duration: 0.8,
-      ease: "power2.inOut",
+      ease: "elastic.inOut(1, 0.7)",
       zIndex: -50,
       onComplete: () => {
         setTimeout(() => {
@@ -487,7 +494,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       scale: 0.95,
       filter: "blur(5px)",
       duration: 0.8,
-      ease: "power2.inOut",
+      ease: "elastic.inOut(1, 0.7)",
       zIndex: -50,
     });
 
@@ -497,7 +504,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       scale: 1,
       filter: "blur(0px)",
       duration: 0.8,
-      ease: "power2.out",
+      ease: "elastic.out(1, 0.7)",
       delay: 0.5,
       onComplete: () => {
         isAnimating = false;
@@ -542,15 +549,15 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       "tmpl-button-with-arrow backdrop-blur-sm group min-w-[50%] p-2 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out";
     sendMailBtn.innerHTML = `<span class="button-text w-full z-10 relative text-center">Wyślij wycenę na maila</span>`;
     sendMailBtn.addEventListener("click", () => {
-
-      const subject = encodeURIComponent(`PROŚBA O WIĄŻĄCĄ WYCENĘ: Projekt ${selectedCategory} (Szacunkowy Koszt: ${totalPrice} zł)`);
+      const subject = encodeURIComponent(
+        `PROŚBA O WIĄŻĄCĄ WYCENĘ: Projekt ${selectedCategory} (Szacunkowy Koszt: ${totalPrice} zł)`
+      );
 
       const target = "team@nikostuff.com";
 
       const body = encodeURIComponent(
-  `Dzień dobry,\r\n\r\nWypełniłem(am) wstępny kalkulator wyceny projektu ${selectedCategory} i chciał(a)bym przejść do stworzenia wiążącej, oficjalnej wyceny.\r\n\r\nPoniżej przedstawiam podsumowanie moich wyborów i wstępny szacunek kosztu:\r\n\r\nKATEGORIA: ${selectedCategory}\r\n\r\nOPCJE WYBRANE W KALKULATORZE:\r\n${prettyChoices.map((c, i) => `${i + 1}. ${c}`).join("\r\n")}\r\n\r\nŁĄCZNY SZACUNKOWY KOSZT: ${totalPrice} zł netto\r\n\r\nDANE KONTAKTOWE KLIENTA:\r\nImię i Nazwisko / Nazwa Firmy: [PROSZĘ WPROWADZIĆ DANE]\r\nTelefon kontaktowy: [PROSZĘ WPROWADZIĆ DANE]\r\nDodatkowe uwagi do projektu: [PROSZĘ WPROWADZIĆ DODATKOWE INFORMACJE/PYTANIA]\r\n\r\nProszę o kontakt w celu omówienia szczegółów i stworzenia dokładnej oferty.\r\n\r\nPozdrawiam,\r\n[TWOJE IMIĘ I NAZWISKO]\r\n`
-    );
-
+        `Dzień dobry,\r\n\r\nWypełniłem(am) wstępny kalkulator wyceny projektu ${selectedCategory} i chciał(a)bym przejść do stworzenia wiążącej, oficjalnej wyceny.\r\n\r\nPoniżej przedstawiam podsumowanie moich wyborów i wstępny szacunek kosztu:\r\n\r\nKATEGORIA: ${selectedCategory}\r\n\r\nOPCJE WYBRANE W KALKULATORZE:\r\n${prettyChoices.map((c, i) => `${i + 1}. ${c}`).join("\r\n")}\r\n\r\nŁĄCZNY SZACUNKOWY KOSZT: ${totalPrice} zł netto\r\n\r\nDANE KONTAKTOWE KLIENTA:\r\nImię i Nazwisko / Nazwa Firmy: [PROSZĘ WPROWADZIĆ DANE]\r\nTelefon kontaktowy: [PROSZĘ WPROWADZIĆ DANE]\r\nDodatkowe uwagi do projektu: [PROSZĘ WPROWADZIĆ DODATKOWE INFORMACJE/PYTANIA]\r\n\r\nProszę o kontakt w celu omówienia szczegółów i stworzenia dokładnej oferty.\r\n\r\nPozdrawiam,\r\n[TWOJE IMIĘ I NAZWISKO]\r\n`
+      );
 
       window.location.href = `mailto:${target}?subject=${subject}&body=${body}`;
     });
@@ -591,7 +598,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       scale: 0.95,
       filter: "blur(5px)",
       duration: 0.8,
-      ease: "power2.inOut",
+      ease: "elastic.inOut(1, 0.7)",
       zIndex: -50,
     });
     gsap.to(summarySlide, {
@@ -600,7 +607,8 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       scale: 1,
       filter: "blur(0px)",
       duration: 0.8,
-      ease: "power2.out",
+      ease: "elastic.out(1, 0.7)",
+      delay: 0.5,
       onComplete: () => {
         isAnimating = false;
         fadeInContent(summarySlide);
@@ -618,7 +626,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
     slide.querySelectorAll("button").forEach((b) => {
       b.disabled = true;
-      gsap.to(b, { opacity: 0.9, duration: 0.2, ease: "power2.out" });
+      // gsap.to(b, { opacity: 0.5, duration: 0.2, ease: "elastic.out(1, 0.7)" });
     });
 
     const start = totalPrice;
@@ -629,7 +637,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       {
         val: end,
         duration: 0.6,
-        ease: "power1.out",
+        ease: "power3.inOut",
         onUpdate() {
           pricing.textContent = `${Math.round(this.targets()[0].val)} PLN`;
         },
@@ -642,7 +650,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
               duration: 0.3,
               yoyo: true,
               repeat: 1,
-              ease: "power1.out",
+              ease: "power3.inOut",
             }
           );
         },
@@ -650,7 +658,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
     );
 
     slide.querySelectorAll("button").forEach((b) => {
-      gsap.to(b, { opacity: 1, duration: 0.3, ease: "power2.out" });
+      gsap.to(b, { opacity: 1, duration: 0.3, ease: "elastic.out(1, 0.7)" });
       b.disabled = false;
     });
 
@@ -691,7 +699,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       scale: 0.95,
       filter: "blur(5px)",
       duration: 0.6,
-      ease: "power2.inOut",
+      ease: "elastic.inOut(1, 0.7)",
       onComplete: () => {
         Array.from(container.children).forEach((child) => {
           if (child.id !== "template") child.remove();
