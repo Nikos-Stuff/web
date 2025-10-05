@@ -542,11 +542,15 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       "tmpl-button-with-arrow backdrop-blur-sm group min-w-[50%] p-2 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out";
     sendMailBtn.innerHTML = `<span class="button-text w-full z-10 relative text-center">Wyślij wycenę na maila</span>`;
     sendMailBtn.addEventListener("click", () => {
-      const subject = encodeURIComponent("Wycena projektu");
+
+      const subject = encodeURIComponent(`PROŚBA O WIĄŻĄCĄ WYCENĘ: Projekt ${selectedCategory} (Szacunkowy Koszt: ${totalPrice} zł)`);
+
       const target = "team@nikostuff.com";
+
       const body = encodeURIComponent(
-        `Dzień dobry,\r\n\r\nNa podstawie wypełnionej ankiety dotyczącej projektu w kategorii: ${selectedCategory}, przygotowałem wstępną wycenę. Poniżej przedstawiam szczegóły:\r\n\r\n${prettyChoices.map((c, i) => `${i + 1}. ${c}`).join("\r\n")}\r\n\r\nŁączny koszt: ${totalPrice} zł\r\n\r\nJeżeli są dodatkowe informacje, które warto uwzględnić przy wycenie, proszę o ich przesłanie.\r\n\r\nChętnie odpowiem również na wszelkie pytania dotyczące projektu i doprecyzuję szczegóły.\r\n\r\nPozdrawiam serdecznie,\r\n[Twoje Imię]\r\n[Twoja firma / stanowisko, jeśli chcesz]\r\n[Opcjonalnie telefon kontaktowy]`
-      );
+  `Dzień dobry,\r\n\r\nWypełniłem(am) wstępny kalkulator wyceny projektu ${selectedCategory} i chciał(a)bym przejść do stworzenia wiążącej, oficjalnej wyceny.\r\n\r\nPoniżej przedstawiam podsumowanie moich wyborów i wstępny szacunek kosztu:\r\n\r\nKATEGORIA: ${selectedCategory}\r\n\r\nOPCJE WYBRANE W KALKULATORZE:\r\n${prettyChoices.map((c, i) => `${i + 1}. ${c}`).join("\r\n")}\r\n\r\nŁĄCZNY SZACUNKOWY KOSZT: ${totalPrice} zł netto\r\n\r\nDANE KONTAKTOWE KLIENTA:\r\nImię i Nazwisko / Nazwa Firmy: [PROSZĘ WPROWADZIĆ DANE]\r\nTelefon kontaktowy: [PROSZĘ WPROWADZIĆ DANE]\r\nDodatkowe uwagi do projektu: [PROSZĘ WPROWADZIĆ DODATKOWE INFORMACJE/PYTANIA]\r\n\r\nProszę o kontakt w celu omówienia szczegółów i stworzenia dokładnej oferty.\r\n\r\nPozdrawiam,\r\n[TWOJE IMIĘ I NAZWISKO]\r\n`
+    );
+
 
       window.location.href = `mailto:${target}?subject=${subject}&body=${body}`;
     });
