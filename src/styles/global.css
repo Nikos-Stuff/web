@@ -367,3 +367,7 @@ article img {
 .copy-svg {
   @apply w-full aspect-square text-white opacity-70 hover:opacity-90;
 }
+
+.adsense-auto-ads-ignore {
+    google-auto-ads: ignore;
+}
