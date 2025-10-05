@@ -77,6 +77,10 @@ export const LINKS: Links = [
 
   },
   {
+    TEXT: "Kosztorys",
+    HREF: "/kosztorys",
+  },
+  {
     TEXT: "Status",
     HREF: "https://status.nikostuff.com",
 

@@ -85,6 +85,9 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
+    const ignore_pages = ["/kosztorys"];
+    
+
     const audio = document.getElementById("spooky-audio");
     if (!(audio instanceof HTMLAudioElement)) return;
 
@@ -92,6 +95,12 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
       document.getElementById("mute_music"),
       document.getElementById("drawer-mute_music"),
     ];
+
+    if (ignore_pages.includes(window.location.pathname)) {
+      audio.remove();
+      muteButtons.forEach((button) => button?.remove());
+      return;
+    }
 
     let isMuted: boolean =
       sessionStorage.getItem("spooky-audio-muted") === "true";
