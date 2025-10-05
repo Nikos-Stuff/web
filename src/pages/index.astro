@@ -10,7 +10,9 @@ import { SITE, SOCIALS } from "@consts";
 import TwinklingStars from "@components/TwinklingStars.astro";
 import MeteorShower from "@components/MeteorShower.astro";
 import { Image } from "astro:assets";
+
 import FancyDiv from "@components/FancyDiv.astro";
+import WhyMe from "@components/WhyMe.astro"
 
 import Reviews from "@components/Reviews.astro";
 
@@ -79,7 +81,7 @@ import POD from "@components/POD.astro";
 
 // APOD - Astronomy Picture of the Day
 
-import { NASA_API, AZURE_API } from "astro:env/server";
+import { NASA_API, AZURE_API } from "astro:env/server";;
 
 const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
 
@@ -247,7 +249,9 @@ try {
           Spooky Scary Skeletons przejęły dzisiaj miejsce NASA Picture of the Day! 🎃👻<br />
           Zamiast kosmicznych widoków, czas na odrobinę halloweenowego klimatu i muzyki.<br />
           Uważaj, bo szkieletory mogą zatańczyć na Twoim ekranie! 🦴🕺<br />
-          Wesołego (i strasznego) miesiąca!
+          Wesołego (i strasznego) miesiąca!<br /><br />
+
+          <small>Możesz wyciszyć muzykę oraz ukryć film w tle naciskająć 🔇 w Headerze.</small>
         </p>
       </section>
     </FancyDiv>
@@ -311,6 +315,10 @@ try {
         <!-- We use the standard carousel script -->
       </section>
     </FancyDiv>
+
+
+    <!-- Why me Section -->
+    <WhyMe/>
 
     <!--  About Section  -->
     <FancyDiv isAnimated={true}>

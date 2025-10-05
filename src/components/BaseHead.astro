@@ -96,6 +96,8 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
       document.getElementById("drawer-mute_music"),
     ];
 
+    const apod_image = document.getElementById("apod-image");
+
     if (ignore_pages.includes(currentPath)) {
       audio.remove();
       muteButtons.forEach((button) => button?.remove());
@@ -113,9 +115,26 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
         if (isMuted) {
           button.classList.add("opacity-50");
           button.classList.remove("opacity-100");
+
+          if (apod_image) {
+
+            setTimeout(() => {
+            apod_image.classList.add("opacity-0");
+            apod_image.classList.remove("opacity-100");
+            }, 500);
+          }
         } else {
           button.classList.remove("opacity-50");
           button.classList.add("opacity-100");
+
+          if (apod_image) {
+
+            
+            setTimeout(() => {
+            apod_image.classList.remove("opacity-0");
+            apod_image.classList.add("opacity-100");
+            }, 500);
+          } 
         }
       });
     };

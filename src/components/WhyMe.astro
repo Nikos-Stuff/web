@@ -1,0 +1,201 @@
+---
+import FancyDiv from "@components/FancyDiv.astro";
+---
+
+<div>
+  <FancyDiv theme="simple_full_width_blurred_bg" margin_bottom="50">
+    <section class="animate max-w-screen-md mx-auto pt-25 pb-25">
+      <div
+        class="relative animate w-full border border-black/15 dark:border-white/20 rounded-lg h-40 flex flex-col justify-center items-center overflow-hidden dark:bg-black/50 bg-white/50 transition-colors"
+      >
+        <p
+          class="absolute text-[18rem] md:text-[22rem] font-extrabold text-black/10 dark:text-white/10 select-none leading-none pointer-events-none"
+          aria-hidden="true"
+        >
+          ###
+        </p>
+
+        <p
+          id="animate_num"
+          class="relative text-center text-9xl font-bold z-10 w-full"
+          data-animate-num="40"
+        >
+          40
+        </p>
+
+        <p class="relative text-center text-md animate z-10">
+          zadowolonych klientów
+        </p>
+      </div>
+
+      <hr class="border-black/10 dark:border-white/25 animate my-25" />
+
+      <!-- Flex boxes -->
+      <div class="flex flex-col md:flex-row gap-10 md:gap-20">
+        <div class="flex-1 animate">
+          <p class="font-semibold text-2xl mb-5">Sprawdzone Rozwiązania</p>
+          <p class="text-sm">
+            <span class="font-bold">Ponad 5 lat stałej praktyki</span> oznacza, że
+            nie eksperymentuję. Dostarczam najlepsze techniki montażu wideo, optymalizacji
+            stron i doboru materiałów (jak specjalistyczny TPU).
+          </p>
+        </div>
+
+        <div class="flex-1 animate">
+          <p class="font-semibold text-2xl mb-5">Gwarancja Satysfakcji</p>
+          <p class="text-sm">
+            <span class="font-bold">Nie ma limitu poprawek.</span> Pracuję aż do
+            Twojej 100% satysfakcji, ponieważ wyceniamy <span class="font-bold"
+              >rezultat</span
+            >, a nie liczbę godzin pracy.
+          </p>
+        </div>
+
+        <div class="flex-1 animate">
+          <p class="font-semibold text-2xl mb-5">Wsparcie i Bezpieczeństwo</p>
+          <p class="text-sm">
+            <span class="font-bold">Nie znikam po wysyłce!</span> Oferuję konsultacje
+            po wdrożeniu strony, pomoc w obsłudze systemów (CMS) i wsparcie techniczne
+            specjalnie dla Ciebie.
+          </p>
+        </div>
+      </div>
+
+      <hr class="border-black/10 dark:border-white/25 animate my-25" />
+
+      <!-- Stats -->
+      <div class="flex flex-col md:flex-row gap-10 md:gap-20">
+        <!-- 2h -->
+        <div
+          class="relative flex-1 animate border border-black/10 dark:border-white/20 rounded-lg p-5 dark:bg-black/50 bg-white/50 transition-colors flex flex-col justify-center items-center overflow-hidden"
+        >
+          <p
+            class="absolute text-[12rem] md:text-[16rem] font-extrabold text-black/10 dark:text-white/10 select-none leading-none pointer-events-none"
+            aria-hidden="true"
+          >
+            ~~~~~~
+          </p>
+          <p
+            class="relative text-center text-7xl font-bold z-10 w-full"
+            data-animate-num="2"
+            data-suffix="h"
+          >
+            2h
+          </p>
+          <p class="relative text-center text-md animate z-10">
+            Ekspresowy czas odpowiedzi
+          </p>
+        </div>
+
+        <!-- 0% -->
+        <div
+          class="relative flex-1 animate border border-black/10 dark:border-white/20 rounded-lg p-5 dark:bg-black/50 bg-white/50 transition-colors flex flex-col justify-center items-center overflow-hidden"
+        >
+          <p
+            class="absolute text-[12rem] md:text-[16rem] font-extrabold text-black/10 dark:text-white/10 select-none leading-none pointer-events-none"
+            aria-hidden="true"
+          >
+            /\/\/\/\/\
+          </p>
+          <p
+            class="relative text-center text-7xl font-bold z-10 w-full"
+            data-animate-num="0"
+            data-start="100"
+            data-suffix="%"
+          >
+            0%
+          </p>
+          <p class="relative text-center text-md animate z-10">
+            Współczynnik reklamacji
+          </p>
+        </div>
+
+        <!-- 6mo -->
+        <div
+          class="relative flex-1 animate border border-black/10 dark:border-white/20 rounded-lg p-5 dark:bg-black/50 bg-white/50 transition-colors flex flex-col justify-center items-center overflow-hidden"
+        >
+          <p
+            class="absolute text-[12rem] md:text-[16rem] font-extrabold text-black/10 dark:text-white/10 select-none leading-none pointer-events-none"
+            aria-hidden="true"
+          >
+            ++++++
+          </p>
+          <p
+            class="relative text-center text-7xl font-bold z-10 w-full"
+            data-animate-num="6"
+            data-suffix="mo"
+          >
+            6mo
+          </p>
+          <p class="relative text-center text-md animate z-10">
+            Gwarancja i wsparcie techniczne
+          </p>
+        </div>
+      </div>
+    </section>
+  </FancyDiv>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const animateNumbers = () => {
+    const elements =
+      document.querySelectorAll<HTMLElement>("[data-animate-num]");
+
+    const parseNumber = (value: string | undefined, fallback = 0) => {
+      const parsed = Number(value);
+      return isNaN(parsed) ? fallback : parsed;
+    };
+
+    elements.forEach((el) => {
+      const dataset = el.dataset;
+      const targetValue = parseNumber(dataset.animateNum);
+      const startValue = parseNumber(dataset.start);
+      const suffix = dataset.suffix || "";
+      const obj = { value: startValue };
+
+      // Set initial value
+      el.textContent = Math.floor(startValue).toString() + suffix;
+
+      gsap.to(obj, {
+        value: targetValue,
+        duration: 2,
+        ease: "power1.inOut",
+        onUpdate: () => {
+          el.textContent = Math.floor(obj.value).toString() + suffix;
+        },
+        paused: true,
+      });
+
+      ScrollTrigger.create({
+        trigger: el,
+        start: "top 80%",
+        toggleActions: "play reverse play reverse",
+        onEnter: () =>
+          gsap.to(obj, {
+            value: targetValue,
+            duration: 2,
+            ease: "power1.inOut",
+            onUpdate: () => {
+              el.textContent = Math.floor(obj.value) + suffix;
+            },
+          }),
+        onLeaveBack: () =>
+          gsap.to(obj, {
+            value: startValue,
+            duration: 2,
+            ease: "power1.inOut",
+            onUpdate: () => {
+              el.textContent = Math.floor(obj.value) + suffix;
+            },
+          }),
+      });
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", animateNumbers);
+</script>

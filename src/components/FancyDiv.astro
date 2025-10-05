@@ -58,6 +58,17 @@ const themeVariants: Record<string, string> = {
     bg-white dark:bg-black sm:rounded-2xl animate sm:border border-t border-b
     border-black/25 dark:border-white/25 ${extraClass}
   `,
+
+  simple_full_width_blurred_bg: `
+    w-full p-5 ${marginBottom} space-y-24 backdrop-blur-2xl 
+    backdrop-brightness-150 dark:backdrop-brightness-75 animate border border-black/10 dark:border-white/20
+    ${extraClass}
+  `,
+
+  simple_full_width: `
+    w-full p-5 ${marginBottom} space-y-24 bg-white dark:bg-black animate border border-black/10 dark:border-white/20
+    ${extraClass}
+  `,
 };
 
 const divClass = themeVariants[theme] ?? themeVariants.default;
