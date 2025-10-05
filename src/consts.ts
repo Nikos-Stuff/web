@@ -49,6 +49,11 @@ export const NNB_WORKSHOP: Page = {
   DESCRIPTION: "Explore modded content.",
 }
 
+export const DYNAMIC_PRICING: Page = {
+  TITLE: "Kosztorys",
+  DESCRIPTION: "Szybki kosztorys usług.", 
+}
+
 // Links
 export const LINKS: Links = [
   { 
