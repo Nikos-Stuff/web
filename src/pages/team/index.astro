@@ -1,28 +1,46 @@
 ---
-import { getCollection } from "astro:content"
-import PageLayout from "@layouts/PageLayout.astro"
-import TopLayout from "@layouts/TopLayout.astro"
-import BottomLayout from "@layouts/BottomLayout.astro"
-import Projects from "@components/Teams"
-import {TEAM} from "../../consts";
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import TopLayout from "@layouts/TopLayout.astro";
+import BottomLayout from "@layouts/BottomLayout.astro";
+import SearchCollection from "@components/SearchCollection";
+import { TEAM } from "@consts";
+import type { CollectionEntry } from "astro:content";
 
 const teams = (await getCollection("team"))
-  .filter(team => !team.data.draft)
-  // .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .filter((project) => !project.data.draft)
 
-const tags = [...new Set(teams.flatMap(team => team.data.tags))]
-  .sort((a, b) => a.localeCompare(b))
+const tags = [
+  ...new Set(teams.flatMap((team) => team.data.tags)),
+].sort((a, b) => a.localeCompare(b));
+
+const estimated_initial_size =
+  28 + teams.length * 158 + (teams.length - 1) * 12;
 ---
 
 <PageLayout title={TEAM.TITLE} description={TEAM.DESCRIPTION}>
   <TopLayout>
-    <div class="animate page-heading">
-      {TEAM.TITLE}
+    <div class="animate">
+      <h1 class="text-3xl font-semibold text-black dark:text-white mt-2">
+        {TEAM.TITLE}
+      </h1>
+      <div class="mt-1">
+        {TEAM.DESCRIPTION}
+      </div>
     </div>
   </TopLayout>
   <BottomLayout>
-    <div class="animate">
-      <Projects client:load tags={tags} data={teams} />
+    <div
+      id="search-collection-wrapper"
+      class="animate"
+      style={{ minHeight: `${estimated_initial_size}px` }}
+    >
+      <SearchCollection
+        client:load
+        entry_name={"teams"}
+        tags={tags}
+        data={teams}
+      />
     </div>
   </BottomLayout>
 </PageLayout>

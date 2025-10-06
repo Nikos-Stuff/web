@@ -34,7 +34,9 @@ import WhyMe from "@components/WhyMe.astro";
   <BackgroundFX />
 
   <!-- Root Container -->
-  <section class="flex items-center justify-center overflow-hidden backdrop-blur-xs">
+  <section
+    class="flex items-center justify-center overflow-hidden backdrop-blur-xs"
+  >
     <div id="root_container" class="relative w-svw h-svh perspective-[1500px]">
       <!-- Template -->
       <div
@@ -69,7 +71,7 @@ import WhyMe from "@components/WhyMe.astro";
             class="tmpl-button-with-arrow backdrop-blur-sm group min-w-full md:min-w-[50%] p-2 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
           >
             <span
-              class="button-text w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center"
+              class="button-text w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
             >
               Text
             </span>
@@ -108,22 +110,21 @@ import WhyMe from "@components/WhyMe.astro";
     </div>
   </section>
   <div class="relative mb-44 mt-20">
-
-    <WhyMe/>
+    <WhyMe />
 
     <FancyDiv isAnimated="true">
       <section class="animate pb-0">
         <p class="font-semibold text-2xl">Nie znalazłeś tego co trzeba?</p>
         <p class="font-bold text-sm mb-4">
-          Odkryj dokładniejsze cenniki oraz rozpiski planów lub
-          skontaktuj się ze mną!
+          Odkryj dokładniejsze cenniki oraz rozpiski planów lub skontaktuj się
+          ze mną!
         </p>
         <a
           href="/pricing"
           class="backdrop-blur-sm group w-full p-2 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out mb-2"
         >
           <span
-            class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center"
+            class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
           >
             Odkryj Cennik
           </span>
@@ -156,7 +157,7 @@ import WhyMe from "@components/WhyMe.astro";
           class="backdrop-blur-sm group w-full p-2 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
         >
           <span
-            class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center"
+            class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
           >
             Wyślij Wiadomość
           </span>
