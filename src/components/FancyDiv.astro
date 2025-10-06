@@ -19,14 +19,14 @@ const marginBottom = validMargins[String(margin_bottom)] ?? "mb-10";
 
 // Universal themes
 const themeVariants: Record<string, string> = {
-  default: `
+  default_h: `
   mx-auto max-w-screen-sm p-5 ${marginBottom} space-y-24 backdrop-blur-2xl 
   backdrop-brightness-150 dark:backdrop-brightness-75 sm:rounded-2xl animate sm:border border-t border-b
   border-orange-500/60 dark:border-orange-300/40 ${extraClass}
   shadow-[0_0_25px_rgba(255,115,0,0.4)]
 `,
 
-  defaulta: `
+  default: `
     mx-auto max-w-screen-sm p-5 ${marginBottom} space-y-24 backdrop-blur-2xl 
     backdrop-brightness-200 dark:backdrop-brightness-50 sm:rounded-2xl animate sm:border border-t border-b
     border-black/25 dark:border-white/25 ${extraClass}
