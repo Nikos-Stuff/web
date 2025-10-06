@@ -41,9 +41,9 @@
   }
 }
 
-/* Testing */
+/* Mke this was fun to do - As for now it feels too unstable to use */
 
-@view-transition {
+/* @view-transition {
   navigation: auto;
 }
 
@@ -67,7 +67,7 @@
 
 ::view-transition-new(body-animate) {
   animation: grow-fade-in 700ms cubic-bezier(0.85, 0, 0.15, 1) both;
-}
+} */
 
 /* -------------- */
 
@@ -110,7 +110,7 @@ body {
 
 body {
   @apply relative flex flex-col;
-  view-transition-name: body-animate;
+  /* view-transition-name: body-animate; */
 }
 
 main {
