@@ -15,16 +15,15 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
 ---
 
 <!-- Preconnect -->
-<link rel="preconnect" href="https://nikostuff.com" crossorigin>
-<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://nikostuff.com" crossorigin />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <link rel="icon" type="image/svg+xml" href="/favicon.webp" />
-
 
 <meta name="generator" content={Astro.generator} />
 
@@ -42,6 +41,18 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
   type="font/woff"
   crossorigin
 />
+
+<!-- Global Scripts -->
+<script is:inline data-cfasync="false" src="/js/theme.js"></script>
+<script defer is:inline src="/js/scroll.js"></script>
+<script defer is:inline src="/js/copy.js"></script>
+
+<PageAnimations />
+<CursorEffect />
+<!--<script is:inline async src="/js/bg.js"/>-->
+<!--<script is:inline data-astro-rerun async src="/js/typewriter.js"/>-->
+
+<!--<ViewTransitions  />-->
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -75,18 +86,6 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
   title={title}
   href={`${Astro.site}rss.xml`}
 />
-
-<!-- Global Scripts -->
-<script is:inline data-cfasync="false" src="/js/theme.js"></script>
-<script defer is:inline src="/js/scroll.js"></script>
-<script defer is:inline src="/js/copy.js"></script>
-
-<PageAnimations />
-<CursorEffect />
-<!--<script is:inline async src="/js/bg.js"/>-->
-<!--<script is:inline data-astro-rerun async src="/js/typewriter.js"/>-->
-
-<!--<ViewTransitions  />-->
 
 <!-- SPOOKYMONTH -->
 <audio id="spooky-audio" src="/spooktober.ogg" loop></audio>
@@ -125,10 +124,9 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
           button.classList.remove("opacity-100");
 
           if (apod_image) {
-
             setTimeout(() => {
-            apod_image.classList.add("opacity-0");
-            apod_image.classList.remove("opacity-100");
+              apod_image.classList.add("opacity-0");
+              apod_image.classList.remove("opacity-100");
             }, 500);
           }
         } else {
@@ -136,13 +134,11 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
           button.classList.add("opacity-100");
 
           if (apod_image) {
-
-            
             setTimeout(() => {
-            apod_image.classList.remove("opacity-0");
-            apod_image.classList.add("opacity-100");
+              apod_image.classList.remove("opacity-0");
+              apod_image.classList.add("opacity-100");
             }, 500);
-          } 
+          }
         }
       });
     };
