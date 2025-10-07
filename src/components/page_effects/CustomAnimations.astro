@@ -8,9 +8,9 @@
     if (element.dataset.scroll_animated) return;
     element.dataset.scroll_animated = "true"; 
 
-    gsap.from(element, {
-      opacity: 0,
-      y: 50,
+    gsap.to(element, {
+      opacity: 1,
+      y: 0,
       duration: 1,
       ease: "elastic.out(1, 0.7)",
       scrollTrigger: {
