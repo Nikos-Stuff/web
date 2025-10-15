@@ -1,26 +1,26 @@
 ---
 import { Image } from "astro:assets";
 import { NASA_API } from "astro:env/server";
-const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
-let apodData = null;
+// const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
+// let apodData = null;
 let isLoaded = false;
 
-try {
-  const response = await fetch(apiUrl);
-  apodData = await response.json();
-} catch (error) {
-  console.error("Error fetching NASA APOD:", error);
-}
+// try {
+//   const response = await fetch(apiUrl);
+//   apodData = await response.json();
+// } catch (error) {
+//   console.error("Error fetching NASA APOD:", error);
+// }
 
-let finalUrl = apodData?.url;
+// let finalUrl = apodData?.url;
 
-if (finalUrl && finalUrl.includes("/embed/")) {
-  const [baseUrl] = finalUrl.split("?");
-  const videoId = baseUrl.split("/embed/")[1];
-  finalUrl = `${baseUrl}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
-}
+// if (finalUrl && finalUrl.includes("/embed/")) {
+//   const [baseUrl] = finalUrl.split("?");
+//   const videoId = baseUrl.split("/embed/")[1];
+//   finalUrl = `${baseUrl}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+// }
 
-console.log(" APOD will use URL:", finalUrl);
+// console.log(" APOD will use URL:", finalUrl);
 ---
 
 <div

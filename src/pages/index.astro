@@ -81,46 +81,46 @@ import POD from "@components/POD.astro";
 
 // APOD - Astronomy Picture of the Day
 
-import { NASA_API, AZURE_API } from "astro:env/server";;
+// import { NASA_API, AZURE_API } from "astro:env/server";;
 
-const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
+// const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
 
-let apodData = null;
-let translatedExplanation = null;
+// let apodData = null;
+// let translatedExplanation = null;
 
-const azureRegion = "eastus";
-const azureEndpoint = `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=pl`;
+// const azureRegion = "eastus";
+// const azureEndpoint = `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=pl`;
 
-try {
-  const response = await fetch(apiUrl);
-  apodData = await response.json();
+// try {
+//   const response = await fetch(apiUrl);
+//   apodData = await response.json();
 
-  // Prepare the text for translation
-  const translationPayload = [
-    {
-      Text: apodData.explanation,
-    },
-  ];
+//   // Prepare the text for translation
+//   const translationPayload = [
+//     {
+//       Text: apodData.explanation,
+//     },
+//   ];
 
-  const translateResponse = await fetch(azureEndpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Ocp-Apim-Subscription-Key": AZURE_API,
-      "Ocp-Apim-Subscription-Region": azureRegion,
-    },
-    body: JSON.stringify(translationPayload),
-  });
+//   const translateResponse = await fetch(azureEndpoint, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Ocp-Apim-Subscription-Key": AZURE_API,
+//       "Ocp-Apim-Subscription-Region": azureRegion,
+//     },
+//     body: JSON.stringify(translationPayload),
+//   });
 
-  const translation = await translateResponse.json();
-  translatedExplanation =
-    translation?.[0]?.translations?.[0]?.text || apodData.explanation;
+//   const translation = await translateResponse.json();
+//   translatedExplanation =
+//     translation?.[0]?.translations?.[0]?.text || apodData.explanation;
 
-  console.log(" Translated Explanation:", translatedExplanation);
-} catch (error) {
-  console.error(" Defaulting to og text - Error:", error);
-  translatedExplanation = apodData.explanation;
-}
+//   console.log(" Translated Explanation:", translatedExplanation);
+// } catch (error) {
+//   console.error(" Defaulting to og text - Error:", error);
+//   translatedExplanation = apodData.explanation;
+// }
 ---
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
