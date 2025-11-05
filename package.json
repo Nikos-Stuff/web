@@ -30,14 +30,14 @@
     "js-yaml": "^4.1.0",
     "node-fetch": "^3.3.2",
     "sharp": "^0.34.4",
-    "solid-js": "^1.9.9",
+    "solid-js": "^1.9.10",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.16",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
-    "vite": "^7.1.11"
+    "vite": "^7.2.0"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
