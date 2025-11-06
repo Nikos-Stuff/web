@@ -24,8 +24,8 @@ importers:
         specifier: ^3.6.0
         version: 3.6.0
       '@astrojs/solid-js':
-        specifier: 5.1.1
-        version: 5.1.1(@types/node@24.10.0)(jiti@2.6.1)(lightningcss@1.30.2)(solid-js@1.9.10)(yaml@2.8.1)
+        specifier: 5.1.2
+        version: 5.1.2(@types/node@24.10.0)(jiti@2.6.1)(lightningcss@1.30.2)(solid-js@1.9.10)(yaml@2.8.1)
       '@playform/inline':
         specifier: ^0.1.2
         version: 0.1.2(@types/node@24.10.0)(jiti@2.6.1)(lightningcss@1.30.2)(rollup@4.52.5)(typescript@5.9.3)(yaml@2.8.1)
@@ -126,8 +126,8 @@ packages:
   '@astrojs/sitemap@3.6.0':
     resolution: {integrity: sha512-4aHkvcOZBWJigRmMIAJwRQXBS+ayoP5z40OklTXYXhUDhwusz+DyDl+nSshY6y9DvkVEavwNcFO8FD81iGhXjg==}
 
-  '@astrojs/solid-js@5.1.1':
-    resolution: {integrity: sha512-8HoB5d58N9UYHWIkg523BF6pc/SFgri3UxNg2faH/PzTWHncJrUujprjuW7atpiZSP8cFFOId/dPE7F2/ydFKg==}
+  '@astrojs/solid-js@5.1.2':
+    resolution: {integrity: sha512-0Mt4tDXM4zQ8+WzY1ZNDgBQ4pE8vYW3We1P5XHJA9eOSYV2dhLOGT5zfVTQZ8PWTfZtoKBABtakZmdP97e01uQ==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0}
     peerDependencies:
       solid-devtools: ^0.30.1
@@ -2743,7 +2743,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.25.76
 
-  '@astrojs/solid-js@5.1.1(@types/node@24.10.0)(jiti@2.6.1)(lightningcss@1.30.2)(solid-js@1.9.10)(yaml@2.8.1)':
+  '@astrojs/solid-js@5.1.2(@types/node@24.10.0)(jiti@2.6.1)(lightningcss@1.30.2)(solid-js@1.9.10)(yaml@2.8.1)':
     dependencies:
       solid-js: 1.9.10
       vite: 6.4.1(@types/node@24.10.0)(jiti@2.6.1)(lightningcss@1.30.2)(yaml@2.8.1)
