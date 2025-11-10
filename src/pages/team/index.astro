@@ -5,7 +5,7 @@ import TopLayout from "@layouts/TopLayout.astro";
 import BottomLayout from "@layouts/BottomLayout.astro";
 import SearchCollection from "@components/SearchCollection";
 import { TEAM } from "@consts";
-import type { CollectionEntry } from "astro:content";
+// import type { CollectionEntry } from "astro:content";
 
 const teams = (await getCollection("team"))
   .filter((project) => !project.data.draft)

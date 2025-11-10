@@ -11,7 +11,7 @@ type Props = {
   data: CollectionEntry<"blog">[] | CollectionEntry<'projects'>[] | CollectionEntry<'team'>[]
 }
 
-export default function SearchCollection({ entry_name, data, tags }: Props) {
+export default function SearchCollection({ data, tags }: Props) { // There was "entry_name" gotta use it later.
   const coerced = data.map((entry) => entry as CollectionEntry<'blog'>);
 
   const [query, setQuery] = createSignal("");
