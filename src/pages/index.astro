@@ -81,46 +81,46 @@ import POD from "@components/POD.astro";
 
 // APOD - Astronomy Picture of the Day
 
-// import { NASA_API, AZURE_API } from "astro:env/server";;
+import { NASA_API, AZURE_API } from "astro:env/server";;
 
-// const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
+const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
 
-// let apodData = null;
-// let translatedExplanation = null;
+let apodData = null;
+let translatedExplanation = null;
 
-// const azureRegion = "eastus";
-// const azureEndpoint = `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=pl`;
+const azureRegion = "eastus";
+const azureEndpoint = `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=pl`;
 
-// try {
-//   const response = await fetch(apiUrl);
-//   apodData = await response.json();
+try {
+  const response = await fetch(apiUrl);
+  apodData = await response.json();
 
-//   // Prepare the text for translation
-//   const translationPayload = [
-//     {
-//       Text: apodData.explanation,
-//     },
-//   ];
+  // Prepare the text for translation
+  const translationPayload = [
+    {
+      Text: apodData.explanation,
+    },
+  ];
 
-//   const translateResponse = await fetch(azureEndpoint, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "Ocp-Apim-Subscription-Key": AZURE_API,
-//       "Ocp-Apim-Subscription-Region": azureRegion,
-//     },
-//     body: JSON.stringify(translationPayload),
-//   });
+  const translateResponse = await fetch(azureEndpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Ocp-Apim-Subscription-Key": AZURE_API,
+      "Ocp-Apim-Subscription-Region": azureRegion,
+    },
+    body: JSON.stringify(translationPayload),
+  });
 
-//   const translation = await translateResponse.json();
-//   translatedExplanation =
-//     translation?.[0]?.translations?.[0]?.text || apodData.explanation;
+  const translation = await translateResponse.json();
+  translatedExplanation =
+    translation?.[0]?.translations?.[0]?.text || apodData.explanation;
 
-//   console.log(" Translated Explanation:", translatedExplanation);
-// } catch (error) {
-//   console.error(" Defaulting to og text - Error:", error);
-//   translatedExplanation = apodData.explanation;
-// }
+  console.log(" Translated Explanation:", translatedExplanation);
+} catch (error) {
+  console.error(" Defaulting to og text - Error:", error);
+  translatedExplanation = apodData.explanation;
+}
 ---
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
@@ -239,30 +239,9 @@ import POD from "@components/POD.astro";
         <p class="font-semibold text-black dark:text-white">
           Obrazek / Informacja Dnia
         </p>
-        <!-- <p class="font-bold text-sm mb-2">{apodData.title}</p>
+        <p class="font-bold text-sm mb-2">{apodData.title}</p>
         <p class="text-xs mb-2">{apodData.date} - {apodData.copyright}</p>
-        <p class="text-sm max-w-3xl">{translatedExplanation}</p> -->
-
-        <p class="font-bold text-sm mb-2">Micro Moon vs. Super Moon</p>
-        <p class="text-xs mb-2">Şenol Şanlı 10/11/2025</p>
-        <p class="text-sm max-w-3xl">
-          Co było takiego super w środowym superksiężycu? W zeszłym tygodniu
-          miała miejsce pełnia Księżyca, która wydawała się nieco większa i
-          jaśniejsza niż zwykle. Powodem jest to, że faza pełnego rozświetlenia
-          Księżyca nastąpiła w krótkim czasie od perygeum – kiedy Księżyc
-          znajdował się najbliżej Ziemi na swojej eliptycznej orbicie. Chociaż
-          dokładne warunki definiujące superksiężyc są różne, superksiężyc w
-          zeszłą środę był z pewnością najbliższą, największą i najjaśniejszą
-          pełnią Księżyca w tym roku. Jednym z powodów popularności
-          superksiężyców jest ich łatwość obserwacji – wystarczy wyjść na
-          zewnątrz o zachodzie słońca i obserwować imponujący wschód Księżyca w
-          pełni! Na zdjęciu środowy superksiężyc porównano do kwietniowego
-          mikroksiężyca – kiedy pełnia Księżyca występuje w pobliżu najdalszej
-          części orbity Księżyca – przez co wydaje się on nieco mniejszy i
-          ciemniejszy niż zwykle. Biorąc pod uwagę wiele definicji, co najmniej
-          jedna superpełnia występuje każdego roku, a kolejna nastąpi w
-          przyszłym miesiącu (w dniu miesiąca).
-        </p>
+        <p class="text-sm max-w-3xl">{translatedExplanation}</p>
       </section>
     </FancyDiv>
 

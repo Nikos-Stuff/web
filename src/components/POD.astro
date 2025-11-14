@@ -1,27 +1,26 @@
 ---
 import { Image } from "astro:assets";
-import APOD_IMAGE from "@assets/apod.jpg";
-// import { NASA_API } from "astro:env/server";
-// const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
-// let apodData = null;
+import { NASA_API } from "astro:env/server";
+const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
+let apodData = null;
 let isLoaded = false;
 
-// try {
-//   const response = await fetch(apiUrl);
-//   apodData = await response.json();
-// } catch (error) {
-//   console.error("Error fetching NASA APOD:", error);
-// }
+try {
+  const response = await fetch(apiUrl);
+  apodData = await response.json();
+} catch (error) {
+  console.error("Error fetching NASA APOD:", error);
+}
 
-// let finalUrl = apodData?.url;
+let finalUrl = apodData?.url;
 
-// if (finalUrl && finalUrl.includes("/embed/")) {
-//   const [baseUrl] = finalUrl.split("?");
-//   const videoId = baseUrl.split("/embed/")[1];
-//   finalUrl = `${baseUrl}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
-// }
+if (finalUrl && finalUrl.includes("/embed/")) {
+  const [baseUrl] = finalUrl.split("?");
+  const videoId = baseUrl.split("/embed/")[1];
+  finalUrl = `${baseUrl}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+}
 
-// console.log(" APOD will use URL:", finalUrl);
+console.log(" APOD will use URL:", finalUrl);
 ---
 
 <div
@@ -29,7 +28,7 @@ let isLoaded = false;
   class="fixed inset-0 w-svw h-svh bg-white dark:bg-black transition-all duration-1000 ease-out"
   style={`opacity: ${isLoaded ? 1 : 0};`}
 >
-  <!-- { DISABLED DUE TO SPOOKYMONTH
+  {
     apodData ? (
       apodData.media_type === "image" ? (
         <Image
@@ -72,7 +71,7 @@ let isLoaded = false;
         </video>
       ) : null
     ) : null
-  } -->
+  }
 
   <!-- <video
     id="apod-image"
@@ -86,16 +85,4 @@ let isLoaded = false;
     <source src="/spooky.webm" type="video/mp4" />
     Your browser does not support the video tag.
   </video> -->
-
-  <Image
-    id="apod-image"
-    inferSize={true}
-    quality="low"
-    src={APOD_IMAGE}
-    alt="APOD Nasa Image"
-    class="w-svw h-svh object-cover blur-xs dark:blur-sm brightness-[1.3] dark:brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
-    onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0'); document.getElementById('pod').style.opacity = 1;`}
-    decoding="async"
-    loading="eager"
-  />
 </div>
