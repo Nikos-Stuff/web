@@ -54,6 +54,11 @@ export const DYNAMIC_PRICING: Page = {
   DESCRIPTION: "Szybki kosztorys usług.", 
 }
 
+export const HOSTING: Page = {
+  TITLE: "Hosting",
+  DESCRIPTION: "Profesjonalny hosting serwerów gier i nie tylko.", 
+}
+
 // Links
 export const LINKS: Links = [
   { 
@@ -76,6 +81,11 @@ export const LINKS: Links = [
   //   TEXT: "Mapy MC",
   //   HREF: "/downloads", 
   // },
+  {
+    TEXT: "Hosting",
+    HREF: "/hosting",
+
+  },
   {
     TEXT: "Cennik",
     HREF: "/pricing",

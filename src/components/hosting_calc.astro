@@ -1,0 +1,219 @@
+<div>
+  <div class="space-y-4 animate">
+    <!-- Custom Dropdown Node -->
+    <div class="relative" id="node_dropdown">
+      <p class="block text-sm font-medium mb-1">Wybierz node</p>
+
+      <!-- Wybrana opcja -->
+      <div
+        id="node_selected"
+        class="border border-black/15 dark:border-white/20 rounded-lg px-4 py-3 cursor-pointer flex justify-between items-center select-none hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-in-out"
+      >
+        🇩🇪 Niemcy (Ryzen 7 PRO 8700GE)
+      </div>
+
+      <!-- Lista opcji -->
+      <div
+        id="node_options"
+        class="absolute w-full border border-black/15 dark:border-white/20 rounded-lg mt-1 overflow-auto max-h-0 transition-all duration-300 z-50 dark:bg-black bg-white shadow-lg"
+        style="box-sizing: border-box;"
+      >
+        <div
+          class="px-4 py-3 cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
+          data-multiplier="1.0"
+        >
+          🇩🇪 Niemcy (Ryzen 7 PRO 8700GE)
+        </div>
+        <div
+          class="px-4 py-3 cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
+          data-multiplier="1.9"
+        >
+          🇩🇪 Niemcy (Ryzen 9 7950X3D)
+        </div>
+      </div>
+    </div>
+
+    <!-- Slider CPU -->
+    <div>
+      <label class="block text-sm font-medium mb-1"
+        >CPU (rdzenie): <span id="cpu_val" class="font-bold">2</span>
+        <input
+          id="cpu"
+          type="range"
+          min="1"
+          max="8"
+          step="1"
+          value="2"
+          class="w-full h-3 rounded-lg appearance-none bg-black/10 dark:bg-white/20 hover:bg-black/20 dark:hover:bg-white/30 transition-all duration-300 ease-in-out accent-black dark:accent-white"
+        />
+      </label>
+    </div>
+
+    <!-- Slider RAM -->
+    <div>
+      <label class="block text-sm font-medium mb-1"
+        >RAM (GB): <span id="ram_val" class="font-bold">4</span>
+        <input
+          id="ram"
+          type="range"
+          min="1"
+          max="64"
+          step="1"
+          value="4"
+          class="w-full h-3 rounded-lg appearance-none bg-black/10 dark:bg-white/20 hover:bg-black/20 dark:hover:bg-white/30 transition-all duration-300 ease-in-out accent-black dark:accent-white"
+        />
+      </label>
+    </div>
+
+    <!-- Slider Dysk -->
+    <div>
+      <label class="block text-sm font-medium mb-1"
+        >Dysk (GB): <span id="disk_val" class="font-bold">50</span>
+        <input
+          id="disk"
+          type="range"
+          min="10"
+          max="2000"
+          step="10"
+          value="50"
+          class="w-full h-3 rounded-lg appearance-none bg-black/10 dark:bg-white/20 hover:bg-black/20 dark:hover:bg-white/30 transition-all duration-300 ease-in-out accent-black dark:accent-white"
+        />
+      </label>
+    </div>
+
+    <!-- Slider Backup -->
+    <div>
+      <label class="block text-sm font-medium mb-1"
+        >Kopie zapasowe (ilość): <span id="backup_val" class="font-bold">0</span
+        >
+        <input
+          id="backup"
+          type="range"
+          min="0"
+          max="7"
+          step="1"
+          value="0"
+          class="w-full h-3 rounded-lg appearance-none bg-black/10 dark:bg-white/20 hover:bg-black/20 dark:hover:bg-white/30 transition-all duration-300 ease-in-out accent-black dark:accent-white"
+        />
+      </label>
+    </div>
+  </div>
+
+  <!-- Podsumowanie -->
+  <div class="pt-3 border-t dark:border-white/5 space-y-2">
+    <p class="text-sm text-muted">Podsumowanie:</p>
+    <div class="flex justify-between text-sm">
+      <span>CPU:</span><span id="cpu_cost">—</span>
+    </div>
+    <div class="flex justify-between text-sm">
+      <span>RAM:</span><span id="ram_cost">—</span>
+    </div>
+    <div class="flex justify-between text-sm">
+      <span>Dysk:</span><span id="disk_cost">—</span>
+    </div>
+    <div class="flex justify-between text-sm">
+      <span>Kopie zapasowe:</span><span id="backup_cost">—</span>
+    </div>
+    <div class="flex justify-between text-sm mt-2">
+      <span>Multiplier node:</span><span id="node_mult">x1.00</span>
+    </div>
+
+    <div class="mt-4 pt-3 border-t dark:border-white/5">
+      <div class="flex items-baseline justify-between">
+        <span class="text-lg font-semibold">Wytypowany koszt / mies.</span>
+        <span id="total_cost" class="text-2xl font-extrabold">—</span>
+      </div>
+      <p id="note" class="text-xs text-muted mt-1">
+        * Ceny są wyliczane na podstawie aktualnych stawek i mogą ulec zmianie.
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const nodeDropdown = document.getElementById("node_dropdown");
+  const nodeSelected = document.getElementById("node_selected");
+  const nodeOptions = document.getElementById("node_options");
+  const nodeMult = document.getElementById("node_mult");
+
+  nodeSelected?.addEventListener("click", () => {
+    nodeOptions?.classList.toggle("max-h-60");
+  });
+
+  nodeOptions?.querySelectorAll("div")?.forEach((option) => {
+    option.addEventListener("click", () => {
+      if (!nodeSelected || !nodeOptions || !nodeMult) return;
+      nodeSelected.textContent = option.textContent;
+      nodeOptions.classList.remove("max-h-60");
+      nodeMult.textContent = `x${option.dataset.multiplier}`;
+      updateTotalCostServer();
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    const target = e.target;
+    if (!(target instanceof Node) || !nodeDropdown?.contains(target)) {
+      nodeOptions?.classList.remove("max-h-60");
+    }
+  });
+
+  // Sliders
+  const sliders = ["cpu", "ram", "disk", "backup"];
+  sliders.forEach((id) => {
+    const slider = document.getElementById(id) as HTMLInputElement | null;
+    const val = document.getElementById(`${id}_val`);
+    slider?.addEventListener("input", () => {
+      if (val && slider) val.textContent = slider.value;
+      updateTotalCostServer();
+    });
+  });
+
+  // Fetch do PHP
+  async function updateTotalCostServer() {
+    const cpu = (document.getElementById("cpu") as HTMLInputElement).value;
+    const ram = (document.getElementById("ram") as HTMLInputElement).value;
+    const disk = (document.getElementById("disk") as HTMLInputElement).value;
+    const backup = (document.getElementById("backup") as HTMLInputElement)
+      .value;
+    const multiplier = nodeMult?.textContent?.replace("x", "") || "1";
+
+    const payload = {
+      cpu: parseInt(cpu),
+      ram: parseInt(ram),
+      disk: parseInt(disk),
+      backup: parseInt(backup),
+      multiplier: parseFloat(multiplier),
+    };
+
+    try {
+      const res = await fetch("https://api.nikostuff.com/v2/hosting/calc", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error("Błąd połączenia z serwerem");
+
+      const data = await res.json();
+
+      if (data.error) throw new Error(data.error);
+
+      // Wyświetlamy ceny
+      document.getElementById("cpu_cost")!.textContent =
+        `${data.cpu_cost.toFixed(2)} zł`;
+      document.getElementById("ram_cost")!.textContent =
+        `${data.ram_cost.toFixed(2)} zł`;
+      document.getElementById("disk_cost")!.textContent =
+        `${data.disk_cost.toFixed(2)} zł`;
+      document.getElementById("backup_cost")!.textContent =
+        `${data.backup_cost.toFixed(2)} zł`;
+      document.getElementById("total_cost")!.textContent =
+        `${data.total.toFixed(2)} zł`;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // Inicjalne wyliczenie
+  updateTotalCostServer();
+</script>
