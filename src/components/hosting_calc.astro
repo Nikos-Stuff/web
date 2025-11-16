@@ -4,7 +4,6 @@
     <div class="relative" id="node_dropdown">
       <p class="block text-sm font-medium mb-1">Wybierz node</p>
 
-      <!-- Wybrana opcja -->
       <div
         id="node_selected"
         class="border border-black/15 dark:border-white/20 rounded-lg px-4 py-3 cursor-pointer flex justify-between items-center select-none hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-in-out"
@@ -12,11 +11,9 @@
         🇩🇪 Niemcy (Ryzen 7 PRO 8700GE)
       </div>
 
-      <!-- Lista opcji -->
       <div
         id="node_options"
-        class="absolute w-full border border-black/15 dark:border-white/20 rounded-lg mt-1 overflow-auto max-h-0 transition-all duration-300 z-50 dark:bg-black bg-white shadow-lg"
-        style="box-sizing: border-box;"
+        class="absolute w-full rounded-lg mt-1 overflow-auto max-h-0 transition-all duration-300 z-51 dark:bg-black bg-white shadow-lg"
       >
         <div
           class="px-4 py-3 cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
@@ -33,9 +30,42 @@
       </div>
     </div>
 
-    <!-- Slider CPU -->
+    <!-- Custom Dropdown Eggs -->
+    <div class="relative" id="egg_dropdown">
+      <p class="block text-sm font-medium mb-1">Wybierz jajko:</p>
+
+      <div
+        id="egg_selected"
+        class="border border-black/15 dark:border-white/20 rounded-lg px-4 py-3 cursor-pointer flex justify-between items-center select-none hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-in-out"
+      >
+        Kliknij aby wybrać jajko
+      </div>
+
+      <div
+        id="egg_options"
+        class="absolute w-full rounded-lg mt-1 overflow-auto max-h-0 transition-all duration-300 z-50 dark:bg-black bg-white shadow-lg"
+      >
+        <div class="p-3 grid grid-cols-3 md:grid-cols-6 gap-2 justify-items-center">
+          <div
+            hidden
+            id="egg_template"
+            data-egg_id="?"
+            class="flex flex-col items-center px-2 py-3 rounded-lg cursor-pointer hover:bg-black/5 dark:hover:bg-white/10 select-none transition-all"
+          >
+            <figure
+              class="w-16 h-16 rounded-md overflow-hidden bg-black/5 dark:bg-white/5 flex items-center justify-center"
+            >
+              <img src="" alt="Loading" class="w-full h-full object-cover" />
+            </figure>
+            <span class="text-sm mt-2 text-center">Pobieranie danych...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div>
-      <label class="block text-sm font-medium mb-1"
+      <label class="block text-sm font-medium mb-1 mt-10"
         >CPU (rdzenie): <span id="cpu_val" class="font-bold">2</span>
         <input
           id="cpu"
@@ -49,7 +79,6 @@
       </label>
     </div>
 
-    <!-- Slider RAM -->
     <div>
       <label class="block text-sm font-medium mb-1"
         >RAM (GB): <span id="ram_val" class="font-bold">4</span>
@@ -65,7 +94,6 @@
       </label>
     </div>
 
-    <!-- Slider Dysk -->
     <div>
       <label class="block text-sm font-medium mb-1"
         >Dysk (GB): <span id="disk_val" class="font-bold">50</span>
@@ -81,7 +109,6 @@
       </label>
     </div>
 
-    <!-- Slider Backup -->
     <div>
       <label class="block text-sm font-medium mb-1"
         >Kopie zapasowe (ilość): <span id="backup_val" class="font-bold">0</span
@@ -99,7 +126,6 @@
     </div>
   </div>
 
-  <!-- Podsumowanie -->
   <div class="pt-3 border-t dark:border-white/5 space-y-2">
     <p class="text-sm text-muted">Podsumowanie:</p>
     <div class="flex justify-between text-sm">
@@ -136,6 +162,83 @@
   const nodeOptions = document.getElementById("node_options");
   const nodeMult = document.getElementById("node_mult");
 
+  const eggDropdown = document.getElementById("egg_dropdown");
+  const eggSelected = document.getElementById("egg_selected");
+  const eggOptions = document.getElementById("egg_options");
+  const eggTemplate = document.getElementById("egg_template");
+
+  const egg_list = "https://api.nikostuff.com/v2/hosting/pelican_data?list_eggs"
+  // Returns:
+  // [
+  //   {
+  //     "id": 1,
+  //     "name": "Forge Minecraft",
+  //     "image": "img_cache/egg_1.jpeg" <- CAN BE SVG OR PNG. WEB. etc!
+  //   },
+  //   {
+  //     "id": 2,
+  //     "name": "Paper",
+  //     "image": "img_cache/egg_2.svg"
+  //   },
+  // ...
+
+  async function fetchEggs() {
+
+    try {
+      const res = await fetch(egg_list);
+      if (!res.ok) throw new Error("Błąd pobierania jajek");
+
+      const data = await res.json();
+      const grid = eggOptions?.querySelector(".p-3");
+      if (!grid) return;
+
+      for (const egg of data) {
+        const eggOption = eggTemplate?.cloneNode(true);
+        if (!(eggOption instanceof HTMLElement)) continue;
+
+        eggOption.id = "";
+        eggOption.classList.add("egg_option");
+        eggOption.setAttribute("data-egg_id", egg.id);
+
+        // unhide
+        eggOption.hidden = false;
+
+        const img = eggOption.querySelector("img");
+        if (img) {
+          img.src = egg.image || "/imgs/plc.png";
+          img.alt = egg.name || "";
+        }
+
+        const label = eggOption.querySelector("span");
+        if (label) label.textContent = egg.name || "";
+
+        grid.appendChild(eggOption);
+
+        // wait 200ms before adding next item to avoid overwhelming the page
+        await new Promise((resolve) => setTimeout(resolve, 100));
+      }
+
+      // attach click handlers only to actual options
+      eggOptions?.querySelectorAll(".egg_option")?.forEach((option) => {
+        option.addEventListener("click", () => {
+          if (!eggSelected || !eggOptions) return;
+          const txt = option.querySelector("span")?.textContent?.trim() || "";
+          eggSelected.textContent = txt;
+          eggOptions.classList.remove("max-h-60");
+        });
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  eggSelected?.addEventListener("click", () => {
+    const eggOptions = document.getElementById("egg_options");
+    eggOptions?.classList.toggle("max-h-60");
+  });
+
+  fetchEggs();
+
   nodeSelected?.addEventListener("click", () => {
     nodeOptions?.classList.toggle("max-h-60");
   });
@@ -154,6 +257,10 @@
     const target = e.target;
     if (!(target instanceof Node) || !nodeDropdown?.contains(target)) {
       nodeOptions?.classList.remove("max-h-60");
+    }
+
+    if (!(target instanceof Node) || !eggDropdown?.contains(target)) {
+      eggOptions?.classList.remove("max-h-60");
     }
   });
 
