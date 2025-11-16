@@ -12,10 +12,10 @@ import Calculator from "@components/hosting_calc.astro";
 
 import { Image } from "astro:assets";
 
-import Image1 from "@assets/hosting/pay_only_for_usage.png"
-import Image2 from "@assets/hosting/perfect_panel.png"
-import Image3 from "@assets/hosting/power_that_delivers.png"
-import Image4 from "@assets/hosting/what_are_ya_waiting.png"
+import Image1 from "@assets/hosting/pay_only_for_usage.png";
+import Image2 from "@assets/hosting/perfect_panel.png";
+import Image3 from "@assets/hosting/power_that_delivers.png";
+import Image4 from "@assets/hosting/what_are_ya_waiting.png";
 ---
 
 <PageLayout title="Hosting" description={SITE.DESCRIPTION}>
@@ -75,7 +75,7 @@ import Image4 from "@assets/hosting/what_are_ya_waiting.png"
         class="relative flex items-center justify-center h-72 overflow-hidden"
       >
         <!-- Background Image -->
-         <Image
+        <Image
           src={Image1}
           alt="Hosting - Idealny Panel, Specjalny dla Ciebie"
           class="absolute inset-0 w-full h-full object-cover z-10 rounded-2xl invert-100 dark:invert-0 brightness-50"
@@ -109,7 +109,7 @@ import Image4 from "@assets/hosting/what_are_ya_waiting.png"
         class="relative flex items-center justify-center h-72 overflow-hidden"
       >
         <!-- Background Image -->
-         <Image
+        <Image
           src={Image2}
           alt="Hosting - Idealny Panel, Specjalny dla Ciebie"
           class="absolute inset-0 w-full h-full object-cover z-10 rounded-2xl invert-100 dark:invert-0 brightness-50"
@@ -145,7 +145,7 @@ import Image4 from "@assets/hosting/what_are_ya_waiting.png"
         class="relative flex items-center justify-center h-72 overflow-hidden"
       >
         <!-- Background Image -->
-         <Image
+        <Image
           src={Image3}
           alt="Hosting - Moc, Która Nie Zawodzi"
           class="absolute inset-0 w-full h-full object-cover z-10 rounded-2xl invert-100 dark:invert-0 brightness-50"
@@ -182,7 +182,7 @@ import Image4 from "@assets/hosting/what_are_ya_waiting.png"
         class="relative flex items-center justify-center h-72 overflow-hidden"
       >
         <!-- Background Image -->
-         <Image
+        <Image
           src={Image4}
           alt="Hosting - Na Co Czekasz?"
           class="absolute inset-0 w-full h-full object-cover z-10 rounded-2xl invert-100 dark:invert-0 brightness-50"
@@ -225,18 +225,20 @@ import Image4 from "@assets/hosting/what_are_ya_waiting.png"
 
         <Calculator />
 
-        <button
-          id="place_order_btn"
-          disabled
-          class="group animate w-full p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
-        >
-          <span
-            class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
+        <div class="animate">
+          <button
+            id="place_order_btn"
+            disabled
+            class="group w-full p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
           >
-            Kup Teraz <small>(Powered by Stripe)</small>
-          </span>
-        </button>
-
+            <span
+              class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
+            >
+              Kup Teraz <small>(Powered by Stripe)</small>
+            </span>
+          </button>
+        </div>
+        
         <!-- Line -->
         <hr class="border-black/10 dark:border-white/25 animate my-5" />
 
@@ -252,18 +254,20 @@ import Image4 from "@assets/hosting/what_are_ya_waiting.png"
           kosztuje, a pomoże nam to w podjęciu decyzji o uruchomieniu usługi.
         </p>
 
-        <a
-          id="place_order_btn"
-          href="https://forms.gle/M6DXeg3NzyFWBsn17"
-          target="_blank"
-          class="group animate w-full p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
-        >
-          <span
-            class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
+        <div class="animate">
+          <a
+            id="place_order_btn"
+            href="https://forms.gle/M6DXeg3NzyFWBsn17"
+            target="_blank"
+            class="group w-full p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
           >
-            Wypełnij Formularz Zainteresowania
-          </span>
-        </a>
+            <span
+              class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
+            >
+              Wypełnij Formularz Zainteresowania
+            </span>
+          </a>
+        </div>
       </section>
     </FancyDiv>
 
