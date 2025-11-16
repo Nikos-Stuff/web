@@ -15,6 +15,7 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
 ---
 
 <!-- Preconnect -->
+ <link rel="preconnect" href="https://challenges.cloudflare.com">
 <link rel="preconnect" href="https://nikostuff.com" crossorigin />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
@@ -46,6 +47,12 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
 <script is:inline data-cfasync="false" src="/js/theme.js"></script>
 <script defer is:inline src="/js/scroll.js"></script>
 <script defer is:inline src="/js/copy.js"></script>
+<script
+  src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+  async
+  defer
+></script>
+
 
 <PageAnimations />
 <CursorEffect />
