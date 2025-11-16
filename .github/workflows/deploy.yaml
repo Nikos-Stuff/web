@@ -25,6 +25,15 @@ jobs:
         with:
           fetch-depth: 0
 
+
+      - name: Show runner public IP
+        run: |
+          echo "Public IPv4:"
+          curl -4 https://ifconfig.me
+          echo ""
+          echo "Public IPv6:"
+          curl -6 https://ifconfig.me || echo "IPv6 not available"
+
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
