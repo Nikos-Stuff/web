@@ -103,7 +103,7 @@ Usługodawca nie odpowiada za:
 # 7. Rezygnacja i Zwroty
 
 1. Klient może anulować subskrypcję w dowolnym momencie.
-2. Jeśli subskrypcja została anulowana, usługa wygaśnie z końcem opłaconego okresu.
+2. Jeśli subskrypcja została anulowana, usługa wygaśnie 3 dni po końcu opłaconego okresu. ( Dane zostaną nieodwracalnie usunięte )
 3. Usługodawca **nie udziela zwrotów** za niewykorzystany czas trwania usługi.
 4. Zwroty mogą być przyznane jedynie w wyjątkowych sytuacjach według uznania Usługodawcy.
 
