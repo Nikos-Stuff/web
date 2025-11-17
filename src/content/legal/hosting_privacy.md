@@ -1,6 +1,6 @@
 ---
 title: "Polityka Prywatności dotycząca Usług Hostingowych"
-date: "17.11.2025"
+date: "17/11/2025"
 ---
 
 ## UWAGA: WCZESNA WERSJA ROBOCZA
