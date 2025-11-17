@@ -260,100 +260,61 @@
 
   const clientEmailInput = document.getElementById("client_email");
 
-  // ------------------------------
-  // VARIABLES
-  // ------------------------------
-  let fetchTimeout: number | undefined; // debounce timer for email input
-  let selectedLocation = ""; // stores currently selected location
-  let currentTurnstileToken: string | null = null; // stores CF Turnstile token
-
-  // Prevent continuous resets: track last reset per email and time
-  let lastResetEmail: string | null = null;
-  let lastResetAt = 0;
-
-  // ------------------------------
-  // TURNSTILE CALLBACKS (GLOBAL)
-  // on success, use token immediately if email present
-  // ------------------------------
-  (window as any).onTurnstileSuccess = function (token: string) {
-    currentTurnstileToken = token;
-    const email =
-      clientEmailInput instanceof HTMLInputElement
-        ? clientEmailInput.value.trim()
-        : "";
-    if (email.length > 0) {
-      // directly fetch user nodes using the fresh token
-      fetchUserNodes(email, token);
-      // invalidate token to avoid accidental reuse
-      currentTurnstileToken = null;
-      // allow future resets for new email changes
-      lastResetEmail = null;
-    }
-  };
-
-  (window as any).onTurnstileExpired = function () {
-    currentTurnstileToken = null;
-  };
-
   const egg_list =
     "https://api.nikostuff.com/v2/hosting/pelican_data?list_eggs"; // API for eggs
   const user_nodes_api =
     "https://api.nikostuff.com/v2/hosting/pelican_data?list_user_servers&email="; // API for user servers
 
   // ------------------------------
-  // EMAIL INPUT HANDLER
-  // Debounced. If we already have a valid token -> use it and clear it.
-  // If we don't have a token -> reset Turnstile only occasionally to avoid loop.
+  // TURNSTILE CALLBACKS (GLOBAL)
+  // on success -> immediately fetch user nodes if email present
+  // ------------------------------
+  (window as any).onTurnstileSuccess = function (token: string) {
+    const email =
+      clientEmailInput instanceof HTMLInputElement
+        ? clientEmailInput.value.trim()
+        : "";
+    if (email.length > 0) {
+      // use the token to fetch user nodes
+      fetchUserNodes(email, token).catch((e) => console.error(e));
+    }
+  };
+
+  (window as any).onTurnstileExpired = function () {
+    // nothing special needed here for the simplified flow
+  };
+
+  // ------------------------------
+  // SIMPLE EMAIL INPUT HANDLER
+  // On every input change: show usernodes area when email present and
+  // trigger a fresh Turnstile token by resetting the widget.
   // ------------------------------
   if (clientEmailInput instanceof HTMLInputElement) {
     clientEmailInput.addEventListener("input", () => {
       const email = clientEmailInput.value.trim();
 
-      // Toggle dropdowns
       if (email.length > 0) {
         usernodesDropdown?.removeAttribute("hidden");
         locationDropdown?.setAttribute("hidden", "true");
+
+        // Always ask Turnstile for a fresh token on input change
+        const w: any = window;
+        if (w.turnstile && typeof w.turnstile.reset === "function") {
+          try {
+            w.turnstile.reset();
+          } catch (e) {
+            console.warn("Turnstile reset failed", e);
+          }
+        }
       } else {
         usernodesDropdown?.setAttribute("hidden", "true");
         locationDropdown?.removeAttribute("hidden");
-
-        // clear any stored token when email cleared
-        currentTurnstileToken = null;
-        lastResetEmail = null;
       }
-
-      // Debounce fetch
-      if (fetchTimeout) clearTimeout(fetchTimeout);
-      fetchTimeout = window.setTimeout(() => {
-        const emailVal = email;
-        if (!emailVal) return;
-
-        // If we already have a fresh token, use it immediately.
-        if (currentTurnstileToken) {
-          fetchUserNodes(emailVal, currentTurnstileToken);
-          currentTurnstileToken = null; // invalidate token after use
-          lastResetEmail = null;
-        } else {
-          // No token available — reset the widget only when useful.
-          const w: any = window;
-          if (w.turnstile) {
-            const now = Date.now();
-            // only reset once per email value, or if >15s since last reset
-            if (lastResetEmail !== emailVal || now - lastResetAt > 15000) {
-              console.warn("No valid Turnstile token. Resetting challenge...");
-              w.turnstile.reset();
-              lastResetEmail = emailVal;
-              lastResetAt = now;
-            }
-          }
-        }
-      }, 500);
     });
   }
 
   // ------------------------------
-  // FETCH USER NODES WITH VALIDATION
-  // Fetches user nodes from backend after Turnstile validation
+  // FETCH USER NODES
   // ------------------------------
   async function fetchUserNodes(email: string, token: string) {
     try {
@@ -387,11 +348,9 @@
         grid.appendChild(serverOption);
       }
 
-      // Reset Turnstile widget and clear stored token after successful fetch
+      // reset Turnstile (optional cleanup)
       const w: any = window;
-      if (w.turnstile) w.turnstile.reset();
-      currentTurnstileToken = null;
-      lastResetEmail = null;
+      if (w.turnstile && typeof w.turnstile.reset === "function") w.turnstile.reset();
     } catch (e) {
       console.error(e);
     }
@@ -399,7 +358,6 @@
 
   // ------------------------------
   // FETCH EGGS
-  // Fetches eggs from backend, populates egg dropdown
   // ------------------------------
   async function fetchEggs() {
     try {
@@ -484,10 +442,11 @@
       option.addEventListener("click", () => {
         if (!locationSelected || !locationOptions) return;
         locationSelected.innerHTML = option.innerHTML;
-        selectedLocation = option.getAttribute("data-location_name") || "";
+        // store selected location for cost calc
+        const selected = option.getAttribute("data-location_name") || "";
         locationOptions.classList.remove("max-h-60");
-
-        // Recalculate costs whenever location changes
+        // trigger cost recalculation (function defined below)
+        selectedLocation = selected;
         updateTotalCostServer();
       });
     });
@@ -495,6 +454,9 @@
   // ------------------------------
   // SLIDER INPUT HANDLERS (CPU / RAM / Disk / Backup)
   // ------------------------------
+  // selectedLocation variable used above
+  let selectedLocation = "";
+
   const sliders = ["cpu", "ram", "disk", "backup"];
   sliders.forEach((id) => {
     const slider = document.getElementById(id);
@@ -632,12 +594,8 @@
   }
 
   // ------------------------------
-  // INITIAL CALCULATION ON PAGE LOAD
+  // INITIAL CALCULATION / EGGS INIT
   // ------------------------------
   updateTotalCostServer();
-
-  // ------------------------------
-  // INITIALIZE EGGS ON PAGE LOAD
-  // ------------------------------
   fetchEggs();
 </script>
