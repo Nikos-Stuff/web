@@ -266,27 +266,28 @@
   let fetchTimeout: number | undefined; // debounce timer for email input
   let selectedLocation = ""; // stores currently selected location
   let currentTurnstileToken: string | null = null; // stores CF Turnstile token
-
-  const egg_list =
-    "https://api.nikostuff.com/v2/hosting/pelican_data?list_eggs"; // API for eggs
-  const user_nodes_api =
-    "https://api.nikostuff.com/v2/hosting/pelican_data?list_user_servers&email="; // API for user servers
+  let tokenCheckInterval: number | undefined; // interval for checking Turnstile token
 
   // ------------------------------
-  // TURNSTILE CALLBACKS
+  // TURNSTILE CALLBACKS (GLOBAL)
   // ------------------------------
-  function onTurnstileSuccess(token: string) {
+  (window as any).onTurnstileSuccess = function (token: string) {
     currentTurnstileToken = token;
     const email =
       clientEmailInput instanceof HTMLInputElement
         ? clientEmailInput.value.trim()
         : "";
     if (email.length > 0) fetchUserNodes(email, token);
-  }
+  };
 
-  function onTurnstileExpired() {
+  (window as any).onTurnstileExpired = function () {
     currentTurnstileToken = null;
-  }
+  };
+
+  const egg_list =
+    "https://api.nikostuff.com/v2/hosting/pelican_data?list_eggs"; // API for eggs
+  const user_nodes_api =
+    "https://api.nikostuff.com/v2/hosting/pelican_data?list_user_servers&email="; // API for user servers
 
   // ------------------------------
   // EMAIL INPUT HANDLER
@@ -297,20 +298,48 @@
     clientEmailInput.addEventListener("input", () => {
       const email = clientEmailInput.value.trim();
 
+      // Toggle dropdowns
       if (email.length > 0) {
         usernodesDropdown?.removeAttribute("hidden");
         locationDropdown?.setAttribute("hidden", "true");
       } else {
         usernodesDropdown?.setAttribute("hidden", "true");
         locationDropdown?.removeAttribute("hidden");
+
+        // Clear polling if email is emptied
+        if (tokenCheckInterval) {
+          clearInterval(tokenCheckInterval);
+          tokenCheckInterval = undefined;
+        }
       }
 
+      // Debounce fetch
       if (fetchTimeout) clearTimeout(fetchTimeout);
       fetchTimeout = window.setTimeout(() => {
         if (currentTurnstileToken) {
           fetchUserNodes(email, currentTurnstileToken);
+
+          // Clear polling if somehow it was still running
+          if (tokenCheckInterval) {
+            clearInterval(tokenCheckInterval);
+            tokenCheckInterval = undefined;
+          }
         } else {
-          console.warn("No Turnstile token yet");
+          console.warn("No Turnstile token yet, starting polling...");
+
+          // Clear previous interval if any
+          if (tokenCheckInterval) clearInterval(tokenCheckInterval);
+
+          // Start polling every second until token exists
+          tokenCheckInterval = window.setInterval(() => {
+            if (currentTurnstileToken) {
+              fetchUserNodes(email, currentTurnstileToken);
+              if (tokenCheckInterval) {
+                clearInterval(tokenCheckInterval);
+                tokenCheckInterval = undefined;
+              }
+            }
+          }, 1000);
         }
       }, 500);
     });
