@@ -47,7 +47,7 @@ f. Dostęp do danych mają wyłącznie osoby upoważnione.
 
 a. Dane mogą być przekazywane wyłącznie podmiotom, które świadczą usługi na rzecz Administratora jako **podmioty przetwarzające** (art. 28 RODO), w szczególności:
 - **Stripe, Inc.** – obsługa płatności, autoryzacja transakcji,
-- **OVH SAS / OVHcloud** – dostawca infrastruktury serwerowej,
+- **dostawcy infrastruktury serwerowej** - (np. firmy hostingowe i chmurowe zapewniające fizyczne lub wirtualne zasoby serwerowe)
 - **Cloudflare, Inc.** – ochrona i optymalizacja ruchu, w tym Cloudflare Turnstile,
 - dostawcy usług mailingowych,
 - firmy świadczące usługi techniczne i bezpieczeństwa,
