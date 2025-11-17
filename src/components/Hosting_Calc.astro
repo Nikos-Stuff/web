@@ -269,20 +269,20 @@
   // TURNSTILE CALLBACKS (GLOBAL)
   // on success -> immediately fetch user nodes if email present
   // ------------------------------
-  (window as any).onTurnstileSuccess = function (token: string) {
-    const email =
-      clientEmailInput instanceof HTMLInputElement
-        ? clientEmailInput.value.trim()
-        : "";
-    if (email.length > 0) {
+  // (window as any).onTurnstileSuccess = function (token: string) {
+  //  const email =
+  //    clientEmailInput instanceof HTMLInputElement
+  //      ? clientEmailInput.value.trim()
+  //      : "";
+  //  if (email.length > 0) {
       // use the token to fetch user nodes
-      fetchUserNodes(email, token).catch((e) => console.error(e));
-    }
-  };
+  //    fetchUserNodes(email, token).catch((e) => console.error(e));
+  //  }
+  // };
 
-  (window as any).onTurnstileExpired = function () {
+  // (window as any).onTurnstileExpired = function () {
     // nothing special needed here for the simplified flow
-  };
+  //};
 
   // ------------------------------
   // SIMPLE EMAIL INPUT HANDLER
