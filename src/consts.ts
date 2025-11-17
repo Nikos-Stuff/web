@@ -59,6 +59,11 @@ export const HOSTING: Page = {
   DESCRIPTION: "Profesjonalny hosting serwerów gier i nie tylko.", 
 }
 
+export const LEGAL: Page = {
+  TITLE: "Informacje prawne",
+  DESCRIPTION: "Polityka prywatności, regulamin i inne informacje prawne.", 
+}
+
 // Links
 export const LINKS: Links = [
   { 

@@ -1,43 +1,77 @@
 ---
-title: "Warunki Korzystania"
-date: "03/19/2025"
+title: "Warunki Korzystania z Usług (Regulamin)"
+date: "11/17/2025"
 ---
 
+## UWAGA: WCZESNA WERSJA ROBOCZA
 
-Proszę uważnie zapoznać się z niniejszymi Warunkami Użytkowania ("Warunki", "Warunki Użytkowania") przed skorzystaniem ze strony nikostuff.com.
+Niniejszy dokument stanowi wstępny zarys Regulaminu Usług/Polityki Prywatności i nie został jeszcze autoryzowany prawnie. Prosimy o traktowanie go jako wersji poglądowej. Ostateczna wersja, zweryfikowana przez prawnika, zostanie opublikowana przed uruchomieniem płatności komercyjnych.
+
+### Definicje
+
+* **Usługodawca/Administrator:** Maciej Frączek prowadzący działalność gospodarczą pod firmą Niko's Stuff, NIP: ---, REGON: ---.
+* **Serwis:** Strona internetowa nikostuff.com oraz wszystkie powiązane usługi, w tym Panel Klienta i system hostingu.
+* **Usługa:** Dzierżawa zasobów serwerowych (CPU, RAM, Dysk) w celu hostowania serwerów gier.
+* **Klient/Użytkownik:** Osoba korzystająca z Serwisu i Usług.
+
+---
 
 ## 1. Zgoda na Warunki
-Korzystając z tej strony, użytkownik wyraża zgodę na przestrzeganie niniejszych Warunków Użytkowania. Jeśli nie zgadzasz się z tymi Warunkami, nie korzystaj z Usługi.
+
+Korzystając z Serwisu i zamawiając Usługę, Użytkownik wyraża zgodę na przestrzeganie niniejszych Warunków Korzystania. Jeśli Użytkownik nie zgadza się z tymi Warunkami, nie powinien korzystać z Serwisu ani Usług.
 
 ## 2. Prawa własności intelektualnej
-Wszelkie treści na stronie, takie jak teksty, grafiki, logotypy, ikony, obrazy, filmy, oprogramowanie i inne materiały, są własnością Niko's Stuff lub odpowiednich właścicieli praw autorskich. Zabrania się kopiowania, modyfikowania lub dystrybucji tych treści bez zgody właścicieli praw.
 
-## 3. Oświadczenia użytkowników
-Użytkownik zobowiązuje się do korzystania z Usługi zgodnie z obowiązującymi przepisami prawa oraz do niepodejmowania działań, które mogłyby zakłócić działanie strony lub naruszać jej integralność.
+Wszelkie treści na Serwisie (teksty, grafiki, logotypy, oprogramowanie, Panel Klienta) są własnością Usługodawcy lub odpowiednich właścicieli praw autorskich. Zabrania się kopiowania, modyfikowania lub dystrybucji tych treści bez zgody Usługodawcy.
 
-## 4. Linki do innych stron
-Strona może zawierać linki do innych serwisów internetowych. Nie ponosimy odpowiedzialności za treści lub działania tych stron. Korzystanie z takich linków odbywa się na własne ryzyko użytkownika.
+## 3. Zasady Dopuszczalnego Użytkowania (AUP)
 
-## 5. Zakończenie
-Zastrzegamy sobie prawo do zakończenia dostępu użytkownika do Usługi w przypadku naruszenia niniejszych Warunków Użytkowania. W takim przypadku użytkownik nie będzie mógł dalej korzystać z Usługi.
+Użytkownik zobowiązuje się do korzystania z Usługi zgodnie z obowiązującymi przepisami prawa (RP i UE) oraz do niepodejmowania działań, które mogłyby zakłócić działanie Serwisu lub naruszać jego integralność.
 
-## 6. Zmiany w Warunkach Użytkowania
-Zastrzegamy sobie prawo do aktualizacji lub zmiany tych Warunków w dowolnym czasie. Wszelkie zmiany będą publikowane na tej stronie i wchodzą w życie z chwilą ich opublikowania.
+### 3.1. Zakazane Działania i Zawartość
 
-# Warunki "Umowy"
+W ramach Usługi zabrania się hostowania, udostępniania lub promowania:
+* Treści niezgodnych z prawem, w tym m.in. materiałów naruszających prawa autorskie (piractwo), treści nieodpowiednich, promujących przemoc lub nienawiść.
+* Działań mających na celu zakłócenie pracy Serwisu lub sieci osób trzecich (w tym ataków DDoS, phishingu, spamu, botnetów).
+* **Kopania kryptowalut (mining)** oraz innych procesów, które stale i nieproporcjonalnie obciążają zasoby Serwera (CPU, RAM, I/O) w sposób szkodliwy dla innych użytkowników.
 
-Każda umowa lub potwierdzenie zawiera następujące postanowienia:
+### 3.2. Zasady Korzystania z Zasobów (Overselling)
 
-### Odpowiedzialność usługodawcy
-Usługodawca pełni rolę podmiotu realizującego zamówione usługi zgodnie z umową. Usługodawca nie ponosi odpowiedzialności cywilnej ani karnej za treści lub materiały dostarczone przez klienta w ramach świadczonych usług.
-
-W zakresie świadczonych usług, usługodawca zapewnia wsparcie techniczne oraz pośredniczy w kontakcie z dostawcami infrastruktury. W przypadku awarii lub prac konserwacyjnych podejmowane są działania mające na celu jak najszybsze przywrócenie usług.
-
-Wszelkie pytania dotyczące usług dostarczanych przez zewnętrznych partnerów mogą być kierowane do usługodawcy, który w miarę możliwości udzieli wsparcia lub przekieruje sprawę do właściwego dostawcy.
+Klient przyjmuje do wiadomości, że Serwis działa w oparciu o współdzieloną pulę zasobów infrastrukturalnych (overselling). Usługodawca zapewnia najwyższą dostępność zasobów, jednak w przypadku nadmiernego obciążenia przez pojedynczego Klienta, Usługodawca zastrzega sobie prawo do tymczasowego ograniczenia zasobów w celu zapewnienia stabilności pozostałym Użytkownikom.
 
 ---
 
-### Cykl rozliczeniowy
-Cykl rozliczeniowy rozpoczyna się w dniu zaksięgowania płatności. Podpisanie umowy oznacza zgodę na uruchomienie zamówionych usług / rozpoczęcie ich realizacji. W przypadku usług subskrypcyjnych płatności odnawiają się automatycznie na kolejne okresy rozliczeniowe, chyba że klient zgłosi rezygnację najpóźniej na 2 dni przed końcem bieżącego okresu. W przypadku rezygnacji nie przysługuje zwrot środków za niewykorzystany czas. 
+## 4. Warunki Umowy i Cykl Rozliczeniowy
 
-Wszelkie zmiany w cenniku wynikające z decyzji dostawców usług mogą zostać uwzględnione w kolejnych okresach rozliczeniowych. O wszelkich zmianach klienci zostaną poinformowani z odpowiednim wyprzedzeniem.
+### 4.1. Realizacja Usługi i Odpowiedzialność
+
+* Usługodawca pełni rolę podmiotu realizującego zamówione usługi zgodnie z umową, wykorzystując infrastrukturę dostarczoną przez zewnętrznych partnerów (np. OVH).
+* Usługodawca nie ponosi odpowiedzialności cywilnej ani karnej za treści, aplikacje lub materiały dostarczone i hostowane przez Klienta.
+* W zakresie świadczonych Usług, Usługodawca zapewnia wsparcie techniczne oraz pośredniczy w kontakcie z dostawcami infrastruktury.
+* Wszelkie pytania dotyczące usług dostarczanych przez zewnętrznych partnerów mogą być kierowane do Usługodawcy, który udzieli wsparcia lub przekaże sprawę do właściwego dostawcy.
+
+### 4.2. Płatności i Odnowienia
+
+* Usługi rozliczane są w cyklach [np. miesięcznych/kwartalnych]. Cykl rozliczeniowy rozpoczyna się w dniu zaksięgowania płatności.
+* Płatności są obsługiwane przez operatora zewnętrznego, firmę **Stripe** (zob. Polityka Prywatności). Usługodawca nie przechowuje wrażliwych danych płatniczych Klienta (np. numerów kart).
+* Usługi subskrypcyjne odnawiają się automatycznie na kolejne okresy rozliczeniowe, chyba że Klient zgłosi rezygnację.
+
+### 4.3. Rezygnacja i Zwroty
+
+* Rezygnacja z Usługi jest możliwa poprzez **anulowanie subskrypcji w Panelu Klienta** (Stripe Customer Portal) lub poprzez kontakt z Usługodawcą, najpóźniej na 2 dni przed końcem bieżącego okresu rozliczeniowego.
+* W przypadku rezygnacji Klientowi **nie przysługuje zwrot środków** za niewykorzystany czas opłaconego okresu.
+* Usługodawca zastrzega sobie prawo do uwzględnienia zmian w cenniku (wynikających z decyzji dostawców infrastruktury) w kolejnych okresach rozliczeniowych. O wszelkich zmianach Klient zostanie poinformowany z odpowiednim wyprzedzeniem.
+
+---
+
+## 5. Zakończenie (Terminacja Usługi)
+
+Usługodawca zastrzega sobie prawo do natychmiastowego zakończenia dostępu Klienta do Usługi, **bez obowiązku zwrotu środków**, w przypadku:
+1.  Naruszenia przepisów prawa Rzeczypospolitej Polskiej lub Unii Europejskiej.
+2.  Złamania klauzul dotyczących **Zakazanych Działań i Zawartości** (Sekcja 3.1).
+3.  Zaległości w płatnościach.
+
+## 6. Postanowienia Końcowe
+
+* Strona może zawierać linki do innych serwisów internetowych. Usługodawca nie ponosi odpowiedzialności za treści lub działania tych stron.
+* Usługodawca zastrzega sobie prawo do aktualizacji lub zmiany niniejszych Warunków w dowolnym czasie. Wszelkie zmiany będą publikowane na tej stronie i wchodzą w życie z chwilą ich opublikowania.

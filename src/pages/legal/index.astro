@@ -1,0 +1,27 @@
+---
+import PageLayout from "@layouts/PageLayout_Minimal.astro";
+import { LEGAL } from "@consts";
+---
+
+<PageLayout title="Hosting" description={LEGAL.DESCRIPTION}>
+  <div class="justify-center max-w-3xl mx-auto px-4 py-16 sm:py-24 lg:py-32">
+    <h1 class="text-4xl font-bold mb-6">Dostępne Dokumenty:</h1>
+    <ul class="list-disc list-inside space-y-2">
+      <li>
+        <a href="/legal/website_privacy" class="text-blue-600 hover:underline">
+            Polityka Prywatności - Strona WWW
+        </a>
+      </li>
+      <li>
+        <a href="/legal/hosting_privacy" class="text-blue-600 hover:underline">
+            Polityka Prywatności - Usługi Hostingowe
+        </a>
+      </li>
+      <li>
+        <a href="/legal/terms" class="text-blue-600 hover:underline">
+            Regulamin Serwisu / Usług / Strony WWW
+        </a>
+      </li>
+    </ul>
+  </div>
+</PageLayout>

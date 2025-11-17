@@ -1,6 +1,6 @@
 ---
-title: "Polityka prywatności"
-date: "03/19/2025"
+title: "Polityka prywatności dotycząca strony WWW"
+date: "11/17/2025"
 ---
 
 ## 1. Informacje ogólne
@@ -19,6 +19,8 @@ Google Analytics zbiera anonimowe informacje na temat odwiedzin (np. czas spędz
 
 Google AdSense może wyświetlać spersonalizowane reklamy na podstawie plików cookies. Użytkownicy mogą zarządzać swoimi preferencjami reklamowymi na stronie [Google Ads Settings](https://adssettings.google.com).
 
+W celu ochrony Serwisu przed nadużyciami, stosowana jest usługa Cloudflare Turnstile, która może umieszczać pliki cookies w urządzeniu końcowym Użytkownika. Działa to zgodnie z polityką prywatności firmy Cloudflare, Inc. z siedzibą w USA.
+
 Możesz zablokować pliki cookies w ustawieniach swojej przeglądarki, jednak może to wpłynąć na funkcjonalność Strony.
 
 ## 4. Podmioty trzecie
@@ -28,4 +30,4 @@ Na Stronie mogą znajdować się osadzone treści (np. wideo z YouTube, mapy Goo
 Polityka prywatności może być aktualizowana. Aktualna wersja będzie zawsze dostępna na tej stronie.
 
 ## 6. Kontakt
-W razie pytań dotyczących prywatności możesz skontaktować się pod adresem: team@nikostuff.com
+W razie pytań dotyczących prywatności możesz skontaktować się pod adresem: rodo@nikostuff.com
