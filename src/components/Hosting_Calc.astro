@@ -307,7 +307,6 @@
             }
           }
         }, 500);
-        
       } else {
         usernodesDropdown?.setAttribute("hidden", "true");
         locationDropdown?.removeAttribute("hidden");
@@ -319,6 +318,12 @@
   // FETCH USER NODES
   // ------------------------------
   async function fetchUserNodes(email: string, token: string) {
+    const grid = usernodeOptions;
+    
+    // Clear existing options
+    if (!grid) return;
+    grid.querySelectorAll("[data-server_id]").forEach((el) => el.remove());
+
     try {
       const res = await fetch(user_nodes_api + encodeURIComponent(email), {
         method: "POST",
@@ -332,10 +337,6 @@
       if (data.error) throw new Error(data.error);
 
       const servers = data.servers || [];
-      const grid = usernodeOptions;
-      if (!grid) return;
-
-      grid.querySelectorAll("[data-server_id]").forEach((el) => el.remove());
 
       for (const server of servers) {
         const serverOption = usernodeTemplate?.cloneNode(true);
@@ -349,13 +350,14 @@
 
         grid.appendChild(serverOption);
       }
-
-      // reset Turnstile (optional cleanup)
-      const w: any = window;
-      if (w.turnstile && typeof w.turnstile.reset === "function") w.turnstile.reset();
     } catch (e) {
       console.error(e);
     }
+
+    // reset the widget to get a fresh token for next time (even if error or invalid email provided)
+    const w: any = window;
+    if (w.turnstile && typeof w.turnstile.reset === "function")
+      w.turnstile.reset();
   }
 
   // ------------------------------
