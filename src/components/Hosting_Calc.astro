@@ -266,10 +266,10 @@
   let fetchTimeout: number | undefined; // debounce timer for email input
   let selectedLocation = ""; // stores currently selected location
   let currentTurnstileToken: string | null = null; // stores CF Turnstile token
-  let tokenCheckInterval: number | undefined; // interval for checking Turnstile token
 
   // ------------------------------
   // TURNSTILE CALLBACKS (GLOBAL)
+  // on success, use token immediately if email present
   // ------------------------------
   (window as any).onTurnstileSuccess = function (token: string) {
     currentTurnstileToken = token;
@@ -277,7 +277,12 @@
       clientEmailInput instanceof HTMLInputElement
         ? clientEmailInput.value.trim()
         : "";
-    if (email.length > 0) fetchUserNodes(email, token);
+    if (email.length > 0) {
+      // directly fetch user nodes using the fresh token
+      fetchUserNodes(email, token);
+      // invalidate token to avoid accidental reuse
+      currentTurnstileToken = null;
+    }
   };
 
   (window as any).onTurnstileExpired = function () {
@@ -291,8 +296,9 @@
 
   // ------------------------------
   // EMAIL INPUT HANDLER
-  // Shows user nodes if email is typed, otherwise shows location dropdown
-  // Uses debounce (500ms) to avoid spamming API
+  // Debounced. If we already have a valid token -> use it and clear it.
+  // If we don't have a token -> reset Turnstile and wait for widget callback.
+  // I did the silly before but no more!
   // ------------------------------
   if (clientEmailInput instanceof HTMLInputElement) {
     clientEmailInput.addEventListener("input", () => {
@@ -306,49 +312,25 @@
         usernodesDropdown?.setAttribute("hidden", "true");
         locationDropdown?.removeAttribute("hidden");
 
-        // Clear any ongoing polling if email is emptied
-        if (tokenCheckInterval) {
-          clearInterval(tokenCheckInterval);
-          tokenCheckInterval = undefined;
-        }
+        // clear any stored token when email cleared
+        currentTurnstileToken = null;
       }
 
       // Debounce fetch
       if (fetchTimeout) clearTimeout(fetchTimeout);
       fetchTimeout = window.setTimeout(() => {
         const emailVal = email;
+        if (!emailVal) return;
 
-        // Helper to request user nodes with a token
-        const requestWithToken = (token: string) => {
-          // Prevent reuse of same token
-          if (!token) return;
-          fetchUserNodes(emailVal, token);
-          currentTurnstileToken = null; // invalidate token immediately
-        };
-
-        // If we already have a fresh token, use it
+        // If we already have a fresh token, use it immediately.
         if (currentTurnstileToken) {
-          requestWithToken(currentTurnstileToken);
-          if (tokenCheckInterval) {
-            clearInterval(tokenCheckInterval);
-            tokenCheckInterval = undefined;
-          }
+          fetchUserNodes(emailVal, currentTurnstileToken);
+          currentTurnstileToken = null; // invalidate token after use
         } else {
+          // No token available — reset the widget and wait for onTurnstileSuccess to call fetch.
           console.warn("No valid Turnstile token. Resetting challenge...");
-
-          // Reset Turnstile to generate a new token
           const w: any = window;
           if (w.turnstile) w.turnstile.reset();
-
-          // Poll until we get a valid token
-          if (tokenCheckInterval) clearInterval(tokenCheckInterval);
-          tokenCheckInterval = window.setInterval(() => {
-            if (currentTurnstileToken) {
-              requestWithToken(currentTurnstileToken);
-              clearInterval(tokenCheckInterval);
-              tokenCheckInterval = undefined;
-            }
-          }, 1000);
         }
       }, 500);
     });
@@ -390,7 +372,7 @@
         grid.appendChild(serverOption);
       }
 
-      // Reset Turnstile token after successful fetch
+      // Reset Turnstile widget and clear stored token after successful fetch
       const w: any = window;
       if (w.turnstile) w.turnstile.reset();
       currentTurnstileToken = null;
