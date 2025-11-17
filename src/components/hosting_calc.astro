@@ -1,31 +1,43 @@
 <div>
   <div class="space-y-4 animate">
-    <!-- Custom Dropdown Node -->
-    <div class="relative" id="node_dropdown">
-      <p class="block text-sm font-medium mb-1">Wybierz node</p>
+    <!-- Custom Dropdown location -->
+    <div class="relative" id="location_dropdown">
+      <p class="block text-sm font-medium mb-1">Wybierz lokalizacje:</p>
 
       <div
-        id="node_selected"
+        id="location_selected"
         class="border border-black/15 dark:border-white/20 rounded-lg px-4 py-3 cursor-pointer flex justify-between items-center select-none hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-in-out"
       >
-        🇩🇪 Niemcy (Ryzen 7 PRO 8700GE)
+        <div>
+          <span class="fi fi-xx mr-5"></span>Kliknij aby wybrać lokalizację
+        </div><span id="cpu_available" class="text-xs text-muted ml-2"
+          >Dostępność: ?%</span
+        >
       </div>
 
       <div
-        id="node_options"
+        id="location_options"
         class="absolute w-full rounded-lg mt-1 overflow-auto max-h-0 transition-all duration-300 z-51 dark:bg-black bg-white shadow-lg"
       >
         <div
-          class="px-4 py-3 cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
-          data-multiplier="1.0"
+          class="px-4 py-3 flex justify-between items-center cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
+          data-location_name="europe_standard"
         >
-          🇩🇪 Niemcy (Ryzen 7 PRO 8700GE)
+          <div>
+            <span class="fi fi-eu mr-5"></span>Europa - Standard
+          </div><span id="cpu_available" class="text-xs text-muted ml-2"
+            >Dostępność: ?%</span
+          >
         </div>
         <div
-          class="px-4 py-3 cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
-          data-multiplier="1.9"
+          class="px-4 py-3 flex justify-between items-center cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
+          data-location_name="poland_standard"
         >
-          🇩🇪 Niemcy (Ryzen 9 7950X3D)
+          <div>
+            <span class="fi fi-pl mr-5"></span>Polska - Standard
+          </div><span id="cpu_available" class="text-xs text-muted ml-2"
+            >Dostępność: ?%</span
+          >
         </div>
       </div>
     </div>
@@ -45,7 +57,9 @@
         id="egg_options"
         class="absolute w-full rounded-lg mt-1 overflow-auto max-h-0 transition-all duration-300 z-50 dark:bg-black bg-white shadow-lg"
       >
-        <div class="p-3 grid grid-cols-3 md:grid-cols-6 gap-2 justify-items-center">
+        <div
+          class="p-3 grid grid-cols-3 md:grid-cols-6 gap-2 justify-items-center"
+        >
           <div
             hidden
             id="egg_template"
@@ -63,6 +77,44 @@
       </div>
     </div>
 
+    <!-- Email Input for node editing -->
+    <div class="relative">
+      <p class="block text-sm font-medium mb-1">
+        Adres e-mail ( jeśli chcesz przedłużyć / edytować serwer ):
+      </p>
+      <input
+        id="client_email"
+        type="text"
+        placeholder="twojmail@xyz.com"
+        class="w-full border border-black/15 dark:border-white/20 rounded-lg px-4 py-3 cursor-pointer flex justify-between items-center select-none hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-in-out"
+      />
+    </div>
+
+    <!-- Custom Dropdown - User Nodes -->
+    <div class="relative" id="usernodes_dropdown" hidden>
+      <p class="block text-sm font-medium mb-1">Wybierz Serwer:</p>
+
+      <div
+        id="usernode_selected"
+        class="border border-black/15 dark:border-white/20 rounded-lg px-4 py-3 cursor-pointer flex justify-between items-center select-none hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-in-out"
+      >
+        Kliknij aby wybrać serwer
+        <span class="text-xs text-muted ml-2">Ważny do: ?</span>
+      </div>
+
+      <div
+        id="usernode_options"
+        class="absolute w-full rounded-lg mt-1 overflow-auto max-h-0 transition-all duration-300 z-51 dark:bg-black bg-white shadow-lg"
+      >
+        <div
+          hidden
+          id="usernode_template"
+          class="px-4 py-3 flex justify-between items-center cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
+        >
+          <div>---</div><span class="text-xs text-muted ml-2">Ważny do: ?</span>
+        </div>
+      </div>
+    </div>
 
     <div>
       <label class="block text-sm font-medium mb-1 mt-10"
@@ -129,7 +181,8 @@
   <div class="pt-3 border-t dark:border-white/5 space-y-2">
     <p class="text-sm text-muted">Podsumowanie:</p>
     <div class="flex justify-between text-sm">
-      <span>CPU:</span><span id="cpu_cost">—</span>
+      <span>CPU:</span><span class="text-xs text-muted" id="cpu_name">—</span
+      ><span id="cpu_cost">—</span>
     </div>
     <div class="flex justify-between text-sm">
       <span>RAM:</span><span id="ram_cost">—</span>
@@ -141,7 +194,7 @@
       <span>Kopie zapasowe:</span><span id="backup_cost">—</span>
     </div>
     <div class="flex justify-between text-sm mt-2">
-      <span>Multiplier node:</span><span id="node_mult">x1.00</span>
+      <span>Lokalizacja:</span><span id="node_mult">x1.00</span>
     </div>
 
     <div class="mt-4 pt-3 border-t dark:border-white/5">
@@ -154,36 +207,164 @@
       </p>
     </div>
   </div>
+
+  <div class="flex justify-center my-4">
+    <div class="w-full max-w-[360px] h-[78px] flex items-center justify-center">
+      <!-- reserved box to avoid CLS and keep centered -->
+      <div
+        class="cf-turnstile"
+        data-sitekey="0x4AAAAAACBNatxTQCTb20u7"
+        data-theme="light"
+        data-size="normal"
+        data-callback="onSuccess"
+        style="min-height:78px;"
+      >
+      </div>
+    </div>
+  </div>
+
+  <div class="animate">
+    <button
+      id="place_order_btn"
+      disabled
+      class="group w-full p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+    >
+      <span
+        class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
+      >
+        Kontunuuj do Płatności / Edycji Usługi
+      </span>
+    </button>
+  </div>
 </div>
 
 <script>
-  const nodeDropdown = document.getElementById("node_dropdown");
-  const nodeSelected = document.getElementById("node_selected");
-  const nodeOptions = document.getElementById("node_options");
-  const nodeMult = document.getElementById("node_mult");
+  // ------------------------------
+  // DOM ELEMENT REFERENCES
+  // ------------------------------
+  const locationDropdown = document.getElementById("location_dropdown");
+  const locationSelected = document.getElementById("location_selected");
+  const locationOptions = document.getElementById("location_options");
+  const locationMult = document.getElementById("node_mult");
 
   const eggDropdown = document.getElementById("egg_dropdown");
   const eggSelected = document.getElementById("egg_selected");
   const eggOptions = document.getElementById("egg_options");
   const eggTemplate = document.getElementById("egg_template");
 
-  const egg_list = "https://api.nikostuff.com/v2/hosting/pelican_data?list_eggs"
-  // Returns:
-  // [
-  //   {
-  //     "id": 1,
-  //     "name": "Forge Minecraft",
-  //     "image": "img_cache/egg_1.jpeg" <- CAN BE SVG OR PNG. WEB. etc!
-  //   },
-  //   {
-  //     "id": 2,
-  //     "name": "Paper",
-  //     "image": "img_cache/egg_2.svg"
-  //   },
-  // ...
+  const usernodesDropdown = document.getElementById("usernodes_dropdown");
+  const usernodeSelected = document.getElementById("usernode_selected");
+  const usernodeOptions = document.getElementById("usernode_options");
+  const usernodeTemplate = document.getElementById("usernode_template");
 
+  const clientEmailInput = document.getElementById("client_email");
+
+  // ------------------------------
+  // VARIABLES
+  // ------------------------------
+  let fetchTimeout: number | undefined; // debounce timer for email input
+  let selectedLocation = ""; // stores currently selected location
+  let currentTurnstileToken: string | null = null; // stores CF Turnstile token
+
+  const egg_list =
+    "https://api.nikostuff.com/v2/hosting/pelican_data?list_eggs"; // API for eggs
+  const user_nodes_api =
+    "https://api.nikostuff.com/v2/hosting/pelican_data?list_user_servers&email="; // API for user servers
+
+  // ------------------------------
+  // TURNSTILE CALLBACKS
+  // ------------------------------
+  function onTurnstileSuccess(token: string) {
+    currentTurnstileToken = token;
+    const email =
+      clientEmailInput instanceof HTMLInputElement
+        ? clientEmailInput.value.trim()
+        : "";
+    if (email.length > 0) fetchUserNodes(email, token);
+  }
+
+  function onTurnstileExpired() {
+    currentTurnstileToken = null;
+  }
+
+  // ------------------------------
+  // EMAIL INPUT HANDLER
+  // Shows user nodes if email is typed, otherwise shows location dropdown
+  // Uses debounce (500ms) to avoid spamming API
+  // ------------------------------
+  if (clientEmailInput instanceof HTMLInputElement) {
+    clientEmailInput.addEventListener("input", () => {
+      const email = clientEmailInput.value.trim();
+
+      if (email.length > 0) {
+        usernodesDropdown?.removeAttribute("hidden");
+        locationDropdown?.setAttribute("hidden", "true");
+      } else {
+        usernodesDropdown?.setAttribute("hidden", "true");
+        locationDropdown?.removeAttribute("hidden");
+      }
+
+      if (fetchTimeout) clearTimeout(fetchTimeout);
+      fetchTimeout = window.setTimeout(() => {
+        if (currentTurnstileToken) {
+          fetchUserNodes(email, currentTurnstileToken);
+        } else {
+          console.warn("No Turnstile token yet");
+        }
+      }, 500);
+    });
+  }
+
+  // ------------------------------
+  // FETCH USER NODES WITH VALIDATION
+  // Fetches user nodes from backend after Turnstile validation
+  // ------------------------------
+  async function fetchUserNodes(email: string, token: string) {
+    try {
+      const res = await fetch(user_nodes_api + encodeURIComponent(email), {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ "cf-turnstile-response": token }),
+      });
+
+      if (!res.ok) throw new Error("Error fetching user servers");
+
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+
+      const servers = data.servers || [];
+      const grid = usernodeOptions;
+      if (!grid) return;
+
+      grid.querySelectorAll("[data-server_id]").forEach((el) => el.remove());
+
+      for (const server of servers) {
+        const serverOption = usernodeTemplate?.cloneNode(true);
+        if (!(serverOption instanceof HTMLElement)) continue;
+
+        serverOption.id = "";
+        serverOption.setAttribute("data-server_id", server.id);
+        serverOption.hidden = false;
+        serverOption.querySelector("div")!.textContent =
+          server.name || "Bez nazwy";
+
+        grid.appendChild(serverOption);
+      }
+
+      // Reset Turnstile token after successful fetch
+      const w: any = window;
+      if (w.turnstile) w.turnstile.reset();
+      currentTurnstileToken = null;
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // ------------------------------
+  // FETCH EGGS
+  // Fetches eggs from backend, populates egg dropdown
+  // ------------------------------
   async function fetchEggs() {
-
     try {
       const res = await fetch(egg_list);
       if (!res.ok) throw new Error("Błąd pobierania jajek");
@@ -192,6 +373,7 @@
       const grid = eggOptions?.querySelector(".p-3");
       if (!grid) return;
 
+      // Create egg options
       for (const egg of data) {
         const eggOption = eggTemplate?.cloneNode(true);
         if (!(eggOption instanceof HTMLElement)) continue;
@@ -199,8 +381,6 @@
         eggOption.id = "";
         eggOption.classList.add("egg_option");
         eggOption.setAttribute("data-egg_id", egg.id);
-
-        // unhide
         eggOption.hidden = false;
 
         const img = eggOption.querySelector("img");
@@ -214,11 +394,11 @@
 
         grid.appendChild(eggOption);
 
-        // wait 200ms before adding next item to avoid overwhelming the page
+        // small delay for rendering large number of eggs
         await new Promise((resolve) => setTimeout(resolve, 100));
       }
 
-      // attach click handlers only to actual options
+      // Add click listeners for eggs
       eggOptions?.querySelectorAll(".egg_option")?.forEach((option) => {
         option.addEventListener("click", () => {
           if (!eggSelected || !eggOptions) return;
@@ -232,64 +412,84 @@
     }
   }
 
+  // ------------------------------
+  // DROPDOWN TOGGLE HANDLERS
+  // ------------------------------
+  usernodeSelected?.addEventListener("click", () => {
+    usernodeOptions?.classList.toggle("max-h-60");
+  });
+
   eggSelected?.addEventListener("click", () => {
-    const eggOptions = document.getElementById("egg_options");
     eggOptions?.classList.toggle("max-h-60");
   });
 
-  fetchEggs();
-
-  nodeSelected?.addEventListener("click", () => {
-    nodeOptions?.classList.toggle("max-h-60");
+  locationSelected?.addEventListener("click", () => {
+    locationOptions?.classList.toggle("max-h-60");
   });
 
-  nodeOptions?.querySelectorAll("div")?.forEach((option) => {
-    option.addEventListener("click", () => {
-      if (!nodeSelected || !nodeOptions || !nodeMult) return;
-      nodeSelected.textContent = option.textContent;
-      nodeOptions.classList.remove("max-h-60");
-      nodeMult.textContent = `x${option.dataset.multiplier}`;
-      updateTotalCostServer();
-    });
-  });
-
+  // Click outside to close dropdowns
   document.addEventListener("click", (e) => {
     const target = e.target;
-    if (!(target instanceof Node) || !nodeDropdown?.contains(target)) {
-      nodeOptions?.classList.remove("max-h-60");
+    if (!(target instanceof Node) || !locationDropdown?.contains(target)) {
+      locationOptions?.classList.remove("max-h-60");
     }
-
     if (!(target instanceof Node) || !eggDropdown?.contains(target)) {
       eggOptions?.classList.remove("max-h-60");
     }
   });
 
-  // Sliders
+  // ------------------------------
+  // LOCATION OPTION SELECT
+  // ------------------------------
+  locationOptions
+    ?.querySelectorAll("[data-location_name]")
+    ?.forEach((option) => {
+      option.addEventListener("click", () => {
+        if (!locationSelected || !locationOptions) return;
+        locationSelected.innerHTML = option.innerHTML;
+        selectedLocation = option.getAttribute("data-location_name") || "";
+        locationOptions.classList.remove("max-h-60");
+
+        // Recalculate costs whenever location changes
+        updateTotalCostServer();
+      });
+    });
+
+  // ------------------------------
+  // SLIDER INPUT HANDLERS (CPU / RAM / Disk / Backup)
+  // ------------------------------
   const sliders = ["cpu", "ram", "disk", "backup"];
   sliders.forEach((id) => {
-    const slider = document.getElementById(id) as HTMLInputElement | null;
+    const slider = document.getElementById(id);
     const val = document.getElementById(`${id}_val`);
-    slider?.addEventListener("input", () => {
-      if (val && slider) val.textContent = slider.value;
-      updateTotalCostServer();
-    });
+    if (slider instanceof HTMLInputElement) {
+      slider.addEventListener("input", () => {
+        if (val) val.textContent = slider.value;
+        updateTotalCostServer(); // Recalculate cost on slider change
+      });
+    }
   });
 
-  // Fetch do PHP
+  // ------------------------------
+  // UPDATE TOTAL COST
+  // ------------------------------
   async function updateTotalCostServer() {
-    const cpu = (document.getElementById("cpu") as HTMLInputElement).value;
-    const ram = (document.getElementById("ram") as HTMLInputElement).value;
-    const disk = (document.getElementById("disk") as HTMLInputElement).value;
-    const backup = (document.getElementById("backup") as HTMLInputElement)
-      .value;
-    const multiplier = nodeMult?.textContent?.replace("x", "") || "1";
+    const cpuEl = document.getElementById("cpu");
+    const ramEl = document.getElementById("ram");
+    const diskEl = document.getElementById("disk");
+    const backupEl = document.getElementById("backup");
+
+    const cpu = cpuEl instanceof HTMLInputElement ? cpuEl.value : "0";
+    const ram = ramEl instanceof HTMLInputElement ? ramEl.value : "0";
+    const disk = diskEl instanceof HTMLInputElement ? diskEl.value : "0";
+    const backup = backupEl instanceof HTMLInputElement ? backupEl.value : "0";
 
     const payload = {
-      cpu: parseInt(cpu),
-      ram: parseInt(ram),
-      disk: parseInt(disk),
-      backup: parseInt(backup),
-      multiplier: parseFloat(multiplier),
+      cpu: parseInt(cpu, 10),
+      ram: parseInt(ram, 10),
+      disk: parseInt(disk, 10),
+      backup: parseInt(backup, 10),
+      location: selectedLocation || undefined,
     };
 
     try {
@@ -305,22 +505,102 @@
 
       if (data.error) throw new Error(data.error);
 
-      // Wyświetlamy ceny
-      document.getElementById("cpu_cost")!.textContent =
-        `${data.cpu_cost.toFixed(2)} zł`;
-      document.getElementById("ram_cost")!.textContent =
-        `${data.ram_cost.toFixed(2)} zł`;
-      document.getElementById("disk_cost")!.textContent =
-        `${data.disk_cost.toFixed(2)} zł`;
-      document.getElementById("backup_cost")!.textContent =
-        `${data.backup_cost.toFixed(2)} zł`;
-      document.getElementById("total_cost")!.textContent =
-        `${data.total.toFixed(2)} zł`;
+      // ------------------------------
+      // UPDATE COST ELEMENTS IN UI
+      // ------------------------------
+      const cpuCostEl = document.getElementById("cpu_cost");
+      const ramCostEl = document.getElementById("ram_cost");
+      const diskCostEl = document.getElementById("disk_cost");
+      const backupCostEl = document.getElementById("backup_cost");
+      const totalCostEl = document.getElementById("total_cost");
+      const cpuNameEl = document.getElementById("cpu_name");
+
+      if (cpuCostEl && typeof data.cpu_cost === "number")
+        cpuCostEl.textContent = `${data.cpu_cost.toFixed(2)} zł`;
+      if (ramCostEl && typeof data.ram_cost === "number")
+        ramCostEl.textContent = `${data.ram_cost.toFixed(2)} zł`;
+      if (diskCostEl && typeof data.disk_cost === "number")
+        diskCostEl.textContent = `${data.disk_cost.toFixed(2)} zł`;
+      if (backupCostEl && typeof data.backup_cost === "number")
+        backupCostEl.textContent = `${data.backup_cost.toFixed(2)} zł`;
+      if (totalCostEl && typeof data.total === "number")
+        totalCostEl.textContent = `${data.total.toFixed(2)} zł`;
+      if (cpuNameEl && typeof data.cpu_name === "string")
+        cpuNameEl.textContent = data.cpu_name;
+
+      if (locationMult && typeof data.multiplier === "number") {
+        locationMult.textContent = `x${data.multiplier.toFixed(2)}`;
+      }
+
+      // ------------------------------
+      // APPLY LOCATION LIMITS TO SLIDERS
+      // ------------------------------
+      if (data.location_limits && typeof data.location_limits === "object") {
+        const { max_cpu, max_ram, max_disk, max_backup } = data.location_limits;
+
+        const cpuInput = document.getElementById("cpu");
+        const ramInput = document.getElementById("ram");
+        const diskInput = document.getElementById("disk");
+        const backupInput = document.getElementById("backup");
+
+        const cpuValEl = document.getElementById("cpu_val");
+        const ramValEl = document.getElementById("ram_val");
+        const diskValEl = document.getElementById("disk_val");
+        const backupValEl = document.getElementById("backup_val");
+
+        if (
+          cpuInput instanceof HTMLInputElement &&
+          typeof max_cpu === "number"
+        ) {
+          cpuInput.max = String(max_cpu);
+          if (parseInt(cpuInput.value, 10) > max_cpu) {
+            cpuInput.value = String(max_cpu);
+            if (cpuValEl) cpuValEl.textContent = cpuInput.value;
+          }
+        }
+        if (
+          ramInput instanceof HTMLInputElement &&
+          typeof max_ram === "number"
+        ) {
+          ramInput.max = String(max_ram);
+          if (parseInt(ramInput.value, 10) > max_ram) {
+            ramInput.value = String(max_ram);
+            if (ramValEl) ramValEl.textContent = ramInput.value;
+          }
+        }
+        if (
+          diskInput instanceof HTMLInputElement &&
+          typeof max_disk === "number"
+        ) {
+          diskInput.max = String(max_disk);
+          if (parseInt(diskInput.value, 10) > max_disk) {
+            diskInput.value = String(max_disk);
+            if (diskValEl) diskValEl.textContent = diskInput.value;
+          }
+        }
+        if (
+          backupInput instanceof HTMLInputElement &&
+          typeof max_backup === "number"
+        ) {
+          backupInput.max = String(max_backup);
+          if (parseInt(backupInput.value, 10) > max_backup) {
+            backupInput.value = String(max_backup);
+            if (backupValEl) backupValEl.textContent = backupInput.value;
+          }
+        }
+      }
     } catch (e) {
       console.error(e);
     }
   }
 
-  // Inicjalne wyliczenie
+  // ------------------------------
+  // INITIAL CALCULATION ON PAGE LOAD
+  // ------------------------------
   updateTotalCostServer();
+
+  // ------------------------------
+  // INITIALIZE EGGS ON PAGE LOAD
+  // ------------------------------
+  fetchEggs();
 </script>

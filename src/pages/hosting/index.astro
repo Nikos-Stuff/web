@@ -8,7 +8,8 @@ import POD from "@components/POD.astro";
 import DynamicTitle from "@components/TitleHeader.astro";
 import FancyDiv from "@components/FancyDiv.astro";
 import Accordion from "@components/Accordion.astro";
-import Calculator from "@components/hosting_calc.astro";
+import Calculator from "@components/Hosting_Calc.astro";
+import ExtendService from "@components/ExtendService.astro";
 
 import { Image } from "astro:assets";
 
@@ -215,43 +216,17 @@ import Image4 from "@assets/hosting/what_are_ya_waiting.png";
     <FancyDiv isAnimated={true} theme="default_big" margin_bottom="50">
       <section class="relative animate">
         <p
-          class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white"
+          class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white animate"
         >
-          Centrum Akcji
+          Zamów Swój Hosting
         </p>
-        <p class="font-bold text-sm mb-2">
-          Prosty mini panel do kupna / odnawiania usług.
+        <p class="font-bold text-sm mb-2 animate">
+          Wybierz specyfikacje - dostosuj serwer do swoich potrzeb i budżetu.
         </p>
 
         <Calculator />
 
-        <div class="flex justify-center my-4">
-          <div class="w-full max-w-[360px] h-[78px] flex items-center justify-center">
-            <!-- reserved box to avoid CLS and keep centered -->
-            <div
-              class="cf-turnstile"
-              data-sitekey="0x4AAAAAACBNatxTQCTb20u7"
-              data-theme="light"
-              data-size="normal"
-              data-callback="onSuccess"
-              style="min-height:78px;"
-            ></div>
-          </div>
-        </div>
 
-        <div class="animate">
-          <button
-            id="place_order_btn"
-            disabled
-            class="group w-full p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
-          >
-            <span
-              class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
-            >
-              Kup Teraz <small>(Powered by Stripe)</small>
-            </span>
-          </button>
-        </div>
 
         <!-- Line -->
         <hr class="border-black/10 dark:border-white/25 animate my-5" />
@@ -282,6 +257,21 @@ import Image4 from "@assets/hosting/what_are_ya_waiting.png";
             </span>
           </a>
         </div>
+
+        <!-- Line -->
+        <hr class="border-black/10 dark:border-white/25 animate my-5" />
+
+        <!-- <p
+          class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white animate"
+        >
+          Zarządzaj Swoimi Usługami
+        </p>
+        <p class="font-bold text-sm mb-2 animate">
+          Przedłuż, modyfikuj lub anuluj swoje usługi.
+        </p>
+
+        <ExtendService /> -->
+        
       </section>
     </FancyDiv>
 
