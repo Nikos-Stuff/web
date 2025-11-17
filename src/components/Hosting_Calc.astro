@@ -297,14 +297,17 @@
         usernodesDropdown?.removeAttribute("hidden");
         locationDropdown?.setAttribute("hidden", "true");
 
-        // const w: any = window;
-        // if (w.turnstile && typeof w.turnstile.reset === "function") {
-        //   try {
-        //     w.turnstile.reset();
-        //   } catch (e) {
-        //     console.warn("Turnstile reset failed", e);
-        //   }
-        // }
+        // After 500 ms delay call the fetchUserNodes function with the current email
+        setTimeout(() => {
+          const w: any = window;
+          if (w.turnstile && typeof w.turnstile.getResponse === "function") {
+            const token = w.turnstile.getResponse();
+            if (token) {
+              fetchUserNodes(email, token).catch((e) => console.error(e));
+            }
+          }
+        }, 500);
+        
       } else {
         usernodesDropdown?.setAttribute("hidden", "true");
         locationDropdown?.removeAttribute("hidden");
