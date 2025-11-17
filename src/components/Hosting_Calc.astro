@@ -267,6 +267,10 @@
   let selectedLocation = ""; // stores currently selected location
   let currentTurnstileToken: string | null = null; // stores CF Turnstile token
 
+  // Prevent continuous resets: track last reset per email and time
+  let lastResetEmail: string | null = null;
+  let lastResetAt = 0;
+
   // ------------------------------
   // TURNSTILE CALLBACKS (GLOBAL)
   // on success, use token immediately if email present
@@ -282,6 +286,8 @@
       fetchUserNodes(email, token);
       // invalidate token to avoid accidental reuse
       currentTurnstileToken = null;
+      // allow future resets for new email changes
+      lastResetEmail = null;
     }
   };
 
@@ -297,8 +303,7 @@
   // ------------------------------
   // EMAIL INPUT HANDLER
   // Debounced. If we already have a valid token -> use it and clear it.
-  // If we don't have a token -> reset Turnstile and wait for widget callback.
-  // I did the silly before but no more!
+  // If we don't have a token -> reset Turnstile only occasionally to avoid loop.
   // ------------------------------
   if (clientEmailInput instanceof HTMLInputElement) {
     clientEmailInput.addEventListener("input", () => {
@@ -314,6 +319,7 @@
 
         // clear any stored token when email cleared
         currentTurnstileToken = null;
+        lastResetEmail = null;
       }
 
       // Debounce fetch
@@ -326,11 +332,20 @@
         if (currentTurnstileToken) {
           fetchUserNodes(emailVal, currentTurnstileToken);
           currentTurnstileToken = null; // invalidate token after use
+          lastResetEmail = null;
         } else {
-          // No token available — reset the widget and wait for onTurnstileSuccess to call fetch.
-          console.warn("No valid Turnstile token. Resetting challenge...");
+          // No token available — reset the widget only when useful.
           const w: any = window;
-          if (w.turnstile) w.turnstile.reset();
+          if (w.turnstile) {
+            const now = Date.now();
+            // only reset once per email value, or if >15s since last reset
+            if (lastResetEmail !== emailVal || now - lastResetAt > 15000) {
+              console.warn("No valid Turnstile token. Resetting challenge...");
+              w.turnstile.reset();
+              lastResetEmail = emailVal;
+              lastResetAt = now;
+            }
+          }
         }
       }, 500);
     });
@@ -376,6 +391,7 @@
       const w: any = window;
       if (w.turnstile) w.turnstile.reset();
       currentTurnstileToken = null;
+      lastResetEmail = null;
     } catch (e) {
       console.error(e);
     }
