@@ -306,7 +306,7 @@
         usernodesDropdown?.setAttribute("hidden", "true");
         locationDropdown?.removeAttribute("hidden");
 
-        // Clear polling if email is emptied
+        // Clear any ongoing polling if email is emptied
         if (tokenCheckInterval) {
           clearInterval(tokenCheckInterval);
           tokenCheckInterval = undefined;
@@ -316,28 +316,37 @@
       // Debounce fetch
       if (fetchTimeout) clearTimeout(fetchTimeout);
       fetchTimeout = window.setTimeout(() => {
-        if (currentTurnstileToken) {
-          fetchUserNodes(email, currentTurnstileToken);
+        const emailVal = email;
 
-          // Clear polling if somehow it was still running
+        // Helper to request user nodes with a token
+        const requestWithToken = (token: string) => {
+          // Prevent reuse of same token
+          if (!token) return;
+          fetchUserNodes(emailVal, token);
+          currentTurnstileToken = null; // invalidate token immediately
+        };
+
+        // If we already have a fresh token, use it
+        if (currentTurnstileToken) {
+          requestWithToken(currentTurnstileToken);
           if (tokenCheckInterval) {
             clearInterval(tokenCheckInterval);
             tokenCheckInterval = undefined;
           }
         } else {
-          console.warn("No Turnstile token yet, starting polling...");
+          console.warn("No valid Turnstile token. Resetting challenge...");
 
-          // Clear previous interval if any
+          // Reset Turnstile to generate a new token
+          const w: any = window;
+          if (w.turnstile) w.turnstile.reset();
+
+          // Poll until we get a valid token
           if (tokenCheckInterval) clearInterval(tokenCheckInterval);
-
-          // Start polling every second until token exists
           tokenCheckInterval = window.setInterval(() => {
             if (currentTurnstileToken) {
-              fetchUserNodes(email, currentTurnstileToken);
-              if (tokenCheckInterval) {
-                clearInterval(tokenCheckInterval);
-                tokenCheckInterval = undefined;
-              }
+              requestWithToken(currentTurnstileToken);
+              clearInterval(tokenCheckInterval);
+              tokenCheckInterval = undefined;
             }
           }, 1000);
         }
