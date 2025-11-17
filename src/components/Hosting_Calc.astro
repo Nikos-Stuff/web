@@ -297,15 +297,14 @@
         usernodesDropdown?.removeAttribute("hidden");
         locationDropdown?.setAttribute("hidden", "true");
 
-        // Always ask Turnstile for a fresh token on input change
-        const w: any = window;
-        if (w.turnstile && typeof w.turnstile.reset === "function") {
-          try {
-            w.turnstile.reset();
-          } catch (e) {
-            console.warn("Turnstile reset failed", e);
-          }
-        }
+        // const w: any = window;
+        // if (w.turnstile && typeof w.turnstile.reset === "function") {
+        //   try {
+        //     w.turnstile.reset();
+        //   } catch (e) {
+        //     console.warn("Turnstile reset failed", e);
+        //   }
+        // }
       } else {
         usernodesDropdown?.setAttribute("hidden", "true");
         locationDropdown?.removeAttribute("hidden");
