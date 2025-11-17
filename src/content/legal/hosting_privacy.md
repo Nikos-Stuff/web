@@ -20,7 +20,8 @@ zgodnie z niniejszym dokumentem.
 
 * c. Informacje o zachowaniu użytkowników w serwisie mogą podlegać logowaniu.
 Dane te są wykorzystywane w celu administrowania serwisem.
-d. Serwis wykorzystuje dane osobowe w następujących celach:
+
+* d. Serwis wykorzystuje dane osobowe w następujących celach:
     * i. świadczenia usług hostingowych,
 
 
