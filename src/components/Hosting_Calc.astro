@@ -10,8 +10,7 @@
       >
         <div>
           <span class="fi fi-xx mr-5"></span>Kliknij aby wybrać lokalizację
-        </div><span id="cpu_available" class="text-xs text-muted ml-2"
-          >Dostępność: ?%</span
+        </div><span id="cpu_available" class="text-xs ml-2">Dostępność: ?%</span
         >
       </div>
 
@@ -25,7 +24,7 @@
         >
           <div>
             <span class="fi fi-eu mr-5"></span>Europa - Standard
-          </div><span id="cpu_available" class="text-xs text-muted ml-2"
+          </div><span id="cpu_available" class="text-xs ml-2"
             >Dostępność: ?%</span
           >
         </div>
@@ -35,7 +34,7 @@
         >
           <div>
             <span class="fi fi-pl mr-5"></span>Polska - Standard
-          </div><span id="cpu_available" class="text-xs text-muted ml-2"
+          </div><span id="cpu_available" class="text-xs ml-2"
             >Dostępność: ?%</span
           >
         </div>
@@ -52,6 +51,12 @@
       >
         Kliknij aby wybrać jajko
       </div>
+      <a
+        href="https://forms.gle/KXNLmxLib8ERo9vT7"
+        target="_blank"
+        class="text-xs italic"
+        >Nie znalazłeś tego czego szukasz? Daj nam znać!</a
+      >
 
       <div
         id="egg_options"
@@ -99,7 +104,7 @@
         class="border border-black/15 dark:border-white/20 rounded-lg px-4 py-3 cursor-pointer flex justify-between items-center select-none hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 ease-in-out"
       >
         Kliknij aby wybrać serwer
-        <span class="text-xs text-muted ml-2">Ważny do: ?</span>
+        <span class="text-xs ml-2">Ważny do: ?</span>
       </div>
 
       <div
@@ -111,7 +116,7 @@
           id="usernode_template"
           class="px-4 py-3 flex justify-between items-center cursor-pointer hover:bg-black/5 dark:hover:bg-white/10"
         >
-          <div>---</div><span class="text-xs text-muted ml-2">Ważny do: ?</span>
+          <div>---</div><span class="text-xs ml-2">Ważny do: ?</span>
         </div>
       </div>
     </div>
@@ -179,10 +184,11 @@
   </div>
 
   <div class="pt-3 border-t dark:border-white/5 space-y-2">
-    <p class="text-sm text-muted">Podsumowanie:</p>
+    <p class="text-sm">Podsumowanie:</p>
     <div class="flex justify-between text-sm">
-      <span>CPU:</span><span class="text-xs text-muted" id="cpu_name">—</span
-      ><span id="cpu_cost">—</span>
+      <span>CPU:</span><span class="text-xs" id="cpu_name">—</span><span
+        id="cpu_cost">—</span
+      >
     </div>
     <div class="flex justify-between text-sm">
       <span>RAM:</span><span id="ram_cost">—</span>
@@ -202,7 +208,7 @@
         <span class="text-lg font-semibold">Wytypowany koszt / mies.</span>
         <span id="total_cost" class="text-2xl font-extrabold">—</span>
       </div>
-      <p id="note" class="text-xs text-muted mt-1">
+      <p id="note" class="text-xs mt-1">
         * Ceny są wyliczane na podstawie aktualnych stawek i mogą ulec zmianie.
       </p>
     </div>
@@ -227,7 +233,6 @@
   <div class="animate">
     <button
       id="place_order_btn"
-      disabled
       class="group w-full p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
     >
       <span
@@ -259,30 +264,29 @@
   const usernodeTemplate = document.getElementById("usernode_template");
 
   const clientEmailInput = document.getElementById("client_email");
+  const placeOrderBtn = document.getElementById("place_order_btn");
+  const order_blocker = document.getElementById("order_blocker");
+  const order_status = document.getElementById("order_activity");
+  // ------------------------------
 
   const egg_list =
     "https://api.nikostuff.com/v2/hosting/pelican_data?list_eggs"; // API for eggs
   const user_nodes_api =
     "https://api.nikostuff.com/v2/hosting/pelican_data?list_user_servers&email="; // API for user servers
+  const order_api = "https://api.nikostuff.com/v2/hosting/order_manager?place_order"; // API for placing / renewing stuff
 
-  // ------------------------------
-  // TURNSTILE CALLBACKS (GLOBAL)
-  // on success -> immediately fetch user nodes if email present
-  // ------------------------------
-  // (window as any).onTurnstileSuccess = function (token: string) {
-  //  const email =
-  //    clientEmailInput instanceof HTMLInputElement
-  //      ? clientEmailInput.value.trim()
-  //      : "";
-  //  if (email.length > 0) {
-      // use the token to fetch user nodes
-  //    fetchUserNodes(email, token).catch((e) => console.error(e));
-  //  }
-  // };
+  const data_storage = {
+    egg_id: "",
+    usernode_id: "",
+    client_email: "",
+    cpu: 0,
+    ram: 0,
+    disk: 0,
+    backup: 0,
+    location: "",
+  };
 
-  // (window as any).onTurnstileExpired = function () {
-    // nothing special needed here for the simplified flow
-  //};
+  let user_servers_cache: any = {};
 
   // ------------------------------
   // SIMPLE EMAIL INPUT HANDLER
@@ -306,10 +310,17 @@
               fetchUserNodes(email, token).catch((e) => console.error(e));
             }
           }
+
+          // Without cloudflare token for testing purposes
+          // fetchUserNodes(email, "").catch((e) => console.error(e));
+
         }, 500);
       } else {
         usernodesDropdown?.setAttribute("hidden", "true");
         locationDropdown?.removeAttribute("hidden");
+
+        data_storage.usernode_id = "";
+        data_storage.client_email = "";
       }
     });
   }
@@ -319,8 +330,9 @@
   // ------------------------------
   async function fetchUserNodes(email: string, token: string) {
     const grid = usernodeOptions;
-    
-    // Clear existing options
+    user_servers_cache = {}; // clear cache each time
+
+    // Clear existing options + order selection
     if (!grid) return;
     grid.querySelectorAll("[data-server_id]").forEach((el) => el.remove());
 
@@ -331,9 +343,15 @@
         body: new URLSearchParams({ "cf-turnstile-response": token }),
       });
 
+      // Without cloudflare token for testing purposes
+      // const res = await fetch(user_nodes_api + encodeURIComponent(email));
+
       if (!res.ok) throw new Error("Error fetching user servers");
 
       const data = await res.json();
+
+      user_servers_cache = data; // cache the data
+
       if (data.error) throw new Error(data.error);
 
       const servers = data.servers || [];
@@ -349,6 +367,24 @@
           server.name || "Bez nazwy";
 
         grid.appendChild(serverOption);
+
+        // Add click listener for server option
+        serverOption.addEventListener("click", () => {
+          if (!usernodeSelected || !usernodeOptions) return;
+          usernodeSelected.innerHTML = serverOption.innerHTML;
+          usernodeOptions.classList.remove("max-h-60");
+
+          apply_server_values(server.id);
+
+          const selectedServerId =
+            serverOption.getAttribute("data-server_id") || "";
+          // store selected server and mail for ordering
+          data_storage.usernode_id = selectedServerId;
+          data_storage.client_email =
+            clientEmailInput instanceof HTMLInputElement
+              ? clientEmailInput.value.trim()
+              : "";
+        });
       }
     } catch (e) {
       console.error(e);
@@ -404,12 +440,81 @@
           const txt = option.querySelector("span")?.textContent?.trim() || "";
           eggSelected.textContent = txt;
           eggOptions.classList.remove("max-h-60");
+          const selectedEggId = option.getAttribute("data-egg_id") || "";
+          // store selected egg for ordering
+          data_storage.egg_id = selectedEggId;
         });
       });
     } catch (e) {
       console.error(e);
     }
   }
+
+  // -------------------------------
+  // APPLY SERVER VALUES TO SLIDERS
+  // -------------------------------
+  function apply_server_values(server_id: string) {
+    const server = user_servers_cache.servers.find(
+      (s: { id: number; }) => s.id === parseInt(server_id)
+    );
+    if (!server) return;
+
+    // ----------------------
+    // SLIDERS (convert MB -> GB)
+    // ----------------------
+    const cpuInput = document.getElementById("cpu") as HTMLInputElement;
+    const ramInput = document.getElementById("ram") as HTMLInputElement;
+    const diskInput = document.getElementById("disk") as HTMLInputElement;
+    const backupInput = document.getElementById("backup") as HTMLInputElement;
+
+    const cpuValEl = document.getElementById("cpu_val");
+    const ramValEl = document.getElementById("ram_val");
+    const diskValEl = document.getElementById("disk_val");
+    const backupValEl = document.getElementById("backup_val");
+
+    if (cpuInput && cpuValEl) {
+      cpuInput.value = String(server.limits.cpu);
+      cpuValEl.textContent = cpuInput.value;
+    }
+    if (ramInput && ramValEl) {
+      const ramGB = Math.floor(server.limits.memory / 1000);
+      ramInput.value = String(ramGB);
+      ramValEl.textContent = ramInput.value;
+    }
+    if (diskInput && diskValEl) {
+      const diskGB = Math.floor(server.limits.disk / 1000);
+      diskInput.value = String(diskGB);
+      diskValEl.textContent = diskInput.value;
+    }
+    if (backupInput && backupValEl) {
+      const backups = server.feature_limits.backups || 0;
+      backupInput.value = String(backups);
+      backupValEl.textContent = backupInput.value;
+    }
+
+    // ----------------------
+    // EGG
+    // ----------------------
+    if (eggSelected) {
+      eggSelected.textContent = server.egg_name || "";
+      data_storage.egg_id = server.egg;
+    }
+
+    // ----------------------
+    // LOCATION
+    // ----------------------
+    if (locationSelected) {
+      locationSelected.textContent = server.location || "";
+      data_storage.location = server.location;
+      selectedLocation = server.location;
+    }
+
+    // ----------------------
+    // UPDATE TOTAL COST
+    // ----------------------
+    updateTotalCostServer();
+  }
+
 
   // ------------------------------
   // DROPDOWN TOGGLE HANDLERS
@@ -425,6 +530,7 @@
   locationSelected?.addEventListener("click", () => {
     locationOptions?.classList.toggle("max-h-60");
   });
+  // ------------------------------
 
   // Click outside to close dropdowns
   document.addEventListener("click", (e) => {
@@ -434,6 +540,9 @@
     }
     if (!(target instanceof Node) || !eggDropdown?.contains(target)) {
       eggOptions?.classList.remove("max-h-60");
+    }
+    if (!(target instanceof Node) || !usernodesDropdown?.contains(target)) {
+      usernodeOptions?.classList.remove("max-h-60");
     }
   });
 
@@ -451,6 +560,8 @@
         locationOptions.classList.remove("max-h-60");
         // trigger cost recalculation (function defined below)
         selectedLocation = selected;
+        // add to data storage for ordering
+        data_storage.location = selected;
         updateTotalCostServer();
       });
     });
@@ -592,10 +703,61 @@
           }
         }
       }
+      // ------------------------------
+      // SET OUR DATA STORAGE FOR ORDERING
+      // ------------------------------
+      data_storage.cpu = payload.cpu;
+      data_storage.ram = payload.ram;
+      data_storage.disk = payload.disk;
+      data_storage.backup = payload.backup;
+      data_storage.location = payload.location || "";
     } catch (e) {
       console.error(e);
     }
   }
+
+  placeOrderBtn?.addEventListener("click", async () => {
+    console.log("Placing order with data:", data_storage);
+    // Simply unhide the order blocker and send the data to the order API without any further handling for now ( everything is server side )
+    if (order_blocker) order_blocker.removeAttribute("hidden");
+    if (!order_status) return;
+    try {
+      order_status.textContent = "Oczekiwanie na odpowiedź...";
+      const res = await fetch(order_api, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data_storage),
+      });
+
+      if (!res.ok) throw new Error("Błąd składania zamówienia");
+
+      const data = await res.json();
+
+      if (data.error) throw new Error(data.error);
+
+      // Redirect to payment / order page
+      if (data.status === "task_created") {
+        order_status.textContent =
+          "Pomyślnie utworzono zamówienie! Przekierowywanie...";
+        setTimeout(() => {
+          if (order_blocker) order_blocker.setAttribute("hidden", "true");
+          window.location.href = data.redirect_url || "/";
+        }, 3000);
+      } else {
+        if (order_blocker) order_blocker.setAttribute("hidden", "true");
+        alert(
+          "Wystąpił błąd podczas składania zamówienia. Proszę spróbować ponownie."
+        );
+      }
+    } catch (e: any) {
+      console.error(e);
+      if (order_blocker) order_blocker.setAttribute("hidden", "true");
+      alert(
+        "Wystąpił błąd podczas składania zamówienia. Proszę spróbować ponownie. Bład: " +
+          e.message
+      );
+    }
+  });
 
   // ------------------------------
   // INITIAL CALCULATION / EGGS INIT
