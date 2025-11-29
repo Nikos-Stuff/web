@@ -1,26 +1,30 @@
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let mouseX = 0,
-      mouseY = 0,
-      scrollY = 0;
-    let targetMouseX = 0,
-      targetMouseY = 0,
-      targetScrollY = 0;
+  document.addEventListener("DOMContentLoaded", () => {
+    let mouseX = 0, mouseY = 0;
+    let scrollY = 0;
+
+    let targetMouseX = 0, targetMouseY = 0;
+    let targetScrollY = 0;
+
     const easing = 0.075;
 
-    // Initialize document height and window height
+    // amazing mobile detection 100% no scam
+    const isMobile =
+      /Android|iPhone|iPad|iPod|Opera Mini|SKIBIDI_TOILET|IEMobile/i.test(navigator.userAgent) ||
+      window.innerWidth < 768;
+
+    // dims
     let docHeight = document.body.scrollHeight;
     let winHeight = window.innerHeight;
     let winScrollY = window.scrollY;
 
     window.addEventListener("resize", () => {
-      // Update dimensions on resize
       docHeight = document.body.scrollHeight;
       winHeight = window.innerHeight;
       winScrollY = window.scrollY;
     });
 
-    // Parallax multipliers for particles and stars
+    // multipliers
     const multipliers: Record<string, { mouse: number; scroll: number }> = {
       particles1: { mouse: 3, scroll: 0.05 },
       particles2: { mouse: 5, scroll: 0.1 },
@@ -28,134 +32,78 @@
       stars1: { mouse: 3, scroll: 0.05 },
       stars2: { mouse: 5, scroll: 0.1 },
       stars3: { mouse: 2, scroll: 0.15 },
-      pod: { mouse: 1, scroll: 0.05 },
+      "pod-wrapper": { mouse: 1, scroll: 0.05 },
     };
 
-    // Mouse and scroll event listeners
-    document.addEventListener("mousemove", function (e) {
-      targetMouseX =
-        (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
-      targetMouseY =
-        (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
+    // mouse input
+    document.addEventListener("mousemove", (e) => {
+      targetMouseX = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2);
+      targetMouseY = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
     });
 
-    window.addEventListener("scroll", function () {
-      winScrollY = window.scrollY; // update cached scroll position
-      targetScrollY = winScrollY; // set the easing target to the latest scroll pos
+    // scroll input
+    window.addEventListener("scroll", () => {
+      winScrollY = window.scrollY;
+      targetScrollY = winScrollY;
     });
 
-    function ease(current: number, target: number, easeFactor: number) {
-      return current + (target - current) * easeFactor;
-    }
+    const ease = (current: number, target: number, factor: number) =>
+      current + (target - current) * factor;
 
     function updateParallax() {
       mouseX = ease(mouseX, targetMouseX, easing);
       mouseY = ease(mouseY, targetMouseY, easing);
       scrollY = ease(scrollY, targetScrollY, easing);
 
-      const elements = {
-        particles1: document.getElementById("particles1"),
-        particles2: document.getElementById("particles2"),
-        particles3: document.getElementById("particles3"),
-        stars1: document.getElementById("stars1"),
-        stars2: document.getElementById("stars2"),
-        stars3: document.getElementById("stars3"),
-        pod: document.getElementById("pod"),
-      };
+      const ids = [
+        "particles1",
+        "particles2",
+        "particles3",
+        "stars1",
+        "stars2",
+        "stars3",
+        "pod-wrapper",
+      ];
 
-      for (const [id, elem] of Object.entries(elements)) {
-        if (elem) {
-          if (id === "pod") {
-            const maxScale = 1.3;
-            const maxRotation = 10;
-            const scrollFraction = Math.min(
-              1,
-              winScrollY / (docHeight - winHeight)
-            ); // Calculate scroll fraction
-            const podScale = 1 + (maxScale - 1) * scrollFraction;
+      for (const id of ids) {
+        const elem = document.getElementById(id);
+        if (!elem) continue;
 
-            elem.style.transform = `translate(${
-              mouseX * multipliers[id].mouse
-            }px, ${mouseY * multipliers[id].mouse}px) scale(${podScale}) rotate(${
-              maxRotation * scrollFraction
-            }deg)`;
-            elem.style.willChange = "transform"; // Ensure GPU acceleration
-            // elem.style.transition = "transform 1s ease-out"; // Again not sure if this will not bite TailWind CSS styling.
+        const { mouse, scroll } = multipliers[id];
+
+        // POD special-case: disable animations on mobile
+        if (id === "pod-wrapper") {
+          if (isMobile) {
+            // no transforms, no will-change spam
+            elem.style.transform = "none";
             continue;
           }
 
-          const { mouse, scroll } = multipliers[id];
-          elem.style.transform = `translate(${mouseX * mouse}px, ${
-            mouseY * mouse
-          }px) translateY(-${scrollY * scroll}px)`;
-          elem.style.willChange = "transform"; // Ensure GPU acceleration
+          const scrollFraction = Math.min(1, winScrollY / (docHeight - winHeight));
+          const maxScale = 1.3;
+          const maxRotation = 10;
+          const podScale = 1 + (maxScale - 1) * scrollFraction;
+
+          elem.style.transform =
+            `translate(${mouseX * mouse}px, ${mouseY * mouse}px)
+             scale(${podScale})
+             rotate(${maxRotation * scrollFraction}deg)`;
+
+          continue;
         }
+
+        // default parallax
+        elem.style.transform =
+          `translate(${mouseX * mouse}px, ${mouseY * mouse}px)
+           translateY(-${scrollY * scroll}px)`;
       }
 
       requestAnimationFrame(updateParallax);
     }
 
-    function initBG() {
-      console.log("BG Loaded");
-      const particlesSmall = generateParticles(150, "#000");
-      const particlesMedium = generateParticles(100, "#000");
-      const particlesLarge = generateParticles(50, "#000");
-      const starsSmall = generateParticles(150, "#fff");
-      const starsMedium = generateParticles(100, "#fff");
-      const starsLarge = generateParticles(50, "#fff");
+    // ------------ background particle generation ------------ //
 
-      const particles1 = document.getElementById("particles1");
-      const particles2 = document.getElementById("particles2");
-      const particles3 = document.getElementById("particles3");
-      const stars1 = document.getElementById("stars1");
-      const stars2 = document.getElementById("stars2");
-      const stars3 = document.getElementById("stars3");
-
-      if (particles1)
-        applyStyles(
-          particles1,
-          1,
-          particlesSmall,
-          "animStar 50s linear infinite"
-        );
-      if (particles2)
-        applyStyles(
-          particles2,
-          1.5,
-          particlesMedium,
-          "animateParticle 100s linear infinite"
-        );
-      if (particles3)
-        applyStyles(
-          particles3,
-          2,
-          particlesLarge,
-          "animateParticle 150s linear infinite"
-        );
-      if (stars1) applyStyles(stars1, 1, starsSmall, "");
-      if (stars2) applyStyles(stars2, 1.5, starsMedium, "");
-      if (stars3) applyStyles(stars3, 2, starsLarge, "");
-    }
-
-    function applyStyles(
-      element: HTMLElement,
-      size: number,
-      boxShadow: string,
-      animation: string
-    ) {
-      element.style.cssText = `
-            width: ${size}px;
-            height: ${size}px;
-            border-radius: 50%;
-            box-shadow: ${boxShadow};
-            animation: ${animation};
-            will-change: transform;
-        `;
-    }
-
-    function getRandom(max: number) {
-      return Math.floor(Math.random() * max);
-    }
+    const getRandom = (max: number) => Math.floor(Math.random() * max);
 
     function generateParticles(n: number, color: string) {
       const positions = [];
@@ -165,8 +113,46 @@
       return positions.join(", ");
     }
 
+    // Applies GPU promotion ONCE — no per-frame writes
+    function applyStyles(element: HTMLElement, size: string | number, boxShadow: string | number, animation: string | number) {
+      element.style.cssText = `
+        width: ${size}px;
+        height: ${size}px;
+        border-radius: 50%;
+        box-shadow: ${boxShadow};
+        animation: ${animation};
+        will-change: transform;
+      `;
+    }
+
+    function initBG() {
+      console.log("BG Loaded");
+
+      const particlesSmall = generateParticles(150, "#000");
+      const particlesMedium = generateParticles(100, "#000");
+      const particlesLarge = generateParticles(50, "#000");
+
+      const starsSmall = generateParticles(150, "#fff");
+      const starsMedium = generateParticles(100, "#fff");
+      const starsLarge = generateParticles(50, "#fff");
+
+      const map = {
+        particles1: [1, particlesSmall, "animStar 50s linear infinite"],
+        particles2: [1.5, particlesMedium, "animateParticle 100s linear infinite"],
+        particles3: [2, particlesLarge, "animateParticle 150s linear infinite"],
+        stars1: [1, starsSmall, ""],
+        stars2: [1.5, starsMedium, ""],
+        stars3: [2, starsLarge, ""],
+      };
+
+      for (const [id, [size, shadow, anim]] of Object.entries(map)) {
+        const elem = document.getElementById(id);
+        if (elem) applyStyles(elem, size, shadow, anim);
+      }
+    }
+
     document.addEventListener("astro:after-swap", initBG);
     initBG();
-    updateParallax(); // Start the parallax effect
+    updateParallax();
   });
 </script>
