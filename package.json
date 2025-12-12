@@ -33,7 +33,7 @@
     "sharp": "^0.34.5",
     "solid-js": "^1.9.10",
     "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
