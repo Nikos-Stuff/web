@@ -88,7 +88,7 @@ export const LINKS: Links = [
   // },
   {
     TEXT: "Hosting",
-    HREF: "/hosting",
+    HREF: "https://hosting.nikostuff.com",
 
   },
   {
