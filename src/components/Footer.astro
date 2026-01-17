@@ -5,6 +5,8 @@ import HeaderIcon from "@components/web_icon.astro"
 
 import PageVersion from "@components/GitVer.astro"
 
+// Get current Year
+const currentYear = new Date().getFullYear();
 
 // import InfoButton from '@components/info_button/button.astro';
 ---
@@ -63,7 +65,7 @@ import PageVersion from "@components/GitVer.astro"
               </a>
             </div>
             <div class="text-sm mt-2">
-              &copy; 2025 | <PageVersion/>
+              &copy; {currentYear} | <PageVersion/>
             </div>
           </div>
   
