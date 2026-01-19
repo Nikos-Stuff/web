@@ -58,7 +58,7 @@ jobs:
         run: pnpm build
 
       - name: Sync
-        uses: burnett01/rsync-deployments@7.0.2
+        uses: burnett01/rsync-deployments@v8
         with:
           switches: -avzr --delete --progress
           path: dist/
