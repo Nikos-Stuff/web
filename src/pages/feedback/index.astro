@@ -1,0 +1,17 @@
+---
+import { SITE } from "@consts";
+import PageLayout from "@layouts/PageLayout.astro";
+---
+
+<PageLayout title="Home" description={SITE.DESCRIPTION}>
+  <div class="flex justify-center mt-20">
+    <p class="text-center text-2xl font-bold mt-10">Przekierowywanie...</p>
+  </div>
+</PageLayout>
+
+<script>
+  // aktualnie do trust pilot-a ale w przysłości do google business - 0.5 sekundy
+  setTimeout(() => {
+    window.location.href = "https://pl.trustpilot.com/evaluate/nikostuff.com";
+  }, 500);
+</script>
