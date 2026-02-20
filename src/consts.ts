@@ -142,6 +142,12 @@ export const SOCIALS: Socials = [
     ICON: "discord",
     TEXT: "niko_fluffer",
     HREF: "https://dc.nikostuff.com",
+  },
+  {
+    NAME: "Facebook",
+    ICON: "facebook",
+    TEXT: "Niko's Stuff",
+    HREF: "https://www.facebook.com/share/1C5M2EZ4p6/",
   }
 ]
 
