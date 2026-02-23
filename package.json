@@ -23,7 +23,7 @@
     "@playform/inline": "^0.1.2",
     "@tailwindcss/vite": "^4.2.0",
     "@types/js-yaml": "^4.0.9",
-    "astro": "5.17.2",
+    "astro": "5.17.3",
     "clsx": "^2.1.1",
     "flag-icons": "^7.5.0",
     "fuse.js": "^7.1.0",
