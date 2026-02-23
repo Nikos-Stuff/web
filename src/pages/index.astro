@@ -21,7 +21,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
 import Image1 from "@assets/vid_montage.png";
 import Image2 from "@assets/web_dev.png";
-import Image3 from "@assets/work_in_progress_panel.png";
+import Image3 from "@assets/3d_printing.jpg";
 
 const posts = (await getCollection("blog"))
   .filter((post) => !post.data.draft)
@@ -256,7 +256,7 @@ try {
           <Image
             src={Image1}
             alt="Video Editing"
-            class="rounded-sm border border-black/25 dark:border-white/25 hover:brightness-150 hover:scale-105 transition-[filter,scale] duration-300"
+            class="rounded-sm border border-black/25 dark:border-white/25 hover:brightness-150 hover:scale-105 transition-[filter,scale] duration-300 h-78.75 object-cover"
           />
         </div>
       </section>
@@ -273,7 +273,7 @@ try {
           <Image
             src={Image2}
             alt="Web Development"
-            class="rounded-sm border border-black/25 dark:border-white/25 hover:brightness-150 hover:scale-105 transition-[filter,scale] duration-300"
+            class="rounded-sm border border-black/25 dark:border-white/25 hover:brightness-150 hover:scale-105 transition-[filter,scale] duration-300 h-78.75 object-cover"
           />
         </div>
       </section>
@@ -281,15 +281,15 @@ try {
 
     <FancyDiv margin_bottom="24" isAnimated={true}>
       <section class="animate pb-0">
-        <p class="font-semibold text-2xl">Wysokiej jakości Usługi</p>
+        <p class="font-semibold text-2xl">Wysokiej jakości Druki 3D</p>
         <p class="font-bold text-sm mb-2">
-          Intuicyjny panel zarządzania twoich serwerów. <small>(wkrótce)</small>
+          Precyzyjne detale, trwałe materiały, szybka realizacja.
         </p>
         <div class="animate">
           <Image
             src={Image3}
-            alt="Work in progress panel"
-            class="rounded-sm border border-black/25 dark:border-white/25 hover:brightness-150 hover:scale-105 transition-[filter,scale] duration-300"
+            alt="3D Printing"
+            class="rounded-sm border border-black/25 dark:border-white/25 hover:brightness-150 hover:scale-105 transition-[filter,scale] duration-300 h-78.75 object-cover"
           />
         </div>
       </section>
