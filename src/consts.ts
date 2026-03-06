@@ -97,8 +97,8 @@ export const LINKS: Links = [
 
   },
   {
-    TEXT: "Kosztorys",
-    HREF: "/kosztorys",
+    TEXT: "Kontakt",
+    HREF: "/contactus",
   },
   {
     TEXT: "Status",

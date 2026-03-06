@@ -401,3 +401,8 @@ article img {
   opacity: 0;
   transform: translateY(50px);
 }
+
+
+.hide_scrollbar::-webkit-scrollbar {
+  display: none;
+}

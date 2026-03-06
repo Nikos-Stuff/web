@@ -29,14 +29,17 @@ import HeaderIcon from "@components/web_icon.astro";
           {
             LINKS.map((LINK) => (
               <a
+                data-cursor-hover="true"
+                data-cursor-parallax="true"
+
                 href={LINK.HREF}
                 class={cn(
                   "h-8 rounded-full px-3 text-current whitespace-nowrap",
                   "flex items-center justify-center",
                   "transition-colors duration-300 ease-in-out",
                   pathname === LINK.HREF || "/" + subpath?.[0] === LINK.HREF
-                    ? "bg-black dark:bg-white text-white dark:text-black hover:bg-[#737373] transition-all duration-300 ease-in-out"
-                    : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white"
+                    ? "bg-black dark:bg-white text-white dark:text-black hover:bg-[#737373] transition-colors duration-300 ease-in-out"
+                    : "hover:bg-black/5 dark:hover:bg-white/20 hover:text-black dark:hover:text-white",
                 )}
               >
                 {LINK.TEXT}
@@ -59,7 +62,7 @@ import HeaderIcon from "@components/web_icon.astro";
             "transition-all duration-300 ease-in-out",
             pathname === "/search" || "/" + subpath?.[0] === "/search"
               ? "pointer-events-none bg-black dark:bg-white text-white dark:text-black"
-              : ""
+              : "",
           )}
         >
           <svg class="size-full">
@@ -91,7 +94,7 @@ import HeaderIcon from "@components/web_icon.astro";
             "bg-transparent hover:bg-black/5 dark:hover:bg-white/20",
             "stroke-current hover:stroke-black hover:dark:stroke-white",
             "border border-black/10 dark:border-white/25",
-            "transition-all duration-300 ease-in-out"
+            "transition-all duration-300 ease-in-out",
           )}
         >
           <svg class="size-full block dark:hidden">
@@ -111,7 +114,7 @@ import HeaderIcon from "@components/web_icon.astro";
             "bg-transparent hover:bg-black/5 dark:hover:bg-white/20",
             "stroke-current hover:stroke-black hover:dark:stroke-white",
             "border border-black/10 dark:border-white/25",
-            "transition-all duration-300 ease-in-out"
+            "transition-all duration-300 ease-in-out",
           )}
         >
           <svg id="drawer-open" class="size-full">

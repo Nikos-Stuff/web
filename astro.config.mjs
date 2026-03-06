@@ -42,4 +42,7 @@ export default defineConfig({
       }),
     ],
   },
+  image: {
+    domains: ["api.nikostuff.com", "apod.nasa.gov"],
+  },
 });

@@ -1,0 +1,58 @@
+<div class="fixed top-4 left-4 w-0.5 h-[calc(100%-2rem)] z-50">
+  <div id="scrollbar" class="w-full backdrop-invert-50"></div>
+</div>
+
+<script>
+  import gsap from "gsap";
+
+  const scrollbar = document.getElementById("scrollbar");
+  let idleTween: gsap.core.Tween;
+
+  // Initial state: hide the bar
+  gsap.set(scrollbar, { opacity: 0 });
+
+  function hideScrollbar() {
+    gsap.to(scrollbar, {
+      opacity: 0,
+      duration: 0.5,
+      ease: "power2.inOut",
+    });
+  }
+
+  function updateScrollbar() {
+    const scrollTop = window.scrollY;
+    const containerHeight = window.innerHeight - 32;
+    const docHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    // Prevent division by zero if page isn't scrollable
+    const scrollPercent =
+      docHeight > 0 ? Math.max(0, Math.min(1, scrollTop / docHeight)) : 0;
+
+    const minHeight = 40;
+    const maxHeight = containerHeight * 0.25;
+    const currentHeight =
+      minHeight + (maxHeight - minHeight) * Math.sin(scrollPercent * Math.PI);
+    const yPos = scrollPercent * (containerHeight - currentHeight);
+
+    // 1. Show the bar and move it
+    gsap.to(scrollbar, {
+      opacity: 1, // Ensure it's visible while moving
+      height: currentHeight,
+      y: yPos,
+      duration: 0.7,
+      ease: "back.out(2)",
+      overwrite: "auto", // Prevents conflicts with the fade-out
+    });
+
+    // 2. Handle Idle Logic
+    if (idleTween) idleTween.kill(); // Stop any pending fade-out
+    idleTween = gsap.delayedCall(2, hideScrollbar); // Fade out after 2 seconds of inactivity
+  }
+
+  window.addEventListener("scroll", updateScrollbar);
+  window.addEventListener("resize", updateScrollbar);
+
+  // Trigger once to set initial position
+  updateScrollbar();
+</script>

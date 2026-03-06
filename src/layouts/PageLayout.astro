@@ -7,15 +7,17 @@ import Drawer from "@components/Drawer.astro"
 // import Preloader from "@components/Preloader.astro"
 const { title, description } = Astro.props
 import { SITE } from "@consts"
+import ScrollBar from "@components/ScrollBar.astro"
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="hide_scrollbar">
   <head>
     <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
   </head>
   <body>
     <!-- <Preloader /> -->
+    <ScrollBar />
     <Header />
     <Drawer />
     <main>
