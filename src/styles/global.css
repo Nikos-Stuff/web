@@ -410,3 +410,9 @@ article img {
 .hide_scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+/* Fallback for browsers that don't support scrollbar-width */
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
