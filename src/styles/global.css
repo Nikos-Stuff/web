@@ -403,10 +403,10 @@ article img {
 }
 
 .hide_scrollbar {
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
 
-  &::-webkit-scrollbar {
-    display: none; /* WebKit */
-  }
+.hide_scrollbar::-webkit-scrollbar {
+  display: none;
 }
