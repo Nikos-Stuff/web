@@ -402,7 +402,11 @@ article img {
   transform: translateY(50px);
 }
 
+.hide_scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
 
-.hide_scrollbar::-webkit-scrollbar {
-  display: none;
+  &::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
 }
