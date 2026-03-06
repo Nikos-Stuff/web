@@ -11,11 +11,11 @@ import ScrollBar from "@components/ScrollBar.astro"
 ---
 
 <!doctype html>
-<html lang="en" class="hide_scrollbar">
+<html lang="en">
   <head>
     <BaseHead title={`${title} | ${SITE.TITLE}`} description={description} />
   </head>
-  <body>
+  <body class="hide_scrollbar">
     <!-- <Preloader /> -->
     <ScrollBar />
     <Header />
