@@ -1,21 +1,23 @@
+// TODO: Refactor to use CSS variables ( + custom  themes support ) instead of toggling classes and reloading the page
 function changeTheme() {
   const element = document.documentElement
   const theme = element.classList.contains("dark") ? "light" : "dark"
 
   const css = document.createElement("style")
 
-  css.appendChild(
-    document.createTextNode(
-      `* {
-           -webkit-transition: none !important;
-           -moz-transition: none !important;
-           -o-transition: none !important;
-           -ms-transition: none !important;
-           transition: none !important;
-        }`,
-    ),
-  )
-  document.head.appendChild(css)
+  // Make it use transitions for the theme change.
+  // css.appendChild(
+  //   document.createTextNode(
+  //     `* {
+  //          -webkit-transition: none !important;
+  //          -moz-transition: none !important;
+  //          -o-transition: none !important;
+  //          -ms-transition: none !important;
+  //          transition: none !important;
+  //       }`,
+  //   ),
+  // )
+  // document.head.appendChild(css)
 
   if (theme === "dark") {
     element.classList.add("dark")
@@ -24,7 +26,7 @@ function changeTheme() {
   }
 
   window.getComputedStyle(css).opacity
-  document.head.removeChild(css)
+  // document.head.removeChild(css)
   localStorage.theme = theme
 }
 

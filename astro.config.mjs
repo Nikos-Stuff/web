@@ -20,6 +20,8 @@ export default defineConfig({
     },
   },
 
+
+  
   site: "https://nikostuff.com",
 
   // tailwind({
