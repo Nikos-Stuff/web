@@ -55,7 +55,7 @@ const team = defineCollection({
     demoUrl: z.string().optional(),
     repoUrl: z.string().optional(),
     imageUrl: z.string().optional(),
-    otherUrls: z.array(z.object({ name: z.string(), url: z.string().url(),})).optional(),
+    otherUrls: z.array(z.object({ name: z.string(), url: z.url(),})).optional(),
   }),
 })
 
