@@ -15,7 +15,7 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
 ---
 
 <!-- Preconnect -->
- <link rel="preconnect" href="https://challenges.cloudflare.com">
+<link rel="preconnect" href="https://challenges.cloudflare.com" />
 <link rel="preconnect" href="https://nikostuff.com" crossorigin />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
@@ -43,6 +43,12 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
   crossorigin
 />
 
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.css"
+/>
+
 <!-- Global Scripts -->
 <script is:inline data-cfasync="false" src="/js/theme.js"></script>
 <script defer is:inline src="/js/scroll.js"></script>
@@ -52,7 +58,6 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
   async
   defer
 ></script> -->
-
 
 <PageAnimations />
 <CursorEffect />
@@ -251,8 +256,8 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
   document.addEventListener("astro:before-swap", (e) =>
     [
       ...(e as TransitionBeforeSwapEvent).newDocument.head.querySelectorAll(
-        'link[as="font"]'
+        'link[as="font"]',
       ),
-    ].forEach((link) => link.remove())
+    ].forEach((link) => link.remove()),
   );
 </script>

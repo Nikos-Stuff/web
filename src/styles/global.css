@@ -102,6 +102,17 @@ html.dark {
   background-color: black;
 }
 
+button,
+a {
+  cursor: default;
+}
+
+img {
+  user-select: none;
+  -webkit-user-drag: none; 
+  pointer-events: auto;
+}
+
 html,
 body {
   @apply h-full w-full antialiased;

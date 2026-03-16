@@ -65,9 +65,9 @@ import HeaderIcon from "@components/web_icon.astro";
               : "",
           )}
         >
-          <svg class="size-full">
-            <use href="/ui.svg#search"></use>
-          </svg>
+          <div class="size-full">
+            <i class="ph ph-magnifying-glass"></i>
+          </div>
         </a>
 
         <!-- <button
@@ -97,12 +97,12 @@ import HeaderIcon from "@components/web_icon.astro";
             "transition-all duration-300 ease-in-out",
           )}
         >
-          <svg class="size-full block dark:hidden">
-            <use href="/ui.svg#sun"></use>
-          </svg>
-          <svg class="size-full hidden dark:block">
-            <use href="/ui.svg#moon"></use>
-          </svg>
+          <div class="size-full block dark:hidden">
+            <i class="ph ph-sun"></i>
+          </div>
+          <div class="size-full hidden dark:block">
+            <i class="ph ph-moon"></i> 
+          </div>
         </button>
 
         <button
@@ -117,12 +117,12 @@ import HeaderIcon from "@components/web_icon.astro";
             "transition-all duration-300 ease-in-out",
           )}
         >
-          <svg id="drawer-open" class="size-full">
-            <use href="/ui.svg#menu"></use>
-          </svg>
-          <svg id="drawer-close" class="size-full">
-            <use href="/ui.svg#x"></use>
-          </svg>
+          <div id="drawer-open" class="size-full">
+            <i class="ph ph-dots-three-outline"></i>
+          </div>
+          <div id="drawer-close" class="size-full">
+            <i class="ph ph-x"></i>
+          </div>
         </button>
       </div>
     </div>
@@ -147,7 +147,7 @@ import HeaderIcon from "@components/web_icon.astro";
   }
 </style>
 
-<script is:inline>
+<script>
   function toggleDrawer() {
     const drawer = document.getElementById("drawer");
     const drawerButton = document.getElementById("header-drawer-button");

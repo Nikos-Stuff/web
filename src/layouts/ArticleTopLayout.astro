@@ -1,44 +1,64 @@
 ---
-import type { CollectionEntry } from "astro:content"
-import { formatDate, readingTime } from "@lib/utils"
+import type { CollectionEntry } from "astro:content";
+import { formatDate, readingTime } from "@lib/utils";
 
 type Props = {
-  entry: CollectionEntry<"projects"> | CollectionEntry<"blog">
-}
+  entry: CollectionEntry<"projects"> | CollectionEntry<"blog">;
+};
 
-const { entry } = Astro.props
-const { collection, data, body } = entry
-const { title, summary, date } = data
+const { entry } = Astro.props;
+const { collection, data, body } = entry;
+const { title, summary, date } = data;
 
-const demoUrl = collection === "projects" ? data.demoUrl : null
-const repoUrl = collection === "projects" ? data.repoUrl : null
+const demoUrl = collection === "projects" ? data.demoUrl : null;
+const repoUrl = collection === "projects" ? data.repoUrl : null;
 
-const imageUrl = collection === "projects" ? data.imageUrl : null
-
+const imageUrl = collection === "projects" ? data.imageUrl : null;
 ---
 
-
 <div>
-  <a href={`/${collection}`} class="group w-fit p-1.5 gap-1.5 text-sm flex items-center border rounded hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white">
-      <line x1="19" y1="12" x2="5" y2="12" class="scale-x-0 group-hover:scale-x-100 translate-x-3 group-hover:translate-x-0 transition-all duration-300 ease-in-out" />
-      <polyline points="12 19 5 12 12 5" class="translate-x-1 group-hover:translate-x-0 transition-all duration-300 ease-in-out" />
+  <a
+    href={`/${collection}`}
+    class="group w-fit p-1.5 gap-1.5 text-sm flex items-center border rounded hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white"
+    >
+      <line
+        x1="19"
+        y1="12"
+        x2="5"
+        y2="12"
+        class="scale-x-0 group-hover:scale-x-100 translate-x-3 group-hover:translate-x-0 transition-all duration-300 ease-in-out"
+      ></line>
+      <polyline
+        points="12 19 5 12 12 5"
+        class="translate-x-1 group-hover:translate-x-0 transition-all duration-300 ease-in-out"
+      ></polyline>
     </svg>
-    <div class="w-full group-hover:text-black group-hover:dark:text-white transition-colors duration-300 ease-in-out">
+    <div
+      class="w-full group-hover:text-black group-hover:dark:text-white transition-colors duration-300 ease-in-out"
+    >
       Wróć
       <!-- do {collection} -->
     </div>
   </a>
   <div class="flex flex-wrap text-sm uppercase mt-12 gap-3 opacity-75">
     <div class="flex items-center gap-2">
-      <svg class="size-5 stroke-current">
-        <use href="/ui.svg#calendar"/>
-      </svg>
+      <i class="ph ph-calendar-blank text-2xl"></i>
       {date ? formatDate(date) : "No date available"}
     </div>
     <div class="flex items-center gap-2">
       <svg class="size-5 stroke-current">
-        <use href="/ui.svg#book-open"/>
+        <i class="ph ph-book-open-text text-2xl"></i>
       </svg>
       {body ? readingTime(body) : "No date available"}
     </div>
@@ -49,45 +69,48 @@ const imageUrl = collection === "projects" ? data.imageUrl : null
   <div class="mt-1">
     {summary}
   </div>
-  {(demoUrl || repoUrl) &&
+  {
+    (demoUrl || repoUrl) && (
       <div class="mt-4 flex flex-wrap gap-2">
-        {demoUrl &&
-            <a href={demoUrl} target="_blank" class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend">
-              <svg class="size-4">
-                <use href="/ui.svg#globe" class="fill-current group-hover:fill-black group-hover:dark:fill-white blend"/>
-              </svg>
-              <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
-          Zobacz Stronę
-        </span>
-            </a>
-        }
-        {repoUrl &&
-            <a href={repoUrl} target="_blank" class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend">
-              <svg class="size-4">
-                <use href="/ui.svg#link" class="fill-current group-hover:fill-black group-hover:dark:fill-white blend"/>
-              </svg>
-              <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
-          Zobacz Repozytorium
-        </span>
-            </a>
-        }
+        {demoUrl && (
+          <a
+            href={demoUrl}
+            target="_blank"
+            class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
+          >
+            <i class="ph ph-globe text-xl" />
+            <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
+              Zobacz Stronę
+            </span>
+          </a>
+        )}
+        {repoUrl && (
+          <a
+            href={repoUrl}
+            target="_blank"
+            class="group flex gap-2 items-center px-3 py-1.5 truncate rounded text-xs md:text-sm lg:text-base border border-black/25 dark:border-white/25 hover:bg-black/5 hover:dark:bg-white/15 blend"
+          >
+            <i class="ph ph-link text-xl" />
+            <span class="text-current group-hover:text-black group-hover:dark:text-white blend">
+              Zobacz Repozytorium
+            </span>
+          </a>
+        )}
       </div>
+    )
   }
 </div>
 
-{imageUrl && (
-  <div class="mt-14 relative content-center border rounded-lg h-[355px] hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
-    <img
-      src={imageUrl}
-      alt={title}
-      class="transition-all duration-300 ease-in-out object-cover h-full w-full rounded-lg"
-      decoding="async"
-      loading="eager"
-    />
-  </div>
-)}
-
-
-
-
-
+{
+  imageUrl && (
+    <div class="mt-14 relative content-center border rounded-lg h-[355px] hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
+      <img
+        src={imageUrl}
+        alt={title}
+        class="transition-all duration-300 ease-in-out object-cover h-full w-full rounded-lg"
+        decoding="async"
+        loading="eager"
+      />
+    </div>
+  )
+}

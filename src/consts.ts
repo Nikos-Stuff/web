@@ -115,7 +115,7 @@ export const LINKS: Links = [
 export const SOCIALS: Socials = [
   {
     NAME: "Email",
-    ICON: "email",
+    ICON: "ph ph-envelope-simple",
     TEXT: "team@nikostuff.com",
     HREF: "mailto:team@nikostuff.com",
   },
@@ -127,7 +127,7 @@ export const SOCIALS: Socials = [
   // },
   {
     NAME: "LinkedIn",
-    ICON: "linkedin",
+    ICON: "ph ph-linkedin-logo",
     TEXT: "Maciej F.",
     HREF: "https://www.linkedin.com/in/maciej-fr%C4%85czek-087578345",
   },
@@ -139,13 +139,13 @@ export const SOCIALS: Socials = [
   // },
   {
     NAME: "Discord",
-    ICON: "discord",
+    ICON: "ph ph-discord-logo",
     TEXT: "niko_fluffer",
     HREF: "https://dc.nikostuff.com",
   },
   {
     NAME: "Facebook",
-    ICON: "facebook",
+    ICON: "ph ph-facebook-logo",
     TEXT: "Niko's Stuff",
     HREF: "https://www.facebook.com/share/1C5M2EZ4p6/",
   }

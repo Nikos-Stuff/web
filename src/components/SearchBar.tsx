@@ -13,10 +13,10 @@ export default function SearchBar({
   return (
     <div class="relative">
       {" "}
-      <svg class="absolute size-6 left-2 top-[0.45rem] stroke-neutral-400 dark:stroke-neutral-500 pointer-events-none">
+      <div class="absolute size-6 left-2 top-[0.45rem] flex items-center justify-center stroke-neutral-400 dark:stroke-neutral-500 pointer-events-none">
         {" "}
-        <use href={`/ui.svg#search`} />{" "}
-      </svg>{" "}
+        <i class="ph ph-magnifying-glass text-lg"></i>{" "}
+      </div>{" "}
       <input
         name="search"
         type="text"
@@ -33,10 +33,10 @@ export default function SearchBar({
           class="absolute flex justify-center items-center h-full w-10 right-0 top-0 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300"
         >
           {" "}
-          <svg class="size-5">
+          <div class="flex items-center justify-center">
             {" "}
-            <use href={`/ui.svg#x`} />{" "}
-          </svg>{" "}
+            <i class="ph ph-x text-2xl"></i>{" "}
+          </div>{" "}
         </button>
       )}{" "}
     </div>
