@@ -1,5 +1,5 @@
 {
-  "name": "astro-sphere",
+  "name": "nikostuff",
   "type": "module",
   "version": "1.0.0",
   "scripts": {
@@ -21,7 +21,6 @@
     "@astrojs/sitemap": "^3.7.1",
     "@astrojs/solid-js": "6.0.0",
     "@playform/inline": "^0.1.4",
-    "@tailwindcss/vite": "^4.2.1",
     "@types/js-yaml": "^4.0.9",
     "astro": "6.0.4",
     "clsx": "^2.1.1",
@@ -38,6 +37,7 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.1",
     "vite": "^7.3.1"
   },
   "pnpm": {
