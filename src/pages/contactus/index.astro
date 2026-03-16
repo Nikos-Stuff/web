@@ -1,126 +1,15 @@
 ---
 // export const prerender = false;
-
-import { getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
-import ArrowCard from "@components/ArrowCard";
-// import TeamCard from "@components/TeamCard";
-import StackCard from "@components/StackCard.astro";
-import { SITE, SOCIALS } from "@consts";
+import { SITE } from "@consts";
 import TwinklingStars from "@components/TwinklingStars.astro";
 import MeteorShower from "@components/MeteorShower.astro";
-import { Image } from "astro:assets";
 
 import FancyDiv from "@components/FancyDiv.astro";
-import WhyMe from "@components/WhyMe.astro";
-
-import Reviews from "@components/Reviews.astro";
-
 import DynamicTitle from "@components/TitleHeader.astro";
 import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
-import Image1 from "@assets/vid_montage.png";
-import Image2 from "@assets/web_dev.png";
-import Image3 from "@assets/3d_printing.jpg";
-
-const posts = (await getCollection("blog"))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => {
-    // Sort by date and time
-    const dateA = new Date(a.data.date);
-    const dateB = new Date(b.data.date);
-
-    const timeA = a.data.time || "00:00";
-    const timeB = b.data.time || "00:00";
-
-    const dateTimeA = new Date(`${dateA.toDateString()} ${timeA}`);
-    const dateTimeB = new Date(`${dateB.toDateString()} ${timeB}`);
-
-    return dateTimeB.getTime() - dateTimeA.getTime();
-  })
-  .slice(0, 3);
-
-const projects = (await getCollection("projects"))
-  .filter((project) => !project.data.draft)
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
-
-// const teammembers = (await getCollection("team"))
-//   .filter((teammember) => !teammember.data.draft)
-//   .slice(0, 3);
-
-const stack = [
-  {
-    text: "Lua",
-    icon: "lua",
-    href: "https://www.lua.org/home.html",
-  },
-  {
-    text: "Astro",
-    icon: "astro",
-    href: "https://astro.build",
-  },
-  {
-    text: "Javascript",
-    icon: "javascript",
-    href: "https://www.javascript.com",
-  },
-  {
-    text: "Typescript",
-    icon: "typescript",
-    href: "https://www.typescriptlang.org",
-  },
-  {
-    text: "PHP",
-    icon: "php",
-    href: "https://www.php.net",
-  },
-];
-
 import POD from "@components/POD.astro";
-
-// APOD - Astronomy Picture of the Day
-
-import { NASA_API, AZURE_API } from "astro:env/server";
-
-const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
-
-let apodData = null;
-let translatedExplanation = null;
-
-const azureRegion = "eastus";
-const azureEndpoint = `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to=pl`;
-
-try {
-  const response = await fetch(apiUrl);
-  apodData = await response.json();
-
-  // Prepare the text for translation
-  const translationPayload = [
-    {
-      Text: apodData.explanation,
-    },
-  ];
-
-  const translateResponse = await fetch(azureEndpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "Ocp-Apim-Subscription-Key": AZURE_API,
-      "Ocp-Apim-Subscription-Region": azureRegion,
-    },
-    body: JSON.stringify(translationPayload),
-  });
-
-  const translation = await translateResponse.json();
-  translatedExplanation =
-    translation?.[0]?.translations?.[0]?.text || apodData.explanation;
-
-  console.log(" Translated Explanation:", translatedExplanation);
-} catch (error) {
-  console.error(" Defaulting to og text - Error:", error);
-  translatedExplanation = apodData.explanation;
-}
 ---
 
 <PageLayout title="Home" description={SITE.DESCRIPTION}>
