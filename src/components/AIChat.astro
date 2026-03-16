@@ -1,0 +1,100 @@
+<!-- flex -->
+<div
+  id="chat_ai"
+  class="hidden group fixed bottom-4 right-4 z-50
+         h-10 px-5 rounded-xl  items-center justify-center
+         select-none cursor-pointer transition-all duration-300"
+>
+  <div
+    id="glow_layer"
+    class="absolute -inset-1.5 -z-10 opacity-0 group-hover:opacity-60
+           blur-lg rounded-3xl transition-opacity duration-500 pointer-events-none"
+    style="background: conic-gradient(from var(--angle), #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8f00ff, #ff0000); --angle: 0deg;"
+  >
+  </div>
+
+  <div
+    class="absolute inset-0 bg-[#0f0f0f] rounded-xl z-0 transition-colors group-hover:bg-black"
+  >
+  </div>
+
+  <span
+    class="relative z-10 text-white text-base font-bold uppercase tracking-wider"
+  >
+    AI
+  </span>
+</div>
+
+<!-- flex -->
+<div
+  id="chatbox"
+  class="hidden h-lvh pointer-events-auto fixed inset-0  items-center justify-center bg-black/60 z-50 font-sans transition-all ease-in-out"
+>
+  <div
+    id="popup-content"
+    class="relative bg-white/70 dark:bg-black/70 rounded-2xl shadow-2xl m-3 p-0 max-w-lg w-full h-125 border border-black/10 dark:border-white/10 backdrop-blur-xl flex flex-col overflow-hidden"
+  >
+    <div
+      class="p-4 border-b border-black/10 dark:border-white/10 flex justify-between items-center"
+    >
+      <h3 class="font-bold text-gray-900 dark:text-white">AI Assistant</h3>
+      <button
+        onclick="closeStripePopup()"
+        class="p-2 hover:bg-black/10 dark:hover:bg-white/10 rounded-full transition-colors"
+        >✕</button
+      >
+    </div>
+
+    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4">
+      <div
+        class="bg-gray-200 dark:bg-white/10 p-3 rounded-lg max-w-[80%] text-sm text-gray-800 dark:text-gray-200"
+      >
+        Cześć! W czym mogę Ci dzisiaj pomóc?
+      </div>
+
+      <div
+        class="bg-blue-600 text-white p-3 rounded-lg max-w-[80%] ml-auto text-sm shadow-md"
+      >
+        Chciałbym stworzyć nowoczesny landing page dla mojego biznesu.
+      </div>
+    </div>
+
+    <div
+      class="p-4 border-t border-black/10 dark:border-white/10 bg-white/50 dark:bg-black/50 flex gap-2"
+    >
+      <input
+        type="text"
+        placeholder="Napisz wiadomość..."
+        class="w-full p-4 mt-5 border rounded-lg
+                    bg-transparent
+                  border-black/15 dark:border-white/20
+                  hover:bg-black/5 hover:dark:bg-white/10
+                    focus:outline-none
+                  focus:border-black/40 dark:focus:border-white/40
+                    focus:ring-2 focus:ring-black/20 dark:focus:ring-white/20
+                    focus:ring-offset-0
+                    transition-all duration-300 ease-out"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  import gsap from "gsap";
+
+  const chatAI = document.getElementById("chat_ai");
+  const glowLayer = document.getElementById("glow_layer");
+
+  const nitroAnim = gsap.to(glowLayer, {
+    "--angle": "360deg",
+    duration: 4,
+    repeat: -1,
+    ease: "none",
+    paused: true,
+  });
+
+  if (chatAI) {
+    chatAI.addEventListener("mouseenter", () => nitroAnim.play());
+    chatAI.addEventListener("mouseleave", () => nitroAnim.pause());
+  }
+</script>
