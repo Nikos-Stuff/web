@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mój guest book</title>
+    <link rel="stylesheet" href="https://unpkg.com/98.css" />
+    <link rel="preconnect" href="https://challenges.cloudflare.com" />
+    <style>
+      .cf-turnstile {
+        position: fixed;
+        bottom: 20px;
+        left: 20px;
+        z-index: 9999 !important;
+
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+
+        mix-blend-mode: screen;
+
+        opacity: 0.85;
+
+        transform: scale(0.85);
+        transform-origin: bottom left;
+        pointer-events: auto;
+      }
+      /* Hide scrollbars globally */
+      html,
+      body {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        background: teal;
+        font-family: "Microsoft Sans Serif", sans-serif;
+        padding: 20px;
+        overflow-x: hidden;
+        cursor: url("/cursors/arrow.cur"), auto;
+      }
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar {
+        display: none;
+      }
+
+      .window {
+        width: 300px;
+        position: absolute;
+        z-index: 1;
+      }
+
+      /* Mobile Stacking */
+      @media (max-width: 600px) {
+        .window {
+          position: relative !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          margin-bottom: 20px;
+        }
+      }
+
+      .chat-log {
+        height: 150px;
+        overflow-y: scroll;
+        margin-top: 25px;
+      }
+      .marquee-container {
+        width: 100%;
+        overflow: hidden;
+        border: 2px inset #ccc;
+        margin-bottom: 10px;
+      }
+
+      /* Cursors */
+      .title-bar {
+        user-select: none;
+        -webkit-user-select: none;
+        cursor: url("/cursors/arrow.cur"), auto;
+      }
+      button,
+      .title-bar-controls button {
+        cursor: url("/cursors/Cursor_15.cur"), pointer !important;
+      }
+      input[type="text"],
+      textarea {
+        cursor: url("/cursors/Cursor_14.cur"), text;
+      }
+      label,
+      legend {
+        cursor: url("/cursors/help_win95.cur"), help;
+      }
+
+      /* Iframe styling to fit window */
+      #ytPlayer {
+        display: block;
+        width: 100%;
+        border: none;
+      }
+
+      #message {
+        /* This prevents the user from resizing it at all */
+        resize: none;
+      }
+    </style>
+
+    <script
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+      async
+      defer></script>
+  </head>
+  <body>
+    <div class="window" style="top: 50px; left: 50px;">
+      <div class="title-bar">
+        <div class="title-bar-text">Guest book</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close" class="close" data-redirect="true"
+          ></button>
+        </div>
+      </div>
+      <div class="window-body">
+        <div class="marquee-container">
+          <marquee scrollamount="3">Witaj! Zostaw cos po sobie!</marquee>
+        </div>
+        <fieldset>
+          <legend>Wpisz sie na sciane:</legend>
+          <div class="field-row-stacked">
+            <label for="nickname">Twoja ksywka:</label>
+            <input id="nickname" type="text" autocomplete="off" />
+          </div>
+          <div class="field-row-stacked">
+            <label for="message">Wiadomosc:</label>
+            <textarea id="message" rows="3"></textarea>
+          </div>
+          <fieldset style="margin-top: 30px;">
+            <button id="sendBtn">Wyslij wpis</button>
+          </fieldset>
+        </fieldset>
+        <ul class="tree-view chat-log">
+          <li><strong>System - </strong>Oczekiwanie...</li>
+        </ul>
+      </div>
+      <audio id="intro_sound" src="/win98.ogv" autoplay></audio>
+      <audio id="notify" src="/you_got_mail.ogg"></audio>
+    </div>
+
+    <div
+      class="window"
+      id="radioWindow"
+      style="top: 120px; left: 400px; width: 360px;"
+    >
+      <div class="title-bar">
+        <div class="title-bar-text">Lofi Radio</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close" class="close"></button>
+        </div>
+      </div>
+      <div class="window-body" style="padding: 0; background: black;">
+        <iframe
+          id="ytPlayer"
+          height="200"
+          src="https://www.youtube.com/embed/jfKfPfyJRdk?enablejsapi=1&autoplay=1&controls=0&modestbranding=1&rel=0"
+          allow="autoplay"
+          style="pointer-events: none;"
+        >
+        </iframe>
+      </div>
+    </div>
+
+    <script>
+      const audio = document.getElementById(
+        "intro_sound",
+      ) as HTMLAudioElement | null;
+      if (audio) {
+        audio.volume = 0.2;
+      }
+
+      // --- 1. Load the YouTube API ---
+      const tag = document.createElement("script");
+      tag.src = "https://www.youtube.com/iframe_api";
+      document.head.appendChild(tag);
+
+      // --- 2. TYPESCRIPT FIXES ---
+      declare global {
+        interface Window {
+          onYouTubeIframeAPIReady: () => void;
+          YT: any; // or import YT types if using DefinitelyTyped
+        }
+      }
+
+      let player: any;
+
+      // --- 3. MUST BE GLOBAL FOR API ---
+      window.onYouTubeIframeAPIReady = () => {
+        player = new window.YT.Player("ytPlayer", {
+          events: {
+            onReady: onPlayerReady,
+          },
+        });
+      };
+
+      function onPlayerReady(event: any) {
+        event.target.setVolume(15);
+        event.target.playVideo();
+      }
+
+      // --- 4. Dragging & focus logic ---
+      const windows = document.querySelectorAll<HTMLElement>(".window");
+      let activeWindow: HTMLElement | null = null;
+      let offsetX = 0,
+        offsetY = 0;
+
+      const CURSOR_MOVE = "url('/cursors/Cursor_10.cur'), move";
+      const CURSOR_DEFAULT = "url('/cursors/arrow.cur'), auto";
+
+      let zCounter = 100; // start above default CSS z-index
+
+      function setActiveWindow(win: HTMLElement) {
+        // Make all windows inactive
+        windows.forEach((w) => {
+          const titleBar = w.querySelector<HTMLElement>(".title-bar");
+          if (titleBar) titleBar.classList.add("inactive");
+        });
+
+        // Active window
+        const titleBar = win.querySelector<HTMLElement>(".title-bar");
+        if (titleBar) titleBar.classList.remove("inactive");
+
+        // Set a higher z-index than any previous window
+        zCounter += 1;
+        win.style.zIndex = `${zCounter}`;
+      }
+
+      windows.forEach((win) => {
+        const titleBar = win.querySelector<HTMLElement>(".title-bar");
+        if (!titleBar) return;
+
+        // Make window draggable
+        titleBar.addEventListener("mousedown", (e) => {
+          if (
+            window.innerWidth <= 600 ||
+            (e.target as HTMLElement).tagName === "BUTTON"
+          )
+            return;
+
+          activeWindow = win;
+          const rect = win.getBoundingClientRect();
+          offsetX = e.clientX - rect.left;
+          offsetY = e.clientY - rect.top;
+
+          document.body.style.cursor = CURSOR_MOVE;
+          win.style.cursor = CURSOR_MOVE;
+          titleBar.style.cursor = CURSOR_MOVE;
+
+          // Bring to front and update inactive/active classes
+          setActiveWindow(win);
+        });
+
+        // Also allow clicking the title bar without dragging to focus
+        titleBar.addEventListener("click", () => {
+          setActiveWindow(win);
+        });
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (!activeWindow) return;
+        activeWindow.style.left = `${e.clientX - offsetX}px`;
+        activeWindow.style.top = `${e.clientY - offsetY}px`;
+      });
+
+      document.addEventListener("mouseup", () => {
+        if (!activeWindow) return;
+        document.body.style.cursor = "";
+        const titleBar = activeWindow.querySelector<HTMLElement>(".title-bar");
+        if (titleBar) titleBar.style.cursor = CURSOR_DEFAULT;
+        activeWindow.style.cursor = CURSOR_DEFAULT;
+        activeWindow = null;
+      });
+
+      // --- Focus on any interaction with a window ---
+      windows.forEach((win) => {
+        // Focus on click anywhere inside the window
+        win.addEventListener("mousedown", (e) => {
+          // Don't interfere with dragging on title bar (already handled)
+          //   const target = e.target as HTMLElement;
+          //   if (target.tagName === "BUTTON") return; // avoid button clicks
+          setActiveWindow(win);
+        });
+      });
+
+      // Close buttons
+      document.querySelectorAll<HTMLElement>(".close").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+          const target = e.target as HTMLElement;
+          const windowEl = target.closest(".window");
+
+          if (!windowEl) return;
+
+          // Check for "redirect" flag on the button
+          if (target.dataset.redirect === "true") {
+            window.location.href = "https://nikostuff.com";
+            return;
+          }
+
+          // Default: just remove the window
+          windowEl.remove();
+        });
+      });
+    </script>
+
+    <div
+      class="cf-turnstile"
+      data-sitekey="0x4AAAAAACBNatxTQCTb20u7"
+      data-size="normal"
+      data-theme="dark"
+      data-callback="onSuccess"
+    >
+    </div>
+    <script>
+      declare const turnstile: {
+        reset: () => void;
+      };
+      const notify_sound: HTMLAudioElement | null = document.getElementById(
+        "notify",
+      ) as HTMLAudioElement;
+      const ws: WebSocket = new WebSocket("wss://ws_wall.nikostuff.com");
+      const chatLog: HTMLUListElement | null =
+        document.querySelector(".chat-log");
+      const sendBtn: HTMLButtonElement | null = document.getElementById(
+        "sendBtn",
+      ) as HTMLButtonElement;
+      const nickInput: HTMLInputElement | null = document.getElementById(
+        "nickname",
+      ) as HTMLInputElement;
+      const msgInput: HTMLInputElement | null = document.getElementById(
+        "message",
+      ) as HTMLInputElement;
+
+      // Map to store colors per username
+      const userColors: Record<string, string> = {};
+
+      // Helper to generate random color
+      function getRandomColor(): string {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      }
+
+      // Helper to log to the UI window
+      function log_message(from: string, text: string) {
+        if (!chatLog) return;
+
+        const li: HTMLLIElement = document.createElement("li");
+
+        // Assign color if not assigned yet
+        if (!userColors[from]) {
+          userColors[from] = getRandomColor();
+        }
+
+        li.innerHTML = `<strong style="color: ${userColors[from]}">${from} - </strong> ${text}`;
+        chatLog.appendChild(li);
+
+        // Auto-scroll to bottom
+        chatLog.scrollTop = chatLog.scrollHeight;
+        if (notify_sound) {
+          notify_sound.volume = 0.05;
+          notify_sound
+            .play()
+            .catch((e) => console.error("Audio play failed:", e));
+        }
+      }
+
+      // 2. Clean Unicode Function
+      function cleanString(str: string): string {
+        // Strips everything except basic letters, numbers, and common punctuation
+        return str.replace(/[^\x00-\x7F]/g, "").trim();
+      }
+
+      // 3. Handle Incoming Messages
+      ws.onmessage = (event: MessageEvent<string>) => {
+        const data = JSON.parse(event.data);
+
+        // Socket usually sends data in an event/data format
+        if (data.event === "chat.message") {
+          log_message(data.data.from, data.data.message);
+        } else if (data.event === "welcome") {
+          log_message("System", "Polaczono z serwerem.");
+        } else if (data.event === "error") {
+          log_message("System Error", data.data.message);
+        }
+      };
+
+      ws.onclose = () => log_message("System", "Polaczenie przerwane.");
+
+      // 4. Send Message Logic
+      sendBtn?.addEventListener("click", () => {
+        if (!nickInput || !msgInput) return;
+
+        const nick: string = cleanString(nickInput.value);
+        const msg: string = cleanString(msgInput.value);
+
+        // Get Turnstile token
+        const turnstileRes: string | undefined = (
+          document.querySelector(
+            '[name="cf-turnstile-response"]',
+          ) as HTMLInputElement | null
+        )?.value;
+
+        if (!nick || !msg) {
+          log_message("System", "Pola nie moga byc puste!");
+          return;
+        }
+
+        if (!turnstileRes) {
+          log_message("System", "Dokoncz weryfikacje!");
+          return;
+        }
+
+        // Set username first (as your backend expects chat.setUsername)
+        ws.send(
+          JSON.stringify({
+            event: "chat.setUsername",
+            data: { username: nick },
+          }),
+        );
+
+        // Send the message
+        ws.send(
+          JSON.stringify({
+            event: "chat.message",
+            data: {
+              message: msg,
+              "cf-turnstile": turnstileRes,
+            },
+          }),
+        );
+
+        // Clear message field but keep nick
+        msgInput.value = "";
+
+        // Reset Turnstile token for next message
+        if (typeof turnstile !== "undefined") turnstile.reset();
+      });
+    </script>
+  </body>
+</html>
