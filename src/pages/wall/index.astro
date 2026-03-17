@@ -107,6 +107,30 @@
       defer></script>
   </head>
   <body>
+    <div
+      id="first_interaction_grabber"
+      style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(0, 0, 0, 0.5); z-index: 99999; 
+            display: flex; align-items: center; justify-content: center;"
+    >
+      <div
+        class="window"
+        data-not-moveable="true"
+        style="position: relative; width: 300px;"
+      >
+        <div class="title-bar">
+          <div class="title-bar-text">Witaj</div>
+        </div>
+        <div class="window-body" style="text-align: center;">
+          <p>Witaj w moim Guest Book-u!</p>
+          <p>Kliknij OK aby rozpoczac!</p>
+          <section class="field-row" style="justify-content: center;">
+            <button id="start_button" style="width: 80px;">OK</button>
+          </section>
+        </div>
+      </div>
+    </div>
+
     <div class="window" style="top: 50px; left: 50px;">
       <div class="title-bar">
         <div class="title-bar-text">Guest book</div>
@@ -137,7 +161,7 @@
           <li><strong>System - </strong>Oczekiwanie...</li>
         </ul>
       </div>
-      <audio id="intro_sound" src="/win98.ogv" autoplay></audio>
+      <audio id="intro_sound" src="/win98.ogv"></audio>
       <audio id="notify" src="/you_got_mail.ogg"></audio>
     </div>
 
@@ -165,43 +189,73 @@
     </div>
 
     <script>
-      const audio = document.getElementById(
+      // --- AUDIO SETUP ---
+      const introAudio = document.getElementById(
         "intro_sound",
       ) as HTMLAudioElement | null;
-      if (audio) {
-        audio.volume = 0.2;
+
+      if (introAudio) {
+        introAudio.volume = 0.2;
       }
 
-      // --- 1. Load the YouTube API ---
+      let shouldStartPlayback = false;
+
+      // --- START BUTTON ---
+      const startButton = document.getElementById("start_button");
+      const overlay = document.getElementById("first_interaction_grabber");
+
+      // --- YOUTUBE API LOAD ---
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
       document.head.appendChild(tag);
 
-      // --- 2. TYPESCRIPT FIXES ---
+      // --- TYPES ---
       declare global {
         interface Window {
           onYouTubeIframeAPIReady: () => void;
-          YT: any; // or import YT types if using DefinitelyTyped
+          YT: any;
         }
       }
 
-      let player: any;
+      let player: any = null;
+      let ytReady = false;
 
-      // --- 3. MUST BE GLOBAL FOR API ---
+      // --- INIT PLAYER ---
       window.onYouTubeIframeAPIReady = () => {
         player = new window.YT.Player("ytPlayer", {
           events: {
-            onReady: onPlayerReady,
+            onReady: (event: any) => {
+              ytReady = true;
+              event.target.setVolume(15);
+
+              if (shouldStartPlayback) {
+                event.target.playVideo();
+              }
+            },
           },
         });
       };
 
-      function onPlayerReady(event: any) {
-        event.target.setVolume(15);
-        event.target.playVideo();
-      }
+      // --- START EXPERIENCE ON CLICK ---
+      startButton?.addEventListener("click", () => {
+        overlay?.remove();
 
-      // --- 4. Dragging & focus logic ---
+        // 🔊 audio
+        if (introAudio) {
+          introAudio.currentTime = 0;
+          introAudio.play().catch((e) => {
+            console.error("Intro audio failed:", e);
+          });
+        }
+
+        shouldStartPlayback = true;
+
+        if (player && ytReady) {
+          player.playVideo();
+        }
+      });
+
+      // --- DRAGGING & WINDOW LOGIC ---
       const windows = document.querySelectorAll<HTMLElement>(".window");
       let activeWindow: HTMLElement | null = null;
       let offsetX = 0,
@@ -210,29 +264,27 @@
       const CURSOR_MOVE = "url('/cursors/Cursor_10.cur'), move";
       const CURSOR_DEFAULT = "url('/cursors/arrow.cur'), auto";
 
-      let zCounter = 100; // start above default CSS z-index
+      let zCounter = 100;
 
       function setActiveWindow(win: HTMLElement) {
-        // Make all windows inactive
         windows.forEach((w) => {
           const titleBar = w.querySelector<HTMLElement>(".title-bar");
           if (titleBar) titleBar.classList.add("inactive");
         });
 
-        // Active window
         const titleBar = win.querySelector<HTMLElement>(".title-bar");
         if (titleBar) titleBar.classList.remove("inactive");
 
-        // Set a higher z-index than any previous window
         zCounter += 1;
         win.style.zIndex = `${zCounter}`;
       }
 
       windows.forEach((win) => {
+        if (win.dataset.notMoveable === "true") return;
+
         const titleBar = win.querySelector<HTMLElement>(".title-bar");
         if (!titleBar) return;
 
-        // Make window draggable
         titleBar.addEventListener("mousedown", (e) => {
           if (
             window.innerWidth <= 600 ||
@@ -249,11 +301,9 @@
           win.style.cursor = CURSOR_MOVE;
           titleBar.style.cursor = CURSOR_MOVE;
 
-          // Bring to front and update inactive/active classes
           setActiveWindow(win);
         });
 
-        // Also allow clicking the title bar without dragging to focus
         titleBar.addEventListener("click", () => {
           setActiveWindow(win);
         });
@@ -267,25 +317,24 @@
 
       document.addEventListener("mouseup", () => {
         if (!activeWindow) return;
+
         document.body.style.cursor = "";
         const titleBar = activeWindow.querySelector<HTMLElement>(".title-bar");
         if (titleBar) titleBar.style.cursor = CURSOR_DEFAULT;
+
         activeWindow.style.cursor = CURSOR_DEFAULT;
         activeWindow = null;
       });
 
-      // --- Focus on any interaction with a window ---
+      // --- FOCUS (skip locked windows) ---
       windows.forEach((win) => {
-        // Focus on click anywhere inside the window
-        win.addEventListener("mousedown", (e) => {
-          // Don't interfere with dragging on title bar (already handled)
-          //   const target = e.target as HTMLElement;
-          //   if (target.tagName === "BUTTON") return; // avoid button clicks
+        win.addEventListener("mousedown", () => {
+          if (win.dataset.notMoveable === "true") return;
           setActiveWindow(win);
         });
       });
 
-      // Close buttons
+      // --- CLOSE BUTTONS ---
       document.querySelectorAll<HTMLElement>(".close").forEach((btn) => {
         btn.addEventListener("click", (e) => {
           const target = e.target as HTMLElement;
@@ -293,13 +342,11 @@
 
           if (!windowEl) return;
 
-          // Check for "redirect" flag on the button
           if (target.dataset.redirect === "true") {
             window.location.href = "https://nikostuff.com";
             return;
           }
 
-          // Default: just remove the window
           windowEl.remove();
         });
       });
