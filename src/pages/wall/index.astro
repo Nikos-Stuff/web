@@ -24,7 +24,14 @@
         transform-origin: bottom left;
         pointer-events: auto;
       }
-      /* Hide scrollbars globally */
+      .chat-log li {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+        max-width: 100%;
+        display: block; 
+      }
+
       html,
       body {
         scrollbar-width: none;
@@ -60,7 +67,9 @@
       .chat-log {
         height: 150px;
         overflow-y: scroll;
+        overflow-x: hidden; /* This kills the horizontal scrollbar */
         margin-top: 25px;
+        word-break: break-word; /* Forces long strings to break */
       }
       .marquee-container {
         width: 100%;
@@ -96,7 +105,6 @@
       }
 
       #message {
-        /* This prevents the user from resizing it at all */
         resize: none;
       }
     </style>
