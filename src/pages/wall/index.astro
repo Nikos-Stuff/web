@@ -317,10 +317,10 @@
       declare const turnstile: {
         reset: () => void;
       };
+
       const notify_sound: HTMLAudioElement | null = document.getElementById(
         "notify",
       ) as HTMLAudioElement;
-      const ws: WebSocket = new WebSocket("wss://ws_wall.nikostuff.com");
       const chatLog: HTMLUListElement | null =
         document.querySelector(".chat-log");
       const sendBtn: HTMLButtonElement | null = document.getElementById(
@@ -372,34 +372,71 @@
 
       // 2. Clean Unicode Function
       function cleanString(str: string): string {
-        // Strips everything except basic letters, numbers, and common punctuation
         return str.replace(/[^\x00-\x7F]/g, "").trim();
       }
 
-      // 3. Handle Incoming Messages
-      ws.onmessage = (event: MessageEvent<string>) => {
-        const data = JSON.parse(event.data);
+      // --- Reconnectable WebSocket ---
+      let ws: WebSocket | null = null;
+      const WS_URL = "wss://ws_wall.nikostuff.com";
+      const RECONNECT_DELAY = 5000; // 5 seconds
 
-        // Socket usually sends data in an event/data format
-        if (data.event === "chat.message") {
-          log_message(data.data.from, data.data.message);
-        } else if (data.event === "welcome") {
-          log_message("System", "Polaczono z serwerem.");
-        } else if (data.event === "error") {
-          log_message("System Error", data.data.message);
-        }
-      };
+      function connectSocket() {
+        ws = new WebSocket(WS_URL);
 
-      ws.onclose = () => log_message("System", "Polaczenie przerwane.");
+        ws.onopen = () => {
+          log_message("System", "Polaczono z websocket-em.");
+        };
+
+        ws.onmessage = (event: MessageEvent<string>) => {
+          const data = JSON.parse(event.data);
+
+          switch (data.event) {
+            case "chat.message":
+              log_message(data.data.from, data.data.message);
+              break;
+
+            case "chat.history":
+              data.data.messages.forEach(
+                (msg: { from: string; message: string }) => {
+                  log_message(msg.from, msg.message);
+                },
+              );
+              break;
+
+            case "welcome":
+              log_message("System", "Polaczono z serwerem.");
+              break;
+
+            case "error":
+              log_message("System Error", data.data.message);
+              break;
+          }
+        };
+
+        ws.onclose = () => {
+          log_message(
+            "System",
+            "Polaczenie przerwane. Próba ponownego polaczenia za 5s...",
+          );
+          setTimeout(connectSocket, RECONNECT_DELAY);
+        };
+
+        ws.onerror = (err) => {
+          console.error("WebSocket error:", err);
+          ws?.close(); // trigger reconnect
+        };
+      }
+
+      // Start the socket initially
+      connectSocket();
 
       // 4. Send Message Logic
       sendBtn?.addEventListener("click", () => {
-        if (!nickInput || !msgInput) return;
+        if (!nickInput || !msgInput || !ws) return;
 
         const nick: string = cleanString(nickInput.value);
         const msg: string = cleanString(msgInput.value);
 
-        // Get Turnstile token
         const turnstileRes: string | undefined = (
           document.querySelector(
             '[name="cf-turnstile-response"]',
@@ -416,7 +453,7 @@
           return;
         }
 
-        // Set username first (as your backend expects chat.setUsername)
+        // Set username first
         ws.send(
           JSON.stringify({
             event: "chat.setUsername",
@@ -435,10 +472,8 @@
           }),
         );
 
-        // Clear message field but keep nick
         msgInput.value = "";
 
-        // Reset Turnstile token for next message
         if (typeof turnstile !== "undefined") turnstile.reset();
       });
     </script>
