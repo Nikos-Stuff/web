@@ -384,13 +384,12 @@
       const userColors: Record<string, string> = {};
 
       // Helper to generate random color
-      function getRandomColor(): string {
-        const letters = "0123456789ABCDEF";
-        let color = "#";
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
-        }
-        return color;
+      function getReadableRandomColor(): string {
+        const h = Math.floor(Math.random() * 360);
+        const s = 70;
+        const l = 40;
+
+        return `hsl(${h}, ${s}%, ${l}%)`;
       }
 
       // Helper to log to the UI window
@@ -401,7 +400,7 @@
 
         // Assign color if not assigned yet
         if (!userColors[from]) {
-          userColors[from] = getRandomColor();
+          userColors[from] = getReadableRandomColor();
         }
 
         li.innerHTML = `<strong style="color: ${userColors[from]}">${from} - </strong> ${text}`;
