@@ -442,11 +442,9 @@
               break;
 
             case "chat.history":
-              data.data.messages.forEach(
-                (msg: { from: string; message: string }) => {
-                  log_message(msg.from, msg.message);
-                },
-              );
+              data.data.forEach((msg: { from: string; message: string }) => {
+                log_message(msg.from, msg.message);
+              });
               break;
 
             case "welcome":
