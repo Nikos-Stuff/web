@@ -395,43 +395,83 @@
 
       // somewhat organize windows on start...
       function organizeWindows() {
-        const windowMap: { [key: string]: { x: number; y: number } } = {
-          "Guest book": { x: 20, y: 20 },
-          Paint: { x: 380, y: 20 },
-          Links: { x: 920, y: 20 },
-          "Lofi Radio": { x: 920, y: 200 },
+        const windows = Array.from(
+          document.querySelectorAll<HTMLElement>(".window"),
+        );
+        const gap = 15;
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+
+        const col1 = windows.filter((w) => w.innerText.includes("Guest book"));
+        const col2 = windows.filter(
+          (w) => w.innerText.includes("Radio") || w.innerText.includes("Links"),
+        );
+        const col3 = windows.filter((w) => w.innerText.includes("Paint"));
+
+        const w1 = col1[0]?.offsetWidth || 0;
+        const w2 = col2[0]?.offsetWidth || 0;
+        const w3 = col3[0]?.offsetWidth || 0;
+
+        const totalBlockWidth = w1 + w2 + w3 + gap * 2;
+
+        const isTooCramped = screenW < totalBlockWidth || screenH < 600;
+
+        const animateWin = (
+          win: HTMLElement,
+          targetX: number,
+          targetY: number,
+          index: number,
+        ) => {
+          win.style.left = `${targetX}px`;
+          win.style.top = `${targetY}px`;
+
+          gsap.fromTo(
+            win,
+            {
+              scale: 0.5,
+              opacity: 0,
+              x: (Math.random() - 0.5) * 200,
+              y: (Math.random() - 0.5) * 200,
+            },
+            {
+              x: 0,
+              y: 0,
+              scale: 1,
+              opacity: 1,
+              duration: 0.6,
+              delay: index * 0.1,
+              ease: "power4.out",
+              onComplete: () => {
+                gsap.set(win, { clearProps: "x,y" });
+                if (typeof keepInBounds === "function") keepInBounds(win);
+              },
+            },
+          );
         };
 
-        const allWindows = document.querySelectorAll<HTMLElement>(".window");
+        if (isTooCramped) {
+          windows.forEach((win, i) => {
+            const randomX =
+              Math.random() * (screenW - win.offsetWidth - 40) + 20;
+            const randomY =
+              Math.random() * (screenH - win.offsetHeight - 40) + 20;
+            animateWin(win, randomX, randomY, i);
+          });
+        } else {
+          let cursorX = (screenW - totalBlockWidth) / 2;
+          [col1, col2, col3].forEach((col, colIdx) => {
+            const colWidths = [w1, w2, w3];
+            const colHeight =
+              col.reduce((sum, w) => sum + w.offsetHeight + gap, 0) - gap;
+            let cursorY = (screenH - colHeight) / 2;
 
-        allWindows.forEach((win, index) => {
-          const titleText = win
-            .querySelector(".title-bar-text")
-            ?.textContent?.trim();
-
-          if (titleText && windowMap[titleText]) {
-            const pos = windowMap[titleText];
-
-            gsap.fromTo(
-              win,
-              {
-                opacity: 0,
-                scale: 0.95,
-                left: pos.x,
-                top: pos.y + 20,
-              },
-              {
-                opacity: 1,
-                scale: 1,
-                top: pos.y,
-                duration: 1,
-                delay: index * 0.15,
-                ease: "power4.out",
-                onUpdate: () => keepInBounds(win),
-              },
-            );
-          }
-        });
+            col.forEach((win, winIdx) => {
+              animateWin(win, cursorX, cursorY, colIdx + winIdx);
+              cursorY += win.offsetHeight + gap;
+            });
+            cursorX += colWidths[colIdx] + gap;
+          });
+        }
       }
 
       // --- START EXPERIENCE ON CLICK ---
