@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="https://unpkg.com/98.css" />
     <link rel="preconnect" href="https://challenges.cloudflare.com" />
     <style>
+      @font-face {
+        font-family: "Pixelated MS Sans Serif";
+        src: url("fonts/ms_sans_serif.woff") format("woff");
+        src: url("fonts/ms_sans_serif.woff2") format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Pixelated MS Sans Serif";
+        src: url("fonts/ms_sans_serif_bold.woff") format("woff");
+        src: url("fonts/ms_sans_serif_bold.woff2") format("woff2");
+        font-weight: bold;
+        font-style: normal;
+      }
+
       .cf-turnstile {
         position: fixed;
         bottom: 20px;
@@ -37,10 +53,16 @@
         scrollbar-width: none;
         -ms-overflow-style: none;
         background: teal;
-        font-family: "Microsoft Sans Serif", sans-serif;
+        font-family:
+          "Pixelated MS Sans Serif", "Microsoft Sans Serif", Arial, sans-serif;
         padding: 20px;
         overflow-x: hidden;
         cursor: url("/cursors/arrow.cur"), auto;
+
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
       }
       html::-webkit-scrollbar,
       body::-webkit-scrollbar {
@@ -76,9 +98,9 @@
       .chat-log {
         height: 150px;
         overflow-y: scroll;
-        overflow-x: hidden; /* This kills the horizontal scrollbar */
+        overflow-x: hidden; 
         margin-top: 25px;
-        word-break: break-word; /* Forces long strings to break */
+        word-break: break-word;
       }
       .marquee-container {
         width: 100%;
@@ -95,6 +117,10 @@
       }
       button,
       .title-bar-controls button {
+        cursor: url("/cursors/Cursor_15.cur"), pointer !important;
+      }
+
+      a {
         cursor: url("/cursors/Cursor_15.cur"), pointer !important;
       }
       input[type="text"],
@@ -119,6 +145,99 @@
 
       #paintCanvas {
         touch-action: none;
+      }
+
+      /* Taskbar Stuff */
+      .taskbar {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 28px;
+        background: #c0c0c0;
+        border-top: 2px solid #ffffff;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2px;
+        box-sizing: border-box;
+        z-index: 500;
+      }
+
+      .taskbar-left-section {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        flex-grow: 1;
+      }
+
+      .start-button {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: bold;
+        height: 22px;
+        padding: 0 6px;
+      }
+
+      .taskbar-divider {
+        width: 2px;
+        height: 20px;
+        background: #808080;
+        border-right: 1px solid #ffffff;
+        margin: 0 2px;
+      }
+
+      .taskbar-apps {
+        display: flex;
+        gap: 3px;
+      }
+
+      .taskbar-item {
+        background: #c0c0c0;
+        border: 1px solid;
+        border-color: #ffffff #808080 #808080 #ffffff;
+        padding: 2px 8px;
+        font-size: 11px;
+        min-width: 60px;
+        max-width: 150px;
+      }
+
+      .tray {
+        margin: 0 !important;
+        padding: 0 6px !important;
+        height: 22px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow:
+          inset -1px -1px #ffffff,
+          inset 1px 1px #808080 !important;
+        background: #c0c0c0;
+      }
+
+      .tray-stats {
+        display: flex !important;
+        align-items: center !important;
+        border-right: 1px solid #808080;
+        padding-right: 6px;
+      }
+
+      .tray-stats img,
+      .tray img {
+        display: block;
+        margin-right: 4px;
+        image-rendering: pixelated;
+      }
+
+      .stat-divider {
+        color: #808080;
+        margin: 0 1px;
+      }
+      #tray-clock {
+        font-size: 11px;
+        line-height: 1;
+        white-space: nowrap;
       }
     </style>
 
@@ -315,535 +434,534 @@
             style="display: block;"
           />
         </a>
-
-        <hr style="width: 100%; margin: 5px 0;" />
-
-        <div class="status-bar" style="width: 100%; box-sizing: border-box;">
-          <p
-            class="status-bar-field"
-            style="margin: 0; font-size: 10px; text-align: center;"
-          >
-            Other silly webpages!
-          </p>
-        </div>
+      </div>
+      <div class="status-bar">
+        <p class="status-bar-field">Other silly stuff</p>
       </div>
     </div>
 
-    <div
-      id="wsStats"
-      style="
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background: rgba(0, 0, 0, 0.8);
-            color: #00ff00;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 12px;
-            padding: 5px 10px;
-            border: 1px solid #555;
-            pointer-events: none;
-            z-index: 9999;
-            text-transform: uppercase;
-          "
-    >
-      RATE: 0/s | IN: 0.00KB | OUT: 0.00KB
+    <div class="taskbar">
+      <div class="taskbar-left-section"></div>
+
+      <div class="status-bar tray">
+        <img
+          src="https://win98icons.alexmeub.com/icons/png/network_normal_two_pcs-3.png"
+          width="16"
+          alt="net"
+        />
+        <div id="wsStatsTaskbar" class="tray-stats">
+          <span id="stat-rate">0/s</span>
+          <span class="stat-divider">|</span>
+          <span id="stat-in">0.00KB</span>
+          <span class="stat-divider">|</span>
+          <span id="stat-out">0.00KB</span>
+        </div>
+        <div id="tray-clock">12:00 PM</div>
+      </div>
     </div>
-    <script>
-      const staticCanvas = document.getElementById(
-        "staticCanvas",
-      ) as HTMLImageElement;
+  </body>
 
-      function refreshCanvas(): void {
-        if (!staticCanvas) return;
-        staticCanvas.src = `https://api.nikostuff.com/StaticCanvas?ts=${Date.now()}`;
+  <script>
+    const staticCanvas = document.getElementById(
+      "staticCanvas",
+    ) as HTMLImageElement;
+
+    function refreshCanvas(): void {
+      if (!staticCanvas) return;
+      staticCanvas.src = `https://api.nikostuff.com/StaticCanvas?ts=${Date.now()}`;
+    }
+    refreshCanvas();
+    setInterval(refreshCanvas, 5000);
+  </script>
+
+  <script>
+    import gsap from "gsap";
+
+    // --- AUDIO SETUP ---
+    const introAudio = document.getElementById(
+      "intro_sound",
+    ) as HTMLAudioElement | null;
+
+    if (introAudio) {
+      introAudio.volume = 0.2;
+    }
+
+    let shouldStartPlayback = false;
+
+    // --- START BUTTON ---
+    const startButton = document.getElementById("start_button");
+    const overlay = document.getElementById("first_interaction_grabber");
+
+    // --- YOUTUBE API LOAD ---
+    const tag = document.createElement("script");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.head.appendChild(tag);
+
+    // --- TYPES ---
+    declare global {
+      interface Window {
+        onYouTubeIframeAPIReady: () => void;
+        YT: any;
       }
-      refreshCanvas();
-      setInterval(refreshCanvas, 5000);
-    </script>
+    }
 
-    <script>
-      import gsap from "gsap";
+    let player: any = null;
+    let ytReady = false;
 
-      // --- AUDIO SETUP ---
-      const introAudio = document.getElementById(
-        "intro_sound",
-      ) as HTMLAudioElement | null;
+    // --- INIT PLAYER ---
+    window.onYouTubeIframeAPIReady = () => {
+      player = new window.YT.Player("ytPlayer", {
+        events: {
+          onReady: (event: any) => {
+            ytReady = true;
+            event.target.setVolume(15);
 
-      if (introAudio) {
-        introAudio.volume = 0.2;
-      }
+            if (shouldStartPlayback) {
+              event.target.playVideo();
+            }
+          },
+        },
+      });
+    };
 
-      let shouldStartPlayback = false;
+    // somewhat organize windows on start...
+    function organizeWindows() {
+      const windows = Array.from(
+        document.querySelectorAll<HTMLElement>(".window"),
+      );
+      const gap = 15;
+      const screenW = window.innerWidth;
+      const screenH = window.innerHeight;
 
-      // --- START BUTTON ---
-      const startButton = document.getElementById("start_button");
-      const overlay = document.getElementById("first_interaction_grabber");
+      const col1 = windows.filter((w) => w.innerText.includes("Guest book"));
+      const col2 = windows.filter(
+        (w) => w.innerText.includes("Radio") || w.innerText.includes("Links"),
+      );
+      const col3 = windows.filter((w) => w.innerText.includes("Paint"));
 
-      // --- YOUTUBE API LOAD ---
-      const tag = document.createElement("script");
-      tag.src = "https://www.youtube.com/iframe_api";
-      document.head.appendChild(tag);
+      const w1 = col1[0]?.offsetWidth || 0;
+      const w2 = col2[0]?.offsetWidth || 0;
+      const w3 = col3[0]?.offsetWidth || 0;
 
-      // --- TYPES ---
-      declare global {
-        interface Window {
-          onYouTubeIframeAPIReady: () => void;
-          YT: any;
-        }
-      }
+      const totalBlockWidth = w1 + w2 + w3 + gap * 2;
 
-      let player: any = null;
-      let ytReady = false;
+      const isTooCramped = screenW < totalBlockWidth || screenH < 600;
 
-      // --- INIT PLAYER ---
-      window.onYouTubeIframeAPIReady = () => {
-        player = new window.YT.Player("ytPlayer", {
-          events: {
-            onReady: (event: any) => {
-              ytReady = true;
-              event.target.setVolume(15);
+      const animateWin = (
+        win: HTMLElement,
+        targetX: number,
+        targetY: number,
+        index: number,
+      ) => {
+        win.style.left = `${targetX}px`;
+        win.style.top = `${targetY}px`;
 
-              if (shouldStartPlayback) {
-                event.target.playVideo();
-              }
+        gsap.fromTo(
+          win,
+          {
+            scale: 0.5,
+            opacity: 0,
+            x: (Math.random() - 0.5) * 200,
+            y: (Math.random() - 0.5) * 200,
+          },
+          {
+            x: 0,
+            y: 0,
+            scale: 1,
+            opacity: 1,
+            duration: 0.6,
+            delay: index * 0.1,
+            ease: "power4.out",
+            onComplete: () => {
+              gsap.set(win, { clearProps: "x,y" });
+              if (typeof keepInBounds === "function") keepInBounds(win);
             },
           },
-        });
+        );
       };
 
-      // somewhat organize windows on start...
-      function organizeWindows() {
-        const windows = Array.from(
-          document.querySelectorAll<HTMLElement>(".window"),
-        );
-        const gap = 15;
-        const screenW = window.innerWidth;
-        const screenH = window.innerHeight;
+      if (isTooCramped) {
+        windows.forEach((win, i) => {
+          const randomX = Math.random() * (screenW - win.offsetWidth - 40) + 20;
+          const randomY =
+            Math.random() * (screenH - win.offsetHeight - 40) + 20;
+          animateWin(win, randomX, randomY, i);
+        });
+      } else {
+        let cursorX = (screenW - totalBlockWidth) / 2;
+        [col1, col2, col3].forEach((col, colIdx) => {
+          const colWidths = [w1, w2, w3];
+          const colHeight =
+            col.reduce((sum, w) => sum + w.offsetHeight + gap, 0) - gap;
+          let cursorY = (screenH - colHeight) / 2;
 
-        const col1 = windows.filter((w) => w.innerText.includes("Guest book"));
-        const col2 = windows.filter(
-          (w) => w.innerText.includes("Radio") || w.innerText.includes("Links"),
-        );
-        const col3 = windows.filter((w) => w.innerText.includes("Paint"));
-
-        const w1 = col1[0]?.offsetWidth || 0;
-        const w2 = col2[0]?.offsetWidth || 0;
-        const w3 = col3[0]?.offsetWidth || 0;
-
-        const totalBlockWidth = w1 + w2 + w3 + gap * 2;
-
-        const isTooCramped = screenW < totalBlockWidth || screenH < 600;
-
-        const animateWin = (
-          win: HTMLElement,
-          targetX: number,
-          targetY: number,
-          index: number,
-        ) => {
-          win.style.left = `${targetX}px`;
-          win.style.top = `${targetY}px`;
-
-          gsap.fromTo(
-            win,
-            {
-              scale: 0.5,
-              opacity: 0,
-              x: (Math.random() - 0.5) * 200,
-              y: (Math.random() - 0.5) * 200,
-            },
-            {
-              x: 0,
-              y: 0,
-              scale: 1,
-              opacity: 1,
-              duration: 0.6,
-              delay: index * 0.1,
-              ease: "power4.out",
-              onComplete: () => {
-                gsap.set(win, { clearProps: "x,y" });
-                if (typeof keepInBounds === "function") keepInBounds(win);
-              },
-            },
-          );
-        };
-
-        if (isTooCramped) {
-          windows.forEach((win, i) => {
-            const randomX =
-              Math.random() * (screenW - win.offsetWidth - 40) + 20;
-            const randomY =
-              Math.random() * (screenH - win.offsetHeight - 40) + 20;
-            animateWin(win, randomX, randomY, i);
+          col.forEach((win, winIdx) => {
+            animateWin(win, cursorX, cursorY, colIdx + winIdx);
+            cursorY += win.offsetHeight + gap;
           });
-        } else {
-          let cursorX = (screenW - totalBlockWidth) / 2;
-          [col1, col2, col3].forEach((col, colIdx) => {
-            const colWidths = [w1, w2, w3];
-            const colHeight =
-              col.reduce((sum, w) => sum + w.offsetHeight + gap, 0) - gap;
-            let cursorY = (screenH - colHeight) / 2;
+          cursorX += colWidths[colIdx] + gap;
+        });
+      }
+    }
 
-            col.forEach((win, winIdx) => {
-              animateWin(win, cursorX, cursorY, colIdx + winIdx);
-              cursorY += win.offsetHeight + gap;
-            });
-            cursorX += colWidths[colIdx] + gap;
-          });
-        }
+    // --- START EXPERIENCE ON CLICK ---
+    startButton?.addEventListener("click", () => {
+      overlay?.remove();
+
+      shouldStartPlayback = true;
+
+      if (player && ytReady) {
+        player.playVideo();
       }
 
-      // --- START EXPERIENCE ON CLICK ---
-      startButton?.addEventListener("click", () => {
-        overlay?.remove();
+      organizeWindows();
 
-        shouldStartPlayback = true;
+      // 🔊 audio
+      if (introAudio) {
+        introAudio.currentTime = 0;
+        introAudio.play().catch((e) => {
+          console.error("Intro audio failed:", e);
+        });
+      }
+    });
 
-        if (player && ytReady) {
-          player.playVideo();
-        }
+    // --- DRAGGING & WINDOW LOGIC ---
+    const windows = document.querySelectorAll<HTMLElement>(".window");
+    let activeWindow: HTMLElement | null = null;
+    let offsetX = 0,
+      offsetY = 0;
 
-        organizeWindows();
+    const CURSOR_MOVE = "url('/cursors/Cursor_10.cur'), move";
+    const CURSOR_DEFAULT = "url('/cursors/arrow.cur'), auto";
 
-        // 🔊 audio
-        if (introAudio) {
-          introAudio.currentTime = 0;
-          introAudio.play().catch((e) => {
-            console.error("Intro audio failed:", e);
-          });
-        }
+    let zCounter = 100;
+
+    function setActiveWindow(win: HTMLElement) {
+      windows.forEach((w) => {
+        const titleBar = w.querySelector<HTMLElement>(".title-bar");
+        if (titleBar) titleBar.classList.add("inactive");
       });
 
-      // --- DRAGGING & WINDOW LOGIC ---
-      const windows = document.querySelectorAll<HTMLElement>(".window");
-      let activeWindow: HTMLElement | null = null;
-      let offsetX = 0,
-        offsetY = 0;
+      const titleBar = win.querySelector<HTMLElement>(".title-bar");
+      if (titleBar) titleBar.classList.remove("inactive");
 
-      const CURSOR_MOVE = "url('/cursors/Cursor_10.cur'), move";
-      const CURSOR_DEFAULT = "url('/cursors/arrow.cur'), auto";
+      zCounter += 1;
+      win.style.zIndex = `${zCounter}`;
+    }
 
-      let zCounter = 100;
+    windows.forEach((win) => {
+      if (win.dataset.notMoveable === "true") return;
 
-      function setActiveWindow(win: HTMLElement) {
-        windows.forEach((w) => {
-          const titleBar = w.querySelector<HTMLElement>(".title-bar");
-          if (titleBar) titleBar.classList.add("inactive");
-        });
+      const titleBar = win.querySelector<HTMLElement>(".title-bar");
+      if (!titleBar) return;
 
-        const titleBar = win.querySelector<HTMLElement>(".title-bar");
-        if (titleBar) titleBar.classList.remove("inactive");
+      titleBar.addEventListener("mousedown", (e) => {
+        if (
+          window.innerWidth <= 600 ||
+          (e.target as HTMLElement).tagName === "BUTTON"
+        )
+          return;
 
-        zCounter += 1;
-        win.style.zIndex = `${zCounter}`;
-      }
+        activeWindow = win;
+        const rect = win.getBoundingClientRect();
+        offsetX = e.clientX - rect.left;
+        offsetY = e.clientY - rect.top;
 
-      windows.forEach((win) => {
+        document.body.style.cursor = CURSOR_MOVE;
+        win.style.cursor = CURSOR_MOVE;
+        titleBar.style.cursor = CURSOR_MOVE;
+
+        setActiveWindow(win);
+      });
+
+      titleBar.addEventListener("click", () => {
+        setActiveWindow(win);
+      });
+    });
+
+    document.addEventListener("mousemove", (e) => {
+      if (!activeWindow) return;
+
+      // GSAP handles the interpolation (smoothing) for us
+      gsap.to(activeWindow, {
+        left: e.clientX - offsetX,
+        top: e.clientY - offsetY,
+        duration: 0.1, // A tiny bit of lag makes it feel smooth
+        ease: "power1.out",
+        overwrite: "auto", // Prevents animation glitches if you move fast
+      });
+    });
+
+    document.addEventListener("mouseup", () => {
+      if (!activeWindow) return;
+
+      document.body.style.cursor = "";
+      const titleBar = activeWindow.querySelector<HTMLElement>(".title-bar");
+      if (titleBar) titleBar.style.cursor = CURSOR_DEFAULT;
+
+      activeWindow.style.cursor = CURSOR_DEFAULT;
+      activeWindow = null;
+    });
+
+    // --- FOCUS (skip locked windows) ---
+    windows.forEach((win) => {
+      win.addEventListener("mousedown", () => {
         if (win.dataset.notMoveable === "true") return;
-
-        const titleBar = win.querySelector<HTMLElement>(".title-bar");
-        if (!titleBar) return;
-
-        titleBar.addEventListener("mousedown", (e) => {
-          if (
-            window.innerWidth <= 600 ||
-            (e.target as HTMLElement).tagName === "BUTTON"
-          )
-            return;
-
-          activeWindow = win;
-          const rect = win.getBoundingClientRect();
-          offsetX = e.clientX - rect.left;
-          offsetY = e.clientY - rect.top;
-
-          document.body.style.cursor = CURSOR_MOVE;
-          win.style.cursor = CURSOR_MOVE;
-          titleBar.style.cursor = CURSOR_MOVE;
-
-          setActiveWindow(win);
-        });
-
-        titleBar.addEventListener("click", () => {
-          setActiveWindow(win);
-        });
+        setActiveWindow(win);
       });
+    });
 
-      document.addEventListener("mousemove", (e) => {
-        if (!activeWindow) return;
+    // --- CLOSE BUTTONS ---
+    document.querySelectorAll<HTMLElement>(".close").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement;
+        const windowEl = target.closest(".window");
 
-        // GSAP handles the interpolation (smoothing) for us
-        gsap.to(activeWindow, {
-          left: e.clientX - offsetX,
-          top: e.clientY - offsetY,
-          duration: 0.1, // A tiny bit of lag makes it feel smooth
-          ease: "power1.out",
-          overwrite: "auto", // Prevents animation glitches if you move fast
+        if (!windowEl) return;
+
+        if (target.dataset.redirect === "true") {
+          window.location.href = "https://nikostuff.com";
+          return;
+        }
+
+        windowEl.remove();
+      });
+    });
+
+    // Other
+    function keepInBounds(windowElement: HTMLElement) {
+      const rect = windowElement.getBoundingClientRect();
+
+      if (rect.right > window.innerWidth) {
+        windowElement.style.left = window.innerWidth - rect.width + "px";
+      }
+      if (rect.bottom > window.innerHeight) {
+        windowElement.style.top = window.innerHeight - rect.height + "px";
+      }
+    }
+
+    // Call this whenever the window is resized
+    window.addEventListener("resize", () => {
+      const allWindows = document.querySelectorAll(".window");
+      allWindows.forEach((win) => keepInBounds(win as HTMLElement));
+    });
+  </script>
+
+  <div
+    class="cf-turnstile"
+    data-sitekey="0x4AAAAAACBNatxTQCTb20u7"
+    data-size="normal"
+    data-theme="dark"
+    data-callback="onSuccess"
+  >
+  </div>
+
+  <script>
+    // --- Freak u typescript ---
+    declare var turnstile: {
+      reset: () => void;
+    };
+
+    interface Stroke {
+      x: number;
+      y: number;
+      lastX: number;
+      lastY: number;
+      color: string;
+      size: number;
+      mode: string;
+    }
+
+    // --- Configuration & State ---
+    const WS_URL = "wss://ws_wall.nikostuff.com";
+    let ws: WebSocket | null = null;
+    let myClientId: string | null = null;
+    let reconnectAttempts = 0;
+    let lastMoveSent = 0;
+    let isDrawing = false;
+    let lastX = 0,
+      lastY = 0;
+    const remoteCursors = new Map<string, HTMLDivElement>();
+    const userColors: Record<string, string> = {};
+    let strokeBuffer: Stroke[] = [];
+    const FLUSH_INTERVAL = 32;
+    const cursorLastSeen = new Map<string, number>();
+    const CURSOR_TIMEOUT = 5000;
+
+    const stats = {
+      msgsIn: 0,
+      msgsOut: 0,
+      bytesIn: 0,
+      bytesOut: 0,
+      startTime: Date.now(),
+    };
+
+    // --- DOM Elements ---
+    const canvas = document.getElementById("paintCanvas") as HTMLCanvasElement;
+    const ctx = canvas.getContext("2d", {
+      desynchronized: true,
+    }) as CanvasRenderingContext2D;
+    const canvasStage = document.getElementById(
+      "canvasStage",
+    ) as HTMLDivElement;
+    const chatLog = document.querySelector(".chat-log") as HTMLUListElement;
+    const msgInput = document.getElementById("message") as HTMLInputElement;
+    const nickInput = document.getElementById("nickname") as HTMLInputElement;
+    const coordsLabel = document.getElementById("coords") as HTMLElement;
+    const colorInput = document.getElementById(
+      "colorInput",
+    ) as HTMLInputElement;
+    const brushSize = document.getElementById("brushSize") as HTMLInputElement;
+    const notify_sound = document.getElementById("notify") as HTMLAudioElement;
+
+    // --- Helpers ---
+    function getReadableRandomColor() {
+      return `hsl(${Math.floor(Math.random() * 360)}, 70%, 40%)`;
+    }
+
+    function unpackStroke(bin: ArrayBuffer): Stroke {
+      const view = new DataView(bin);
+      const x = view.getUint16(0, false); // big-endian
+      const y = view.getUint16(2, false);
+      const lastX = view.getUint16(4, false);
+      const lastY = view.getUint16(6, false);
+      const r = view.getUint8(8);
+      const g = view.getUint8(9);
+      const b = view.getUint8(10);
+      const size = view.getUint8(11);
+      const mode = view.getUint8(12);
+
+      return {
+        x,
+        y,
+        lastX,
+        lastY,
+        color: `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`,
+        size,
+        mode: mode === 1 ? "erase" : "draw",
+      };
+    }
+
+    function flushStrokeBuffer() {
+      if (strokeBuffer.length > 0 && ws?.readyState === 1) {
+        ws.send(
+          JSON.stringify({
+            event: "user.draw.batch",
+            data: strokeBuffer,
+          }),
+        );
+        strokeBuffer = [];
+      }
+    }
+
+    function text_to_speech(message: string) {
+      const utterance = new SpeechSynthesisUtterance(message);
+
+      utterance.pitch = 1;
+      utterance.rate = 1;
+      utterance.volume = 0.2;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    // heartbeat to clear stuff out
+    setInterval(flushStrokeBuffer, FLUSH_INTERVAL);
+
+    function updateStatsUI() {
+      const elapsed = (Date.now() - stats.startTime) / 1000;
+      const rate = ((stats.msgsIn + stats.msgsOut) / (elapsed || 1)).toFixed(1);
+      const kbIn = (stats.bytesIn / 1024).toFixed(2);
+      const kbOut = (stats.bytesOut / 1024).toFixed(2);
+
+      const rateEl = document.getElementById("stat-rate");
+      const inEl = document.getElementById("stat-in");
+      const outEl = document.getElementById("stat-out");
+
+      if (rateEl) rateEl.innerText = `${rate}/s`;
+      if (inEl) inEl.innerText = `${kbIn}KB`;
+      if (outEl) outEl.innerText = `${kbOut}KB`;
+
+      const clockEl = document.getElementById("tray-clock");
+      if (clockEl) {
+        const now = new Date();
+        clockEl.innerText = now.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
         });
-      });
+      }
+    }
+    setInterval(updateStatsUI, 1000);
 
-      document.addEventListener("mouseup", () => {
-        if (!activeWindow) return;
+    function cleanupStaleCursors() {
+      const now = Date.now();
 
-        document.body.style.cursor = "";
-        const titleBar = activeWindow.querySelector<HTMLElement>(".title-bar");
-        if (titleBar) titleBar.style.cursor = CURSOR_DEFAULT;
-
-        activeWindow.style.cursor = CURSOR_DEFAULT;
-        activeWindow = null;
-      });
-
-      // --- FOCUS (skip locked windows) ---
-      windows.forEach((win) => {
-        win.addEventListener("mousedown", () => {
-          if (win.dataset.notMoveable === "true") return;
-          setActiveWindow(win);
-        });
-      });
-
-      // --- CLOSE BUTTONS ---
-      document.querySelectorAll<HTMLElement>(".close").forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          const target = e.target as HTMLElement;
-          const windowEl = target.closest(".window");
-
-          if (!windowEl) return;
-
-          if (target.dataset.redirect === "true") {
-            window.location.href = "https://nikostuff.com";
-            return;
+      for (const [clientId, lastSeen] of cursorLastSeen.entries()) {
+        if (now - lastSeen > CURSOR_TIMEOUT) {
+          const el = remoteCursors.get(clientId);
+          if (el) {
+            el.remove();
+            remoteCursors.delete(clientId);
           }
-
-          windowEl.remove();
-        });
-      });
-
-      // Other
-      function keepInBounds(windowElement: HTMLElement) {
-        const rect = windowElement.getBoundingClientRect();
-
-        if (rect.right > window.innerWidth) {
-          windowElement.style.left = window.innerWidth - rect.width + "px";
-        }
-        if (rect.bottom > window.innerHeight) {
-          windowElement.style.top = window.innerHeight - rect.height + "px";
+          cursorLastSeen.delete(clientId);
         }
       }
+    }
 
-      // Call this whenever the window is resized
-      window.addEventListener("resize", () => {
-        const allWindows = document.querySelectorAll(".window");
-        allWindows.forEach((win) => keepInBounds(win as HTMLElement));
-      });
-    </script>
+    setInterval(cleanupStaleCursors, 2000);
 
-    <div
-      class="cf-turnstile"
-      data-sitekey="0x4AAAAAACBNatxTQCTb20u7"
-      data-size="normal"
-      data-theme="dark"
-      data-callback="onSuccess"
-    >
-    </div>
+    function log_message(from: string, text: string) {
+      if (!chatLog) return;
+      const li = document.createElement("li");
+      if (!userColors[from]) userColors[from] = getReadableRandomColor();
+      li.innerHTML = `<strong style="color: ${userColors[from]}">${from}: </strong> ${text}`;
+      chatLog.appendChild(li);
+      chatLog.scrollTop = chatLog.scrollHeight;
 
-    <script>
-      // --- Freak u typescript ---
-      declare var turnstile: {
-        reset: () => void;
-      };
+      // play da sound
+      notify_sound.volume = 0.1;
+      notify_sound.play();
+    }
 
-      interface Stroke {
-        x: number;
-        y: number;
-        lastX: number;
-        lastY: number;
-        color: string;
-        size: number;
-        mode: string;
+    const originalSend = WebSocket.prototype.send;
+    WebSocket.prototype.send = function (data: any) {
+      stats.msgsOut++;
+
+      // calc the size safely - checking which property exists
+      if (typeof data === "string") {
+        stats.bytesOut += data.length;
+      } else if (data instanceof ArrayBuffer) {
+        stats.bytesOut += data.byteLength;
+      } else if (data instanceof Blob) {
+        stats.bytesOut += data.size;
+      } else if (ArrayBuffer.isView(data)) {
+        stats.bytesOut += data.byteLength;
       }
 
-      // --- Configuration & State ---
-      const WS_URL = "wss://ws_wall.nikostuff.com";
-      let ws: WebSocket | null = null;
-      let myClientId: string | null = null;
-      let reconnectAttempts = 0;
-      let lastMoveSent = 0;
-      let isDrawing = false;
-      let lastX = 0,
-        lastY = 0;
-      const remoteCursors = new Map<string, HTMLDivElement>();
-      const userColors: Record<string, string> = {};
-      let strokeBuffer: Stroke[] = [];
-      const FLUSH_INTERVAL = 32;
-      const cursorLastSeen = new Map<string, number>();
-      const CURSOR_TIMEOUT = 5000;
+      return originalSend.apply(this, [data] as any);
+    };
 
-      const stats = {
-        msgsIn: 0,
-        msgsOut: 0,
-        bytesIn: 0,
-        bytesOut: 0,
-        startTime: Date.now(),
-      };
+    // --- Logic: Drawing & Cursors ---
+    function renderStroke(stroke: any) {
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.strokeStyle = stroke.mode === "erase" ? "#ffffff" : stroke.color;
+      ctx.lineWidth = stroke.size;
+      ctx.beginPath();
+      ctx.moveTo(stroke.lastX, stroke.lastY);
+      ctx.lineTo(stroke.x, stroke.y);
+      ctx.stroke();
+    }
 
-      // --- DOM Elements ---
-      const canvas = document.getElementById(
-        "paintCanvas",
-      ) as HTMLCanvasElement;
-      const ctx = canvas.getContext("2d", {
-        desynchronized: true,
-      }) as CanvasRenderingContext2D;
-      const canvasStage = document.getElementById(
-        "canvasStage",
-      ) as HTMLDivElement;
-      const chatLog = document.querySelector(".chat-log") as HTMLUListElement;
-      const msgInput = document.getElementById("message") as HTMLInputElement;
-      const nickInput = document.getElementById("nickname") as HTMLInputElement;
-      const coordsLabel = document.getElementById("coords") as HTMLElement;
-      const colorInput = document.getElementById(
-        "colorInput",
-      ) as HTMLInputElement;
-      const brushSize = document.getElementById(
-        "brushSize",
-      ) as HTMLInputElement;
-      const notify_sound = document.getElementById(
-        "notify",
-      ) as HTMLAudioElement;
+    function handleRemoteMove(data: any) {
+      if (data.clientId === myClientId) return;
 
-      // --- Helpers ---
-      function getReadableRandomColor() {
-        return `hsl(${Math.floor(Math.random() * 360)}, 70%, 40%)`;
-      }
+      cursorLastSeen.set(data.clientId, Date.now());
 
-      function unpackStroke(bin: ArrayBuffer): Stroke {
-        const view = new DataView(bin);
-        const x = view.getUint16(0, false); // big-endian
-        const y = view.getUint16(2, false);
-        const lastX = view.getUint16(4, false);
-        const lastY = view.getUint16(6, false);
-        const r = view.getUint8(8);
-        const g = view.getUint8(9);
-        const b = view.getUint8(10);
-        const size = view.getUint8(11);
-        const mode = view.getUint8(12);
+      let cursor = remoteCursors.get(data.clientId);
 
-        return {
-          x,
-          y,
-          lastX,
-          lastY,
-          color: `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`,
-          size,
-          mode: mode === 1 ? "erase" : "draw",
-        };
-      }
-
-      function flushStrokeBuffer() {
-        if (strokeBuffer.length > 0 && ws?.readyState === 1) {
-          ws.send(
-            JSON.stringify({
-              event: "user.draw.batch",
-              data: strokeBuffer,
-            }),
-          );
-          strokeBuffer = [];
-        }
-      }
-
-      function text_to_speech(message: string) {
-        const utterance = new SpeechSynthesisUtterance(message);
-
-        utterance.pitch = 1;
-        utterance.rate = 1;
-        utterance.volume = 0.2;
-
-        window.speechSynthesis.speak(utterance);
-      }
-
-      // heartbeat to clear stuff out
-      setInterval(flushStrokeBuffer, FLUSH_INTERVAL);
-
-      function updateStatsUI() {
-        const elapsed = (Date.now() - stats.startTime) / 1000;
-        const rate = ((stats.msgsIn + stats.msgsOut) / elapsed).toFixed(1);
-        const kbIn = (stats.bytesIn / 1024).toFixed(2);
-        const kbOut = (stats.bytesOut / 1024).toFixed(2);
-
-        const statsEl = document.getElementById("wsStats");
-        if (statsEl) {
-          statsEl.innerText = `RATE: ${rate}/s | IN: ${kbIn}KB | OUT: ${kbOut}KB`;
-        }
-      }
-      setInterval(updateStatsUI, 1000);
-
-      function cleanupStaleCursors() {
-        const now = Date.now();
-
-        for (const [clientId, lastSeen] of cursorLastSeen.entries()) {
-          if (now - lastSeen > CURSOR_TIMEOUT) {
-            const el = remoteCursors.get(clientId);
-            if (el) {
-              el.remove();
-              remoteCursors.delete(clientId);
-            }
-            cursorLastSeen.delete(clientId);
-          }
-        }
-      }
-
-      setInterval(cleanupStaleCursors, 2000);
-
-      function log_message(from: string, text: string) {
-        if (!chatLog) return;
-        const li = document.createElement("li");
-        if (!userColors[from]) userColors[from] = getReadableRandomColor();
-        li.innerHTML = `<strong style="color: ${userColors[from]}">${from}: </strong> ${text}`;
-        chatLog.appendChild(li);
-        chatLog.scrollTop = chatLog.scrollHeight;
-
-        // play da sound
-        notify_sound.volume = 0.1;
-        notify_sound.play();
-      }
-
-      const originalSend = WebSocket.prototype.send;
-      WebSocket.prototype.send = function (data: any) {
-        stats.msgsOut++;
-
-        // calc the size safely - checking which property exists
-        if (typeof data === "string") {
-          stats.bytesOut += data.length;
-        } else if (data instanceof ArrayBuffer) {
-          stats.bytesOut += data.byteLength;
-        } else if (data instanceof Blob) {
-          stats.bytesOut += data.size;
-        } else if (ArrayBuffer.isView(data)) {
-          stats.bytesOut += data.byteLength;
-        }
-
-        return originalSend.apply(this, [data] as any);
-      };
-
-      // --- Logic: Drawing & Cursors ---
-      function renderStroke(stroke: any) {
-        ctx.lineCap = "round";
-        ctx.lineJoin = "round";
-        ctx.strokeStyle = stroke.mode === "erase" ? "#ffffff" : stroke.color;
-        ctx.lineWidth = stroke.size;
-        ctx.beginPath();
-        ctx.moveTo(stroke.lastX, stroke.lastY);
-        ctx.lineTo(stroke.x, stroke.y);
-        ctx.stroke();
-      }
-
-      function handleRemoteMove(data: any) {
-        if (data.clientId === myClientId) return;
-
-        cursorLastSeen.set(data.clientId, Date.now());
-
-        let cursor = remoteCursors.get(data.clientId);
-
-        if (!cursor) {
-          cursor = document.createElement("div");
-          cursor.style.cssText = `
+      if (!cursor) {
+        cursor = document.createElement("div");
+        cursor.style.cssText = `
           position: absolute;
           top: 0;
           left: 0;
@@ -852,7 +970,7 @@
           will-change: transform;
         `;
 
-          cursor.innerHTML = `
+        cursor.innerHTML = `
           <div style="width: 8px; height: 8px; background: red; border: 1px solid #000; box-shadow: 1px 1px 0px #fff inset; position: relative;"></div>
           <div class="cursor-label" style="
             position: absolute;
@@ -869,251 +987,244 @@
           "></div>
         `;
 
-          canvasStage.appendChild(cursor);
-          remoteCursors.set(data.clientId, cursor);
-        }
-
-        const label = cursor.querySelector(".cursor-label") as HTMLElement;
-
-        const currentName = data.username || "Guest";
-        if (label.innerText !== currentName) {
-          label.innerText = currentName;
-        }
-
-        const stageRect = canvasStage.getBoundingClientRect();
-        const labelWidth = label.offsetWidth || 80;
-        const labelHeight = label.offsetHeight || 18;
-        const buffer = 4;
-
-        let x = Math.max(
-          buffer,
-          Math.min(data.x, stageRect.width - 8 - buffer),
-        );
-        let y = Math.max(
-          buffer,
-          Math.min(data.y, stageRect.height - 8 - buffer),
-        );
-
-        const flipX = x + labelWidth + 25 > stageRect.width;
-        const flipY = y + labelHeight + 25 > stageRect.height;
-
-        label.style.left = flipX ? `-${labelWidth + 2}px` : "12px";
-        label.style.top = flipY ? `-${labelHeight + 2}px` : "12px";
-
-        if (flipX && x - labelWidth < buffer) x = labelWidth + buffer;
-        if (flipY && y - labelHeight < buffer) y = labelHeight + buffer;
-
-        x = Math.max(0, Math.min(x, stageRect.width - 2));
-        y = Math.max(0, Math.min(y, stageRect.height - 2));
-
-        cursor.style.transform = `translate(${x}px, ${y}px)`;
+        canvasStage.appendChild(cursor);
+        remoteCursors.set(data.clientId, cursor);
       }
 
-      // --- Connection Management ---
-      function connect() {
-        if (ws && (ws.readyState === 0 || ws.readyState === 1)) return;
-        ws = new WebSocket(WS_URL);
+      const label = cursor.querySelector(".cursor-label") as HTMLElement;
 
-        ws.onopen = () => {
-          reconnectAttempts = 0;
-          log_message("System", "Connected to the websocket.");
-        };
-
-        ws.onmessage = (e) => {
-          stats.msgsIn++;
-          stats.bytesIn += new Blob([e.data]).size;
-          const msg = JSON.parse(e.data);
-          switch (msg.event) {
-            case "welcome":
-              myClientId = msg.data.clientId;
-              break;
-            case "chat.message":
-              log_message(msg.data.from, msg.data.message);
-              // play da speech
-              const fullMessage = msg.data.from + " said: " + msg.data.message;
-              text_to_speech(fullMessage);
-              break;
-            case "chat.history":
-              msg.data.forEach((m: any) => log_message(m.from, m.message));
-              break;
-            case "paint.history":
-              msg.data.strokes.forEach((s: any) => renderStroke(s));
-              break;
-            case "user.draw.batch":
-              const strokes = msg.data.strokes;
-              const delayBetweenPoints = 5;
-
-              strokes.forEach((stroke: Stroke, index: number) => {
-                // Use the Stroke interface here
-                setTimeout(() => {
-                  renderStroke(stroke);
-
-                  handleRemoteMove({
-                    clientId: msg.data.clientId,
-                    username: msg.data.username,
-                    x: stroke.x,
-                    y: stroke.y,
-                  });
-                }, index * delayBetweenPoints);
-              });
-              break;
-            case "user.move":
-              handleRemoteMove(msg.data);
-              break;
-            case "user.disconnected":
-              const el = remoteCursors.get(msg.data.clientId);
-              if (el) {
-                el.remove();
-                remoteCursors.delete(msg.data.clientId);
-              }
-              break;
-            case "error":
-              // You can use your log_message function or a simple alert
-              log_message(
-                "System",
-                `<span style="color: red; font-weight: bold; font-size: 1.2em;">${msg.data.message}</span>`,
-              );
-              break;
-          }
-        };
-
-        ws.onclose = () => {
-          const delay = Math.min(5000 * Math.pow(2, reconnectAttempts), 30000);
-
-          log_message(
-            "System",
-            `Connection lost! Retrying in ${delay / 1000} seconds...`,
-          );
-
-          setTimeout(() => {
-            reconnectAttempts++;
-            connect();
-          }, delay);
-        };
+      const currentName = data.username || "Guest";
+      if (label.innerText !== currentName) {
+        label.innerText = currentName;
       }
 
-      // --- Input Events ---
-      canvas.addEventListener("pointerdown", (e) => {
-        isDrawing = true;
-        const rect = canvas.getBoundingClientRect();
-        lastX = (e.clientX - rect.left) * (canvas.width / rect.width);
-        lastY = (e.clientY - rect.top) * (canvas.height / rect.height);
-      });
+      const stageRect = canvasStage.getBoundingClientRect();
+      const labelWidth = label.offsetWidth || 80;
+      const labelHeight = label.offsetHeight || 18;
+      const buffer = 4;
 
-      window.addEventListener("pointerup", () => (isDrawing = false));
+      let x = Math.max(buffer, Math.min(data.x, stageRect.width - 8 - buffer));
+      let y = Math.max(buffer, Math.min(data.y, stageRect.height - 8 - buffer));
 
-      canvas.addEventListener("pointermove", (e) => {
-        const rect = canvas.getBoundingClientRect();
-        const x = (e.clientX - rect.left) * (canvas.width / rect.width);
-        const y = (e.clientY - rect.top) * (canvas.height / rect.height);
-        coordsLabel.innerText = `${Math.floor(x)}, ${Math.floor(y)}`;
+      const flipX = x + labelWidth + 25 > stageRect.width;
+      const flipY = y + labelHeight + 25 > stageRect.height;
 
-        if (Date.now() - lastMoveSent > 150 && ws?.readyState === 1) {
-          ws.send(
-            JSON.stringify({
-              event: "user.move",
-              data: { x, y, username: nickInput.value },
-            }),
-          );
-          lastMoveSent = Date.now();
+      label.style.left = flipX ? `-${labelWidth + 2}px` : "12px";
+      label.style.top = flipY ? `-${labelHeight + 2}px` : "12px";
+
+      if (flipX && x - labelWidth < buffer) x = labelWidth + buffer;
+      if (flipY && y - labelHeight < buffer) y = labelHeight + buffer;
+
+      x = Math.max(0, Math.min(x, stageRect.width - 2));
+      y = Math.max(0, Math.min(y, stageRect.height - 2));
+
+      cursor.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    // --- Connection Management ---
+    function connect() {
+      if (ws && (ws.readyState === 0 || ws.readyState === 1)) return;
+      ws = new WebSocket(WS_URL);
+
+      ws.onopen = () => {
+        reconnectAttempts = 0;
+        log_message("System", "Connected to the websocket.");
+      };
+
+      ws.onmessage = (e) => {
+        stats.msgsIn++;
+        stats.bytesIn += new Blob([e.data]).size;
+        const msg = JSON.parse(e.data);
+        switch (msg.event) {
+          case "welcome":
+            myClientId = msg.data.clientId;
+            break;
+          case "chat.message":
+            log_message(msg.data.from, msg.data.message);
+            // play da speech
+            const fullMessage = msg.data.from + " said: " + msg.data.message;
+            text_to_speech(fullMessage);
+            break;
+          case "chat.history":
+            msg.data.forEach((m: any) => log_message(m.from, m.message));
+            break;
+          case "paint.history":
+            msg.data.strokes.forEach((s: any) => renderStroke(s));
+            break;
+          case "user.draw.batch":
+            const strokes = msg.data.strokes;
+            const delayBetweenPoints = 5;
+
+            strokes.forEach((stroke: Stroke, index: number) => {
+              // Use the Stroke interface here
+              setTimeout(() => {
+                renderStroke(stroke);
+
+                handleRemoteMove({
+                  clientId: msg.data.clientId,
+                  username: msg.data.username,
+                  x: stroke.x,
+                  y: stroke.y,
+                });
+              }, index * delayBetweenPoints);
+            });
+            break;
+          case "user.move":
+            handleRemoteMove(msg.data);
+            break;
+          case "user.disconnected":
+            const el = remoteCursors.get(msg.data.clientId);
+            if (el) {
+              el.remove();
+              remoteCursors.delete(msg.data.clientId);
+            }
+            break;
+          case "error":
+            // You can use your log_message function or a simple alert
+            log_message(
+              "System",
+              `<span style="color: red; font-weight: bold; font-size: 1.2em;">${msg.data.message}</span>`,
+            );
+            break;
         }
+      };
 
-        if (!isDrawing) return;
-        const stroke = {
-          x,
-          y,
-          lastX,
-          lastY,
-          color: colorInput.value,
-          size: parseInt(brushSize.value),
-          mode: "draw",
-        };
-        renderStroke(stroke);
-        strokeBuffer.push(stroke);
+      ws.onclose = () => {
+        const delay = Math.min(5000 * Math.pow(2, reconnectAttempts), 30000);
 
-        lastX = x;
-        lastY = y;
-      });
+        log_message(
+          "System",
+          `Connection lost! Retrying in ${delay / 1000} seconds...`,
+        );
 
-      document.getElementById("sendBtn")?.addEventListener("click", () => {
-        if (!nickInput || !msgInput || !ws) return;
+        setTimeout(() => {
+          reconnectAttempts++;
+          connect();
+        }, delay);
+      };
+    }
 
-        const nick = nickInput.value.trim();
-        const msg = msgInput.value.trim();
+    // --- Input Events ---
+    canvas.addEventListener("pointerdown", (e) => {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      lastX = (e.clientX - rect.left) * (canvas.width / rect.width);
+      lastY = (e.clientY - rect.top) * (canvas.height / rect.height);
+    });
 
-        // cf grabber
-        const turnstileRes = (
-          document.querySelector(
-            '[name="cf-turnstile-response"]',
-          ) as HTMLInputElement | null
-        )?.value;
+    window.addEventListener("pointerup", () => (isDrawing = false));
 
-        // check da boi
-        if (!nick || !msg) {
-          log_message("System", "Username / Message cannot be empty!");
-          return;
-        }
+    canvas.addEventListener("pointermove", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+      const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+      coordsLabel.innerText = `${Math.floor(x)}, ${Math.floor(y)}`;
 
-        if (!turnstileRes) {
-          log_message("System", "Finish the verification!");
-          return;
-        }
-
-        // sync
+      if (Date.now() - lastMoveSent > 150 && ws?.readyState === 1) {
         ws.send(
           JSON.stringify({
-            event: "chat.setUsername",
-            data: { username: nick },
+            event: "user.move",
+            data: { x, y, username: nickInput.value },
           }),
         );
-
-        // yeet it!
-        ws.send(
-          JSON.stringify({
-            event: "chat.message",
-            data: {
-              from: nick,
-              message: msg,
-              "cf-turnstile": turnstileRes,
-            },
-          }),
-        );
-
-        // clean it!
-        msgInput.value = "";
-
-        // reset!
-        if (typeof turnstile !== "undefined") {
-          turnstile.reset();
-        }
-      });
-
-      // --- UI Feedback ---
-      function updateBrushPreview(): void {
-        const size = brushSize.value;
-        const color = colorInput.value;
-
-        // Update the text display (Brush: Xpx)
-        const brushDisplay = document.getElementById("brushDisplay");
-        if (brushDisplay) brushDisplay.innerText = size;
-
-        // Update the visual circle
-        const sizePreview = document.getElementById("sizePreview");
-        if (sizePreview) {
-          sizePreview.style.width = `${size}px`;
-          sizePreview.style.height = `${size}px`;
-          sizePreview.style.backgroundColor = color;
-        }
+        lastMoveSent = Date.now();
       }
 
-      // Listen for changes
-      brushSize.addEventListener("input", updateBrushPreview);
-      colorInput.addEventListener("input", updateBrushPreview);
+      if (!isDrawing) return;
+      const stroke = {
+        x,
+        y,
+        lastX,
+        lastY,
+        color: colorInput.value,
+        size: parseInt(brushSize.value),
+        mode: "draw",
+      };
+      renderStroke(stroke);
+      strokeBuffer.push(stroke);
 
-      // Run once on load to sync initial values
-      updateBrushPreview();
+      lastX = x;
+      lastY = y;
+    });
 
-      connect();
-    </script>
-  </body>
+    document.getElementById("sendBtn")?.addEventListener("click", () => {
+      if (!nickInput || !msgInput || !ws) return;
+
+      const nick = nickInput.value.trim();
+      const msg = msgInput.value.trim();
+
+      // cf grabber
+      const turnstileRes = (
+        document.querySelector(
+          '[name="cf-turnstile-response"]',
+        ) as HTMLInputElement | null
+      )?.value;
+
+      // check da boi
+      if (!nick || !msg) {
+        log_message("System", "Username / Message cannot be empty!");
+        return;
+      }
+
+      if (!turnstileRes) {
+        log_message("System", "Finish the verification!");
+        return;
+      }
+
+      // sync
+      ws.send(
+        JSON.stringify({
+          event: "chat.setUsername",
+          data: { username: nick },
+        }),
+      );
+
+      // yeet it!
+      ws.send(
+        JSON.stringify({
+          event: "chat.message",
+          data: {
+            from: nick,
+            message: msg,
+            "cf-turnstile": turnstileRes,
+          },
+        }),
+      );
+
+      // clean it!
+      msgInput.value = "";
+
+      // reset!
+      if (typeof turnstile !== "undefined") {
+        turnstile.reset();
+      }
+    });
+
+    // --- UI Feedback ---
+    function updateBrushPreview(): void {
+      const size = brushSize.value;
+      const color = colorInput.value;
+
+      // Update the text display (Brush: Xpx)
+      const brushDisplay = document.getElementById("brushDisplay");
+      if (brushDisplay) brushDisplay.innerText = size;
+
+      // Update the visual circle
+      const sizePreview = document.getElementById("sizePreview");
+      if (sizePreview) {
+        sizePreview.style.width = `${size}px`;
+        sizePreview.style.height = `${size}px`;
+        sizePreview.style.backgroundColor = color;
+      }
+    }
+
+    // Listen for changes
+    brushSize.addEventListener("input", updateBrushPreview);
+    colorInput.addEventListener("input", updateBrushPreview);
+
+    // Run once on load to sync initial values
+    updateBrushPreview();
+
+    connect();
+  </script>
 </html>
