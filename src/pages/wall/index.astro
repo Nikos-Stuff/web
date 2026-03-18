@@ -702,6 +702,16 @@
         }
       }
 
+      function text_to_speech(message: string) {
+        const utterance = new SpeechSynthesisUtterance(message);
+
+        utterance.pitch = 1;
+        utterance.rate = 1;
+        utterance.volume = 0.2;
+
+        window.speechSynthesis.speak(utterance);
+      }
+
       // heartbeat to clear stuff out
       setInterval(flushStrokeBuffer, FLUSH_INTERVAL);
 
@@ -729,6 +739,10 @@
         // play da sound
         notify_sound.volume = 0.1;
         notify_sound.play();
+
+        // play da speech
+        const fullMessage = from + " said: " + text;
+        text_to_speech(fullMessage)
       }
 
       const originalSend = WebSocket.prototype.send;
