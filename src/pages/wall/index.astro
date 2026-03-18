@@ -66,6 +66,11 @@
           width: 100% !important;
           margin-bottom: 20px;
         }
+        #sizePreview,
+        .sizeBrushPreview,
+        .status-bar {
+          display: none !important;
+        }
       }
 
       .chat-log {
@@ -110,6 +115,10 @@
 
       #message {
         resize: none;
+      }
+
+      #paintCanvas {
+        touch-action: none;
       }
     </style>
 
@@ -165,7 +174,7 @@
             <label for="message">Message:</label>
             <textarea id="message" rows="3"></textarea>
           </div>
-            <button id="sendBtn" style="margin-top: 10px;">Send</button>
+          <button id="sendBtn" style="margin-top: 10px;">Send</button>
         </fieldset>
         <ul class="tree-view chat-log">
           <li><strong>System - </strong>Waiting...</li>
@@ -255,6 +264,7 @@
           </div>
 
           <div
+            class="sizeBrushPreview"
             style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border: 2px inset #ffffff; background: white;"
           >
             <div
@@ -716,53 +726,75 @@
 
       function handleRemoteMove(data: any) {
         if (data.clientId === myClientId) return;
+
         let cursor = remoteCursors.get(data.clientId);
 
         if (!cursor) {
           cursor = document.createElement("div");
-          // Added 'contain: layout;' to help with performance and prevent layout shifts
-          // Added 'pointer-events: none;' to ensure the tag doesn't block clicks
           cursor.style.cssText = `
-      position: absolute; 
-      top: 0; 
-      left: 0; 
-      pointer-events: none; 
-      z-index: 1000; 
-      transition: transform 0.1s linear;
-      will-change: transform;
-    `;
+          position: absolute;
+          top: 0;
+          left: 0;
+          pointer-events: none;
+          z-index: 1000;
+          will-change: transform;
+        `;
 
           cursor.innerHTML = `
-      <div style="
-        width: 8px; 
-        height: 8px; 
-        background: red; 
-        border: 1px solid #000; 
-        box-shadow: 1px 1px 0px #fff inset;
-        position: relative;
-      "></div>
+          <div style="width: 8px; height: 8px; background: red; border: 1px solid #000; box-shadow: 1px 1px 0px #fff inset; position: relative;"></div>
+          <div class="cursor-label" style="
+            position: absolute;
+            left: 12px;
+            top: 12px;
+            padding: 1px 4px 2px 4px;
+            background: #ffffca;
+            border: 1px solid #000;
+            font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
+            font-size: 11px;
+            line-height: 12px;
+            white-space: nowrap;
+            box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+          "></div>
+        `;
 
-      <div style="
-        position: absolute; 
-        left: 10px; 
-        top: 10px; 
-        padding: 1px 4px 2px 4px; /* Adjusted padding for better MS Sans alignment */
-        background: #ffffca; 
-        border: 1px solid #000; 
-        font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
-        font-size: 11px; 
-        line-height: 12px; /* Explicit line-height prevents text from touching borders */
-        white-space: nowrap; 
-        box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
-        z-index: 1001;
-      ">
-        ${data.username || "Guest"}
-      </div>
-    `;
           canvasStage.appendChild(cursor);
           remoteCursors.set(data.clientId, cursor);
         }
-        cursor.style.transform = `translate(${data.x}px, ${data.y}px)`;
+
+        const label = cursor.querySelector(".cursor-label") as HTMLElement;
+
+        const currentName = data.username || "Guest";
+        if (label.innerText !== currentName) {
+          label.innerText = currentName;
+        }
+
+        const stageRect = canvasStage.getBoundingClientRect();
+        const labelWidth = label.offsetWidth || 80;
+        const labelHeight = label.offsetHeight || 18;
+        const buffer = 4;
+
+        let x = Math.max(
+          buffer,
+          Math.min(data.x, stageRect.width - 8 - buffer),
+        );
+        let y = Math.max(
+          buffer,
+          Math.min(data.y, stageRect.height - 8 - buffer),
+        );
+
+        const flipX = x + labelWidth + 25 > stageRect.width;
+        const flipY = y + labelHeight + 25 > stageRect.height;
+
+        label.style.left = flipX ? `-${labelWidth + 2}px` : "12px";
+        label.style.top = flipY ? `-${labelHeight + 2}px` : "12px";
+
+        if (flipX && x - labelWidth < buffer) x = labelWidth + buffer;
+        if (flipY && y - labelHeight < buffer) y = labelHeight + buffer;
+
+        x = Math.max(0, Math.min(x, stageRect.width - 2));
+        y = Math.max(0, Math.min(y, stageRect.height - 2));
+
+        cursor.style.transform = `translate(${x}px, ${y}px)`;
       }
 
       // --- Connection Management ---
@@ -834,16 +866,16 @@
       }
 
       // --- Input Events ---
-      canvas.addEventListener("mousedown", (e) => {
+      canvas.addEventListener("pointerdown", (e) => {
         isDrawing = true;
         const rect = canvas.getBoundingClientRect();
         lastX = (e.clientX - rect.left) * (canvas.width / rect.width);
         lastY = (e.clientY - rect.top) * (canvas.height / rect.height);
       });
 
-      window.addEventListener("mouseup", () => (isDrawing = false));
+      window.addEventListener("pointerup", () => (isDrawing = false));
 
-      canvas.addEventListener("mousemove", (e) => {
+      canvas.addEventListener("pointermove", (e) => {
         const rect = canvas.getBoundingClientRect();
         const x = (e.clientX - rect.left) * (canvas.width / rect.width);
         const y = (e.clientY - rect.top) * (canvas.height / rect.height);
