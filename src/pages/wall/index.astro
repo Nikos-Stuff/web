@@ -115,6 +115,7 @@
         -webkit-user-select: none;
         cursor: url("/cursors/arrow.cur"), auto;
       }
+      input[type="color"],
       a,
       input,
       button,
@@ -122,7 +123,6 @@
         cursor: url("/cursors/Cursor_15.cur"), pointer;
       }
 
-      input[type="color"],
       input[type="text"],
       textarea {
         cursor: url("/cursors/Cursor_14.cur"), text;
@@ -369,7 +369,7 @@
               id="colorInput"
               type="color"
               value="#000000"
-              style="width: 30px; height: 30px; cursor: pointer;"
+              style="width: 30px; height: 30px;"
             />
           </div>
 
@@ -682,13 +682,26 @@
     document.addEventListener("mousemove", (e) => {
       if (!activeWindow) return;
 
-      // GSAP handles the interpolation (smoothing) for us
+      const rect = activeWindow.getBoundingClientRect();
+
+      let newX = e.clientX - offsetX;
+      let newY = e.clientY - offsetY;
+
+      const taskbarHeight = 28;
+
+      const maxX = window.innerWidth - rect.width;
+      const maxY = window.innerHeight - rect.height - taskbarHeight;
+
+      // Clamp
+      newX = Math.max(0, Math.min(newX, maxX));
+      newY = Math.max(0, Math.min(newY, maxY));
+
       gsap.to(activeWindow, {
-        left: e.clientX - offsetX,
-        top: e.clientY - offsetY,
-        duration: 0.1, // A tiny bit of lag makes it feel smooth
+        left: newX,
+        top: newY,
+        duration: 0.1,
         ease: "power1.out",
-        overwrite: "auto", // Prevents animation glitches if you move fast
+        overwrite: "auto",
       });
     });
 
