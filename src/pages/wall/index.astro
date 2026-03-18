@@ -177,7 +177,7 @@
           <button id="sendBtn" style="margin-top: 10px;">Send</button>
         </fieldset>
         <ul class="tree-view chat-log">
-          <li><strong>System - </strong>Waiting...</li>
+          <li><strong>System: </strong>Waiting...</li>
         </ul>
       </div>
       <audio id="intro_sound" src="/win98.ogv"></audio>
@@ -888,6 +888,13 @@
                 el.remove();
                 remoteCursors.delete(msg.data.clientId);
               }
+              break;
+            case "error":
+              // You can use your log_message function or a simple alert
+              log_message(
+                "System",
+                `<span style="color: red; font-weight: bold; font-size: 1.2em;">${msg.data.message}</span>`,
+              );
               break;
           }
         };
