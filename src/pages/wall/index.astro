@@ -227,11 +227,17 @@
           id="canvasStage"
           style="position: relative; line-height: 0;  overflow-x: auto"
         >
+          <img
+            id="staticCanvas"
+            src=""
+            alt="Canvas Background"
+            style="position: absolute; top: 0; left: 0; width: 504px; height: 304px; pointer-events: none; background-color: #ffffff; z-index: -1;"
+          />
           <canvas
             id="paintCanvas"
             width="500"
             height="300"
-            style="background: white; border: 2px inset #ffffff; cursor: crosshair; display: block;"
+            style="background: transparent; border: 2px inset #ffffff; cursor: crosshair; display: block;"
           ></canvas>
         </div>
 
@@ -339,6 +345,18 @@
     >
       RATE: 0/s | IN: 0.00KB | OUT: 0.00KB
     </div>
+    <script>
+      const staticCanvas = document.getElementById(
+        "staticCanvas",
+      ) as HTMLImageElement;
+
+      function refreshCanvas(): void {
+        if (!staticCanvas) return;
+        staticCanvas.src = `https://api.nikostuff.com/StaticCanvas?ts=${Date.now()}`;
+      }
+      refreshCanvas();
+      setInterval(refreshCanvas, 5000);
+    </script>
 
     <script>
       import gsap from "gsap";
