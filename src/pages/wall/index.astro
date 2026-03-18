@@ -652,6 +652,8 @@
       const userColors: Record<string, string> = {};
       let strokeBuffer: Stroke[] = [];
       const FLUSH_INTERVAL = 32;
+      const cursorLastSeen = new Map<string, number>();
+      const CURSOR_TIMEOUT = 5000;
 
       const stats = {
         msgsIn: 0,
@@ -728,6 +730,23 @@
       }
       setInterval(updateStatsUI, 1000);
 
+      function cleanupStaleCursors() {
+        const now = Date.now();
+
+        for (const [clientId, lastSeen] of cursorLastSeen.entries()) {
+          if (now - lastSeen > CURSOR_TIMEOUT) {
+            const el = remoteCursors.get(clientId);
+            if (el) {
+              el.remove();
+              remoteCursors.delete(clientId);
+            }
+            cursorLastSeen.delete(clientId);
+          }
+        }
+      }
+      
+      setInterval(cleanupStaleCursors, 2000);
+
       function log_message(from: string, text: string) {
         if (!chatLog) return;
         const li = document.createElement("li");
@@ -773,6 +792,8 @@
 
       function handleRemoteMove(data: any) {
         if (data.clientId === myClientId) return;
+
+        cursorLastSeen.set(data.clientId, Date.now());
 
         let cursor = remoteCursors.get(data.clientId);
 
