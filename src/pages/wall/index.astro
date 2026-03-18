@@ -98,7 +98,7 @@
       .chat-log {
         height: 150px;
         overflow-y: scroll;
-        overflow-x: hidden; 
+        overflow-x: hidden;
         margin-top: 25px;
         word-break: break-word;
       }
@@ -857,9 +857,9 @@
     function text_to_speech(message: string) {
       const utterance = new SpeechSynthesisUtterance(message);
 
-      utterance.pitch = 1;
+      utterance.pitch = Math.random() * (1.2 - 0.8) + 0.8;
       utterance.rate = 1;
-      utterance.volume = 0.2;
+      utterance.volume = 0.3;
 
       window.speechSynthesis.speak(utterance);
     }
