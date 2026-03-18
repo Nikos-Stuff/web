@@ -53,6 +53,10 @@
         z-index: 1;
       }
 
+      .win_anim {
+        opacity: 0;
+      }
+
       /* Mobile Stacking */
       @media (max-width: 600px) {
         .window {
@@ -127,11 +131,11 @@
         style="position: relative; width: 300px;"
       >
         <div class="title-bar">
-          <div class="title-bar-text">UWAGA</div>
+          <div class="title-bar-text">Hello World!</div>
         </div>
         <div class="window-body" style="text-align: center;">
-          <p>Witaj w moim Guest Book-u!</p>
-          <p>Jeszcze work in progress... ale co tam!</p>
+          <p>Welcome to my silly place!</p>
+          <p>Still work in progress - but whatever!</p>
           <section class="field-row" style="justify-content: center;">
             <button id="start_button" style="width: 80px;">OK</button>
           </section>
@@ -139,7 +143,7 @@
       </div>
     </div>
 
-    <div class="window" style="top: 50px; left: 50px;">
+    <div class="window win_anim">
       <div class="title-bar">
         <div class="title-bar-text">Guest book</div>
         <div class="title-bar-controls">
@@ -149,31 +153,33 @@
       </div>
       <div class="window-body">
         <div class="marquee-container">
-          <marquee scrollamount="3">Witaj! Zostaw cos po sobie!</marquee>
+          <marquee scrollamount="3">Leave a random message! ( Global )</marquee>
         </div>
         <fieldset>
           <legend>Wpisz sie na sciane:</legend>
           <div class="field-row-stacked">
-            <label for="nickname">Twoja ksywka:</label>
+            <label for="nickname">Your nickname:</label>
             <input id="nickname" type="text" autocomplete="off" />
           </div>
           <div class="field-row-stacked">
-            <label for="message">Wiadomosc:</label>
+            <label for="message">Message:</label>
             <textarea id="message" rows="3"></textarea>
           </div>
-          <fieldset style="margin-top: 30px;">
-            <button id="sendBtn">Wyslij wpis</button>
-          </fieldset>
+            <button id="sendBtn" style="margin-top: 10px;">Send</button>
         </fieldset>
         <ul class="tree-view chat-log">
-          <li><strong>System - </strong>Oczekiwanie...</li>
+          <li><strong>System - </strong>Waiting...</li>
         </ul>
       </div>
       <audio id="intro_sound" src="/win98.ogv"></audio>
       <audio id="notify" src="/you_got_mail.ogg"></audio>
     </div>
 
-    <div class="window" id="radioWindow" style="top: 120px; left: 400px;">
+    <div
+      class="window win_anim"
+      id="radioWindow"
+      style="top: 120px; left: 400px;"
+    >
       <div class="title-bar">
         <div class="title-bar-text">Lofi Radio</div>
         <div class="title-bar-controls">
@@ -193,9 +199,9 @@
     </div>
 
     <div
-      class="window"
+      class="window win_anim"
       id="globalPaint"
-      style="top: 120px; left: 900px; width: auto; display: inline-block;"
+      style="width: auto; display: inline-block;"
     >
       <div class="title-bar">
         <div class="title-bar-text">Paint</div>
@@ -227,7 +233,7 @@
           style="display: flex; flex-direction: row; align-items: center; padding: 5px; border-top: 1px solid #808080; gap: 15px;"
         >
           <div class="field-row" style="margin: 0;">
-            <label style="font-size: 10px;">Kolor:</label>
+            <label style="font-size: 10px;">Color:</label>
             <input
               id="colorInput"
               type="color"
@@ -237,7 +243,7 @@
           </div>
 
           <div class="field-row" style="margin: 0; flex-grow: 1;">
-            <label for="brushSize" style="font-size: 10px;">Wielkosc:</label>
+            <label for="brushSize" style="font-size: 10px;">Size:</label>
             <input
               id="brushSize"
               type="range"
@@ -274,27 +280,62 @@
       </div>
     </div>
 
+    <div class="window win_anim" style="width: 120px; display: inline-block;">
+      <div class="title-bar">
+        <div class="title-bar-text">Links</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div
+        class="window-body"
+        style="margin: 0; display: flex; flex-direction: column; align-items: center; padding: 10px; gap: 8px;"
+      >
+        <a href="https://bartkk.xyz" target="_blank">
+          <img
+            src="https://bartkk.xyz/img/buttons/button-zack.gif"
+            alt="Zack The Raccoon"
+            style="display: block;"
+          />
+        </a>
+
+        <hr style="width: 100%; margin: 5px 0;" />
+
+        <div class="status-bar" style="width: 100%; box-sizing: border-box;">
+          <p
+            class="status-bar-field"
+            style="margin: 0; font-size: 10px; text-align: center;"
+          >
+            Other silly webpages!
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div
       id="wsStats"
       style="
-  position: fixed;
-  bottom: 10px;
-  right: 10px;
-  background: rgba(0, 0, 0, 0.8);
-  color: #00ff00;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 12px;
-  padding: 5px 10px;
-  border: 1px solid #555;
-  pointer-events: none;
-  z-index: 9999;
-  text-transform: uppercase;
-"
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            padding: 5px 10px;
+            border: 1px solid #555;
+            pointer-events: none;
+            z-index: 9999;
+            text-transform: uppercase;
+          "
     >
       RATE: 0/s | IN: 0.00KB | OUT: 0.00KB
     </div>
 
     <script>
+      import gsap from "gsap";
+
       // --- AUDIO SETUP ---
       const introAudio = document.getElementById(
         "intro_sound",
@@ -342,9 +383,58 @@
         });
       };
 
+      // somewhat organize windows on start...
+      function organizeWindows() {
+        const windowMap: { [key: string]: { x: number; y: number } } = {
+          "Guest book": { x: 20, y: 20 },
+          Paint: { x: 380, y: 20 },
+          Links: { x: 920, y: 20 },
+          "Lofi Radio": { x: 920, y: 200 },
+        };
+
+        const allWindows = document.querySelectorAll<HTMLElement>(".window");
+
+        allWindows.forEach((win, index) => {
+          const titleText = win
+            .querySelector(".title-bar-text")
+            ?.textContent?.trim();
+
+          if (titleText && windowMap[titleText]) {
+            const pos = windowMap[titleText];
+
+            gsap.fromTo(
+              win,
+              {
+                opacity: 0,
+                scale: 0.95,
+                left: pos.x,
+                top: pos.y + 20,
+              },
+              {
+                opacity: 1,
+                scale: 1,
+                top: pos.y,
+                duration: 1,
+                delay: index * 0.15,
+                ease: "power4.out",
+                onUpdate: () => keepInBounds(win),
+              },
+            );
+          }
+        });
+      }
+
       // --- START EXPERIENCE ON CLICK ---
       startButton?.addEventListener("click", () => {
         overlay?.remove();
+
+        shouldStartPlayback = true;
+
+        if (player && ytReady) {
+          player.playVideo();
+        }
+
+        organizeWindows();
 
         // 🔊 audio
         if (introAudio) {
@@ -352,12 +442,6 @@
           introAudio.play().catch((e) => {
             console.error("Intro audio failed:", e);
           });
-        }
-
-        shouldStartPlayback = true;
-
-        if (player && ytReady) {
-          player.playVideo();
         }
       });
 
@@ -417,8 +501,15 @@
 
       document.addEventListener("mousemove", (e) => {
         if (!activeWindow) return;
-        activeWindow.style.left = `${e.clientX - offsetX}px`;
-        activeWindow.style.top = `${e.clientY - offsetY}px`;
+
+        // GSAP handles the interpolation (smoothing) for us
+        gsap.to(activeWindow, {
+          left: e.clientX - offsetX,
+          top: e.clientY - offsetY,
+          duration: 0.1, // A tiny bit of lag makes it feel smooth
+          ease: "power1.out",
+          overwrite: "auto", // Prevents animation glitches if you move fast
+        });
       });
 
       document.addEventListener("mouseup", () => {
@@ -543,6 +634,9 @@
       const brushSize = document.getElementById(
         "brushSize",
       ) as HTMLInputElement;
+      const notify_sound = document.getElementById(
+        "notify",
+      ) as HTMLAudioElement;
 
       // --- Helpers ---
       function getReadableRandomColor() {
@@ -584,6 +678,10 @@
         li.innerHTML = `<strong style="color: ${userColors[from]}">${from}: </strong> ${text}`;
         chatLog.appendChild(li);
         chatLog.scrollTop = chatLog.scrollHeight;
+
+        // play da sound
+        notify_sound.volume = 0.1;
+        notify_sound.play();
       }
 
       const originalSend = WebSocket.prototype.send;
@@ -598,7 +696,6 @@
         } else if (data instanceof Blob) {
           stats.bytesOut += data.size;
         } else if (ArrayBuffer.isView(data)) {
-        
           stats.bytesOut += data.byteLength;
         }
 
@@ -675,7 +772,7 @@
 
         ws.onopen = () => {
           reconnectAttempts = 0;
-          log_message("System", "Polaczono do websocket-a.");
+          log_message("System", "Connected to the websocket.");
         };
 
         ws.onmessage = (e) => {
@@ -732,7 +829,7 @@
             reconnectAttempts++;
             connect();
           }, delay);
-          log_message("System", "Utracono polaczenie...");
+          log_message("System", "Connection terminated! Retrying...");
         };
       }
 
@@ -779,7 +876,6 @@
         lastY = y;
       });
 
-
       document.getElementById("sendBtn")?.addEventListener("click", () => {
         if (!nickInput || !msgInput || !ws) return;
 
@@ -795,12 +891,12 @@
 
         // check da boi
         if (!nick || !msg) {
-          log_message("System", "Pola nie moga byc puste!");
+          log_message("System", "Username / Message cannot be empty!");
           return;
         }
 
         if (!turnstileRes) {
-          log_message("System", "Dokoncz weryfikacje Turnstile!");
+          log_message("System", "Finish the verification!");
           return;
         }
 
