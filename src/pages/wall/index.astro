@@ -739,10 +739,6 @@
         // play da sound
         notify_sound.volume = 0.1;
         notify_sound.play();
-
-        // play da speech
-        const fullMessage = from + " said: " + text;
-        text_to_speech(fullMessage);
       }
 
       const originalSend = WebSocket.prototype.send;
@@ -868,6 +864,9 @@
               break;
             case "chat.message":
               log_message(msg.data.from, msg.data.message);
+              // play da speech
+              const fullMessage = msg.data.from + " said: " + msg.data.message;
+              text_to_speech(fullMessage);
               break;
             case "chat.history":
               msg.data.forEach((m: any) => log_message(m.from, m.message));
