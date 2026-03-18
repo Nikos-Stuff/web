@@ -131,12 +131,7 @@
         </div>
         <div class="window-body" style="text-align: center;">
           <p>Witaj w moim Guest Book-u!</p>
-          <p>
-            Wszystko, co zobaczysz ponizej, zostalo umieszczone przez losowych
-            uzytkownikow. Tak, obejmuje to skrypty, popupy, przekierowania i
-            przeklete HTML. Jesli cos sie zepsuje, ukradnie Twoje ciasteczka lub
-            przyzwie demona — to Twoja odpowiedzialnosc.
-          </p>
+          <p>Jeszcze work in progress... ale co tam!</p>
           <section class="field-row" style="justify-content: center;">
             <button id="start_button" style="width: 80px;">OK</button>
           </section>
@@ -178,11 +173,7 @@
       <audio id="notify" src="/you_got_mail.ogg"></audio>
     </div>
 
-    <div
-      class="window"
-      id="radioWindow"
-      style="top: 120px; left: 400px; width: 360px;"
-    >
+    <div class="window" id="radioWindow" style="top: 120px; left: 400px;">
       <div class="title-bar">
         <div class="title-bar-text">Lofi Radio</div>
         <div class="title-bar-controls">
@@ -199,6 +190,108 @@
         >
         </iframe>
       </div>
+    </div>
+
+    <div
+      class="window"
+      id="globalPaint"
+      style="top: 120px; left: 900px; width: auto; display: inline-block;"
+    >
+      <div class="title-bar">
+        <div class="title-bar-text">Paint</div>
+        <div class="title-bar-controls">
+          <button
+            aria-label="Close"
+            onclick="document.getElementById('globalPaint').style.display='none'"
+          ></button>
+        </div>
+      </div>
+
+      <div
+        class="window-body"
+        style="margin: 0; display: flex; flex-direction: column;"
+      >
+        <div
+          id="canvasStage"
+          style="position: relative; line-height: 0;  overflow-x: auto"
+        >
+          <canvas
+            id="paintCanvas"
+            width="500"
+            height="300"
+            style="background: white; border: 2px inset #ffffff; cursor: crosshair; display: block;"
+          ></canvas>
+        </div>
+
+        <div
+          style="display: flex; flex-direction: row; align-items: center; padding: 5px; border-top: 1px solid #808080; gap: 15px;"
+        >
+          <div class="field-row" style="margin: 0;">
+            <label style="font-size: 10px;">Kolor:</label>
+            <input
+              id="colorInput"
+              type="color"
+              value="#000000"
+              style="width: 30px; height: 30px; cursor: pointer;"
+            />
+          </div>
+
+          <div class="field-row" style="margin: 0; flex-grow: 1;">
+            <label for="brushSize" style="font-size: 10px;">Wielkosc:</label>
+            <input
+              id="brushSize"
+              type="range"
+              min="1"
+              max="20"
+              value="5"
+              style="width: 100px;"
+            />
+          </div>
+
+          <div
+            style="width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border: 2px inset #ffffff; background: white;"
+          >
+            <div
+              id="sizePreview"
+              style="background: black; border-radius: 50%; width: 5px; height: 5px;"
+            >
+            </div>
+          </div>
+
+          <div class="status-bar" style="flex-grow: 1; height: 20px;">
+            <p
+              class="status-bar-field"
+              id="coords"
+              style="width: 60px; margin: 0;"
+            >
+              0, 0
+            </p>
+            <p class="status-bar-field" style="margin: 0;">
+              <span id="brushDisplay">5</span>px
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="wsStats"
+      style="
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #00ff00;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 12px;
+  padding: 5px 10px;
+  border: 1px solid #555;
+  pointer-events: none;
+  z-index: 9999;
+  text-transform: uppercase;
+"
+    >
+      RATE: 0/s | IN: 0.00KB | OUT: 0.00KB
     </div>
 
     <script>
@@ -363,6 +456,24 @@
           windowEl.remove();
         });
       });
+
+      // Other
+      function keepInBounds(windowElement: HTMLElement) {
+        const rect = windowElement.getBoundingClientRect();
+
+        if (rect.right > window.innerWidth) {
+          windowElement.style.left = window.innerWidth - rect.width + "px";
+        }
+        if (rect.bottom > window.innerHeight) {
+          windowElement.style.top = window.innerHeight - rect.height + "px";
+        }
+      }
+
+      // Call this whenever the window is resized
+      window.addEventListener("resize", () => {
+        const allWindows = document.querySelectorAll(".window");
+        allWindows.forEach((win) => keepInBounds(win as HTMLElement));
+      });
     </script>
 
     <div
@@ -373,144 +484,327 @@
       data-callback="onSuccess"
     >
     </div>
+
     <script>
-      declare const turnstile: {
+      // --- Freak u typescript ---
+      declare var turnstile: {
         reset: () => void;
       };
 
-      const notify_sound: HTMLAudioElement | null = document.getElementById(
-        "notify",
-      ) as HTMLAudioElement;
-      const chatLog: HTMLUListElement | null =
-        document.querySelector(".chat-log");
-      const sendBtn: HTMLButtonElement | null = document.getElementById(
-        "sendBtn",
-      ) as HTMLButtonElement;
-      const nickInput: HTMLInputElement | null = document.getElementById(
-        "nickname",
-      ) as HTMLInputElement;
-      const msgInput: HTMLInputElement | null = document.getElementById(
-        "message",
-      ) as HTMLInputElement;
-
-      // Map to store colors per username
-      const userColors: Record<string, string> = {};
-
-      // Helper to generate random color
-      function getReadableRandomColor(): string {
-        const h = Math.floor(Math.random() * 360);
-        const s = 70;
-        const l = 40;
-
-        return `hsl(${h}, ${s}%, ${l}%)`;
+      interface Stroke {
+        x: number;
+        y: number;
+        lastX: number;
+        lastY: number;
+        color: string;
+        size: number;
+        mode: string;
       }
 
-      // Helper to log to the UI window
+      // --- Configuration & State ---
+      const WS_URL = "wss://ws_wall.nikostuff.com";
+      let ws: WebSocket | null = null;
+      let myClientId: string | null = null;
+      let reconnectAttempts = 0;
+      let lastMoveSent = 0;
+      let isDrawing = false;
+      let lastX = 0,
+        lastY = 0;
+      const remoteCursors = new Map<string, HTMLDivElement>();
+      const userColors: Record<string, string> = {};
+      let strokeBuffer: Stroke[] = [];
+      const FLUSH_INTERVAL = 32;
+
+      const stats = {
+        msgsIn: 0,
+        msgsOut: 0,
+        bytesIn: 0,
+        bytesOut: 0,
+        startTime: Date.now(),
+      };
+
+      // --- DOM Elements ---
+      const canvas = document.getElementById(
+        "paintCanvas",
+      ) as HTMLCanvasElement;
+      const ctx = canvas.getContext("2d", {
+        desynchronized: true,
+      }) as CanvasRenderingContext2D;
+      const canvasStage = document.getElementById(
+        "canvasStage",
+      ) as HTMLDivElement;
+      const chatLog = document.querySelector(".chat-log") as HTMLUListElement;
+      const msgInput = document.getElementById("message") as HTMLInputElement;
+      const nickInput = document.getElementById("nickname") as HTMLInputElement;
+      const coordsLabel = document.getElementById("coords") as HTMLElement;
+      const colorInput = document.getElementById(
+        "colorInput",
+      ) as HTMLInputElement;
+      const brushSize = document.getElementById(
+        "brushSize",
+      ) as HTMLInputElement;
+
+      // --- Helpers ---
+      function getReadableRandomColor() {
+        return `hsl(${Math.floor(Math.random() * 360)}, 70%, 40%)`;
+      }
+
+      function flushStrokeBuffer() {
+        if (strokeBuffer.length > 0 && ws?.readyState === 1) {
+          ws.send(
+            JSON.stringify({
+              event: "user.draw.batch",
+              data: strokeBuffer,
+            }),
+          );
+          strokeBuffer = [];
+        }
+      }
+
+      // heartbeat to clear stuff out
+      setInterval(flushStrokeBuffer, FLUSH_INTERVAL);
+
+      function updateStatsUI() {
+        const elapsed = (Date.now() - stats.startTime) / 1000;
+        const rate = ((stats.msgsIn + stats.msgsOut) / elapsed).toFixed(1);
+        const kbIn = (stats.bytesIn / 1024).toFixed(2);
+        const kbOut = (stats.bytesOut / 1024).toFixed(2);
+
+        const statsEl = document.getElementById("wsStats");
+        if (statsEl) {
+          statsEl.innerText = `RATE: ${rate}/s | IN: ${kbIn}KB | OUT: ${kbOut}KB`;
+        }
+      }
+      setInterval(updateStatsUI, 1000);
+
       function log_message(from: string, text: string) {
         if (!chatLog) return;
-
-        const li: HTMLLIElement = document.createElement("li");
-
-        // Assign color if not assigned yet
-        if (!userColors[from]) {
-          userColors[from] = getReadableRandomColor();
-        }
-
-        li.innerHTML = `<strong style="color: ${userColors[from]}">${from} - </strong> ${text}`;
+        const li = document.createElement("li");
+        if (!userColors[from]) userColors[from] = getReadableRandomColor();
+        li.innerHTML = `<strong style="color: ${userColors[from]}">${from}: </strong> ${text}`;
         chatLog.appendChild(li);
-
-        // Auto-scroll to bottom
         chatLog.scrollTop = chatLog.scrollHeight;
-        if (notify_sound) {
-          notify_sound.volume = 0.05;
-          notify_sound
-            .play()
-            .catch((e) => console.error("Audio play failed:", e));
+      }
+
+      const originalSend = WebSocket.prototype.send;
+      WebSocket.prototype.send = function (data: any) {
+        stats.msgsOut++;
+
+        // calc the size safely - checking which property exists
+        if (typeof data === "string") {
+          stats.bytesOut += data.length;
+        } else if (data instanceof ArrayBuffer) {
+          stats.bytesOut += data.byteLength;
+        } else if (data instanceof Blob) {
+          stats.bytesOut += data.size;
+        } else if (ArrayBuffer.isView(data)) {
+        
+          stats.bytesOut += data.byteLength;
         }
+
+        return originalSend.apply(this, [data] as any);
+      };
+
+      // --- Logic: Drawing & Cursors ---
+      function renderStroke(stroke: any) {
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.strokeStyle = stroke.mode === "erase" ? "#ffffff" : stroke.color;
+        ctx.lineWidth = stroke.size;
+        ctx.beginPath();
+        ctx.moveTo(stroke.lastX, stroke.lastY);
+        ctx.lineTo(stroke.x, stroke.y);
+        ctx.stroke();
       }
 
-      // 2. Clean Unicode Function
-      function cleanString(str: string): string {
-        return str.replace(/[^\x00-\x7F]/g, "").trim();
+      function handleRemoteMove(data: any) {
+        if (data.clientId === myClientId) return;
+        let cursor = remoteCursors.get(data.clientId);
+
+        if (!cursor) {
+          cursor = document.createElement("div");
+          // Added 'contain: layout;' to help with performance and prevent layout shifts
+          // Added 'pointer-events: none;' to ensure the tag doesn't block clicks
+          cursor.style.cssText = `
+      position: absolute; 
+      top: 0; 
+      left: 0; 
+      pointer-events: none; 
+      z-index: 1000; 
+      transition: transform 0.1s linear;
+      will-change: transform;
+    `;
+
+          cursor.innerHTML = `
+      <div style="
+        width: 8px; 
+        height: 8px; 
+        background: red; 
+        border: 1px solid #000; 
+        box-shadow: 1px 1px 0px #fff inset;
+        position: relative;
+      "></div>
+
+      <div style="
+        position: absolute; 
+        left: 10px; 
+        top: 10px; 
+        padding: 1px 4px 2px 4px; /* Adjusted padding for better MS Sans alignment */
+        background: #ffffca; 
+        border: 1px solid #000; 
+        font-family: 'MS Sans Serif', 'Tahoma', Arial, sans-serif;
+        font-size: 11px; 
+        line-height: 12px; /* Explicit line-height prevents text from touching borders */
+        white-space: nowrap; 
+        box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+        z-index: 1001;
+      ">
+        ${data.username || "Guest"}
+      </div>
+    `;
+          canvasStage.appendChild(cursor);
+          remoteCursors.set(data.clientId, cursor);
+        }
+        cursor.style.transform = `translate(${data.x}px, ${data.y}px)`;
       }
 
-      // --- Reconnectable WebSocket ---
-      let ws: WebSocket | null = null;
-      const WS_URL = "wss://ws_wall.nikostuff.com";
-      const RECONNECT_DELAY = 5000; // 5 seconds
-
-      function connectSocket() {
+      // --- Connection Management ---
+      function connect() {
+        if (ws && (ws.readyState === 0 || ws.readyState === 1)) return;
         ws = new WebSocket(WS_URL);
 
         ws.onopen = () => {
-          log_message("System", "Polaczono z websocket-em.");
+          reconnectAttempts = 0;
+          log_message("System", "Polaczono do websocket-a.");
         };
 
-        ws.onmessage = (event: MessageEvent<string>) => {
-          const data = JSON.parse(event.data);
-
-          switch (data.event) {
-            case "chat.message":
-              log_message(data.data.from, data.data.message);
+        ws.onmessage = (e) => {
+          stats.msgsIn++;
+          stats.bytesIn += new Blob([e.data]).size;
+          const msg = JSON.parse(e.data);
+          switch (msg.event) {
+            case "welcome":
+              myClientId = msg.data.clientId;
               break;
-
+            case "chat.message":
+              log_message(msg.data.from, msg.data.message);
+              break;
             case "chat.history":
-              data.data.forEach((msg: { from: string; message: string }) => {
-                log_message(msg.from, msg.message);
+              msg.data.forEach((m: any) => log_message(m.from, m.message));
+              break;
+            case "paint.history":
+              msg.data.strokes.forEach((s: any) => renderStroke(s));
+              break;
+            case "user.draw.batch":
+              const strokes = msg.data.strokes;
+              const delayBetweenPoints = 5;
+
+              strokes.forEach((stroke: Stroke, index: number) => {
+                // Use the Stroke interface here
+                setTimeout(() => {
+                  renderStroke(stroke);
+
+                  handleRemoteMove({
+                    clientId: msg.data.clientId,
+                    username: msg.data.username,
+                    x: stroke.x,
+                    y: stroke.y,
+                  });
+                }, index * delayBetweenPoints);
               });
               break;
-
-            case "welcome":
-              log_message("System", "Polaczono z serwerem.");
+            case "user.move":
+              handleRemoteMove(msg.data);
               break;
-
-            case "error":
-              log_message("System", data.data.message);
+            case "user.disconnected":
+              const el = remoteCursors.get(msg.data.clientId);
+              if (el) {
+                el.remove();
+                remoteCursors.delete(msg.data.clientId);
+              }
               break;
           }
         };
 
         ws.onclose = () => {
-          log_message(
-            "System",
-            "Polaczenie przerwane. Próba ponownego polaczenia za 5s...",
-          );
-          setTimeout(connectSocket, RECONNECT_DELAY);
-        };
-
-        ws.onerror = (err) => {
-          console.error("WebSocket error:", err);
-          ws?.close(); // trigger reconnect
+          const delay = Math.min(1000 * Math.pow(2, reconnectAttempts), 30000);
+          setTimeout(() => {
+            reconnectAttempts++;
+            connect();
+          }, delay);
+          log_message("System", "Utracono polaczenie...");
         };
       }
 
-      // Start the socket initially
-      connectSocket();
+      // --- Input Events ---
+      canvas.addEventListener("mousedown", (e) => {
+        isDrawing = true;
+        const rect = canvas.getBoundingClientRect();
+        lastX = (e.clientX - rect.left) * (canvas.width / rect.width);
+        lastY = (e.clientY - rect.top) * (canvas.height / rect.height);
+      });
 
-      // 4. Send Message Logic
-      sendBtn?.addEventListener("click", () => {
+      window.addEventListener("mouseup", () => (isDrawing = false));
+
+      canvas.addEventListener("mousemove", (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = (e.clientX - rect.left) * (canvas.width / rect.width);
+        const y = (e.clientY - rect.top) * (canvas.height / rect.height);
+        coordsLabel.innerText = `${Math.floor(x)}, ${Math.floor(y)}`;
+
+        if (Date.now() - lastMoveSent > 150 && ws?.readyState === 1) {
+          ws.send(
+            JSON.stringify({
+              event: "user.move",
+              data: { x, y, username: nickInput.value },
+            }),
+          );
+          lastMoveSent = Date.now();
+        }
+
+        if (!isDrawing) return;
+        const stroke = {
+          x,
+          y,
+          lastX,
+          lastY,
+          color: colorInput.value,
+          size: parseInt(brushSize.value),
+          mode: "draw",
+        };
+        renderStroke(stroke);
+        strokeBuffer.push(stroke);
+
+        lastX = x;
+        lastY = y;
+      });
+
+
+      document.getElementById("sendBtn")?.addEventListener("click", () => {
         if (!nickInput || !msgInput || !ws) return;
 
-        const nick: string = cleanString(nickInput.value);
-        const msg: string = cleanString(msgInput.value);
+        const nick = nickInput.value.trim();
+        const msg = msgInput.value.trim();
 
-        const turnstileRes: string | undefined = (
+        // cf grabber
+        const turnstileRes = (
           document.querySelector(
             '[name="cf-turnstile-response"]',
           ) as HTMLInputElement | null
         )?.value;
 
+        // check da boi
         if (!nick || !msg) {
           log_message("System", "Pola nie moga byc puste!");
           return;
         }
 
         if (!turnstileRes) {
-          log_message("System", "Dokoncz weryfikacje!");
+          log_message("System", "Dokoncz weryfikacje Turnstile!");
           return;
         }
 
-        // Set username first
+        // sync
         ws.send(
           JSON.stringify({
             event: "chat.setUsername",
@@ -518,21 +812,53 @@
           }),
         );
 
-        // Send the message
+        // yeet it!
         ws.send(
           JSON.stringify({
             event: "chat.message",
             data: {
+              from: nick,
               message: msg,
               "cf-turnstile": turnstileRes,
             },
           }),
         );
 
+        // clean it!
         msgInput.value = "";
 
-        if (typeof turnstile !== "undefined") turnstile.reset();
+        // reset!
+        if (typeof turnstile !== "undefined") {
+          turnstile.reset();
+        }
       });
+
+      // --- UI Feedback ---
+      function updateBrushPreview(): void {
+        const size = brushSize.value;
+        const color = colorInput.value;
+
+        // Update the text display (Brush: Xpx)
+        const brushDisplay = document.getElementById("brushDisplay");
+        if (brushDisplay) brushDisplay.innerText = size;
+
+        // Update the visual circle
+        const sizePreview = document.getElementById("sizePreview");
+        if (sizePreview) {
+          sizePreview.style.width = `${size}px`;
+          sizePreview.style.height = `${size}px`;
+          sizePreview.style.backgroundColor = color;
+        }
+      }
+
+      // Listen for changes
+      brushSize.addEventListener("input", updateBrushPreview);
+      colorInput.addEventListener("input", updateBrushPreview);
+
+      // Run once on load to sync initial values
+      updateBrushPreview();
+
+      connect();
     </script>
   </body>
 </html>
