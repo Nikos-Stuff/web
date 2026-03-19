@@ -74,6 +74,36 @@ body::-webkit-scrollbar {
   opacity: 0;
 }
 
+@keyframes pulse {
+  0% { opacity: 0.95; }
+  50% { opacity: 1; }
+  100% { opacity: 0.95; }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+
+  backdrop-filter: blur(0.3px) contrast(130%) brightness(100%) saturate(120%);
+
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%, 
+    rgba(0, 0, 0, 0.08) 50%
+  ), 
+  linear-gradient(
+    90deg, 
+    rgba(255, 0, 0, 0.03), 
+    rgba(0, 255, 0, 0.01), 
+    rgba(0, 0, 255, 0.03)
+  );
+  background-size: 100% 3px, 3px 100%;
+  will-change: backdrop-filter;
+  animation: pulse 0.1s infinite;
+}
+
 
 /* Mobile Stacking */
 @media (max-width: 600px) {
