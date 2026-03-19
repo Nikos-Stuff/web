@@ -1,5 +1,5 @@
 ---
-import "@styles/wall_styling.css"
+import "@styles/wall_styling.css";
 ---
 
 <!doctype html>
@@ -10,7 +10,6 @@ import "@styles/wall_styling.css"
     <title>Amazing Wall</title>
     <link rel="stylesheet" href="https://unpkg.com/98.css" />
     <link rel="preconnect" href="https://challenges.cloudflare.com" />
-
 
     <script
       src="https://challenges.cloudflare.com/turnstile/v0/api.js"
@@ -557,6 +556,9 @@ import "@styles/wall_styling.css"
   </div>
 
   <script>
+    import SamJs from "sam-js";
+    let sam = new SamJs();
+
     // --- Freak u typescript ---
     declare var turnstile: {
       reset: () => void;
@@ -659,13 +661,25 @@ import "@styles/wall_styling.css"
     }
 
     function text_to_speech(message: string) {
-      const utterance = new SpeechSynthesisUtterance(message);
+      const buf32 = sam.buf32(message);
 
-      utterance.pitch = Math.random() * (1.2 - 0.8) + 0.8;
-      utterance.rate = 1;
-      utterance.volume = 0.3;
+      if (!buf32 || !(buf32 instanceof Float32Array)) {
+        console.error("Failed to generate audio buffer:", message);
+        return;
+      }
 
-      window.speechSynthesis.speak(utterance);
+      for (let i = 0; i < buf32.length; i++) buf32[i] *= 0.2;
+
+      const audioCtx = new (
+        window.AudioContext || (window as any).webkitAudioContext
+      )();
+      const audioBuffer = audioCtx.createBuffer(1, buf32.length, 22050);
+      audioBuffer.getChannelData(0).set(buf32);
+
+      const source = audioCtx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(audioCtx.destination);
+      source.start();
     }
 
     // heartbeat to clear stuff out
@@ -717,8 +731,10 @@ import "@styles/wall_styling.css"
       staticCanvas.src = `https://api.nikostuff.com/StaticCanvas?ts=${Date.now()}`;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-    // init
-    staticCanvas.src = `https://api.nikostuff.com/StaticCanvas?ts=${Date.now()}`;
+    // refresh image each 1 sec
+    setInterval(() => {
+      staticCanvas.src = `https://api.nikostuff.com/StaticCanvas?ts=${Date.now()}`;
+    }, 1000);
 
     function log_message(from: string, text: string) {
       if (!chatLog) return;
