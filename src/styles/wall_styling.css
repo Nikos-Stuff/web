@@ -74,6 +74,7 @@ body::-webkit-scrollbar {
   opacity: 0;
 }
 
+
 /* Mobile Stacking */
 @media (max-width: 600px) {
   .window {
@@ -82,6 +83,16 @@ body::-webkit-scrollbar {
     left: 0 !important;
     width: 100% !important;
     margin-bottom: 20px;
+  }
+
+  .sizeBrushPreview,
+  #coords,
+  .status-bar-field:last-child {
+    display: none !important;
+  }
+  .status-bar {
+    border: none;
+    background: transparent;
   }
 }
 
