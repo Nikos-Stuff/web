@@ -7,7 +7,7 @@ import "@styles/wall_styling.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Amazing Wall</title>
+    <title>SysAdmin</title>
     <link rel="stylesheet" href="https://unpkg.com/98.css" />
     <link rel="preconnect" href="https://challenges.cloudflare.com" />
 
@@ -237,7 +237,11 @@ import "@styles/wall_styling.css";
     </div>
 
     <!-- Links -->
-    <div class="window win_anim" style="width: 120px; display: inline-block;" id="win-links">
+    <div
+      class="window win_anim"
+      style="width: 120px; display: inline-block;"
+      id="win-links"
+    >
       <div class="title-bar">
         <div class="title-bar-text" data-i18n="links_title">Links</div>
         <div class="title-bar-controls">
@@ -265,7 +269,11 @@ import "@styles/wall_styling.css";
     </div>
 
     <!-- Language -->
-    <div class="window win_anim" style="width: 120px; display: inline-block;" id="win-language">
+    <div
+      class="window win_anim"
+      style="width: 120px; display: inline-block;"
+      id="win-language"
+    >
       <div class="title-bar">
         <div class="title-bar-text" data-i18n="language_title">Lagunage</div>
       </div>
@@ -285,41 +293,114 @@ import "@styles/wall_styling.css";
       </div>
     </div>
 
-    <!-- Icons on the desktop -->
-
-    <!-- Taskbar -->
-    <div class="taskbar">
-      <div class="taskbar-left-section"></div>
-
-      <div class="status-bar tray">
-        <img
-          src="https://win98icons.alexmeub.com/icons/png/network_normal_two_pcs-3.png"
-          width="16"
-          alt="net"
-        />
-        <div id="wsStatsTaskbar" class="tray-stats">
-          <span id="stat-rate">0/s</span>
-          <span class="stat-divider">|</span>
-          <span id="stat-in">0.00KB</span>
-          <span class="stat-divider">|</span>
-          <span id="stat-out">0.00KB</span>
+    <!-- Link Me -->
+    <div class="window win_anim" id="win-linkme" style="width: 250px;">
+      <div class="title-bar">
+        <div class="title-bar-text" data-i18n="linkme_title">Link Me</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close" class="close"></button>
         </div>
-        <div id="tray-clock">12:00 PM</div>
+      </div>
+
+      <div
+        class="window-body"
+        style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 8px;"
+      >
+        <div style="padding: 10px; display: flex; justify-content: center;">
+          <a href="https://nikostuff.com/root" target="_blank">
+            <img
+              src="/NikoButton.gif"
+              alt="Niko's Stuff"
+              style="display: block; border: 1px solid #000;"
+            />
+          </a>
+        </div>
+
+        <div class="field-row-stacked" style="width: 100%;">
+          <label
+            for="code-copy"
+            style="font-size: 11px;"
+            data-i18n="linkme_copyme">Copy this code to your site:</label
+          >
+          <textarea
+            id="code-copy"
+            readonly
+            onclick="this.select()"
+            style="
+              width: 100%;
+              font-size: 11px; 
+              resize: none; 
+            "
+            >&lt;a href="https://nikostuff.com/root" target="_blank"&gt;&lt;img
+            src="/NikoButton.gif" alt="Niko's Stuff" /&gt;&lt;/a&gt;</textarea
+          >
+        </div>
       </div>
     </div>
 
-    <!-- CF -->
-    <div
-      class="cf-turnstile"
-      data-sitekey="0x4AAAAAACBNatxTQCTb20u7"
-      data-size="normal"
-      data-theme="dark"
-      data-callback="onSuccess"
-    >
+    <!-- Test Window - SHOULD WORK WITH THE THING! -->
+    <div class="window win_anim keep_on_mobile" id="win-embededpage" style="width: 250px;">
+      <div class="title-bar">
+        <div class="title-bar-text">Testing!</div>
+        <div class="title-bar-controls">
+          <button aria-label="Close" class="soft_close"></button>
+        </div>
+      </div>
+
+      <div
+        class="window-body"
+        style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 8px;"
+      >
+      If that works = NICE!
+      </div>
     </div>
+
+    
   </body>
+  <!-- Icons on the desktop -->
+  <div class="desktop-icons">
+    <div class="desktop-icon" id="icon-index.html" data-opens="win-embededpage">
+      <img
+        src="https://win98icons.alexmeub.com/icons/png/msie2-1.png"
+        alt="Shortcut"
+      />
+      <span class="icon-label">index.html</span>
+    </div>
+  </div>
+
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <div class="taskbar-left-section"></div>
+
+    <div class="status-bar tray">
+      <img
+        src="https://win98icons.alexmeub.com/icons/png/network_normal_two_pcs-3.png"
+        width="16"
+        alt="net"
+      />
+      <div id="wsStatsTaskbar" class="tray-stats">
+        <span id="stat-rate">0/s</span>
+        <span class="stat-divider">|</span>
+        <span id="stat-in">0.00KB</span>
+        <span class="stat-divider">|</span>
+        <span id="stat-out">0.00KB</span>
+      </div>
+      <div id="tray-clock">12:00 PM</div>
+    </div>
+  </div>
+
+  <!-- CF -->
+  <div
+    class="cf-turnstile"
+    data-sitekey="0x4AAAAAACBNatxTQCTb20u7"
+    data-size="normal"
+    data-theme="dark"
+    data-callback="onSuccess"
+  >
+  </div>
 </html>
 
 <script src="src/win98/websocket.ts"></script>
 <script src="src/win98/windows_manager.ts"></script>
 <script src="src/win98/lang_swapper.ts"></script>
+<script src="src/win98/desktop_logic.ts"></script>

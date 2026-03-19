@@ -64,18 +64,18 @@ function organizeWindows() {
   const winActive = getEl("win-activeusers");
   const winRadio = getEl("win-radio");
   const winLinks = getEl("win-links");
-  const winLanguage = getEl("win-language"); // Fixed typo
+  const winLanguage = getEl("win-language");
   const winPaint = getEl("win-paint");
+  const winLinkMe = getEl("win-linkme");
 
-  // 2. Measure everything once
   const dGuest = dim(winGuest);
   const dActive = dim(winActive);
   const dRadio = dim(winRadio);
   const dLinks = dim(winLinks);
   const dLang = dim(winLanguage);
   const dPaint = dim(winPaint);
+  const dLinkMe = dim(winLinkMe);
 
-  // 3. Define Column Widths
   const w1 = Math.max(dGuest.w, dActive.w);
   const w2_row = dLinks.w + dLang.w + gap;
   const w2 = Math.max(dRadio.w, w2_row);
@@ -84,7 +84,6 @@ function organizeWindows() {
   const totalBlockWidth = w1 + w2 + w3 + gap * 2;
   const isTooCramped = screenW < totalBlockWidth + 40 || screenH < 600;
 
-  // 4. Fixed Type Definition (accepts null)
   const animateWin = (
     win: HTMLElement | null,
     x: number,
@@ -92,6 +91,7 @@ function organizeWindows() {
     delay: number,
   ) => {
     if (!win) return;
+
     gsap.fromTo(
       win,
       { scale: 0.5, opacity: 0, left: x, top: y },
@@ -131,22 +131,34 @@ function organizeWindows() {
     );
 
     // --- Column 2 ---
-    const h2 = dRadio.h + Math.max(dLinks.h, dLang.h) + gap;
+    // Calculate height including the new LinkMe window
+    const rowH = Math.max(dLinks.h, dLang.h);
+    const h2 = dRadio.h + rowH + dLinkMe.h + gap * 2;
+
     const c2X = startX + w1 + gap;
     const c2Y = (screenH - h2) / 2;
+
+    // Row 1: Radio
+    animateWin(winRadio, c2X + (w2 - dRadio.w) / 2, c2Y, 2);
+
+    // Row 2: Links & Language
     const rowY = c2Y + dRadio.h + gap;
     const rowStartX = c2X + (w2 - w2_row) / 2;
-
-    animateWin(winRadio, c2X + (w2 - dRadio.w) / 2, c2Y, 2);
     animateWin(winLinks, rowStartX, rowY, 3);
     animateWin(winLanguage, rowStartX + dLinks.w + gap, rowY, 4);
 
+    // Row 3: LinkMe (The green box)
+    // Centered horizontally relative to the column 2 width
+    const linkMeY = rowY + rowH + gap;
+    animateWin(winLinkMe, c2X + (w2 - dLinkMe.w) / 2, linkMeY, 5);
+
     // --- Column 3 ---
+    // Offset Column 3's timing since LinkMe is now 5
     animateWin(
       winPaint,
       startX + w1 + w2 + gap * 2,
       (screenH - dPaint.h) / 2,
-      5,
+      6,
     );
   }
 }
@@ -288,6 +300,20 @@ document.querySelectorAll<HTMLElement>(".close").forEach((btn) => {
   });
 });
 
+document.querySelectorAll<HTMLElement>(".soft_close").forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const windowEl = target.closest(".window");
+
+    if (!windowEl) return;
+
+    gsap.killTweensOf(windowEl);
+    gsap.set(windowEl, { clearProps: "all" });
+
+    windowEl.classList.add("win_anim");
+  });
+});
+
 // Other
 function keepInBounds(windowElement: HTMLElement) {
   const rect = windowElement.getBoundingClientRect();
@@ -300,8 +326,87 @@ function keepInBounds(windowElement: HTMLElement) {
   }
 }
 
-// Call this whenever the window is resized
+// Manage responsive UX
+function handleMobileWindows() {
+  const isMobile = window.innerWidth <= 600;
+
+  document
+    .querySelectorAll<HTMLElement>(".window.keep_on_mobile")
+    .forEach((win) => {
+      if (isMobile) {
+        // Only animate if it was hidden
+        if (win.classList.contains("win_anim")) {
+          win.classList.remove("win_anim");
+          win.classList.add("always_show");
+        } else {
+          win.classList.add("always_show");
+        }
+      } else {
+        win.classList.remove("always_show");
+        // Keep it hidden until explicitly opened on desktop
+        if (!win.classList.contains("opened")) {
+          win.classList.add("win_anim");
+        }
+      }
+    });
+}
+
 window.addEventListener("resize", () => {
   const allWindows = document.querySelectorAll(".window");
   allWindows.forEach((win) => keepInBounds(win as HTMLElement));
+  handleMobileWindows();
 });
+
+// Program Manager
+const icons = document.querySelectorAll(".desktop-icon");
+let cascadeOffset = 0;
+
+icons.forEach((icon) => {
+  icon.addEventListener("dblclick", () => {
+    const targetId = icon.getAttribute("data-opens");
+    if (!targetId) return;
+
+    const win = document.getElementById(targetId) as HTMLElement;
+    if (!win) return;
+
+    openWindow(win);
+  });
+});
+
+function openWindow(win: HTMLElement) {
+  const wasHidden = win.classList.contains("win_anim");
+
+  win.classList.remove("win_anim");
+
+  // unified z-index system
+  setActiveWindow(win);
+
+  if (wasHidden) {
+    const x = window.innerWidth / 2 - win.offsetWidth / 2 + cascadeOffset;
+    const y = window.innerHeight / 2 - win.offsetHeight / 2 + cascadeOffset;
+
+    win.style.left = `${x}px`;
+    win.style.top = `${y}px`;
+
+    cascadeOffset += 20;
+    if (cascadeOffset > 100) cascadeOffset = 0;
+
+    gsap.fromTo(
+      win,
+      { scale: 0.8, opacity: 0 },
+      {
+        scale: 1,
+        opacity: 1,
+        duration: 0.25,
+        ease: "power2.out",
+        clearProps: "transform",
+
+        // onComplete: () => {
+        //   if (win.classList.contains("keep_on_mobile")) {
+        //     win.classList.add("always_show");
+        //   }
+        // },
+      },
+    );
+  }
+}

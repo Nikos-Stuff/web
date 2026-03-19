@@ -1,70 +1,103 @@
+/* =========================
+   FONTS
+========================= */
 @font-face {
   font-family: "Pixelated MS Sans Serif";
-  src: url("fonts/ms_sans_serif.woff") format("woff");
-  src: url("fonts/ms_sans_serif.woff2") format("woff2");
+  src:
+    url("fonts/ms_sans_serif.woff2") format("woff2"),
+    url("fonts/ms_sans_serif.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: "Pixelated MS Sans Serif";
-  src: url("fonts/ms_sans_serif_bold.woff") format("woff");
-  src: url("fonts/ms_sans_serif_bold.woff2") format("woff2");
+  src:
+    url("fonts/ms_sans_serif_bold.woff2") format("woff2"),
+    url("fonts/ms_sans_serif_bold.woff") format("woff");
   font-weight: bold;
   font-style: normal;
 }
 
-.cf-turnstile {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 9999 !important;
-
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-
-  mix-blend-mode: screen;
-
-  opacity: 0.85;
-
-  transform: scale(0.85);
-  transform-origin: bottom left;
-  pointer-events: auto;
-}
-.chat-log li {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-  white-space: pre-wrap;
-  max-width: 100%;
-  display: block;
-}
-
+/* =========================
+   GLOBAL / RESET
+========================= */
 html,
 body {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
   background: teal;
   font-family:
     "Pixelated MS Sans Serif", "Microsoft Sans Serif", Arial, sans-serif;
   padding: 20px;
   overflow-x: hidden;
+
   cursor: url("/cursors/arrow.cur"), auto;
   image-rendering: pixelated;
 
+  /* disable selection */
   user-select: none;
   -webkit-user-select: none;
-  -moz-user-select: none;
   -ms-user-select: none;
+
+  /* hide scrollbars */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
+
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
 }
 
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+/* =========================
+   CRT EFFECT
+========================= */
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.95;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  pointer-events: none;
+
+  backdrop-filter: blur(0.3px) contrast(130%) brightness(100%) saturate(120%);
+  will-change: backdrop-filter;
+
+  background:
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.08) 50%),
+    linear-gradient(
+      90deg,
+      rgba(255, 0, 0, 0.03),
+      rgba(0, 255, 0, 0.01),
+      rgba(0, 0, 255, 0.03)
+    );
+
+  background-size:
+    100% 3px,
+    3px 100%;
+  animation: pulse 0.1s infinite;
+}
+
+/* =========================
+   WINDOWS / LAYOUT
+========================= */
 .window {
-  width: 300px;
   position: absolute;
-  z-index: 1;
+  width: 300px;
+  z-index: 2;
 
   display: flex;
   flex-direction: column;
@@ -75,131 +108,119 @@ body::-webkit-scrollbar {
   opacity: 0;
 }
 
-@keyframes pulse {
-  0% { opacity: 0.95; }
-  50% { opacity: 1; }
-  100% { opacity: 0.95; }
-}
-
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-
-  backdrop-filter: blur(0.3px) contrast(130%) brightness(100%) saturate(120%);
-
-  background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.08) 50%
-  ), 
-  linear-gradient(
-    90deg, 
-    rgba(255, 0, 0, 0.03), 
-    rgba(0, 255, 0, 0.01), 
-    rgba(0, 0, 255, 0.03)
-  );
-  background-size: 100% 3px, 3px 100%;
-  will-change: backdrop-filter;
-  animation: pulse 0.1s infinite;
-}
-
-
-/* Mobile Stacking */
-@media (max-width: 600px) {
-  .window {
-    position: relative !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    margin-bottom: 20px;
-  }
-
-  .sizeBrushPreview,
-  #coords,
-  .status-bar-field:last-child {
-    display: none !important;
-  }
-  .status-bar {
-    border: none;
-    background: transparent;
-  }
-}
-
+/* =========================
+   CHAT
+========================= */
 .chat-log {
   height: 150px;
+  margin-top: 25px;
+
   overflow-y: scroll;
   overflow-x: hidden;
-  margin-top: 25px;
   word-break: break-word;
 }
 
-.status-bar {
-  margin-top: auto;
-}
-
-.marquee-container {
-  width: 100%;
-  overflow: hidden;
-  border: 2px inset #ccc;
-  margin-bottom: 10px;
-}
-
-/* Cursors */
-.title-bar {
-  user-select: none;
-  -webkit-user-select: none;
-  cursor: url("/cursors/arrow.cur"), auto;
-}
-input[type="color"],
-select,
-option,
-a,
-input,
-button,
-.title-bar-controls button {
-  cursor: url("/cursors/Cursor_15.cur"), pointer;
-}
-
-input[type="text"],
-textarea {
-  cursor: url("/cursors/Cursor_14.cur"), text;
-}
-label,
-legend {
-  cursor: url("/cursors/help_win95.cur"), help;
-}
-
-/* Iframe styling to fit window */
-#ytPlayer {
+.chat-log li {
   display: block;
-  width: 100%;
-  border: none;
+  max-width: 100%;
+
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-#message {
-  resize: none;
+/* =========================
+   SELECTION / UI STATES
+========================= */
+.selection-box {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+
+  border: 1px dotted #fff;
+  mix-blend-mode: difference;
 }
 
-#paintCanvas {
-  touch-action: none;
+.desktop-icon.selected .icon-label {
+  background-color: #000080;
+  color: #fff;
+  outline: 1px dotted #fff;
 }
 
-/* Taskbar Stuff */
+.desktop-icon.selected img {
+  filter: brightness(0.7) sepia(1) hue-rotate(200deg) saturate(2);
+}
+
+/* =========================
+   DESKTOP ICONS
+========================= */
+.desktop-icons {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  height: calc(100% - 40px);
+  padding: 10px;
+  z-index: 0;
+}
+
+.desktop-icon {
+  width: 75px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.desktop-icon img {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 4px;
+}
+
+.desktop-icon .icon-label {
+  font-size: 11px;
+  color: white;
+
+  padding: 2px 4px;
+  border: 1px solid transparent;
+  text-shadow: 1px 1px 1px #000;
+}
+
+/* active/focus */
+.desktop-icon:active .icon-label,
+.desktop-icon:focus .icon-label {
+  background-color: #000080;
+  border: 1px dotted #ffff00;
+  outline: none;
+}
+
+/* =========================
+   TASKBAR
+========================= */
 .taskbar {
   position: fixed;
   bottom: 0;
   left: 0;
+
   width: 100%;
   height: 28px;
-  background: #c0c0c0;
-  border-top: 2px solid #ffffff;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 2px;
   box-sizing: border-box;
+
+  background: #c0c0c0;
+  border-top: 2px solid #fff;
   z-index: 500;
 }
 
@@ -214,17 +235,19 @@ legend {
   display: flex;
   align-items: center;
   gap: 4px;
-  font-weight: bold;
+
   height: 22px;
   padding: 0 6px;
+  font-weight: bold;
 }
 
 .taskbar-divider {
   width: 2px;
   height: 20px;
-  background: #808080;
-  border-right: 1px solid #ffffff;
   margin: 0 2px;
+
+  background: #808080;
+  border-right: 1px solid #fff;
 }
 
 .taskbar-apps {
@@ -233,59 +256,71 @@ legend {
 }
 
 .taskbar-item {
-  background: #c0c0c0;
-  border: 1px solid;
-  border-color: #ffffff #808080 #808080 #ffffff;
-  padding: 2px 8px;
-  font-size: 11px;
   min-width: 60px;
   max-width: 150px;
+  padding: 2px 8px;
+
+  font-size: 11px;
+  background: #c0c0c0;
+
+  border: 1px solid;
+  border-color: #fff #808080 #808080 #fff;
 }
 
+/* =========================
+   TRAY
+========================= */
 .tray {
-  margin: 0 !important;
-  padding: 0 6px !important;
-  height: 22px;
   display: flex;
   align-items: center;
   gap: 6px;
-  box-shadow:
-    inset -1px -1px #ffffff,
-    inset 1px 1px #808080 !important;
+
+  height: 22px;
+  padding: 0 6px;
+  margin: 0 !important;
+
   background: #c0c0c0;
+  box-shadow:
+    inset -1px -1px #fff,
+    inset 1px 1px #808080 !important;
 }
 
 .tray-stats {
   display: flex !important;
   align-items: center !important;
-  border-right: 1px solid #808080;
+
   padding-right: 6px;
+  border-right: 1px solid #808080;
 }
 
-.tray-stats img,
-.tray img {
+.tray img,
+.tray-stats img {
   display: block;
   margin-right: 4px;
 }
 
 .stat-divider {
-  color: #808080;
   margin: 0 1px;
+  color: #808080;
 }
+
 #tray-clock {
   font-size: 11px;
   line-height: 1;
   white-space: nowrap;
 }
 
+/* =========================
+   TABLE FIXES
+========================= */
 #ActiveUsersTable {
-  table-layout: fixed; /* This is the secret sauce for stability */
+  table-layout: fixed;
   border-collapse: collapse;
 }
 
 #ActiveUsersTable th:nth-child(1),
 #ActiveUsersTable td:nth-child(1) {
-  width: 70%; /* Give the name most of the space */
+  width: 70%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -293,7 +328,119 @@ legend {
 
 #ActiveUsersTable th:nth-child(2),
 #ActiveUsersTable td:nth-child(2) {
-  width: 30%; /* Fix the status column width */
-  min-width: 80px; /* Adjust this if 'Typing...' still cuts off */
+  width: 30%;
+  min-width: 80px;
   text-align: left;
+}
+
+/* =========================
+   INPUT / CURSORS
+========================= */
+.title-bar {
+  user-select: none;
+  cursor: url("/cursors/arrow.cur"), auto;
+}
+
+input,
+button,
+select,
+option,
+a,
+.title-bar-controls button {
+  cursor: url("/cursors/Cursor_15.cur"), pointer;
+}
+
+input[type="text"],
+textarea {
+  cursor: url("/cursors/Cursor_14.cur"), text;
+}
+
+label,
+legend {
+  cursor: url("/cursors/help_win95.cur"), help;
+}
+
+/* =========================
+   COMPONENTS
+========================= */
+.marquee-container {
+  width: 100%;
+  margin-bottom: 10px;
+
+  overflow: hidden;
+  border: 2px inset #ccc;
+}
+
+.status-bar {
+  margin-top: auto;
+}
+
+#ytPlayer {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+#message {
+  resize: none;
+}
+
+#paintCanvas {
+  touch-action: none;
+}
+
+/* =========================
+   TURNSTILE
+========================= */
+.cf-turnstile {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999 !important;
+
+  opacity: 0.85;
+  transform: scale(0.85);
+  transform-origin: bottom left;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  mix-blend-mode: screen;
+  pointer-events: auto;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media (max-width: 600px) {
+  .desktop-icons {
+    display: none !important;
+  }
+
+  .window {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+
+  .sizeBrushPreview,
+  #coords,
+  .status-bar-field:last-child {
+    display: none !important;
+  }
+
+  .status-bar {
+    border: none;
+    background: transparent;
+  }
+
+  .soft_close {
+    display: none !important;
+  }
+
+  .always_show {
+    opacity: 1 !important;
+  }
 }

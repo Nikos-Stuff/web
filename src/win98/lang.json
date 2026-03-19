@@ -20,7 +20,9 @@
     "links_title": "Links",
     "links_status": "Other silly stuff",
     "language_title": "Language",
-    "language_select_lang": "Select language:"
+    "language_select_lang": "Select language:",
+    "linkme_title": "Link Me",
+    "linkme_copyme": "Copy this code to your site:"
   },
   "pl": {
     "intro_title": "Witaj swiecie!",
@@ -43,9 +45,11 @@
     "links_title": "Linki",
     "links_status": "Inne glupotki",
     "language_title": "Jezyk",
-    "language_select_lang": "Wybierz jezyk:"
+    "language_select_lang": "Wybierz jezyk:",
+    "linkme_title": "Wklej mnie",
+    "linkme_copyme": "Skopiuj ten kod na swoją stronę:"
   },
-"fr": {
+  "fr": {
     "intro_title": "Bonjour le monde !",
     "intro_line1": "Bienvenue dans mon coin loufoque !",
     "intro_line2": "Encore en cours de developpement - mais peu importe !",
@@ -66,6 +70,8 @@
     "links_title": "Liens",
     "links_status": "Autres trucs bizarres",
     "language_title": "Langue",
-    "language_select_lang": "Choisir la langue :"
+    "language_select_lang": "Choisir la langue :",
+    "linkme_title": "Lien vers moi",
+    "linkme_copyme": "Copiez ce code sur votre site :"
   }
 }
