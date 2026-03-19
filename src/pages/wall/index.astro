@@ -717,6 +717,8 @@ import "@styles/wall_styling.css"
       staticCanvas.src = `https://api.nikostuff.com/StaticCanvas?ts=${Date.now()}`;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
+    // init
+    staticCanvas.src = `https://api.nikostuff.com/StaticCanvas?ts=${Date.now()}`;
 
     function log_message(from: string, text: string) {
       if (!chatLog) return;
