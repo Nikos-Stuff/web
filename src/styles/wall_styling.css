@@ -1,0 +1,256 @@
+@font-face {
+  font-family: "Pixelated MS Sans Serif";
+  src: url("fonts/ms_sans_serif.woff") format("woff");
+  src: url("fonts/ms_sans_serif.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Pixelated MS Sans Serif";
+  src: url("fonts/ms_sans_serif_bold.woff") format("woff");
+  src: url("fonts/ms_sans_serif_bold.woff2") format("woff2");
+  font-weight: bold;
+  font-style: normal;
+}
+
+.cf-turnstile {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999 !important;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  mix-blend-mode: screen;
+
+  opacity: 0.85;
+
+  transform: scale(0.85);
+  transform-origin: bottom left;
+  pointer-events: auto;
+}
+.chat-log li {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 100%;
+  display: block;
+}
+
+html,
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  background: teal;
+  font-family:
+    "Pixelated MS Sans Serif", "Microsoft Sans Serif", Arial, sans-serif;
+  padding: 20px;
+  overflow-x: hidden;
+  cursor: url("/cursors/arrow.cur"), auto;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.window {
+  width: 300px;
+  position: absolute;
+  z-index: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.win_anim {
+  opacity: 0;
+}
+
+/* Mobile Stacking */
+@media (max-width: 600px) {
+  .window {
+    position: relative !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    margin-bottom: 20px;
+  }
+}
+
+.chat-log {
+  height: 150px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-top: 25px;
+  word-break: break-word;
+}
+
+.status-bar {
+  margin-top: auto;
+}
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  border: 2px inset #ccc;
+  margin-bottom: 10px;
+}
+
+/* Cursors */
+.title-bar {
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: url("/cursors/arrow.cur"), auto;
+}
+input[type="color"],
+a,
+input,
+button,
+.title-bar-controls button {
+  cursor: url("/cursors/Cursor_15.cur"), pointer;
+}
+
+input[type="text"],
+textarea {
+  cursor: url("/cursors/Cursor_14.cur"), text;
+}
+label,
+legend {
+  cursor: url("/cursors/help_win95.cur"), help;
+}
+
+/* Iframe styling to fit window */
+#ytPlayer {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+#message {
+  resize: none;
+}
+
+#paintCanvas {
+  touch-action: none;
+}
+
+/* Taskbar Stuff */
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 28px;
+  background: #c0c0c0;
+  border-top: 2px solid #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px;
+  box-sizing: border-box;
+  z-index: 500;
+}
+
+.taskbar-left-section {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-grow: 1;
+}
+
+.start-button {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: bold;
+  height: 22px;
+  padding: 0 6px;
+}
+
+.taskbar-divider {
+  width: 2px;
+  height: 20px;
+  background: #808080;
+  border-right: 1px solid #ffffff;
+  margin: 0 2px;
+}
+
+.taskbar-apps {
+  display: flex;
+  gap: 3px;
+}
+
+.taskbar-item {
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #ffffff #808080 #808080 #ffffff;
+  padding: 2px 8px;
+  font-size: 11px;
+  min-width: 60px;
+  max-width: 150px;
+}
+
+.tray {
+  margin: 0 !important;
+  padding: 0 6px !important;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow:
+    inset -1px -1px #ffffff,
+    inset 1px 1px #808080 !important;
+  background: #c0c0c0;
+}
+
+.tray-stats {
+  display: flex !important;
+  align-items: center !important;
+  border-right: 1px solid #808080;
+  padding-right: 6px;
+}
+
+.tray-stats img,
+.tray img {
+  display: block;
+  margin-right: 4px;
+  image-rendering: pixelated;
+}
+
+.stat-divider {
+  color: #808080;
+  margin: 0 1px;
+}
+#tray-clock {
+  font-size: 11px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+#ActiveUsersTable {
+  table-layout: fixed; /* This is the secret sauce for stability */
+  border-collapse: collapse;
+}
+
+#ActiveUsersTable th:nth-child(1),
+#ActiveUsersTable td:nth-child(1) {
+  width: 70%; /* Give the name most of the space */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+#ActiveUsersTable th:nth-child(2),
+#ActiveUsersTable td:nth-child(2) {
+  width: 30%; /* Fix the status column width */
+  min-width: 80px; /* Adjust this if 'Typing...' still cuts off */
+  text-align: left;
+}

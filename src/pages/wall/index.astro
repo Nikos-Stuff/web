@@ -1,3 +1,7 @@
+---
+import "@styles/wall_styling.css"
+---
+
 <!doctype html>
 <html lang="pl">
   <head>
@@ -6,240 +10,7 @@
     <title>Amazing Wall</title>
     <link rel="stylesheet" href="https://unpkg.com/98.css" />
     <link rel="preconnect" href="https://challenges.cloudflare.com" />
-    <style>
-      @font-face {
-        font-family: "Pixelated MS Sans Serif";
-        src: url("fonts/ms_sans_serif.woff") format("woff");
-        src: url("fonts/ms_sans_serif.woff2") format("woff2");
-        font-weight: normal;
-        font-style: normal;
-      }
 
-      @font-face {
-        font-family: "Pixelated MS Sans Serif";
-        src: url("fonts/ms_sans_serif_bold.woff") format("woff");
-        src: url("fonts/ms_sans_serif_bold.woff2") format("woff2");
-        font-weight: bold;
-        font-style: normal;
-      }
-
-      .cf-turnstile {
-        position: fixed;
-        bottom: 20px;
-        left: 20px;
-        z-index: 9999 !important;
-
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-
-        mix-blend-mode: screen;
-
-        opacity: 0.85;
-
-        transform: scale(0.85);
-        transform-origin: bottom left;
-        pointer-events: auto;
-      }
-      .chat-log li {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        white-space: pre-wrap;
-        max-width: 100%;
-        display: block;
-      }
-
-      html,
-      body {
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-        background: teal;
-        font-family:
-          "Pixelated MS Sans Serif", "Microsoft Sans Serif", Arial, sans-serif;
-        padding: 20px;
-        overflow-x: hidden;
-        cursor: url("/cursors/arrow.cur"), auto;
-
-        user-select: none;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-      }
-      html::-webkit-scrollbar,
-      body::-webkit-scrollbar {
-        display: none;
-      }
-
-      .window {
-        width: 300px;
-        position: absolute;
-        z-index: 1;
-      }
-
-      .win_anim {
-        opacity: 0;
-      }
-
-      /* Mobile Stacking */
-      @media (max-width: 600px) {
-        .window {
-          position: relative !important;
-          top: 0 !important;
-          left: 0 !important;
-          width: 100% !important;
-          margin-bottom: 20px;
-        }
-        #sizePreview,
-        .sizeBrushPreview,
-        .status-bar {
-          display: none !important;
-        }
-      }
-
-      .chat-log {
-        height: 150px;
-        overflow-y: scroll;
-        overflow-x: hidden;
-        margin-top: 25px;
-        word-break: break-word;
-      }
-      .marquee-container {
-        width: 100%;
-        overflow: hidden;
-        border: 2px inset #ccc;
-        margin-bottom: 10px;
-      }
-
-      /* Cursors */
-      .title-bar {
-        user-select: none;
-        -webkit-user-select: none;
-        cursor: url("/cursors/arrow.cur"), auto;
-      }
-      input[type="color"],
-      a,
-      input,
-      button,
-      .title-bar-controls button {
-        cursor: url("/cursors/Cursor_15.cur"), pointer;
-      }
-
-      input[type="text"],
-      textarea {
-        cursor: url("/cursors/Cursor_14.cur"), text;
-      }
-      label,
-      legend {
-        cursor: url("/cursors/help_win95.cur"), help;
-      }
-
-      /* Iframe styling to fit window */
-      #ytPlayer {
-        display: block;
-        width: 100%;
-        border: none;
-      }
-
-      #message {
-        resize: none;
-      }
-
-      #paintCanvas {
-        touch-action: none;
-      }
-
-      /* Taskbar Stuff */
-      .taskbar {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 28px;
-        background: #c0c0c0;
-        border-top: 2px solid #ffffff;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 2px;
-        box-sizing: border-box;
-        z-index: 500;
-      }
-
-      .taskbar-left-section {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        flex-grow: 1;
-      }
-
-      .start-button {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        font-weight: bold;
-        height: 22px;
-        padding: 0 6px;
-      }
-
-      .taskbar-divider {
-        width: 2px;
-        height: 20px;
-        background: #808080;
-        border-right: 1px solid #ffffff;
-        margin: 0 2px;
-      }
-
-      .taskbar-apps {
-        display: flex;
-        gap: 3px;
-      }
-
-      .taskbar-item {
-        background: #c0c0c0;
-        border: 1px solid;
-        border-color: #ffffff #808080 #808080 #ffffff;
-        padding: 2px 8px;
-        font-size: 11px;
-        min-width: 60px;
-        max-width: 150px;
-      }
-
-      .tray {
-        margin: 0 !important;
-        padding: 0 6px !important;
-        height: 22px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        box-shadow:
-          inset -1px -1px #ffffff,
-          inset 1px 1px #808080 !important;
-        background: #c0c0c0;
-      }
-
-      .tray-stats {
-        display: flex !important;
-        align-items: center !important;
-        border-right: 1px solid #808080;
-        padding-right: 6px;
-      }
-
-      .tray-stats img,
-      .tray img {
-        display: block;
-        margin-right: 4px;
-        image-rendering: pixelated;
-      }
-
-      .stat-divider {
-        color: #808080;
-        margin: 0 1px;
-      }
-      #tray-clock {
-        font-size: 11px;
-        line-height: 1;
-        white-space: nowrap;
-      }
-    </style>
 
     <script
       src="https://challenges.cloudflare.com/turnstile/v0/api.js"
@@ -301,6 +72,31 @@
       </div>
       <audio id="intro_sound" src="/win98.ogv"></audio>
       <audio id="notify" src="/you_got_mail.ogg"></audio>
+    </div>
+
+    <div class="window win_anim" style="height: 160px">
+      <div class="title-bar">
+        <div class="title-bar-text">Active Users</div>
+      </div>
+      <div
+        class="sunken-panel"
+        style="height: 100%; width: 100%; margin-top: 2px;"
+      >
+        <table style="width: 100%;" id="ActiveUsersTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="status-bar">
+        <p class="status-bar-field">
+          Active Users: <strong id="activeConnections">0</strong>
+        </p>
+      </div>
     </div>
 
     <div
@@ -462,19 +258,6 @@
   </body>
 
   <script>
-    const staticCanvas = document.getElementById(
-      "staticCanvas",
-    ) as HTMLImageElement;
-
-    function refreshCanvas(): void {
-      if (!staticCanvas) return;
-      staticCanvas.src = `https://api.nikostuff.com/StaticCanvas?ts=${Date.now()}`;
-    }
-    refreshCanvas();
-    setInterval(refreshCanvas, 5000);
-  </script>
-
-  <script>
     import gsap from "gsap";
 
     // --- AUDIO SETUP ---
@@ -533,7 +316,11 @@
       const screenW = window.innerWidth;
       const screenH = window.innerHeight;
 
-      const col1 = windows.filter((w) => w.innerText.includes("Guest book"));
+      const col1 = windows.filter(
+        (w) =>
+          w.innerText.includes("Guest book") ||
+          w.innerText.includes("Active Users"),
+      );
       const col2 = windows.filter(
         (w) => w.innerText.includes("Radio") || w.innerText.includes("Links"),
       );
@@ -827,6 +614,10 @@
     const brushSize = document.getElementById("brushSize") as HTMLInputElement;
     const notify_sound = document.getElementById("notify") as HTMLAudioElement;
 
+    const staticCanvas = document.getElementById(
+      "staticCanvas",
+    ) as HTMLImageElement;
+
     // --- Helpers ---
     function getReadableRandomColor() {
       return `hsl(${Math.floor(Math.random() * 360)}, 70%, 40%)`;
@@ -919,8 +710,13 @@
         }
       }
     }
-
     setInterval(cleanupStaleCursors, 2000);
+
+    function refreshCanvas(): void {
+      if (!staticCanvas) return;
+      staticCanvas.src = `https://api.nikostuff.com/StaticCanvas?ts=${Date.now()}`;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
 
     function log_message(from: string, text: string) {
       if (!chatLog) return;
@@ -1086,14 +882,74 @@
             handleRemoteMove(msg.data);
             break;
           case "user.disconnected":
+            // Delete Cursors
             const el = remoteCursors.get(msg.data.clientId);
             if (el) {
               el.remove();
               remoteCursors.delete(msg.data.clientId);
             }
+
+            // Remove from Active Users table
+            const row = Array.from(
+              document.querySelectorAll<HTMLTableRowElement>(
+                "#ActiveUsersTable tbody tr",
+              ),
+            ).find((tr) => tr.dataset.clientId === msg.data.clientId);
+            if (row) row.remove();
+            break;
+          case "canvas.conversion":
+            log_message(
+              "System",
+              "Saving canvas! Refreshing static snapshot. ( If you dont see it - clear your cache! )",
+            );
+            refreshCanvas();
+            break;
+          case "users.list":
+            console.log(msg.data);
+            const tableBody = document.querySelector<HTMLTableSectionElement>(
+              "#ActiveUsersTable tbody",
+            );
+            if (!tableBody) {
+              console.log("COULD NOT FIND TBODY! Check your HTML tags.");
+              break;
+            }
+
+            // Clear previous rows
+            tableBody.innerHTML = "";
+
+            msg.data.users.forEach((user: any) => {
+              const row = document.createElement("tr");
+              row.dataset.clientId = user.clientId;
+              const nameCell = document.createElement("td");
+              const statusCell = document.createElement("td");
+
+              nameCell.innerText = user.username;
+              statusCell.innerText = "Online";
+
+              row.appendChild(nameCell);
+              row.appendChild(statusCell);
+              tableBody.appendChild(row);
+            });
+
+            // Update active connections count
+            const activeConnectionsEl =
+              document.getElementById("activeConnections");
+            if (activeConnectionsEl) {
+              activeConnectionsEl.innerText = msg.data.users.length.toString();
+            }
+            break;
+          case "user.typing":
+            const userRow = document.querySelector<HTMLTableRowElement>(
+              `#ActiveUsersTable tbody tr[data-client-id="${msg.data.clientId}"]`,
+            );
+
+            if (userRow) {
+              userRow.cells[1].innerText = msg.data.typing
+                ? "Typing..."
+                : "Online";
+            }
             break;
           case "error":
-            // You can use your log_message function or a simple alert
             log_message(
               "System",
               `<span style="color: red; font-weight: bold; font-size: 1.2em;">${msg.data.message}</span>`,
@@ -1211,6 +1067,38 @@
       if (typeof turnstile !== "undefined") {
         turnstile.reset();
       }
+    });
+
+    // typing
+    let typingTimeout: ReturnType<typeof setTimeout> | null = null;
+    let isCurrentlyTyping = false;
+
+    msgInput.addEventListener("input", () => {
+      if (!ws || ws.readyState !== 1) return;
+
+      if (!isCurrentlyTyping && msgInput.value.length > 0) {
+        isCurrentlyTyping = true;
+        ws.send(
+          JSON.stringify({
+            event: "user.typing",
+            data: { typing: true },
+          }),
+        );
+      }
+
+      if (typingTimeout) clearTimeout(typingTimeout);
+
+      typingTimeout = setTimeout(() => {
+        isCurrentlyTyping = false;
+        if (ws?.readyState === 1) {
+          ws.send(
+            JSON.stringify({
+              event: "user.typing",
+              data: { typing: false },
+            }),
+          );
+        }
+      }, 2000);
     });
 
     // --- UI Feedback ---
