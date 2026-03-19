@@ -590,6 +590,11 @@ import "@styles/wall_styling.css";
     const cursorLastSeen = new Map<string, number>();
     const CURSOR_TIMEOUT = 5000;
 
+    let lastMsgsIn = 0;
+    let lastMsgsOut = 0;
+    let lastBytesIn = 0;
+    let lastBytesOut = 0;
+
     const stats = {
       msgsIn: 0,
       msgsOut: 0,
@@ -623,29 +628,6 @@ import "@styles/wall_styling.css";
     // --- Helpers ---
     function getReadableRandomColor() {
       return `hsl(${Math.floor(Math.random() * 360)}, 70%, 40%)`;
-    }
-
-    function unpackStroke(bin: ArrayBuffer): Stroke {
-      const view = new DataView(bin);
-      const x = view.getUint16(0, false); // big-endian
-      const y = view.getUint16(2, false);
-      const lastX = view.getUint16(4, false);
-      const lastY = view.getUint16(6, false);
-      const r = view.getUint8(8);
-      const g = view.getUint8(9);
-      const b = view.getUint8(10);
-      const size = view.getUint8(11);
-      const mode = view.getUint8(12);
-
-      return {
-        x,
-        y,
-        lastX,
-        lastY,
-        color: `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}`,
-        size,
-        mode: mode === 1 ? "erase" : "draw",
-      };
     }
 
     function flushStrokeBuffer() {
@@ -686,18 +668,23 @@ import "@styles/wall_styling.css";
     setInterval(flushStrokeBuffer, FLUSH_INTERVAL);
 
     function updateStatsUI() {
-      const elapsed = (Date.now() - stats.startTime) / 1000;
-      const rate = ((stats.msgsIn + stats.msgsOut) / (elapsed || 1)).toFixed(1);
-      const kbIn = (stats.bytesIn / 1024).toFixed(2);
-      const kbOut = (stats.bytesOut / 1024).toFixed(2);
+      const msgsInDelta = stats.msgsIn - lastMsgsIn;
+      const msgsOutDelta = stats.msgsOut - lastMsgsOut;
+      const bytesInDelta = stats.bytesIn - lastBytesIn;
+      const bytesOutDelta = stats.bytesOut - lastBytesOut;
+
+      lastMsgsIn = stats.msgsIn;
+      lastMsgsOut = stats.msgsOut;
+      lastBytesIn = stats.bytesIn;
+      lastBytesOut = stats.bytesOut;
 
       const rateEl = document.getElementById("stat-rate");
       const inEl = document.getElementById("stat-in");
       const outEl = document.getElementById("stat-out");
 
-      if (rateEl) rateEl.innerText = `${rate}/s`;
-      if (inEl) inEl.innerText = `${kbIn}KB`;
-      if (outEl) outEl.innerText = `${kbOut}KB`;
+      if (rateEl) rateEl.innerText = `${msgsInDelta + msgsOutDelta}/s`; // messages per second
+      if (inEl) inEl.innerText = `${(bytesInDelta / 1024).toFixed(2)} KB/s`;
+      if (outEl) outEl.innerText = `${(bytesOutDelta / 1024).toFixed(2)} KB/s`;
 
       const clockEl = document.getElementById("tray-clock");
       if (clockEl) {
@@ -708,6 +695,7 @@ import "@styles/wall_styling.css";
         });
       }
     }
+
     setInterval(updateStatsUI, 1000);
 
     function cleanupStaleCursors() {
