@@ -49,82 +49,105 @@ window.onYouTubeIframeAPIReady = () => {
 
 // somewhat organize windows on start...
 function organizeWindows() {
-  const windows = Array.from(document.querySelectorAll<HTMLElement>(".window"));
   const gap = 15;
   const screenW = window.innerWidth;
   const screenH = window.innerHeight;
 
-  const col1 = windows.filter(
-    (w) =>
-      w.innerText.includes("Guest book") ||
-      w.innerText.includes("Active Users"),
-  );
-  const col2 = windows.filter(
-    (w) => w.innerText.includes("Radio") || w.innerText.includes("Links"),
-  );
-  const col3 = windows.filter((w) => w.innerText.includes("Paint"));
+  // 1. Helper to get element or null-safe measurements
+  const getEl = (id: string) => document.getElementById(id);
+  const dim = (el: HTMLElement | null) => ({
+    w: el?.offsetWidth || 0,
+    h: el?.offsetHeight || 0,
+  });
 
-  const w1 = col1[0]?.offsetWidth || 0;
-  const w2 = col2[0]?.offsetWidth || 0;
-  const w3 = col3[0]?.offsetWidth || 0;
+  const winGuest = getEl("win-guestbook");
+  const winActive = getEl("win-activeusers");
+  const winRadio = getEl("win-radio");
+  const winLinks = getEl("win-links");
+  const winLanguage = getEl("win-language"); // Fixed typo
+  const winPaint = getEl("win-paint");
+
+  // 2. Measure everything once
+  const dGuest = dim(winGuest);
+  const dActive = dim(winActive);
+  const dRadio = dim(winRadio);
+  const dLinks = dim(winLinks);
+  const dLang = dim(winLanguage);
+  const dPaint = dim(winPaint);
+
+  // 3. Define Column Widths
+  const w1 = Math.max(dGuest.w, dActive.w);
+  const w2_row = dLinks.w + dLang.w + gap;
+  const w2 = Math.max(dRadio.w, w2_row);
+  const w3 = dPaint.w;
 
   const totalBlockWidth = w1 + w2 + w3 + gap * 2;
+  const isTooCramped = screenW < totalBlockWidth + 40 || screenH < 600;
 
-  const isTooCramped = screenW < totalBlockWidth || screenH < 600;
-
+  // 4. Fixed Type Definition (accepts null)
   const animateWin = (
-    win: HTMLElement,
-    targetX: number,
-    targetY: number,
-    index: number,
+    win: HTMLElement | null,
+    x: number,
+    y: number,
+    delay: number,
   ) => {
-    win.style.left = `${targetX}px`;
-    win.style.top = `${targetY}px`;
-
+    if (!win) return;
     gsap.fromTo(
       win,
+      { scale: 0.5, opacity: 0, left: x, top: y },
       {
-        scale: 0.5,
-        opacity: 0,
-        x: (Math.random() - 0.5) * 200,
-        y: (Math.random() - 0.5) * 200,
-      },
-      {
-        x: 0,
-        y: 0,
+        left: x,
+        top: y,
         scale: 1,
         opacity: 1,
         duration: 0.6,
-        delay: index * 0.1,
+        delay: delay * 0.1,
         ease: "power4.out",
-        onComplete: () => {
-          gsap.set(win, { clearProps: "x,y" });
-          if (typeof keepInBounds === "function") keepInBounds(win);
-        },
       },
     );
   };
 
   if (isTooCramped) {
+    const windows = Array.from(
+      document.querySelectorAll<HTMLElement>(".window"),
+    );
     windows.forEach((win, i) => {
-      const randomX = Math.random() * (screenW - win.offsetWidth - 40) + 20;
-      const randomY = Math.random() * (screenH - win.offsetHeight - 40) + 20;
-      animateWin(win, randomX, randomY, i);
+      const rx = Math.random() * (screenW - win.offsetWidth - 40) + 20;
+      const ry = Math.random() * (screenH - win.offsetHeight - 40) + 20;
+      animateWin(win, rx, ry, i);
     });
   } else {
-    let cursorX = (screenW - totalBlockWidth) / 2;
-    [col1, col2, col3].forEach((col, colIdx) => {
-      const colWidths = [w1, w2, w3];
-      const colHeight =
-        col.reduce((sum, w) => sum + w.offsetHeight + gap, 0) - gap;
-      let cursorY = (screenH - colHeight) / 2;
+    const startX = (screenW - totalBlockWidth) / 2;
 
-      col.forEach((win, winIdx) => {
-        animateWin(win, cursorX, cursorY, colIdx + winIdx);
-        cursorY += win.offsetHeight + gap;
-      });
-      cursorX += colWidths[colIdx] + gap;
-    });
+    // --- Column 1 ---
+    const h1 = dGuest.h + dActive.h + gap;
+    let c1Y = (screenH - h1) / 2;
+    animateWin(winGuest, startX + (w1 - dGuest.w) / 2, c1Y, 0);
+    animateWin(
+      winActive,
+      startX + (w1 - dActive.w) / 2,
+      c1Y + dGuest.h + gap,
+      1,
+    );
+
+    // --- Column 2 ---
+    const h2 = dRadio.h + Math.max(dLinks.h, dLang.h) + gap;
+    const c2X = startX + w1 + gap;
+    const c2Y = (screenH - h2) / 2;
+    const rowY = c2Y + dRadio.h + gap;
+    const rowStartX = c2X + (w2 - w2_row) / 2;
+
+    animateWin(winRadio, c2X + (w2 - dRadio.w) / 2, c2Y, 2);
+    animateWin(winLinks, rowStartX, rowY, 3);
+    animateWin(winLanguage, rowStartX + dLinks.w + gap, rowY, 4);
+
+    // --- Column 3 ---
+    animateWin(
+      winPaint,
+      startX + w1 + w2 + gap * 2,
+      (screenH - dPaint.h) / 2,
+      5,
+    );
   }
 }
 

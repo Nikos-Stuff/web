@@ -49,6 +49,7 @@ body {
   padding: 20px;
   overflow-x: hidden;
   cursor: url("/cursors/arrow.cur"), auto;
+  image-rendering: pixelated;
 
   user-select: none;
   -webkit-user-select: none;
@@ -152,6 +153,8 @@ body::after {
   cursor: url("/cursors/arrow.cur"), auto;
 }
 input[type="color"],
+select,
+option,
 a,
 input,
 button,
@@ -263,7 +266,6 @@ legend {
 .tray img {
   display: block;
   margin-right: 4px;
-  image-rendering: pixelated;
 }
 
 .stat-divider {

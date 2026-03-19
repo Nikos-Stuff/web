@@ -17,6 +17,7 @@ import "@styles/wall_styling.css";
       defer></script>
   </head>
   <body>
+    <!-- Interaction grabber -->
     <div
       id="first_interaction_grabber"
       style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
@@ -29,11 +30,11 @@ import "@styles/wall_styling.css";
         style="position: relative; width: 300px;"
       >
         <div class="title-bar">
-          <div class="title-bar-text">Hello World!</div>
+          <div class="title-bar-text" data-i18n="intro_title">Hello World!</div>
         </div>
         <div class="window-body" style="text-align: center;">
-          <p>Welcome to my silly place!</p>
-          <p>Still work in progress - but whatever!</p>
+          <p data-i18n="intro_line1">Welcome to my silly place!</p>
+          <p data-i18n="intro_line2">Still work in progress - but whatever!</p>
           <section class="field-row" style="justify-content: center;">
             <button id="start_button" style="width: 80px;">OK</button>
           </section>
@@ -41,9 +42,10 @@ import "@styles/wall_styling.css";
       </div>
     </div>
 
-    <div class="window win_anim">
+    <!-- Guest Book -->
+    <div class="window win_anim" id="win-guestbook">
       <div class="title-bar">
-        <div class="title-bar-text">Guest book</div>
+        <div class="title-bar-text" data-i18n="guestbook_title">Guest book</div>
         <div class="title-bar-controls">
           <button aria-label="Close" class="close" data-redirect="true"
           ></button>
@@ -51,19 +53,29 @@ import "@styles/wall_styling.css";
       </div>
       <div class="window-body">
         <div class="marquee-container">
-          <marquee scrollamount="3">Leave a random message! ( Global )</marquee>
+          <marquee scrollamount="3" data-i18n="guestbook_marquee"
+            >Leave a random message! ( Global )</marquee
+          >
         </div>
         <fieldset>
-          <legend>Write a Message:</legend>
+          <legend data-i18n="guestbook_messageheader">Write a Message:</legend>
           <div class="field-row-stacked">
-            <label for="nickname">Your nickname:</label>
+            <label for="nickname" data-i18n="guestbook_field_nickname"
+              >Your nickname:</label
+            >
             <input id="nickname" type="text" autocomplete="off" />
           </div>
           <div class="field-row-stacked">
-            <label for="message">Message:</label>
+            <label for="message" data-i18n="guestbook_field_message"
+              >Message:</label
+            >
             <textarea id="message" rows="3"></textarea>
           </div>
-          <button id="sendBtn" style="margin-top: 10px;">Send</button>
+          <button
+            id="sendBtn"
+            style="margin-top: 10px;"
+            data-i18n="guestbook_field_send">Send</button
+          >
         </fieldset>
         <ul class="tree-view chat-log">
           <li><strong>System: </strong>Waiting...</li>
@@ -73,9 +85,12 @@ import "@styles/wall_styling.css";
       <audio id="notify" src="/you_got_mail.ogg"></audio>
     </div>
 
-    <div class="window win_anim" style="height: 160px">
+    <!-- Active Users -->
+    <div class="window win_anim" style="height: 160px" id="win-activeusers">
       <div class="title-bar">
-        <div class="title-bar-text">Active Users</div>
+        <div class="title-bar-text" data-i18n="activeusers_title">
+          Active Users
+        </div>
       </div>
       <div
         class="sunken-panel"
@@ -84,27 +99,27 @@ import "@styles/wall_styling.css";
         <table style="width: 100%;" id="ActiveUsersTable">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Status</th>
+              <th data-i18n="activeusers_th_name">Name</th>
+              <th data-i18n="activeusers_th_status">Status</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
       </div>
-      <div class="status-bar">
-        <p class="status-bar-field">
-          Active Users: <strong id="activeConnections">0</strong>
-        </p>
-      </div>
+      <p class="status-bar-field">
+        <span data-i18n="activeusers_status">Active Users: </span>
+        <strong id="activeConnections">0</strong>
+      </p>
     </div>
 
+    <!-- LoFi Radio -->
     <div
       class="window win_anim"
-      id="radioWindow"
+      id="win-radio"
       style="top: 120px; left: 400px;"
     >
       <div class="title-bar">
-        <div class="title-bar-text">Lofi Radio</div>
+        <div class="title-bar-text" data-i18n="lofiradio_title">Lofi Radio</div>
         <div class="title-bar-controls">
           <button aria-label="Close" class="close"></button>
         </div>
@@ -121,13 +136,14 @@ import "@styles/wall_styling.css";
       </div>
     </div>
 
+    <!-- Paint -->
     <div
       class="window win_anim"
-      id="globalPaint"
+      id="win-paint"
       style="width: auto; display: inline-block;"
     >
       <div class="title-bar">
-        <div class="title-bar-text">Paint</div>
+        <div class="title-bar-text" data-i18n="paint_title">Paint</div>
         <div class="title-bar-controls">
           <button aria-label="Close" class="close"></button>
         </div>
@@ -166,7 +182,7 @@ import "@styles/wall_styling.css";
         style="display: flex; flex-direction: row; align-items: center; padding: 5px; border-top: 1px solid #808080; gap: 15px;"
       >
         <div class="field-row" style="margin: 0;">
-          <label style="font-size: 10px;">Color:</label>
+          <label style="font-size: 10px;" data-i18n="paint_color">Color:</label>
           <input
             id="colorInput"
             type="color"
@@ -176,7 +192,11 @@ import "@styles/wall_styling.css";
         </div>
 
         <div class="field-row" style="margin: 0; flex-grow: 1;">
-          <label for="brushSize" style="font-size: 10px;">Size:</label>
+          <label
+            for="brushSize"
+            style="font-size: 10px;"
+            data-i18n="paint_brushsize">Size:</label
+          >
           <input
             id="brushSize"
             type="range"
@@ -216,9 +236,10 @@ import "@styles/wall_styling.css";
       </div>
     </div>
 
-    <div class="window win_anim" style="width: 120px; display: inline-block;">
+    <!-- Links -->
+    <div class="window win_anim" style="width: 120px; display: inline-block;" id="win-links">
       <div class="title-bar">
-        <div class="title-bar-text">Links</div>
+        <div class="title-bar-text" data-i18n="links_title">Links</div>
         <div class="title-bar-controls">
           <button aria-label="Close" class="close"></button>
         </div>
@@ -237,10 +258,36 @@ import "@styles/wall_styling.css";
         </a>
       </div>
       <div class="status-bar">
-        <p class="status-bar-field">Other silly stuff</p>
+        <p class="status-bar-field" data-i18n="links_status">
+          Other silly stuff
+        </p>
       </div>
     </div>
 
+    <!-- Language -->
+    <div class="window win_anim" style="width: 120px; display: inline-block;" id="win-language">
+      <div class="title-bar">
+        <div class="title-bar-text" data-i18n="language_title">Lagunage</div>
+      </div>
+
+      <div
+        class="window-body"
+        style="margin: 0; display: flex; flex-direction: column; align-items: center; padding: 10px; gap: 8px;"
+      >
+        <p style="margin: 0;" data-i18n="language_select_lang">
+          Select language:
+        </p>
+        <select>
+          <option value="en">English</option>
+          <option value="pl">Polski</option>
+          <option value="fr">Francais</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Icons on the desktop -->
+
+    <!-- Taskbar -->
     <div class="taskbar">
       <div class="taskbar-left-section"></div>
 
@@ -261,6 +308,7 @@ import "@styles/wall_styling.css";
       </div>
     </div>
 
+    <!-- CF -->
     <div
       class="cf-turnstile"
       data-sitekey="0x4AAAAAACBNatxTQCTb20u7"
@@ -272,5 +320,6 @@ import "@styles/wall_styling.css";
   </body>
 </html>
 
-<script src="src/win98/websocket.ts" />
-<script src="src/win98/windows_manager.ts" />
+<script src="src/win98/websocket.ts"></script>
+<script src="src/win98/windows_manager.ts"></script>
+<script src="src/win98/lang_swapper.ts"></script>
