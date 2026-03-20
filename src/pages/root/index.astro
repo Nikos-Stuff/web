@@ -1,5 +1,14 @@
 ---
 import "@styles/wall_styling.css";
+import { getCollection, render } from "astro:content";
+
+const desk_textdocuments = await getCollection("desktop_text_files");
+const renderedDocs = await Promise.all(
+  desk_textdocuments.map(async (doc) => {
+    const { Content } = await render(doc);
+    return { ...doc, Content };
+  }),
+);
 ---
 
 <!doctype html>
@@ -338,34 +347,65 @@ import "@styles/wall_styling.css";
       </div>
     </div>
 
-    <!-- Test Window - SHOULD WORK WITH THE THING! -->
-    <div class="window win_anim keep_on_mobile" id="win-embededpage" style="width: 250px;">
-      <div class="title-bar">
-        <div class="title-bar-text">Testing!</div>
-        <div class="title-bar-controls">
-          <button aria-label="Close" class="soft_close"></button>
+    <!-- Auto add .mdx -> .txt stuff -->
+    {
+      renderedDocs.map(({ data, Content }) => (
+        <div
+          class="window win_anim keep_on_mobile"
+          id={`win-${data.title}`}
+          style="width: 850px; height: 400px; display: flex; flex-direction: column;"
+        >
+          <div class="title-bar">
+            <div class="title-bar-text">Notepad - {data.title}</div>
+            <div class="title-bar-controls">
+              <button aria-label="Close" class="soft_close" />
+            </div>
+          </div>
+
+          <div
+            class="menu-bar"
+            style="display: flex; padding: 2px;"
+          >
+            <span class="menu-item">File</span>
+            <span class="menu-item">Edit</span>
+            <span class="menu-item">Search</span>
+            <span class="menu-item">Help</span>
+          </div>
+
+          <div
+            class="window-body"
+            style="flex-grow: 1; display: flex; flex-direction: column; min-height: 0; margin: 2px;"
+          >
+            <div
+              class="field-border"
+              style="flex-grow: 1; overflow-y: scroll; background: white; padding: 8px; padding-top: 0px; min-height: 0;"
+            >
+              {/* Content will now scroll inside here */}
+              <Content />
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div
-        class="window-body"
-        style="display: flex; flex-direction: column; align-items: center; gap: 12px; margin: 8px;"
-      >
-      If that works = NICE!
-      </div>
-    </div>
-
-    
+      ))
+    }
   </body>
   <!-- Icons on the desktop -->
   <div class="desktop-icons">
-    <div class="desktop-icon" id="icon-index.html" data-opens="win-embededpage">
-      <img
-        src="https://win98icons.alexmeub.com/icons/png/msie2-1.png"
-        alt="Shortcut"
-      />
-      <span class="icon-label">index.html</span>
-    </div>
+    <!-- Auto add .mdx -> .txt stuff -->
+    {
+      desk_textdocuments.map((text_document) => (
+        <div
+          class="desktop-icon"
+          id={`icon-${text_document.data.title}`}
+          data-opens={`win-${text_document.data.title}`}
+        >
+          <img
+            src="https://win98icons.alexmeub.com/icons/png/notepad_file-0.png"
+            alt="Shortcut"
+          />
+          <span class="icon-label">{text_document.data.title}</span>
+        </div>
+      ))
+    }
   </div>
 
   <!-- Taskbar -->

@@ -43,6 +43,18 @@ body {
   -ms-overflow-style: none;
 }
 
+
+
+pre,
+code {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border: none !important;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+}
+
 html::-webkit-scrollbar,
 body::-webkit-scrollbar {
   display: none;
@@ -92,7 +104,7 @@ body::after {
 }
 
 /* =========================
-   WINDOWS / LAYOUT
+   WINDOWS / LAYOUT / MENUS
 ========================= */
 .window {
   position: absolute;
@@ -106,6 +118,21 @@ body::after {
 
 .win_anim {
   opacity: 0;
+  pointer-events: none;
+}
+
+.menu-item {
+  padding: 2px 6px;
+  font-size: 11px;
+}
+
+.menu-item:hover {
+  background-color: #000080;
+  color: white;
+}
+
+.menu-item u {
+  text-decoration: underline;
 }
 
 /* =========================

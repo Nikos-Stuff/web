@@ -1,5 +1,21 @@
 import gsap from "gsap";
 
+function normalizeZ(bringToFront?: HTMLElement) {
+  let z = 100;
+
+  windows.forEach((w) => {
+    if (w.classList.contains("win_anim")) return;
+    if (w === bringToFront) return;
+    w.style.zIndex = `${z++}`;
+  });
+
+  if (bringToFront) {
+    bringToFront.style.zIndex = `${z++}`;
+  }
+
+  zCounter = z;
+}
+
 // --- AUDIO SETUP ---
 const introAudio = document.getElementById(
   "intro_sound",
@@ -91,6 +107,8 @@ function organizeWindows() {
     delay: number,
   ) => {
     if (!win) return;
+
+    win.style.pointerEvents = "auto";
 
     gsap.fromTo(
       win,
@@ -204,10 +222,14 @@ function setActiveWindow(win: HTMLElement) {
   const titleBar = win.querySelector<HTMLElement>(".title-bar");
   if (titleBar) titleBar.classList.remove("inactive");
 
-  zCounter += 1;
-  win.style.zIndex = `${zCounter}`;
+  // normalize if zCounter is too high
+  if (zCounter > 150) {
+    normalizeZ(win);
+  } else {
+    zCounter += 1;
+    win.style.zIndex = `${zCounter}`;
+  }
 }
-
 windows.forEach((win) => {
   if (win.dataset.notMoveable === "true") return;
 
@@ -307,10 +329,13 @@ document.querySelectorAll<HTMLElement>(".soft_close").forEach((btn) => {
 
     if (!windowEl) return;
 
-    gsap.killTweensOf(windowEl);
-    gsap.set(windowEl, { clearProps: "all" });
+    const win = windowEl as HTMLElement; // <-- cast to HTMLElement
 
-    windowEl.classList.add("win_anim");
+    gsap.killTweensOf(win);
+    gsap.set(win, { clearProps: "left,top,scale,opacity" });
+    win.classList.remove("opened");
+    win.classList.add("win_anim");
+    win.style.pointerEvents = "none";
   });
 });
 
@@ -334,26 +359,33 @@ function handleMobileWindows() {
     .querySelectorAll<HTMLElement>(".window.keep_on_mobile")
     .forEach((win) => {
       if (isMobile) {
-        // Only animate if it was hidden
-        if (win.classList.contains("win_anim")) {
-          win.classList.remove("win_anim");
-          win.classList.add("always_show");
-        } else {
-          win.classList.add("always_show");
-        }
+        // Make visible and interactive
+        win.classList.remove("win_anim");
+        win.classList.add("always_show");
+
+        win.style.pointerEvents = "auto"; // allow clicks
       } else {
+        // Restore desktop behavior
         win.classList.remove("always_show");
-        // Keep it hidden until explicitly opened on desktop
+
         if (!win.classList.contains("opened")) {
           win.classList.add("win_anim");
+          win.style.pointerEvents = "none"; // block clicks
+        } else {
+          win.style.pointerEvents = "auto"; // allow clicks for opened windows
         }
       }
     });
 }
 
 window.addEventListener("resize", () => {
-  const allWindows = document.querySelectorAll(".window");
-  allWindows.forEach((win) => keepInBounds(win as HTMLElement));
+  const allWindows = document.querySelectorAll<HTMLElement>(".window");
+  allWindows.forEach((win) => {
+    keepInBounds(win);
+    if (!win.classList.contains("win_anim")) {
+      win.style.pointerEvents = "auto";
+    }
+  });
   handleMobileWindows();
 });
 
@@ -377,6 +409,8 @@ function openWindow(win: HTMLElement) {
   const wasHidden = win.classList.contains("win_anim");
 
   win.classList.remove("win_anim");
+  win.classList.add("opened");
+  win.style.pointerEvents = "auto";
 
   // unified z-index system
   setActiveWindow(win);
@@ -390,6 +424,8 @@ function openWindow(win: HTMLElement) {
 
     cascadeOffset += 20;
     if (cascadeOffset > 100) cascadeOffset = 0;
+
+    keepInBounds(win);
 
     gsap.fromTo(
       win,

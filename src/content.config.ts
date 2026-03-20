@@ -27,6 +27,13 @@ const blog = defineCollection({
   }),
 })
 
+const desktop_text_files = defineCollection({
+  loader: glob({ pattern: '**\/[^_]*.md', base: "./src/content/desktop_docs" }),
+  schema: z.object({
+    title: z.string()
+  }),
+})
+
 
 const projects = defineCollection({
   loader: glob({ pattern: '**\/[^_]*.md', base: "./src/content/projects" }),
@@ -68,4 +75,4 @@ const legal = defineCollection({
   }),
 })
 
-export const collections = { work, blog, projects, legal, team}
+export const collections = { work, blog, projects, legal, team, desktop_text_files }

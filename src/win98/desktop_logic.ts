@@ -6,9 +6,10 @@ selectionBox.classList.add("selection-box");
 
 document.addEventListener("mousedown", (e) => {
   const target = e.target as HTMLElement;
-
-  if (target.closest(".window") || target.closest(".taskbar")) return;
-
+  
+  if (target.closest(".window") || target.closest(".taskbar")) {
+    return;
+  }
   isSelecting = true;
   startX = e.pageX;
   startY = e.pageY;
@@ -72,16 +73,20 @@ document.addEventListener("mouseup", () => {
 });
 
 // --- ICON CLICK LOGIC ---
-document.querySelector('.desktop-icons')?.addEventListener('mousedown', (event: Event) => {
-    const e = event as MouseEvent; 
-    
-    const icon = (e.target as HTMLElement).closest('.desktop-icon');
+document
+  .querySelector(".desktop-icons")
+  ?.addEventListener("mousedown", (event: Event) => {
+    const e = event as MouseEvent;
+
+    const icon = (e.target as HTMLElement).closest(".desktop-icon");
     if (!icon) return;
 
-    e.stopPropagation(); 
-    
+    e.stopPropagation();
+
     if (!e.ctrlKey && !e.shiftKey) {
-        document.querySelectorAll('.desktop-icon').forEach(i => i.classList.remove('selected'));
+      document
+        .querySelectorAll(".desktop-icon")
+        .forEach((i) => i.classList.remove("selected"));
     }
-    icon.classList.add('selected');
-});
+    icon.classList.add("selected");
+  });
