@@ -22,7 +22,16 @@
     "language_title": "Language",
     "language_select_lang": "Select language:",
     "linkme_title": "Link Me",
-    "linkme_copyme": "Copy this code to your site:"
+    "linkme_copyme": "Copy this code to your site:",
+
+    "desktop_activedesktop": "<u>A</u>ctive Desktop",
+    "desktop_arrangeicons": "<u>A</u>rrange Icons",
+    "desktop_lineupicons": "Line <u>U</u>p Icons",
+    "desktop_refresh": "Re<u>f</u>resh",
+    "desktop_paste": "<u>P</u>aste",
+    "desktop_pasteshortcut": "Paste <u>S</u>hortcut",
+    "desktop_new": "<u>N</u>ew",
+    "desktop_properties": "P<u>r</u>operties"
   },
   "pl": {
     "intro_title": "Witaj swiecie!",
@@ -47,7 +56,16 @@
     "language_title": "Jezyk",
     "language_select_lang": "Wybierz jezyk:",
     "linkme_title": "Wklej mnie",
-    "linkme_copyme": "Skopiuj ten kod na swoją stronę:"
+    "linkme_copyme": "Skopiuj ten kod na swoją stronę:",
+
+    "desktop_activedesktop": "<u>A</u>ktywny pulpit",
+    "desktop_arrangeicons": "<u>R</u>ozmiesc ikony",
+    "desktop_lineupicons": "Wyrowna<u>j</u> ikony",
+    "desktop_refresh": "<u>O</u>swiez",
+    "desktop_paste": "<u>W</u>klej",
+    "desktop_pasteshortcut": "Wklej <u>s</u>krot",
+    "desktop_new": "<u>N</u>owy",
+    "desktop_properties": "Wl<u>a</u>sciwasci"
   },
   "fr": {
     "intro_title": "Bonjour le monde !",
@@ -72,6 +90,15 @@
     "language_title": "Langue",
     "language_select_lang": "Choisir la langue :",
     "linkme_title": "Lien vers moi",
-    "linkme_copyme": "Copiez ce code sur votre site :"
+    "linkme_copyme": "Copiez ce code sur votre site :",
+
+    "desktop_activedesktop": "Bureau <u>a</u>ctif",
+    "desktop_arrangeicons": "<u>R</u>eorganiser les icones",
+    "desktop_lineupicons": "<u>A</u>ligner les icones",
+    "desktop_refresh": "<u>A</u>ctualiser",
+    "desktop_paste": "<u>C</u>oller",
+    "desktop_pasteshortcut": "Coller le <u>r</u>accourci",
+    "desktop_new": "<u>N</u>ouveau",
+    "desktop_properties": "P<u>r</u>oprietes"
   }
 }

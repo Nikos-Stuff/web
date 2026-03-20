@@ -1,4 +1,5 @@
 import gsap from "gsap";
+let experienceStarted = false;
 
 function normalizeZ(bringToFront?: HTMLElement) {
   let z = 100;
@@ -183,6 +184,7 @@ function organizeWindows() {
 
 // --- START EXPERIENCE ON CLICK ---
 startButton?.addEventListener("click", () => {
+  experienceStarted = true;
   overlay?.remove();
 
   shouldStartPlayback = true;
@@ -379,6 +381,8 @@ function handleMobileWindows() {
 }
 
 window.addEventListener("resize", () => {
+  if (!experienceStarted) return;
+
   const allWindows = document.querySelectorAll<HTMLElement>(".window");
   allWindows.forEach((win) => {
     keepInBounds(win);

@@ -341,7 +341,7 @@ const renderedDocs = await Promise.all(
               resize: none; 
             "
             >&lt;a href="https://nikostuff.com/root" target="_blank"&gt;&lt;img
-            src="/NikoButton.gif" alt="Niko's Stuff" /&gt;&lt;/a&gt;</textarea
+            src="https://nikostuff.com/NikoButton.gif" alt="Niko's Stuff" /&gt;&lt;/a&gt;</textarea
           >
         </div>
       </div>
@@ -362,10 +362,7 @@ const renderedDocs = await Promise.all(
             </div>
           </div>
 
-          <div
-            class="menu-bar"
-            style="display: flex; padding: 2px;"
-          >
+          <div class="menu-bar" style="display: flex; padding: 2px;">
             <span class="menu-item">File</span>
             <span class="menu-item">Edit</span>
             <span class="menu-item">Search</span>
@@ -437,6 +434,30 @@ const renderedDocs = await Promise.all(
     data-theme="dark"
     data-callback="onSuccess"
   >
+  </div>
+
+  <!-- Context Menu -->
+  <div id="desktop-menu" class="window context-menu" style="display: none;">
+    <div class="menu-item has-submenu" data-i18n="desktop_activedesktop"></div>
+
+    <div class="menu-divider"></div>
+
+    <div class="menu-item has-submenu" data-i18n="desktop_arrangeicons"></div>
+    <div class="menu-item" data-i18n="desktop_lineupicons"></div>
+    <div class="menu-item" data-i18n="desktop_refresh"></div>
+
+    <div class="menu-divider"></div>
+
+    <div class="menu-item disabled" data-i18n="desktop_paste"></div>
+    <div class="menu-item disabled" data-i18n="desktop_pasteshortcut"></div>
+
+    <div class="menu-divider"></div>
+
+    <div class="menu-item has-submenu" data-i18n="desktop_new"></div>
+
+    <div class="menu-divider"></div>
+
+    <div class="menu-item" data-i18n="desktop_properties"></div>
   </div>
 </html>
 

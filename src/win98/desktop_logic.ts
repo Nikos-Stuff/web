@@ -12,7 +12,8 @@ let originalY = 0;
 
 let startX = 0;
 let startY = 0;
-const selectionBox = document.createElement("div");
+const selectionBox = document.createElement("div") as HTMLElement;
+const desktopMenu = document.getElementById("desktop-menu") as HTMLElement;
 selectionBox.classList.add("selection-box");
 
 const clamp = (val: number, min: number, max: number) =>
@@ -82,6 +83,10 @@ document.addEventListener("mousedown", (e) => {
     target.closest(".cf-turnstile")
   )
     return;
+
+  if (desktopMenu && !desktopMenu.contains(e.target as Node)) {
+    desktopMenu.style.display = "none";
+  }
 
   if (icon) {
     isDragging = true;
@@ -193,4 +198,40 @@ window.addEventListener("resize", () => {
     icon.style.left = `${corrected.x}px`;
     icon.style.top = `${corrected.y}px`;
   });
+});
+
+document.addEventListener("contextmenu", (e: MouseEvent) => {
+  const target = e.target as HTMLElement;
+
+  if (
+    target.closest(".window") ||
+    target.closest(".taskbar") ||
+    target.closest(".cf-turnstile")
+  ) {
+    if (desktopMenu) desktopMenu.style.display = "none";
+    return;
+  }
+
+  e.preventDefault();
+
+  if (!desktopMenu) return;
+
+  desktopMenu.style.display = "block";
+
+  const { clientX: mouseX, clientY: mouseY } = e;
+  const menuRect = desktopMenu.getBoundingClientRect();
+
+  let finalX = mouseX;
+  let finalY = mouseY;
+
+  if (mouseX + menuRect.width > window.innerWidth) {
+    finalX = mouseX - menuRect.width;
+  }
+
+  if (mouseY + menuRect.height > window.innerHeight - TASKBAR_HEIGHT) {
+    finalY = mouseY - menuRect.height;
+  }
+
+  desktopMenu.style.left = `${finalX}px`;
+  desktopMenu.style.top = `${finalY}px`;
 });

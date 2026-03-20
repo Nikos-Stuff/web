@@ -43,8 +43,6 @@ body {
   -ms-overflow-style: none;
 }
 
-
-
 pre,
 code {
   background-color: #ffffff !important;
@@ -443,6 +441,67 @@ legend {
 
   mix-blend-mode: screen;
   pointer-events: auto;
+}
+
+/* =========================
+   CONTEXT MENU
+========================= */
+.context-menu {
+  position: absolute;
+  z-index: 1 !important;
+  width: max-content;
+  min-width: 100px;
+}
+
+.context-menu .menu-item {
+  padding: 3px 22px;
+  font-size: 11px;
+  line-height: 1;
+  display: block;
+  white-space: nowrap;
+}
+
+.context-menu .menu-divider {
+  height: 0;
+  border-top: 1px solid #808080;
+  border-bottom: 1px solid #ffffff;
+  margin: 3px 1px;
+}
+
+.context-menu .menu-item.disabled {
+  color: #808080;
+  text-shadow: 1px 1px #fff;
+}
+
+.context-menu .menu-item.disabled:hover {
+  background-color: transparent;
+  color: #808080;
+}
+
+
+.context-menu .menu-item.has-submenu {
+  position: relative;
+  padding-right: 30px;
+}
+
+.context-menu .menu-item.has-submenu::after {
+  content: "";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid black; 
+
+  display: inline-block;
+  width: 0;
+  height: 0;
+}
+
+.context-menu .menu-item.has-submenu:hover::after {
+  border-left-color: #fff;
 }
 
 /* =========================
