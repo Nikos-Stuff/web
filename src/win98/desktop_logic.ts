@@ -20,7 +20,6 @@ const snapToGrid = (x: number, y: number) => {
   const maxX = window.innerWidth - GRID_SIZE_X - OFFSET_PADDING;
   const maxY = window.innerHeight - GRID_SIZE_Y - TASKBAR_HEIGHT - OFFSET_PADDING;
 
-  // Use Math.floor to keep logic consistent with the top-left anchor
   let snappedX = Math.round((x - OFFSET_PADDING) / GRID_SIZE_X) * GRID_SIZE_X + OFFSET_PADDING;
   let snappedY = Math.round((y - OFFSET_PADDING) / GRID_SIZE_Y) * GRID_SIZE_Y + OFFSET_PADDING;
 
@@ -62,10 +61,8 @@ document.addEventListener("mousedown", (e) => {
     isDragging = true;
     dragTarget = icon;
     
-    // Get current position numerically to avoid string parsing issues later
     const rect = icon.getBoundingClientRect();
     
-    // Calculate offset relative to the viewport mouse position
     dragOffset.x = e.clientX - rect.left;
     dragOffset.y = e.clientY - rect.top;
     
