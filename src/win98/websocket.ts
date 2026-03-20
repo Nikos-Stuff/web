@@ -475,22 +475,19 @@ canvas.addEventListener("pointermove", (e) => {
 
   if (indicator) {
     indicator.style.display = "block";
-    indicator.style.left = `${e.clientX}px`;
+    indicator.style.left = `${e.clientX}px`; 
     indicator.style.top = `${e.clientY}px`;
 
     const size = parseInt(brushSize.value);
-    // Scale the indicator to match the canvas-to-screen ratio
-    const screenSide = size * (rect.width / canvas.width);
-    indicator.style.width = `${screenSide}px`;
-    indicator.style.height = `${screenSide}px`;
+    const scale = rect.width / canvas.width;
+    indicator.style.width = `${size * scale}px`;
+    indicator.style.height = `${size * scale}px`;
 
-    // Toggle Eraser Visuals (2 is Right Click)
     if (e.buttons === 2) {
       indicator.classList.add("erasing");
     } else {
       indicator.classList.remove("erasing");
       indicator.style.backgroundColor = colorInput.value;
-      indicator.style.opacity = "0.5";
     }
   }
 

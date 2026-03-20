@@ -437,6 +437,9 @@ const renderedDocs = await Promise.all(
   >
   </div>
 
+  <!-- Paint Cursor -->
+  <div id="brush-indicator"></div>
+
   <!-- Context Menu -->
   <div id="desktop-menu" class="window context-menu" style="display: none;">
     <div class="menu-item has-submenu" data-i18n="desktop_activedesktop"></div>
@@ -460,9 +463,6 @@ const renderedDocs = await Promise.all(
 
     <div class="menu-item" data-i18n="desktop_properties"></div>
   </div>
-
-  <!-- Paint Cursor -->
-  <div id="brush-indicator"></div>
 </html>
 
 <script src="src/win98/websocket.ts"></script>

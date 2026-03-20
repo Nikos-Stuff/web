@@ -507,21 +507,20 @@ legend {
    PAINT
 ========================= */
 #brush-indicator {
-  filter: blur(1px);
   position: fixed;
-  pointer-events: none;
+  pointer-events: none; 
   border-radius: 50%;
-  border: 1px solid rgba(0, 0, 0, 0.808);
-  z-index: 9999;
+  z-index: 400;  
+  transform: translate(-50%, -50%); 
   display: none;
-  transform: translate(-50%, -50%);
+  border: 1px solid rgba(0, 0, 0, 0.678);
 }
 
 #brush-indicator.erasing {
-  border: 2px dashed #ff0000;
-  background: rgba(255, 0, 0, 0.1);
+  border: 1px dashed red !important;
+  background: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 0 4px red;
 }
-
 /* =========================
    MOBILE
 ========================= */
