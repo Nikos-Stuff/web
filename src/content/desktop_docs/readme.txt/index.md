@@ -2,9 +2,9 @@
 title: "README.txt"
 ---
 
-Hello! Welocome to my text document! And in short.. Welcome to my website! Feel free to explore this stuff! Why Windows 98 you might ask..? Well.. Why not!
+Hello! Welcome to my text document! In short… welcome to my website! Feel free to explore everything here. You might be wondering, "Why Windows 98?" Well… why not!  
 
-Yes. This site is still powered by Astro.JS lol. And this file (+ icon on desktop) is automatically generated from Markdown! Cool!
+Yes, this site is still powered by Astro.JS. This file (and the desktop icon) is automatically generated from Markdown! Cool, right?  
 
 ```text
    ___            _ _ _      
@@ -13,6 +13,6 @@ Yes. This site is still powered by Astro.JS lol. And this file (+ icon on deskto
   \___|_| \___\__,_|_|\__/__/
 ```
 
-Here you can find (most) of used assets:
+Here you can find most of the assets used:
 - [Icons](https://win98icons.alexmeub.com)
 - [CSS Theme](https://jdan.github.io/98.css/#intro)
