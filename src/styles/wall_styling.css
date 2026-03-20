@@ -478,7 +478,6 @@ legend {
   color: #808080;
 }
 
-
 .context-menu .menu-item.has-submenu {
   position: relative;
   padding-right: 30px;
@@ -493,7 +492,7 @@ legend {
 
   border-top: 4px solid transparent;
   border-bottom: 4px solid transparent;
-  border-left: 4px solid black; 
+  border-left: 4px solid black;
 
   display: inline-block;
   width: 0;
@@ -502,6 +501,25 @@ legend {
 
 .context-menu .menu-item.has-submenu:hover::after {
   border-left-color: #fff;
+}
+
+/* =========================
+   PAINT
+========================= */
+#brush-indicator {
+  filter: blur(1px);
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.808);
+  z-index: 9999;
+  display: none;
+  transform: translate(-50%, -50%);
+}
+
+#brush-indicator.erasing {
+  border: 2px dashed #ff0000;
+  background: rgba(255, 0, 0, 0.1);
 }
 
 /* =========================
