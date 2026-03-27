@@ -4,8 +4,8 @@
 @font-face {
   font-family: "Pixelated MS Sans Serif";
   src:
-    url("fonts/ms_sans_serif.woff2") format("woff2"),
-    url("fonts/ms_sans_serif.woff") format("woff");
+    url("/fonts/ms_sans_serif.woff2") format("woff2"),
+    url("/fonts/ms_sans_serif.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -13,8 +13,8 @@
 @font-face {
   font-family: "Pixelated MS Sans Serif";
   src:
-    url("fonts/ms_sans_serif_bold.woff2") format("woff2"),
-    url("fonts/ms_sans_serif_bold.woff") format("woff");
+    url("/fonts/ms_sans_serif_bold.woff2") format("woff2"),
+    url("/fonts/ms_sans_serif_bold.woff") format("woff");
   font-weight: bold;
   font-style: normal;
 }
