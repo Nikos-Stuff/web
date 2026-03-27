@@ -16,13 +16,13 @@ export const WORK: Page = {
 // Blog Page
 export const BLOG: Page = {
   TITLE: "Blog",
-  DESCRIPTION: "Writing on topics I am passionate about.",
+  DESCRIPTION: "Aktualnośći, Nowości itp.",
 }
 
 // Projects Page 
 export const PROJECTS: Page = {
   TITLE: "Projekty",
-  DESCRIPTION: "Recent projects I have worked on.",
+  DESCRIPTION: "Ostatnie projekty nad którymi pracowałem.",
 }
 
 // Team Page
