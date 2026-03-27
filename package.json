@@ -15,14 +15,14 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.8",
-    "@astrojs/mdx": "5.0.2",
+    "@astrojs/mdx": "5.0.3",
     "@astrojs/node": "^10.0.4",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "@astrojs/solid-js": "6.0.1",
     "@playform/inline": "^0.1.4",
     "@types/js-yaml": "^4.0.9",
-    "astro": "6.0.8",
+    "astro": "6.1.1",
     "clsx": "^2.1.1",
     "flag-icons": "^7.5.0",
     "fuse.js": "^7.1.0",
@@ -40,7 +40,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.2",
     "@types/node": "^25.5.0",
-    "vite": "^8.0.3"
+    "vite": "^7.3.1"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
