@@ -2,10 +2,10 @@
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "strictNullChecks": true,
-    "baseUrl": ".",
+    "moduleResolution": "bundler", 
     "paths": {
       "@*": [
-        "src/*"
+        "./src/*"
       ]
     },
     "jsx": "preserve",
