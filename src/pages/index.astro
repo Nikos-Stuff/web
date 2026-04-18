@@ -83,9 +83,9 @@ import POD from "@components/POD.astro";
 
 // APOD - Astronomy Picture of the Day
 
-import { NASA_API, AZURE_API } from "astro:env/server";;
+import { AZURE_API } from "astro:env/server";;
 
-const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
+const apiUrl = `https://api.nikostuff.com/NasaImage`;
 
 let apodData = null;
 let translatedExplanation = null;

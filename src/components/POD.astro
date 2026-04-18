@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { NASA_API } from "astro:env/server";
-const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${NASA_API}`;
+const apiUrl = `https://api.nikostuff.com/NasaImage`;
 let apodData = null;
 let isLoaded = false;
 
@@ -44,7 +43,7 @@ console.log(" APOD will use URL:", finalUrl);
               id="apod-image"
               inferSize={true}
               quality="low"
-              src={`https://api.nikostuff.com/OptimizeImage?target=${apodData.url}&compression=5`}
+              src={apodData.url}
               alt={apodData.title}
               class="w-svw h-svh object-cover brightness-[1.5] dark:brightness-[0.3] blur-md saturate-[0.4] contrast-70 dark:contrast-100 duration-500 opacity-0 transform scale-[1.5] transition-all"
               onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0'); document.getElementById('pod-container').style.opacity = 1;`}
