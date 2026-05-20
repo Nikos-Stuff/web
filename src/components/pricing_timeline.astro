@@ -59,27 +59,27 @@
 </section>
 
 <script>
-import { gsap, Power2 } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+  import { gsap, Power2 } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+  gsap.registerPlugin(ScrollTrigger);
 
-// Get all animated elements
-let animatedStuff = document.querySelectorAll(".slide_element");
+  // Get all animated elements
+  let animatedStuff = document.querySelectorAll(".slide_element");
 
-animatedStuff.forEach((element) => {
-      gsap.from(element, {
-        opacity: 0.5,
-        scale: 0.9,
-        duration: 1,
-        ease: Power2.easeInOut,
-        scrollTrigger: {
-          trigger: element,
-          start: "top center", 
-          end: "bottom 40%",
-          toggleActions: "play reverse play reverse",
-         // markers: true, 
-        },
-      });
+  animatedStuff.forEach((element) => {
+    gsap.from(element, {
+      opacity: 0.5,
+      scale: 0.9,
+      duration: 1,
+      ease: Power2.easeInOut,
+      scrollTrigger: {
+        trigger: element,
+        start: "top center",
+        end: "bottom 40%",
+        toggleActions: "play reverse play reverse",
+        // markers: true,
+      },
     });
+  });
 </script>
