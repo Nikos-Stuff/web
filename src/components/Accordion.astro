@@ -9,7 +9,7 @@ const { title, details } = Astro.props as Props;
 
 <div class="animate">
   <div
-    class="accordion mt-2 group relative border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+    class="accordion mt-2 group relative border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out"
   >
     <button
       class="accordion__button flex w-full flex-1 items-center justify-between gap-2 p-3 text-left font-medium transition sm:px-4"
@@ -21,7 +21,7 @@ const { title, details } = Astro.props as Props;
       {title}
 
       <svg
-        class="accordion__chevron fill-black dark:fill-white transition-all h-[1.5rem] w-[1.5rem] min-h-[1.5rem] min-w-[1.5rem] mr-1"
+        class="accordion__chevron fill-white transition-all h-[1.5rem] w-[1.5rem] min-h-[1.5rem] min-w-[1.5rem] mr-1"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 -960 960 960"
       >
@@ -37,7 +37,7 @@ const { title, details } = Astro.props as Props;
       class="accordion__content hidden max-h-0 overflow-hidden px-3 transition-all duration-300 ease-in-out sm:px-4"
     >
       <p
-        class="not-prose mb-4 mt-1 max-w-full text-sm text-gray-500 dark:text-gray-400"
+        class="not-prose mb-4 mt-1 max-w-full text-sm text-gray-400"
       >
         {details}
       </p>

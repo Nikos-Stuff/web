@@ -116,8 +116,8 @@ img {
 html,
 body {
   @apply h-full w-full antialiased;
-  @apply bg-white dark:bg-black;
-  @apply text-black/75 dark:text-white/75;
+  @apply bg-black;
+  @apply text-white/75;
 }
 
 body {
@@ -126,7 +126,7 @@ body {
 }
 
 main {
-  @apply flex flex-col flex-1 bg-white dark:bg-black;
+  @apply flex flex-col flex-1 bg-black;
 }
 
 header {
@@ -136,22 +136,22 @@ header {
 
 header:not(.scrolled) {
   @apply scale-90 rounded-2xl;
-  @apply bg-white/20 dark:bg-black/20;
+  @apply bg-black/20;
   @apply backdrop-blur-xs border-transparent;
 }
 
 header.scrolled {
-  @apply bg-white/75 dark:bg-black/50;
-  @apply border-black/10 dark:border-white/25;
+  @apply bg-black/50;
+  @apply border-white/25;
   @apply backdrop-blur-sm saturate-200;
 }
 
 article {
-  @apply prose dark:prose-invert max-w-full pb-12;
+  @apply prose-invert max-w-full pb-12;
 }
 
 .page-heading {
-  @apply font-semibold text-black dark:text-white;
+  @apply font-semibold text-white;
 }
 
 .blend {

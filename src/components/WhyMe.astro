@@ -4,131 +4,120 @@ import FancyDiv from "@components/FancyDiv.astro";
 
 <div>
   <FancyDiv theme="simple_full_width_blurred_bg" margin_bottom="50">
-    <section class="animate max-w-screen-md mx-auto pt-25 pb-25">
+    <section class="animate max-w-3xl mx-auto py-12 space-y-12">
       <div
-        class="relative animate w-full border border-black/15 dark:border-white/20 rounded-lg h-40 flex flex-col justify-center items-center overflow-hidden dark:bg-black/50 bg-white/50 transition-colors"
+        class="relative animate w-full border border-white/10 rounded-xl h-44 flex flex-col justify-center items-center overflow-hidden bg-neutral-900/20"
       >
-        <p
-          class="absolute text-[18rem] md:text-[22rem] font-extrabold text-black/10 dark:text-white/10 select-none leading-none pointer-events-none"
-          aria-hidden="true"
+        <div
+          class="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-40 bg-white/5 rounded-full blur-3xl pointer-events-none"
         >
-          ###
-        </p>
+        </div>
 
         <p
           id="animate_num"
-          class="relative text-center text-9xl font-bold z-10 w-full"
+          class="relative text-center text-8xl font-extrabold text-white tracking-tighter z-10 w-full leading-none"
           data-animate-num="40"
         >
           40
         </p>
-
-        <p class="relative text-center text-md animate z-10">
+        <p
+          class="relative text-center text-sm font-medium uppercase tracking-wider text-neutral-400 mt-2 z-10"
+        >
           zadowolonych klientów
         </p>
       </div>
 
-      <hr class="border-black/10 dark:border-white/25 animate my-25" />
+      <hr class="border-white/10 animate" />
 
-      <!-- Flex boxes -->
-      <div class="flex flex-col md:flex-row gap-10 md:gap-20">
-        <div class="flex-1 animate">
-          <p class="font-semibold text-2xl mb-5">Sprawdzone Rozwiązania</p>
-          <p class="text-sm">
-            <span class="font-bold">Ponad 5 lat stałej praktyki</span> oznacza, że
-            nie eksperymentuję. Dostarczam najlepsze techniki montażu wideo, optymalizacji
-            stron.
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="animate space-y-2">
+          <h3 class="font-bold text-xl text-white tracking-tight">
+            Sprawdzone Rozwiązania
+          </h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            <span class="font-semibold text-white"
+              >Ponad 5 lat stałej praktyki</span
+            > oznacza, że nie eksperymentuję. Dostarczam najlepsze techniki montażu
+            wideo oraz optymalizacji stron.
           </p>
         </div>
 
-        <div class="flex-1 animate">
-          <p class="font-semibold text-2xl mb-5">Gwarancja Satysfakcji</p>
-          <p class="text-sm">
-            <span class="font-bold">Nie ma limitu poprawek.</span> Pracuję aż do
-            Twojej 100% satysfakcji, ponieważ wyceniamy <span class="font-bold"
-              >rezultat</span
+        <div class="animate space-y-2">
+          <h3 class="font-bold text-xl text-white tracking-tight">
+            Gwarancja Satysfakcji
+          </h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            <span class="font-semibold text-white">Nie ma limitu poprawek.</span
+            > Pracuję aż do Twojej 100% satysfakcji, ponieważ wyceniamy <span
+              class="font-semibold text-white">rezultat</span
             >, a nie liczbę godzin pracy.
           </p>
         </div>
 
-        <div class="flex-1 animate">
-          <p class="font-semibold text-2xl mb-5">Wsparcie i Bezpieczeństwo</p>
-          <p class="text-sm">
-            <span class="font-bold">Nie znikam po wysyłce!</span> Oferuję konsultacje
-            po wdrożeniu strony, pomoc w obsłudze systemów (CMS) i wsparcie techniczne
-            specjalnie dla Ciebie.
+        <div class="animate space-y-2">
+          <h3 class="font-bold text-xl text-white tracking-tight">
+            Wsparcie i Bezpieczeństwo
+          </h3>
+          <p class="text-xs text-neutral-400 leading-relaxed">
+            <span class="font-semibold text-white">Nie znikam po wysyłce!</span> Oferuję
+            konsultacje po wdrożeniu strony, pomoc w obsłudze systemów (CMS) i wsparcie
+            techniczne specjalnie dla Ciebie.
           </p>
         </div>
       </div>
 
-      <hr class="border-black/10 dark:border-white/25 animate my-25" />
+      <hr class="border-white/10 animate" />
 
-      <!-- Stats -->
-      <div class="flex flex-col md:flex-row gap-10 md:gap-20">
-        <!-- 2h -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div
-          class="relative flex-1 animate border border-black/10 dark:border-white/20 rounded-lg p-5 dark:bg-black/50 bg-white/50 transition-colors flex flex-col justify-center items-center overflow-hidden"
+          class="relative flex-1 animate border border-white/10 rounded-xl p-6 bg-neutral-900/10 flex flex-col justify-center items-center overflow-hidden"
         >
           <p
-            class="absolute text-[12rem] md:text-[16rem] font-extrabold text-black/10 dark:text-white/10 select-none leading-none pointer-events-none"
-            aria-hidden="true"
-          >
-            ~~~~~~
-          </p>
-          <p
-            class="relative text-center text-5xl md:text-7xl font-bold z-10 w-full"
+            class="relative text-center text-4xl md:text-5xl font-extrabold text-white tracking-tight z-10 w-full"
             data-animate-num="2"
             data-suffix="h"
           >
             2h
           </p>
-          <p class="relative text-center text-md animate z-10">
+          <p
+            class="relative text-center text-xs text-neutral-400 font-medium tracking-wide mt-1 text-balance z-10"
+          >
             Ekspresowy czas odpowiedzi
           </p>
         </div>
 
-        <!-- 0% -->
         <div
-          class="relative flex-1 animate border border-black/10 dark:border-white/20 rounded-lg p-5 dark:bg-black/50 bg-white/50 transition-colors flex flex-col justify-center items-center overflow-hidden"
+          class="relative flex-1 animate border border-white/10 rounded-xl p-6 bg-neutral-900/10 flex flex-col justify-center items-center overflow-hidden"
         >
           <p
-            class="absolute text-[12rem] md:text-[16rem] font-extrabold text-black/10 dark:text-white/10 select-none leading-none pointer-events-none"
-            aria-hidden="true"
-          >
-            /\/\/\/\/\
-          </p>
-          <p
-            class="relative text-center text-5xl md:text-7xl font-bold z-10 w-full"
+            class="relative text-center text-4xl md:text-5xl font-extrabold text-white tracking-tight z-10 w-full"
             data-animate-num="0"
             data-start="99"
             data-suffix="%"
           >
             0%
           </p>
-          <p class="relative text-center text-md animate z-10">
+          <p
+            class="relative text-center text-xs text-neutral-400 font-medium tracking-wide mt-1 text-balance z-10"
+          >
             Współczynnik reklamacji
           </p>
         </div>
 
-        <!-- 6mo -->
         <div
-          class="relative flex-1 animate border border-black/10 dark:border-white/20 rounded-lg p-5 dark:bg-black/50 bg-white/50 transition-colors flex flex-col justify-center items-center overflow-hidden"
+          class="relative flex-1 animate border border-white/10 rounded-xl p-6 bg-neutral-900/10 flex flex-col justify-center items-center overflow-hidden"
         >
           <p
-            class="absolute text-[12rem] md:text-[16rem] font-extrabold text-black/10 dark:text-white/10 select-none leading-none pointer-events-none"
-            aria-hidden="true"
-          >
-            ++++++
-          </p>
-          <p
-            class="relative text-center text-5xl md:text-7xl font-bold z-10 w-full"
+            class="relative text-center text-4xl md:text-5xl font-extrabold text-white tracking-tight z-10 w-full"
             data-animate-num="6"
             data-suffix="mo"
           >
             6mo
           </p>
-          <p class="relative text-center text-md animate z-10">
-            Gwarancja i wsparcie techniczne
+          <p
+            class="relative text-center text-xs text-neutral-400 font-medium tracking-wide mt-1 text-balance z-10"
+          >
+            Gwarancja i wsparcie
           </p>
         </div>
       </div>

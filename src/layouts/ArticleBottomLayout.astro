@@ -6,65 +6,108 @@ type Props = {
   entry: CollectionEntry<"blog"> | CollectionEntry<"projects"> | CollectionEntry<"team">
 }
 
-// Get the requested entry
 const { entry } = Astro.props
 const { collection } = entry
 const { Content } = await render(entry)
 
-// Get all non-draft entries
 const items = (await getCollection(collection)).filter(post => !post.data.draft)
 
-// Find the current entry index
 const currentIndex = items.findIndex(x => x.id === entry.id)
 
-// Calculate the next index (circular, wraps around)
 const nextIndex = (currentIndex + 1) % items.length
 const prevIndex = (currentIndex - 1 + items.length) % items.length
 
-// Get the next item
 const next = items[nextIndex]
 const prev = items[prevIndex]
-
 ---
 
-<div>
-  <article>
+<div class="space-y-12">
+  <article class="prose prose-invert max-w-none">
     <Content/>
   </article>
+
+  <hr class="border-white/10" />
+
   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-    <a href={`/${prev.collection}/${prev.id}`} class="hover:scale-105 group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
-      <div class="order-2 w-full h-full group-hover:text-black group-hover:dark:text-white blend">
-        <div class="flex flex-wrap gap-2">
-          <div class="text-sm uppercase">
-            Poprzedni
-          </div>
+    <a 
+      href={`/${prev.collection}/${prev.id}`} 
+      class="group p-5 gap-4 flex items-center border rounded-xl border-white/10 bg-neutral-900/10 hover:bg-neutral-900/40 transition-colors duration-300 ease-in-out"
+    >
+      <div class="shrink-0">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="18" 
+          height="18" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke-width="2.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          class="stroke-neutral-500 group-hover:stroke-white rotate-180 transition-colors duration-300"
+        >
+          <line 
+            x1="5" 
+            y1="12" 
+            x2="19" 
+            y2="12" 
+            class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300 ease-in-out" 
+          />
+          <polyline 
+            points="12 5 19 12 12 19" 
+            class="-translate-x-1 group-hover:translate-x-0 transition-all duration-300 ease-in-out" 
+          />
+        </svg>
+      </div>
+
+      <div class="w-full min-w-0 space-y-1">
+        <div class="text-[10px] font-bold uppercase tracking-widest text-neutral-400">
+          Poprzedni
         </div>
-        <div class="font-semibold mt-3 text-black dark:text-white">
+        <div class="font-bold text-base text-white tracking-tight truncate">
           {prev.data.title}
         </div>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="order-1 stroke-current group-hover:stroke-black group-hover:dark:stroke-white rotate-180">
-        <line x1="5" y1="12" x2="19" y2="12" class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out" />
-        <polyline points="12 5 19 12 12 19" class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out" />
-      </svg>
     </a>
 
-
-
-    <a href={`/${next.collection}/${next.id}`} class="hover:scale-105 group p-4 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out">
-      <div class="w-full h-full text-right group-hover:text-black group-hover:dark:text-white blend">
-        <div class="text-sm uppercase">
+    <a 
+      href={`/${next.collection}/${next.id}`} 
+      class="group p-5 gap-4 flex items-center justify-between border rounded-xl border-white/10 bg-neutral-900/10 hover:bg-neutral-900/40 transition-colors duration-300 ease-in-out"
+    >
+      <div class="w-full min-w-0 space-y-1">
+        <div class="text-[10px] font-bold uppercase tracking-widest text-neutral-400">
           Następny
         </div>
-        <div class="font-semibold mt-3 text-black dark:text-white">
+        <div class="font-bold text-base text-white tracking-tight truncate">
           {next.data.title}
         </div>
       </div>
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white">
-        <line x1="5" y1="12" x2="19" y2="12" class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-1 transition-all duration-300 ease-in-out" />
-        <polyline points="12 5 19 12 12 19" class="translate-x-0 group-hover:translate-x-1 transition-all duration-300 ease-in-out" />
-      </svg>
+
+      <div class="shrink-0">
+        <svg 
+          xmlns="http://www.w3.org/2000/svg" 
+          width="18" 
+          height="18" 
+          viewBox="0 0 24 24" 
+          fill="none" 
+          stroke-width="2.5" 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          class="stroke-neutral-500 group-hover:stroke-white transition-colors duration-300"
+        >
+          <line 
+            x1="5" 
+            y1="12" 
+            x2="19" 
+            y2="12" 
+            class="scale-x-0 group-hover:scale-x-100 translate-x-4 group-hover:translate-x-0 transition-all duration-300 ease-in-out" 
+          />
+          <polyline 
+            points="12 5 19 12 12 19" 
+            class="-translate-x-1 group-hover:translate-x-0 transition-all duration-300 ease-in-out" 
+          />
+        </svg>
+      </div>
     </a>
 
   </div>

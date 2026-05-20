@@ -13,15 +13,9 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 ---
 
 <PageLayout title="Pricing" description={SITE.DESCRIPTION}>
-  <!-- Light Mode: Particles -->
-  <div class="absolute inset-0 block dark:hidden">
-    <div id="particles1" class="fixed inset-0"></div>
-    <div id="particles2" class="fixed inset-0"></div>
-    <div id="particles3" class="fixed inset-0"></div>
-  </div>
 
   <!-- Dark Theme: Stars -->
-  <div class="absolute inset-0 bg-black hidden dark:block">
+  <div class="absolute inset-0 block">
     <div id="stars1" class="fixed inset-0"></div>
     <div id="stars2" class="fixed inset-0"></div>
     <div id="stars3" class="fixed inset-0"></div>
@@ -29,7 +23,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
   <!-- Dark Theme: Twinkling Stars / Meteors -->
   <div id="galaxy" class="fixed inset-0">
-    <div class="hidden dark:block">
+    <div class="block">
       <TwinklingStars />
       <MeteorShower />
     </div>
@@ -66,7 +60,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       <section class="animate">
         <div class="space-y-4">
           <div class="flex justify-between">
-            <p id="web" class="font-semibold text-black dark:text-white">
+            <p id="web" class="font-semibold text-white">
               Strony WWW
             </p>
           </div>
@@ -74,20 +68,20 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
             <!-- Basic Plan -->
             <div class="animate">
               <div
-                class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative"
+                class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out relative"
               >
                 <div
-                  class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend"
+                  class="w-full z-10 relative group-hover:text-white blend"
                 >
                   <div class="flex flex-wrap items-center gap-2">
                     <div
-                      class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25"
+                      class="text-sm capitalize px-3 py-1 rounded-full border border-white/25"
                     >
                       ✏️ Web
                     </div>
                   </div>
                   <div
-                    class="font-semibold mt-3 mb-3 text-black dark:text-white"
+                    class="font-semibold mt-3 mb-3 text-white"
                   >
                     ✨ Starter
                   </div>
@@ -125,33 +119,33 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                   <div class="flex items-stretch mt-4 mb-4">
                     <!-- Vertical line -->
                     <div
-                      class="mr-3 rounded-full bg-black/15 dark:bg-white/20 w-1"
+                      class="mr-3 rounded-full bg-white/20 w-1"
                     >
                     </div>
 
                     <!-- Content -->
-                    <div class="font-semibold text-black dark:text-white">
+                    <div class="font-semibold text-white">
                       <span class="text-2xl">800–1900 PLN / yr</span>
-                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      <p class="text-sm text-gray-400 mt-2">
                         Breakdown:
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         150 PLN – Hosting i konfiguracja serwera
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         150–300 PLN – Aktualizacje, łatki bezpieczeństwa i
                         konserwacja
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         200–500 PLN – Dodatkowe funkcje i personalizacja
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         100–300 PLN – Optymalizacja wydajności / Lighthouse
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         100–200 PLN – Raporty miesięczne + wsparcie
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         100–450 PLN – Aktualizacje motywu, pluginów, SEO
                       </p>
                     </div>
@@ -159,12 +153,12 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
                   <ul class="flex flex-wrap mt-2 gap-1">
                     <li
-                      class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75"
+                      class="text-xs uppercase py-0.5 px-1 rounded :bg-white/20 text-white/75"
                     >
                       BASIC
                     </li>
                     <li
-                      class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75"
+                      class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75"
                     >
                       WORDPRESS
                     </li>
@@ -173,10 +167,10 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                   <a
                     href="#"
                     onclick="openStripePopup('https://buy.stripe.com/6oUaEWa7abrm9GSdzBdAk00?locale=pl'); return false;"
-                    class="group p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+                    class="group p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out"
                   >
                     <span
-                      class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
+                      class="w-full z-10 relative group-hover:text-white text-center transition-color duration-300"
                     >
                       Szybki Zakup
                     </span>
@@ -188,20 +182,20 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
             <!-- Standard Plan -->
             <div class="animate">
               <div
-                class="shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-yellow-400/5 hover:dark:bg-yellow-400/10 border-yellow-600/15 dark:border-yellow-400/20 transition-all duration-300 ease-in-out relative"
+                class="shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-yellow-400/10 border-yellow-400/20 transition-all duration-300 ease-in-out relative"
               >
                 <div
-                  class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend"
+                  class="w-full z-10 relative group-hover:text-white blend"
                 >
                   <div class="flex flex-wrap items-center gap-2">
                     <div
-                      class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25"
+                      class="text-sm capitalize px-3 py-1 rounded-full border border-white/25"
                     >
                       ✏️ Web
                     </div>
                   </div>
                   <div
-                    class="font-semibold mt-3 mb-3 text-black dark:text-white"
+                    class="font-semibold mt-3 mb-3 text-white"
                   >
                     ✨ Strona Statyczna
                   </div>
@@ -238,32 +232,32 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                   <div class="flex items-stretch mt-4 mb-4">
                     <!-- Vertical line -->
                     <div
-                      class="mr-3 rounded-full bg-black/15 dark:bg-white/20 w-1"
+                      class="mr-3 rounded-full bg-white/20 w-1"
                     >
                     </div>
 
                     <!-- Content -->
-                    <div class="font-semibold text-black dark:text-white">
+                    <div class="font-semibold text-white">
                       <span class="text-2xl">2000–3700 PLN / yr</span>
-                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      <p class="text-sm text-gray-400 mt-2">
                         Breakdown:
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         300 PLN – Hosting i konfiguracja serwera
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         400–800 PLN – Dodatkowe funkcje i integracje
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         300–600 PLN – Optymalizacja wydajności / Lighthouse
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         600–1100 PLN – Aktualizacje komponentów i zabezpieczenia
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         250–500 PLN – UI/UX audyty i redesign micro-interakcji
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         150–400 PLN – Raporty techniczne, analityka i wsparcie
                       </p>
                     </div>
@@ -271,12 +265,12 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
                   <ul class="flex flex-wrap mt-2 gap-1">
                     <li
-                      class="text-xs uppercase py-0.5 px-1 rounded bg-yellow-800/5 dark:bg-yellow-300/20 text-yellow-900/75 dark:text-yellow-200/75"
+                      class="text-xs uppercase py-0.5 px-1 rounded bg-yellow-300/20 text-yellow-200/75"
                     >
                       POPULARNE
                     </li>
                     <li
-                      class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75"
+                      class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75"
                     >
                       ASTRO
                     </li>
@@ -288,7 +282,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
             <!-- Premium Plan -->
             <div class="animate">
               <div
-                class="group h-[468px] p-4 content-center text-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative flex flex-col justify-center items-center"
+                class="group h-117 p-4 content-center text-center border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out relative flex flex-col justify-center items-center"
               >
                 <i class="ph ph-question-mark text-7xl"></i>
                 <p class="text-sm">
@@ -304,10 +298,10 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
               <a
                 href="https://www.fiverr.com/niko_fx?source=gig_page"
                 target="_blank"
-                class="group p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+                class="group p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out"
               >
                 <span
-                  class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
+                  class="w-full z-10 relative group-hover:text-white text-center transition-color duration-300"
                 >
                   Zobacz więcej ofert na Fiverr
                 </span>
@@ -324,7 +318,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
           <div class="flex justify-between">
             <p
               id="hosting_related"
-              class="font-semibold text-black dark:text-white"
+              class="font-semibold text-white"
             >
               Konfiguracja i Zarządzanie Hostingiem
             </p>
@@ -332,19 +326,19 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
           <div class="space-y-4 transition-all duration-300 ease-in-out">
             <!-- Starter Plan -->
             <div
-              class="gray-shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative"
+              class="gray-shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out relative"
             >
               <div
-                class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend"
+                class="w-full z-10 relative group-hover:text-white blend"
               >
                 <div class="flex flex-wrap items-center gap-2">
                   <div
-                    class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25"
+                    class="text-sm capitalize px-3 py-1 rounded-full border border-white/25"
                   >
                     ⌨️ Server Management
                   </div>
                 </div>
-                <div class="font-semibold mt-3 mb-3 text-black dark:text-white">
+                <div class="font-semibold mt-3 mb-3 text-white">
                   🗃️ Profesjonalna Opieka Serwera
                 </div>
                 <div class="text-sm">
@@ -380,26 +374,26 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                 <div class="flex items-stretch mt-4 mb-4">
                   <!-- Vertical line -->
                   <div
-                    class="mr-3 rounded-full bg-black/15 dark:bg-white/20 w-1"
+                    class="mr-3 rounded-full bg-white/20 w-1"
                   >
                   </div>
 
                   <!-- Content -->
-                  <div class="font-semibold text-black dark:text-white">
+                  <div class="font-semibold text-white">
                     <span class="text-2xl">Do Uzgodnienia</span>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                    <p class="text-sm text-gray-400 mt-2">
                       Breakdown:
                     </p>
-                    <p class="text-xs text-gray-600 dark:text-gray-400">
+                    <p class="text-xs text-gray-400">
                       ? PLN - Cena wybranego pakietu
                     </p>
-                    <p class="text-xs text-gray-600 dark:text-gray-400">
+                    <p class="text-xs text-gray-400">
                       200 PLN - Ciągły monitoring i konserwacja
                     </p>
-                    <p class="text-xs text-gray-600 dark:text-gray-400">
+                    <p class="text-xs text-gray-400">
                       100-300 PLN - Konfiguracja serwera i bezpieczeństwo
                     </p>
-                    <p class="text-xs text-gray-600 dark:text-gray-400">
+                    <p class="text-xs text-gray-400">
                       50-100 PLN - Raporty miesięczne
                     </p>
                   </div>
@@ -407,7 +401,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
                 <ul class="flex flex-wrap mt-2 gap-1">
                   <li
-                    class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75"
+                    class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75"
                   >
                     NOWOŚĆ
                   </li>
@@ -419,10 +413,10 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
             <a
               href="https://skillhost.pl/dostepne-serwery"
               target="_blank"
-              class="group p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+              class="group p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out"
             >
               <span
-                class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
+                class="w-full z-10 relative group-hover:text-white text-center transition-color duration-300"
               >
                 Zobacz dostępne serwery <small>(SkillHost.pl)</small>
               </span>
@@ -438,7 +432,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
           <div class="flex justify-between">
             <p
               id="local_services"
-              class="font-semibold text-black dark:text-white"
+              class="font-semibold text-white"
             >
               Lokalne Usługi
             </p>
@@ -447,20 +441,20 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
             <!-- LOCAL 3D PRINT Plan -->
             <div class="animate">
               <div
-                class="gray-shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out relative"
+                class="gray-shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out relative"
               >
                 <div
-                  class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white blend"
+                  class="w-full z-10 relative group-hover:text-white blend"
                 >
                   <div class="flex flex-wrap items-center gap-2">
                     <div
-                      class="text-sm capitalize px-3 py-1 rounded-full border border-black/15 dark:border-white/25"
+                      class="text-sm capitalize px-3 py-1 rounded-full border border-white/25"
                     >
                       🖨️ 3D Printing
                     </div>
                   </div>
                   <div
-                    class="font-semibold mt-3 mb-3 text-black dark:text-white"
+                    class="font-semibold mt-3 mb-3 text-white"
                   >
                     ⚙️ Średnie Wydruki 3D
                   </div>
@@ -498,27 +492,27 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                   <div class="flex items-stretch mt-4 mb-4">
                     <!-- Vertical line -->
                     <div
-                      class="mr-3 rounded-full bg-black/15 dark:bg-white/20 w-1"
+                      class="mr-3 rounded-full bg-white/20 w-1"
                     >
                     </div>
 
                     <!-- Content -->
-                    <div class="font-semibold text-black dark:text-white">
+                    <div class="font-semibold text-white">
                       <span class="text-2xl">Do Uzgodnienia</span>
-                      <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">
+                      <p class="text-sm text-gray-400 mt-2">
                         Breakdown:
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         ? PLN - Typ i zakres wydruku
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         0.50-1.50 PLN / g - Standardowa stawka za gram
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         20-50 PLN - Koszt wysyłki (w zależności od wagi i
                         rozmiaru)
                       </p>
-                      <p class="text-xs text-gray-600 dark:text-gray-400">
+                      <p class="text-xs text-gray-400">
                         50-100 PLN - Koszt projektowania modelu na zamówienie
                       </p>
                     </div>
@@ -526,12 +520,12 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
                   <ul class="flex flex-wrap mt-2 gap-1">
                     <li
-                      class="text-xs uppercase py-0.5 px-1 rounded bg-black/5 dark:bg-white/20 text-black/75 dark:text-white/75"
+                      class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75"
                     >
                       NOWOŚĆ
                     </li>
                     <li
-                      class="text-xs uppercase py-0.5 px-1 rounded bg-yellow-800/5 dark:bg-yellow-300/20 text-yellow-900/75 dark:text-yellow-200/75"
+                      class="text-xs uppercase py-0.5 px-1 rounded bg-yellow-300/20 text-yellow-200/75"
                     >
                       LOKALNE - TYLKO W LIMANOWEJ
                     </li>
@@ -539,19 +533,6 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                 </div>
               </div>
             </div>
-
-            <!-- Checkout Offerts -->
-            <!-- <a
-              href="https://skillhost.pl/dostepne-serwery"
-              target="_blank"
-              class="group p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
-            >
-              <span
-                class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center"
-              >
-                Zobacz dostępne serwery <small>(SkillHost.pl)</small>
-              </span>
-            </a> -->
           </div>
         </div>
       </section>
@@ -568,11 +549,11 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
   <TimeLine />
 
   <!-- Important notes -->
-  <section class="relative bg-white dark:bg-black">
+  <section class="relative bg-neutral-950">
     <div class="animate mx-auto max-w-screen-sm p-5 space-y-24 pb-16 mt-8">
       <article>
         <p
-          class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-black dark:text-white mb-2"
+          class="text-xl md:text-2xl lg:text-3xl font-bold uppercase text-white mb-2"
         >
           FAQ
         </p>
@@ -624,7 +605,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
     <div class="relative flex flex-col items-center justify-center w-full">
       <p
         id="touch-tite"
-        class="text-xl md:text-2xl lg:text-5xl font-bold uppercase text-black dark:text-white"
+        class="text-xl md:text-2xl lg:text-5xl font-bold uppercase text-white"
       >
         Bądźmy w kontakcie.
       </p>
@@ -637,10 +618,10 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
         <a
           href="https://www.fiverr.com/s/xXEvD2l"
           target="_blank"
-          class="backdrop-blur-sm group w-40 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+          class="backdrop-blur-sm group w-40 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out"
         >
           <span
-            class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
+            class="w-full z-10 relative group-hover:text-white text-center transition-color duration-300"
           >
             Fiverr
           </span>
@@ -653,7 +634,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
             stroke-width="2.5"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10"
+            class="stroke-current group-hover:stroke-white z-10"
           >
             <line
               x1="5"
@@ -673,10 +654,10 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
         <a
           href="https://www.facebook.com/maciek.fraczek.965"
           target="_blank"
-          class="backdrop-blur-sm group w-40 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+          class="backdrop-blur-sm group w-40 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out"
         >
           <span
-            class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center transition-color duration-300"
+            class="w-full z-10 relative group-hover:text-white text-center transition-color duration-300"
           >
             Facebook
           </span>
@@ -689,7 +670,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
             stroke-width="2.5"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10"
+            class="stroke-current group-hover:stroke-white z-10"
           >
             <line
               x1="5"

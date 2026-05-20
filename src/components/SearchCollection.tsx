@@ -15,7 +15,6 @@ type Props = {
 };
 
 export default function SearchCollection({ data, tags }: Props) {
-  // There was "entry_name" gotta use it later.
   const coerced = data.map((entry) => entry as CollectionEntry<"blog">);
 
   const [query, setQuery] = createSignal("");
@@ -77,76 +76,66 @@ export default function SearchCollection({ data, tags }: Props) {
   });
 
   return (
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-      {/* Control Panel*/}
-      <div class="col-span-3 sm:col-span-1">
-        <div class="sticky top-24 mt-7">
-          {/* Search Bar */}
-          <SearchBar
-            onSearchInput={onSearchInput}
-            query={query}
-            setQuery={setQuery}
-            placeholderText={`Wyszukaj`}
-          />
-          {/* Tag Filters */}
-          <div class="relative flex flex-row justify-between w-full">
-            <p class="text-sm font-semibold uppercase my-4 text-black dark:text-white">
-              Tagi
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="col-span-1">
+        <div class="sticky top-24 space-y-4">
+          {/* Search Input Container */}
+          <div class="bg-neutral-900/10 rounded-xl">
+            <SearchBar
+              onSearchInput={onSearchInput}
+              query={query}
+              setQuery={setQuery}
+              placeholderText={`Wyszukaj...`}
+            />
+          </div>
+
+          {/* Tags Section Title Block */}
+          <div class="flex flex-row justify-between items-center w-full px-1">
+            <p class="text-xs font-semibold uppercase tracking-widest text-neutral-400">
+              Filtruj Tagi
             </p>
             {filter().size > 0 && (
               <button
                 onClick={clearFilters}
-                class="absolute flex justify-center items-center h-full w-10 right-0 top-0 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300"
+                class="text-xs text-neutral-400 hover:text-white transition-colors flex items-center gap-1"
               >
-                <div class="flex items-center justify-center">
-                  <i class="ph ph-x text-2xl hover:scale-105"></i>
-                </div>
+                <span>Wyczyść</span>
+                <i class="ph ph-x text-sm"></i>
               </button>
             )}
           </div>
-          <ul class="flex flex-wrap sm:flex-col gap-1.5">
+
+          {/* Tags Stack Layout */}
+          <ul class="flex flex-wrap md:flex-col gap-1.5">
             <For each={tags}>
               {(tag) => (
-                <li class="sm:w-full">
+                <li class="md:w-full">
                   <button
                     onClick={() => toggleTag(tag)}
                     class={cn(
-                      "w-full px-2 py-1 rounded",
-                      "flex gap-2 items-center",
-                      "bg-black/5 dark:bg-white/10",
-                      "hover:bg-black/10 hover:dark:bg-white/15 active:scale-95",
-                      "transition-all duration-300 ease-in-out",
-                      filter().has(tag) && "text-black dark:text-white",
+                      "w-full px-3 py-2 rounded-lg text-sm font-medium flex gap-3 items-center border transition-all duration-200 text-left",
+                      filter().has(tag)
+                        ? "bg-neutral-900/40 text-white border-black/30 border-white/30"
+                        : "bg-neutral-900/10 text-neutral-400 border-transparent hover:border-black/10 hover:text-white",
                     )}
                   >
-                    <div
-                      class={cn(
-                        "relative shrink-0 size-5 flex items-center justify-center fill-black/50 dark:fill-white/50",
-                        "transition-colors duration-300 ease-in-out",
-                        filter().has(tag) && "fill-black dark:fill-white",
+                    <div class="relative shrink-0 size-4 flex items-center justify-center">
+                      {/* Active State Ring Marker */}
+                      <div
+                        class={cn(
+                          "absolute size-2.5 rounded-full transition-all duration-300",
+                          filter().has(tag)
+                            ? "bg-white scale-100 opacity-100"
+                            : "bg-transparent scale-50 opacity-0 border border-neutral-400",
+                        )}
+                      />
+                      {/* Idle State Dot Marker */}
+                      {!filter().has(tag) && (
+                        <div class="size-1.5 rounded-full bg-neutral-600/50" />
                       )}
-                    >
-                      {/* Checked icon */}
-                      <i
-                        class={cn(
-                          "ph ph-check-square text-2xl absolute transition-all duration-300 ease-in-out",
-                          filter().has(tag)
-                            ? "opacity-100 scale-100"
-                            : "opacity-0 scale-90",
-                        )}
-                      />
-                      {/* Empty icon */}
-                      <i
-                        class={cn(
-                          "ph ph-square text-2xl absolute transition-all duration-300 ease-in-out",
-                          filter().has(tag)
-                            ? "opacity-0 scale-90"
-                            : "opacity-100 scale-100",
-                        )}
-                      />
                     </div>
 
-                    <span class="truncate block min-w-0 pt-[2px]">{tag}</span>
+                    <span class="truncate block min-w-0 pt-px">{tag}</span>
                   </button>
                 </li>
               )}
@@ -154,49 +143,49 @@ export default function SearchCollection({ data, tags }: Props) {
           </ul>
         </div>
       </div>
-      {/* Posts */}
-      <div class="col-span-3 sm:col-span-2">
-        <div class="flex flex-col">
-          {/* Info Bar */}
-          <div class="flex justify-between flex-row mb-2">
-            <div class="text-sm uppercase">
-              {collection().length} / {data.length}
+
+      <div class="col-span-1 md:col-span-2">
+        <div class="flex flex-col space-y-4">
+          {/* List Meta Header Bar */}
+          <div class="flex justify-between items-center flex-row px-1">
+            <div class="text-xs font-mono tracking-wider text-neutral-400">
+              Wyniki: {collection().length}{" "}
+              <span class="text-neutral-700">/</span> {data.length}
             </div>
+
             <button
               onClick={toggleDescending}
-              class="flex flex-row gap-1 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300 text-neutral-400 dark:text-neutral-500 hover:text-neutral-600 hover:dark:text-neutral-300 transition-all"
+              class="flex flex-row items-center gap-1.5 text-xs font-semibold tracking-wider text-neutral-400 hover:text-white transition-colors"
             >
-              <div class="text-sm uppercase">
-                {descending() ? "OD NAJSTARSZYCH" : "OD NAJNOWSZYCH"}
-              </div>
+              <span class="uppercase">
+                {descending() ? "Od Najstarszych" : "Od Najnowszych"}
+              </span>
 
-              {/* Icon wrapper */}
-              <div class="relative size-5 flex items-center justify-center">
-                {/* Ascending icon */}
+              <div class="relative size-4 flex items-center justify-center text-sm">
                 <i
                   class={cn(
-                    "ph ph-sort-ascending text-lg absolute transition-all duration-300 ease-in-out",
+                    "ph ph-sort-ascending absolute transition-all duration-300",
                     descending()
-                      ? "opacity-0 scale-90"
+                      ? "opacity-0 scale-75"
                       : "opacity-100 scale-100",
                   )}
                 />
-
-                {/* Descending icon */}
                 <i
                   class={cn(
-                    "ph ph-sort-descending text-lg absolute transition-all duration-300 ease-in-out",
+                    "ph ph-sort-descending absolute transition-all duration-300",
                     descending()
                       ? "opacity-100 scale-100"
-                      : "opacity-0 scale-90",
+                      : "opacity-0 scale-75",
                   )}
                 />
               </div>
             </button>
           </div>
-          <ul class="flex flex-col gap-3">
+
+          {/* Core Collection Mapping Output Grid */}
+          <ul class="grid grid-cols-1 gap-4">
             {collection().map((entry) => (
-              <li>
+              <li class="w-full">
                 <ArrowCard entry={entry} />
               </li>
             ))}

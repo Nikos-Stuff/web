@@ -2,150 +2,106 @@
 import { SITE, SOCIALS } from "@consts";
 import Container from "@components/Container.astro";
 import HeaderIcon from "@components/web_icon.astro";
-
 import PageVersion from "@components/GitVer.astro";
 
-// Get current Year
 const currentYear = new Date().getFullYear();
-
-// import InfoButton from '@components/info_button/button.astro';
 ---
 
-<!--<InfoButton/>--><!-- System detection -->
 <script is:inline async src="/js/system_detection.js"></script>
 
-<footer class="relative">
-  <!-- Footer  bg-white dark:bg-black -->
-  <div>
-    <!-- Footer content | before had animate class -->
-    <section class="py-5">
-      <Container size="md">
-        <div class="flex items-center justify-center sm:justify-end">
-          <button
-            id="back-to-top"
-            aria-label="Back to top of page"
-            class="group flex w-fit p-1.5 gap-1.5 text-sm items-center border rounded hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-colors duration-300 ease-in-out"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white rotate-90"
-            >
-              <line
-                x1="19"
-                y1="12"
-                x2="5"
-                y2="12"
-                class="scale-x-0 group-hover:scale-x-100 translate-x-3 group-hover:translate-x-0 transition-all duration-300 ease-in-out"
-              ></line>
-              <polyline
-                points="12 19 5 12 12 5"
-                class="translate-x-1 group-hover:translate-x-0 transition-all duration-300 ease-in-out"
-              ></polyline>
-            </svg>
-            <div
-              class="w-full group-hover:text-black group-hover:dark:text-white transition-colors duration-300 ease-in-out"
-            >
-              Do Góry
-            </div>
-          </button>
-        </div>
-      </Container>
-    </section>
+<footer
+  class="mt-20 border-t border-white/5 bg-neutral-950/50 backdrop-blur-md"
+>
+  <Container size="md">
+    <div class="py-12 space-y-12">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+        <a
+          href="/"
+          class="flex gap-2.5 items-center font-bold text-white transition-opacity hover:opacity-80"
+        >
+          <HeaderIcon />
+          <span>{SITE.TITLE}</span>
+        </a>
 
-    <section
-      class="py-5 overflow-hidden whitespace-nowrap border-t border-black/10 dark:border-white/25 backdrop-blur-xl transition-all"
-    >
-      <Container size="md">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div class="flex flex-col items-center sm:items-start">
-            <a
-              href="/"
-              class="flex gap-3 place-items-center w-fit font-semibold text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
-            >
-              <HeaderIcon />
-              {SITE.TITLE}
-            </a>
-          </div>
-          <!--<div class="flex gap-2 justify-center sm:justify-end items-center hover:scale-95 transition-all duration-300 ease-in-out" >-->
-          <!--  <iframe src="https://status.nikostuff.com/badge?theme=white"-->
-          <!--          width="250"-->
-          <!--          height="30"-->
-          <!--          title="Status"-->
-          <!--          style="border-radius: 9999px; overflow: hidden;"></iframe>-->
-
-          <!--</div>-->
-        </div>
-      </Container>
-    </section>
-
-    <section
-      class="py-5 overflow-hidden whitespace-nowrap border-t border-black/10 dark:border-white/25"
-    >
-      <Container size="md">
-        <div class="h-full grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div
-            class="order-2 sm:order-1 flex flex-col items-center justify-center sm:items-start"
-          >
-            <div
-              class="legal hover:scale-125 transition-all duration-300 ease-in-out"
-            >
+        <div class="flex gap-1 items-center">
+          {
+            SOCIALS.map((SOCIAL) => (
               <a
-                href="https://dc.nikostuff.com"
-                class="text-current hover:text-black dark:hover:text-white transition-all duration-300 ease-in-out"
+                href={SOCIAL.HREF}
+                target="_blank"
+                aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
+                class="size-10 rounded-full flex items-center justify-center hover:bg-white/10 transition-colors"
               >
-                Created & Built with ❤️ by Niko / M.F.
+                <i class={`${SOCIAL.ICON} text-lg`} />
               </a>
-            </div>
-            <div class="text-sm mt-2">
-              &copy; {currentYear} | <PageVersion />
-            </div>
-          </div>
+            ))
+          }
+        </div>
+      </div>
 
-          <div class="order-1 sm:order-2 flex justify-center sm:justify-end">
-            <div class="flex flex-wrap gap-1 items-center justify-center">
-              {
-                SOCIALS.map((SOCIAL) => (
-                  <a
-                    href={SOCIAL.HREF}
-                    target="_blank"
-                    aria-label={`${SITE.TITLE} on ${SOCIAL.NAME}`}
-                    class="group size-10 rounded-full p-2 items-center justify-center hover:bg-black/5 dark:hover:bg-white/20  blend"
-                  >
-                    <div class="size-full flex items-center justify-center fill-current group-hover:fill-black group-hover:dark:fill-white blend">
-                      <i class={`${SOCIAL.ICON} text-2xl`}></i>
-                    </div>
-                  </a>
-                ))
-              }
-            </div>
+      <div
+        class="flex flex-col sm:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5"
+      >
+        <div
+          class="text-xs text-neutral-500 space-y-1 text-center sm:text-left"
+        >
+          <a
+            href="https://dc.nikostuff.com"
+            class="hover:text-white transition-colors"
+          >
+            Created & Built with ❤️ by Niko / M.F.
+          </a>
+          <div class="font-mono opacity-70">
+            &copy; {currentYear} | <PageVersion />
           </div>
         </div>
-      </Container>
-    </section>
-  </div>
+
+        <button
+          id="back-to-top"
+          aria-label="Back to top"
+          class="group flex gap-2 items-center px-4 py-2 text-xs font-semibold uppercase tracking-wider border border-white/10 rounded-full hover:bg-white/10 transition-all duration-300"
+        >
+          <span>Do Góry</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="stroke-current rotate-90"
+          >
+            <line
+              x1="19"
+              y1="12"
+              x2="5"
+              y2="12"
+              class="scale-x-0 group-hover:scale-x-100 translate-x-3 group-hover:translate-x-0 transition-all duration-300"
+            ></line>
+            <polyline
+              points="12 19 5 12 12 5"
+              class="translate-x-1 group-hover:translate-x-0 transition-all duration-300"
+            ></polyline>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </Container>
 </footer>
 
 <script is:inline>
   function goBackToTop(event) {
     event.preventDefault();
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
-  function inintializeBackToTop() {
+  function initializeBackToTop() {
     const backToTop = document.getElementById("back-to-top");
     backToTop?.addEventListener("click", goBackToTop);
   }
 
-  document.addEventListener("astro:after-swap", inintializeBackToTop);
-  inintializeBackToTop();
+  document.addEventListener("astro:after-swap", initializeBackToTop);
+  initializeBackToTop();
 </script>

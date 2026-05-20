@@ -14,15 +14,9 @@ import POD from "@components/POD.astro";
   ></script> -->
 
   <POD />
-  <!-- Light Mode: Particles -->
-  <div class="absolute inset-0 block dark:hidden">
-    <div id="particles1" class="fixed inset-0"></div>
-    <div id="particles2" class="fixed inset-0"></div>
-    <div id="particles3" class="fixed inset-0"></div>
-  </div>
 
   <!-- Dark Theme: Stars -->
-  <div class="absolute inset-0 hidden dark:block">
+  <div class="absolute inset-0 block">
     <div id="stars1" class="fixed inset-0"></div>
     <div id="stars2" class="fixed inset-0"></div>
     <div id="stars3" class="fixed inset-0"></div>
@@ -30,7 +24,7 @@ import POD from "@components/POD.astro";
 
   <!-- Dark Theme: Twinkling Stars / Metors -->
   <div id="galaxy" class="fixed inset-0">
-    <div class="hidden dark:block">
+    <div class="block">
       <TwinklingStars />
       <MeteorShower />
     </div>
@@ -41,7 +35,7 @@ import POD from "@components/POD.astro";
     <div class="w-svw">
       <FancyDiv margin_bottom="50" isAnimated={true} theme="default_big">
         <section class="animate pb-0">
-          <p class="font-semibold text-black dark:text-white">Scrap Mechanic</p>
+          <p class="font-semibold text-white">Scrap Mechanic</p>
           <p class="font-bold text-sm mb-2">
             We've been waiting for Chapter 2 since:
           </p>
@@ -53,9 +47,9 @@ import POD from "@components/POD.astro";
           </p>
 
           <!-- Line -->
-          <hr class="border-black/10 dark:border-white/25 animate" />
+          <hr class="border-white/25 animate" />
 
-          <p class="font-semibold text-black dark:text-white mt-5">
+          <p class="font-semibold text-white mt-5">
             Still waiting...
           </p>
           <p class="font-bold text-sm mb-2">Time passed so far:</p>

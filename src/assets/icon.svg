@@ -1,4 +1,4 @@
-<svg class="fill-white transition-all h-[2rem] w-[2rem]"  xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 0 32 32" width="150px" fill="#e8eaed">
+<svg class="fill-black dark:fill-white transition-all h-[2rem] w-[2rem]"  xmlns="http://www.w3.org/2000/svg" height="150px" viewBox="0 0 32 32" width="150px" fill="#e8eaed">
 
     <path d="M24.4799 16.4346C24.4799 18.4615 22.8368 20.1046 20.8099 20.1046C18.783 20.1046 17.1399 18.4615 17.1399 16.4346C17.1399 14.4077 18.783 12.7646 20.8099 12.7646C22.8368 12.7646 24.4799 14.4077 24.4799 16.4346Z"/>
     <path d="M12.61 21.9846C13.7808 21.9846 14.73 21.0354 14.73 19.8646C14.73 18.6937 13.7808 17.7446 12.61 17.7446C11.4391 17.7446 10.49 18.6937 10.49 19.8646C10.49 21.0354 11.4391 21.9846 12.61 21.9846Z"/>

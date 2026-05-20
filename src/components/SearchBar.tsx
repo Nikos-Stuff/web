@@ -13,7 +13,7 @@ export default function SearchBar({
   return (
     <div class="relative">
       {" "}
-      <div class="absolute size-6 left-2 top-[0.45rem] flex items-center justify-center stroke-neutral-400 dark:stroke-neutral-500 pointer-events-none">
+      <div class="absolute size-6 left-2 top-[0.45rem] flex items-center justify-center stroke-neutral-500 pointer-events-none">
         {" "}
         <i class="ph ph-magnifying-glass text-lg"></i>{" "}
       </div>{" "}
@@ -25,12 +25,12 @@ export default function SearchBar({
         autocomplete="off"
         spellcheck={false}
         placeholder={placeholderText}
-        class="w-full px-10 py-1.5 rounded outline-none placeholder-neutral-400 dark:placeholder-neutral-500 text-black dark:text-white bg-black/5 dark:bg-white/10 hover:bg-black/10 hover:dark:bg-white/15 focus:bg-black/10 focus:dark:bg-white/15 border border-black/10 dark:border-white/10 focus:border-black/40 focus:dark:border-white/40 transition-all"
+        class="w-full px-10 py-1.5 rounded outline-none placeholder-neutral-500 text-white bg-white/10 hover:bg-white/15 focus:bg-white/15 border border-white/10 focus:border-white/40 transition-all"
       />{" "}
       {query().length > 0 && (
         <button
           onClick={() => setQuery("")}
-          class="absolute flex justify-center items-center h-full w-10 right-0 top-0 stroke-neutral-400 dark:stroke-neutral-500 hover:stroke-neutral-600 hover:dark:stroke-neutral-300"
+          class="absolute flex justify-center items-center h-full w-10 right-0 top-0 stroke-neutral-500 hover:stroke-neutral-300"
         >
           {" "}
           <div class="flex items-center justify-center">

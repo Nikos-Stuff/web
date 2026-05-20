@@ -4,42 +4,36 @@
 >
   <div
     id="popup-content"
-    class="relative bg-white/50 dark:bg-black/50 rounded-2xl shadow-2xl m-3 p-8 max-w-xl w-full border border-black/15 dark:border-white/25 backdrop-blur-md transform scale-0 transition-all duration-300 ease-in-out"
+    class="relative bg-black/50 rounded-2xl shadow-2xl m-3 p-8 max-w-xl w-full border border-white/25 backdrop-blur-md transform scale-0 transition-all duration-300 ease-in-out"
   >
-    <p class="text-xl font-bold mb-3 text-gray-900 dark:text-white">
-      Zanim przejdziesz dalej...
-    </p>
-    <p class="mb-6 text-gray-700 dark:text-gray-300">
-      Wybierając szybkie zamówienie, pomijasz proces wczesnych konsultacji
-      i indywidualnego dopasowania planu. To świetna opcja, jeśli potrzebujesz czegoś
-      prostego – jak firmowa wizytówka, landing page czy blog – gotowego w mniej
-      niż miesiąc.
+    <p class="text-xl font-bold mb-3 text-white">Zanim przejdziesz dalej...</p>
+    <p class="mb-6 text-gray-300">
+      Wybierając szybkie zamówienie, pomijasz proces wczesnych konsultacji i
+      indywidualnego dopasowania planu. To świetna opcja, jeśli potrzebujesz
+      czegoś prostego – jak firmowa wizytówka, landing page czy blog – gotowego
+      w mniej niż miesiąc.
     </p>
 
     <div class="flex flex-col sm:flex-row justify-end gap-3">
       <a
         href="#"
         onclick="closeStripePopup(); return false;"
-        class="group h-10 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out"
+        class="group h-10 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out"
       >
-        <span
-          class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center"
+        <span class="w-full z-10 relative group-hover:text-white text-center"
+          >Anuluj</span
         >
-          Anuluj
-        </span>
       </a>
 
       <a
         id="stripe-link-btn"
         href="#"
         target="_blank"
-        class="group h-10 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-black/5 hover:dark:bg-white/10 border-black/15 dark:border-white/20 transition-all duration-300 ease-in-out w-full sm:w-auto whitespace-normal break-words"
+        class="group h-10 p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out w-full sm:w-auto whitespace-normal break-words"
       >
-        <span
-          class="w-full z-10 relative group-hover:text-black group-hover:dark:text-white text-center"
+        <span class="w-full z-10 relative group-hover:text-white text-center"
+          >Przejdź do płatności</span
         >
-          Przejdź do płatności
-        </span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="20"
@@ -49,7 +43,7 @@
           stroke-width="2.5"
           stroke-linecap="round"
           stroke-linejoin="round"
-          class="stroke-current group-hover:stroke-black group-hover:dark:stroke-white z-10"
+          class="stroke-current group-hover:stroke-white z-10"
         >
           <line
             x1="5"
@@ -69,4 +63,3 @@
 </div>
 
 <script is:inline defer async src="/js/stripe_popup.js"></script>
-

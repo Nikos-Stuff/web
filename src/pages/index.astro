@@ -129,15 +129,9 @@ try {
   <!-- <script is:inline data-astro-rerun async src="/js/scroll_animation.js"
   ></script> -->
   <POD />
-  <!-- Light Mode: Particles -->
-  <div class="absolute inset-0 block dark:hidden">
-    <div id="particles1" class="fixed inset-0"></div>
-    <div id="particles2" class="fixed inset-0"></div>
-    <div id="particles3" class="fixed inset-0"></div>
-  </div>
 
   <!-- Dark Theme: Stars -->
-  <div class="absolute inset-0 hidden dark:block">
+  <div class="absolute inset-0 block">
     <div id="stars1" class="fixed inset-0"></div>
     <div id="stars2" class="fixed inset-0"></div>
     <div id="stars3" class="fixed inset-0"></div>
@@ -145,7 +139,7 @@ try {
 
   <!-- Dark Theme: Twinkling Stars / Metors -->
   <div id="galaxy" class="fixed inset-0">
-    <div class="hidden dark:block">
+    <div class="block">
       <TwinklingStars />
       <MeteorShower />
     </div>
@@ -156,73 +150,445 @@ try {
   <!-- HERO -->
   <section
     id="hero_fade"
-    class="w-full h-svh flex flex-col justify-center items-center relative text-center overflow-hidden"
+    class="snap-center grid w-full h-svh place-items-center relative text-center overflow-hidden transition-all"
   >
-    <h1
-      id="dynamic-headline"
-      class="text-4xl md:text-6xl font-bold flex flex-wrap justify-center gap-x-4 min-h-[1.2em]"
-    >
-
-    </h1>
+    <DynamicTitle
+      text="Niko's Stuff"
+      sub="Składzik Twórczości"
+      buttons={true}
+      typewriter={true}
+    />
   </section>
   <AIChat />
+
+  <div class="relative">
+    <FancyDiv margin_bottom="50" isAnimated={true}>
+      <section class="animate pb-0">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="h-1.5 w-1.5 rounded-full bg-indigo-500"></span>
+          <p
+            class="text-xs font-semibold uppercase tracking-widest text-neutral-400"
+          >
+            Kosmiczny Obraz Dnia
+          </p>
+        </div>
+        <h3 class="font-bold text-xl text-white tracking-tight mb-1">
+          {apodData.title}
+        </h3>
+        <p class="text-xs text-neutral-500 mb-4">
+          {apodData.date} — {apodData.copyright}
+        </p>
+        <p class="text-sm text-neutral-300 leading-relaxed max-w-3xl">
+          {translatedExplanation}
+        </p>
+      </section>
+    </FancyDiv>
+
+    <FancyDiv margin_bottom="50" isAnimated={true}>
+      <section class="animate space-y-6">
+        <div class="space-y-1">
+          <h3
+            class="text-xs font-semibold uppercase tracking-widest text-neutral-400"
+          >
+            Oferta
+          </h3>
+          <h2 class="text-2xl font-bold text-white tracking-tight">
+            Czym się zajmuję
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div
+            class="md:col-span-2 group relative overflow-hidden rounded-xl border border-white/10 h-96 bg-neutral-900 transition-all duration-300"
+          >
+            <div class="absolute inset-0 z-0">
+              <Image
+                src={Image1}
+                alt="Video Editing"
+                class="w-full h-full object-cover brightness-[0.4] group-hover:brightness-[1] transition-all duration-500 contrast-105"
+              />
+              <div
+                class="absolute inset-0 bg-linear-to-t from-neutral-950 via-neutral-950/40 to-transparent"
+              >
+              </div>
+            </div>
+
+            <div
+              class="absolute inset-0 z-10 flex flex-col justify-end p-8 space-y-2"
+            >
+              <h4 class="font-bold text-3xl text-white tracking-tight">
+                Montaż Video
+              </h4>
+              <p class="text-sm text-neutral-300 max-w-xl leading-relaxed">
+                Niesamowita jakość w przystępnej cenie. Dynamiczne cięcia, sound
+                design i profesjonalna korekcja barwna.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="group relative overflow-hidden rounded-xl border border-white/10 h-80 bg-neutral-900 transition-all duration-300"
+          >
+            <div class="absolute inset-0 z-0">
+              <Image
+                src={Image2}
+                alt="Web Development"
+                class="w-full h-full object-cover brightness-[0.4] group-hover:brightness-[1] transition-all duration-500 contrast-105"
+              />
+              <div
+                class="absolute inset-0 bg-linear-to-t from-neutral-950 via-neutral-950/50 to-transparent"
+              >
+              </div>
+            </div>
+
+            <div
+              class="absolute inset-0 z-10 flex flex-col justify-end p-6 space-y-1.5"
+            >
+              <h4 class="font-bold text-xl text-white tracking-tight">
+                Strony WWW
+              </h4>
+              <p class="text-xs text-neutral-300 leading-relaxed max-w-sm">
+                Minimalistyczny design, płynne animacje oraz szybki czas dostawy
+                zoptymalizowany pod kątem SEO.
+              </p>
+            </div>
+          </div>
+
+          <div
+            class="group relative overflow-hidden rounded-xl border border-white/10 h-80 bg-neutral-900 transition-all duration-300"
+          >
+            <div class="absolute inset-0 z-0">
+              <Image
+                src={Image3}
+                alt="3D Printing"
+                class="w-full h-full object-cover brightness-[0.4] group-hover:brightness-[1] transition-all duration-500 contrast-105"
+              />
+              <div
+                class="absolute inset-0 bg-linear-to-t from-neutral-950 via-neutral-950/50 to-transparent"
+              >
+              </div>
+            </div>
+
+            <div
+              class="absolute inset-0 z-10 flex flex-col justify-end p-6 space-y-1.5"
+            >
+              <h4 class="font-bold text-xl text-white tracking-tight">
+                Druki 3D
+              </h4>
+              <p class="text-xs text-neutral-300 leading-relaxed max-w-sm">
+                Precyzyjne detale, trwałe materiały inżynieryjne oraz ekspresowa
+                realizacja gotowych modeli i prototypów.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </FancyDiv>
+
+    <FancyDiv margin_bottom="50" isAnimated={true}>
+      <section class="space-y-4 animate not-prose">
+        <h3
+          class="text-xs font-semibold uppercase tracking-widest text-neutral-400"
+        >
+          Co na to inni
+        </h3>
+        <Reviews />
+        <script is:inline defer src="/js/carousel.js"></script>
+      </section>
+    </FancyDiv>
+
+    <WhyMe />
+
+    <FancyDiv isAnimated={true}>
+      <section class="animate pb-0">
+        <p class="text-neutral-300 leading-relaxed text-sm sm:text-base">
+          Hej! Jestem <span class="rainbow font-semibold text-white">Niko</span>
+          <span class="text-xs text-neutral-500">(Maciek)</span>, pasjonat
+          programowania z zamiłowaniem do edycji wideo, animacji i tworzenia
+          gier. Ukończyłem szkołę zawodową i obecnie współtworzę gry oraz
+          cyfrowe doświadczenia w małym, zaangażowanym zespole. Nieustannie
+          rozwijam się, eksplorując nowe technologie, narzędzia oraz techniki
+          kodowania i projektowania / animowania 2D/3D.
+        </p>
+      </section>
+    </FancyDiv>
+
+    <FancyDiv isAnimated={true}>
+      <section class="animate">
+        <div class="space-y-4">
+          <h3
+            class="text-xs font-semibold uppercase tracking-widest text-neutral-400"
+          >
+            Uczę się / Moje umiejętności
+          </h3>
+          <div class="flex flex-wrap items-center gap-2 mt-4">
+            {
+              stack.map((item) => (
+                <StackCard text={item.text} icon={item.icon} href={item.href} />
+              ))
+            }
+          </div>
+        </div>
+      </section>
+    </FancyDiv>
+
+    <FancyDiv margin_bottom="50" isAnimated={true}>
+      <section class="animate space-y-8">
+        <div class="space-y-1">
+          <h3
+            class="text-xs font-semibold uppercase tracking-widest text-neutral-400"
+          >
+            Edukacja i Osiągnięcia
+          </h3>
+        </div>
+
+        <div class="relative">
+          <div
+            class="hidden md:block absolute top-7.75 left-6 right-6 h-px bg-white/10 z-0"
+          >
+          </div>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 relative z-10"
+          >
+            <div
+              class="flex flex-col items-start md:items-center text-left md:text-center space-y-4"
+            >
+              <div
+                class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-900 border border-white/10 shadow-xl"
+              >
+                <div
+                  class="h-3 w-3 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]"
+                >
+                </div>
+              </div>
+              <div class="space-y-2">
+                <span
+                  class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/10"
+                >
+                  Ukończona
+                </span>
+                <h4 class="text-sm font-bold text-white tracking-tight">
+                  Szkoła Branżowa I Stopnia
+                </h4>
+                <p
+                  class="text-xs text-neutral-500 max-w-50 leading-relaxed"
+                >
+                  Zdobycie solidnych fundamentów zawodowych i praktycznych.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex flex-col items-start md:items-center text-left md:text-center space-y-4"
+            >
+              <div
+                class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-900 border border-white/10 shadow-xl"
+              >
+                <div
+                  class="h-3 w-3 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.6)]"
+                >
+                </div>
+              </div>
+              <div class="space-y-2">
+                <span
+                  class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/10"
+                >
+                  Przyszły rok
+                </span>
+                <h4 class="text-sm font-bold text-neutral-200 tracking-tight">
+                  Egzamin Maturalny
+                </h4>
+                <p
+                  class="text-xs text-neutral-500 max-w-50 leading-relaxed"
+                >
+                  Aktualny priorytet i przygotowania do dalszej ścieżki.
+                </p>
+              </div>
+            </div>
+
+            <div
+              class="flex flex-col items-start md:items-center text-left md:text-center space-y-4"
+            >
+              <div
+                class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-900 border border-white/10 shadow-xl"
+              >
+                <div
+                  class="h-3 w-3 rounded-full bg-indigo-500 animate-pulse shadow-[0_0_12px_rgba(99,102,241,0.6)]"
+                >
+                </div>
+              </div>
+              <div class="space-y-2">
+                <span
+                  class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/10"
+                >
+                  Kolejny krok
+                </span>
+                <h4 class="text-sm font-bold text-neutral-400 tracking-tight">
+                  Technik Programista — TEB
+                </h4>
+                <div class="space-y-2">
+                  <p
+                    class="text-xs text-neutral-500 max-w-50 leading-relaxed"
+                  >
+                    Zaawansowana inżynieria oprogramowania w Nowym Sączu.
+                  </p>
+                  <a
+                    href="https://teb.pl/kierunki/d/technik-programista/nowy-sacz/"
+                    target="_blank"
+                    rel="noopener"
+                    class="inline-flex items-center gap-1 text-[11px] font-medium text-neutral-400 hover:text-white transition-colors group"
+                  >
+                    <span>Program kierunku</span>
+                    <i
+                      class="ph ph-arrow-right text-[10px] group-hover:translate-x-0.5 transition-transform"
+                    ></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </FancyDiv>
+
+    <FancyDiv margin_bottom="50" isAnimated={true}>
+      <section class="animate">
+        <div class="space-y-4">
+          <div class="flex justify-between items-end">
+            <div>
+              <h3
+                class="text-xs font-semibold uppercase tracking-widest text-neutral-400"
+              >
+                Co Nowego?
+              </h3>
+              <p class="text-xs text-neutral-500 mt-0.5">
+                Artykuły i przemyślenia
+              </p>
+            </div>
+            <a
+              href="/blog"
+              class="text-xs text-neutral-400 hover:text-white underline underline-offset-4 transition-colors blend"
+            >
+              Wszystkie Posty →
+            </a>
+          </div>
+          <ul class="space-y-3">
+            {
+              posts.map((post) => (
+                <li class="hover:translate-x-0.5 transition-transform duration-200">
+                  <ArrowCard entry={post} />
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+    </FancyDiv>
+
+    <FancyDiv margin_bottom="50" isAnimated={true}>
+      <section class="animate">
+        <div class="space-y-4">
+          <div class="flex justify-between items-end">
+            <div>
+              <h3
+                class="text-xs font-semibold uppercase tracking-widest text-neutral-400"
+              >
+                Prosto z pieca
+              </h3>
+              <p class="text-xs text-neutral-500 mt-0.5">
+                Najnowsze realizacje
+              </p>
+            </div>
+            <a
+              href="/projects"
+              class="text-xs text-neutral-400 hover:text-white underline underline-offset-4 transition-colors blend"
+            >
+              Zobacz Wszystko →
+            </a>
+          </div>
+          <ul class="space-y-3">
+            {
+              projects.map((project) => (
+                <li class="hover:translate-x-0.5 transition-transform duration-200">
+                  <ArrowCard entry={project} />
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+    </FancyDiv>
+
+    <FancyDiv margin_bottom="50" isAnimated={true}>
+      <section class="animate space-y-6">
+        <div class="space-y-1">
+          <h3
+            class="text-xs font-semibold uppercase tracking-widest text-neutral-400"
+          >
+            Bądźmy w kontakcie
+          </h3>
+          <p class="text-sm text-neutral-400">
+            Dołącz do społeczności lub zostaw prywatną wiadomość.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto">
+          {
+            SOCIALS.map((social) => (
+              <a
+                href={social.HREF}
+                target="_blank"
+                class="flex justify-between items-center px-4 py-3 rounded-lg border border-white/5 bg-neutral-900/20 hover:bg-neutral-900/50 hover:border-white/10 transition-all text-sm group"
+              >
+                <span class="text-neutral-400 group-hover:text-white transition-colors">
+                  {social.NAME}
+                </span>
+                <span class="text-xs text-neutral-500 font-mono truncate max-w-40">
+                  {social.TEXT}
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+
+      <hr class="border-white/10 my-8 animate" />
+
+      <section class="animate flex justify-center items-center">
+        <div
+          class="flex justify-between space-x-6 items-center opacity-40 hover:opacity-75 transition-opacity duration-300"
+        >
+          <a
+            target="_blank"
+            href="https://uptime.betterstack.com"
+            rel="noopener"
+          >
+            <Image
+              src="/betterstack.webp"
+              alt="BetterStack."
+              width={130}
+              height={130}
+              loading="lazy"
+              class="grayscale invert"
+            />
+          </a>
+
+          <a
+            href="https://www.abuseipdb.com/user/228538"
+            title="AbuseIPDB"
+            class="bg-white rounded p-0.5 py-2 flex items-center"
+          >
+            <Image
+              src="https://www.abuseipdb.com/contributor/228538.svg"
+              alt="AbuseIPDB Contributor Badge"
+              width={140}
+              height={35}
+              loading="lazy"
+            />
+          </a>
+        </div>
+      </section>
+    </FancyDiv>
+  </div>
 </PageLayout>
-
-<script>
-  import { gsap } from "gsap";
-
-  const phrases = [
-    "W trakcie przebudowy...",
-    "Under construction...",
-    "In Bearbeitung...",
-    "En construction...",
-    "Estamos en obras...",
-  ];
-
-  let currentIdx = 0;
-  const headlineEl = document.getElementById("dynamic-headline");
-
-  function buildWordSpans(text: string) {
-    if (!headlineEl) return;
-    headlineEl.innerHTML = "";
-
-    text.split(" ").forEach((word) => {
-      const span = document.createElement("span");
-      span.innerText = word;
-      
-      span.classList.add("inline-block", "opacity-0", "select-none");
-      
-      headlineEl.appendChild(span);
-    });
-  }
-
-  function cycleLanguages() {
-    if (!headlineEl) return;
-
-    buildWordSpans(phrases[currentIdx]);
-
-    const words = headlineEl.querySelectorAll("span");
-    const timeline = gsap.timeline({
-      onComplete: () => {
-        currentIdx = (currentIdx + 1) % phrases.length;
-        gsap.delayedCall(1.2, cycleLanguages);
-      },
-    });
-    timeline
-      .fromTo(
-        words,
-        { y: 25, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.5, stagger: 0.12, ease: "power2.out" },
-      )
-      .to(words, {
-        y: -25,
-        opacity: 0,
-        duration: 0.4,
-        stagger: 0.08,
-        ease: "power2.in",
-        delay: 2.5,
-      });
-  }
-
-  cycleLanguages();
-</script>
