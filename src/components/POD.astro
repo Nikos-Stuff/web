@@ -45,7 +45,7 @@ console.log(" APOD will use URL:", finalUrl);
               quality="low"
               src={apodData.url}
               alt={apodData.title}
-              class="w-svw h-svh object-cover brightness-[0.3] blur-md saturate-[0.4] contrast-100 duration-500 opacity-0 transform scale-[1.5] transition-all"
+              class="w-svw h-svh object-cover brightness-[0.3] saturate-[0.4] contrast-100 duration-500 opacity-0 transform scale-[1.5] transition-all"
               onload={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0'); document.getElementById('pod-container').style.opacity = 1;`}
               decoding="async"
               loading="eager"
@@ -56,7 +56,7 @@ console.log(" APOD will use URL:", finalUrl);
               id="apod-image"
               title={apodData.title || "APOD Video"}
               src={finalUrl}
-              class="w-svw h-svh object-cover blur-sm brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
+              class="w-svw h-svh object-cover brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowfullscreen
               loading="eager"
@@ -65,7 +65,7 @@ console.log(" APOD will use URL:", finalUrl);
           ) : apodData.media_type === "video" ? (
             <video
               id="apod-image"
-              class="w-svw h-svh object-cover blur-sm brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
+              class="w-svw h-svh object-cover brightness-[0.3] saturate-[0.4] duration-500 opacity-0 transform scale-[1.5] transition-all"
               controls
               autoplay
               loop
