@@ -5,7 +5,6 @@
 @plugin "@tailwindcss/typography";
 
 @custom-variant hover (&:hover);
-@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --animate-twinkle: twinkle 2s ease-in-out forwards;
@@ -92,15 +91,11 @@
 
 html {
   overflow-y: scroll;
-  color-scheme: light;
-  background-color: white;
+  color-scheme: dark;
+  background-color: rgb(0, 0, 0);
   font-family: "Atkinson", sans-serif;
 }
 
-html.dark {
-  color-scheme: dark;
-  background-color: black;
-}
 
 button,
 a {
@@ -126,7 +121,7 @@ body {
 }
 
 main {
-  @apply flex flex-col flex-1 bg-black;
+  @apply flex flex-col flex-1 bg-neutral-900/50;
 }
 
 header {
