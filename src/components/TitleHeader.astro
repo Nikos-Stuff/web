@@ -138,116 +138,124 @@ import { Image } from "astro:assets";
     const iconContainer = document.querySelector<HTMLElement>("#icon-container");
     const visualStage = document.getElementById("visual-stage");
     const parallaxContent = document.querySelector<HTMLElement>(".parallax-content");
-
-    if (!typewriterElement || !iconContainer || !visualStage || !parallaxContent) return;
-
-    let index = 0;
-
-    function showNextEntry(): void {
-      const currentItem = data[index];
-
-      typewriterElement!.innerHTML = currentItem.text
-        .split("")
-        .map((char) => `<span class="char transform inline-block">${char === " " ? "&nbsp;" : char}</span>`)
-        .join("");
-
-      iconContainer!.innerHTML = `<i class="${currentItem.iconClass} text-7xl md:text-8xl"></i>`;
-      const currentIcon = iconContainer!.querySelector<HTMLElement>("i");
-      const chars = typewriterElement!.querySelectorAll<HTMLElement>(".char");
-
-      const tl = gsap.timeline({
-        onComplete: () => {
-          fadeOut(chars, currentIcon, () => {
-            index = (index + 1) % data.length;
-            showNextEntry();
-          });
-        },
-      });
-
-      tl.from(chars, {
-        opacity: 0,
-        scale: 0.5,
-        rotation: () => gsap.utils.random(-60, 60),
-        y: 20,
-        stagger: { amount: 0.4, from: "start" },
-        duration: 0.4,
-        ease: "back.out(1.5)",
-      });
-
-      if (currentIcon) {
-        tl.from(currentIcon, {
-          opacity: 0,
-          scale: 0.3,
-          rotation: -45,
-          y: 30,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-        }, 0);
-      }
-
-      tl.to({}, { duration: 2.8 });
-    }
-
-    function fadeOut(
-      chars: NodeListOf<HTMLElement>,
-      icon: HTMLElement | null,
-      onComplete: () => void
-    ): void {
-      const mainTl = gsap.timeline({ onComplete });
-
-      mainTl.to(chars, {
-        opacity: 0,
-        scale: 0.5,
-        rotation: () => gsap.utils.random(-40, 40),
-        y: -20,
-        stagger: { amount: 0.3, from: "start" },
-        duration: 0.3,
-        ease: "back.in(1.5)",
-      });
-
-      if (icon) {
-        mainTl.to(icon, {
-          opacity: 0,
-          scale: 0.5,
-          rotation: 45,
-          y: -30,
-          duration: 0.4,
-          ease: "back.in(1.5)",
-        }, 0);
-      }
-    }
-
-    showNextEntry();
-
-    const target = { x: 0, y: 0 };
-    const current = { x: 0, y: 0 };
-    const easeFactor = 0.05;
-
-    const handleMouseMove = (e: MouseEvent): void => {
-      target.x = (e.clientX / window.innerWidth - 0.5) * 2;
-      target.y = (e.clientY / window.innerHeight - 0.5) * 2;
-    };
-
-    const updateParallax = (): void => {
-      current.x += (target.x - current.x) * easeFactor;
-      current.y += (target.y - current.y) * easeFactor;
-
-      gsap.set(visualStage, {
-        x: current.x * 25,
-        y: current.y * 25,
-      });
-
-      gsap.set(parallaxContent, {
-        x: current.x * 12,
-        y: current.y * 12,
-      });
-    };
-
-    document.addEventListener("mousemove", handleMouseMove);
-    gsap.ticker.add(updateParallax);
-
     const stageContainer = document.getElementById("visual-stage-container");
     const contentContainer = document.getElementById("content-wrapper-container");
+
+    if (typewriterElement && iconContainer) {
+      let index = 0;
+
+      const showNextEntry = (): void => {
+        const currentItem = data[index];
+
+        typewriterElement.innerHTML = currentItem.text
+          .split("")
+          .map((char) => `<span class="char transform inline-block">${char === " " ? "&nbsp;" : char}</span>`)
+          .join("");
+
+        iconContainer.innerHTML = `<i class="${currentItem.iconClass} text-7xl md:text-8xl"></i>`;
+        const currentIcon = iconContainer.querySelector<HTMLElement>("i");
+        const chars = typewriterElement.querySelectorAll<HTMLElement>(".char");
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            fadeOut(chars, currentIcon, () => {
+              index = (index + 1) % data.length;
+              showNextEntry();
+            });
+          },
+        });
+
+        tl.from(chars, {
+          opacity: 0,
+          scale: 0.5,
+          rotation: () => gsap.utils.random(-60, 60),
+          y: 20,
+          stagger: { amount: 0.4, from: "start" },
+          duration: 0.4,
+          ease: "back.out(1.5)",
+        });
+
+        if (currentIcon) {
+          tl.from(currentIcon, {
+            opacity: 0,
+            scale: 0.3,
+            rotation: -45,
+            y: 30,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+          }, 0);
+        }
+
+        tl.to({}, { duration: 2.8 });
+      };
+
+      const fadeOut = (
+        chars: NodeListOf<HTMLElement>,
+        icon: HTMLElement | null,
+        onComplete: () => void
+      ): void => {
+        const mainTl = gsap.timeline({ onComplete });
+
+        mainTl.to(chars, {
+          opacity: 0,
+          scale: 0.5,
+          rotation: () => gsap.utils.random(-40, 40),
+          y: -20,
+          stagger: { amount: 0.3, from: "start" },
+          duration: 0.3,
+          ease: "back.in(1.5)",
+        });
+
+        if (icon) {
+          mainTl.to(icon, {
+            opacity: 0,
+            scale: 0.5,
+            rotation: 45,
+            y: -30,
+            duration: 0.4,
+            ease: "back.in(1.5)",
+          }, 0);
+        }
+      };
+
+      showNextEntry();
+    }
+
+    let handleMouseMove: ((e: MouseEvent) => void) | null = null;
+    let updateParallax: (() => void) | null = null;
+
+    if (visualStage || parallaxContent) {
+      const target = { x: 0, y: 0 };
+      const current = { x: 0, y: 0 };
+      const easeFactor = 0.05;
+
+      handleMouseMove = (e: MouseEvent): void => {
+        target.x = (e.clientX / window.innerWidth - 0.5) * 2;
+        target.y = (e.clientY / window.innerHeight - 0.5) * 2;
+      };
+
+      updateParallax = (): void => {
+        current.x += (target.x - current.x) * easeFactor;
+        current.y += (target.y - current.y) * easeFactor;
+
+        if (visualStage) {
+          gsap.set(visualStage, {
+            x: current.x * 25,
+            y: current.y * 25,
+          });
+        }
+
+        if (parallaxContent) {
+          gsap.set(parallaxContent, {
+            x: current.x * 12,
+            y: current.y * 12,
+          });
+        }
+      };
+
+      document.addEventListener("mousemove", handleMouseMove);
+      gsap.ticker.add(updateParallax);
+    }
 
     let scrollTl: gsap.core.Timeline | undefined;
     if (stageContainer && contentContainer) {
@@ -274,8 +282,8 @@ import { Image } from "astro:assets";
     }
 
     document.addEventListener("astro:before-swap", () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      gsap.ticker.remove(updateParallax);
+      if (handleMouseMove) document.removeEventListener("mousemove", handleMouseMove);
+      if (updateParallax) gsap.ticker.remove(updateParallax);
       if (scrollTl) scrollTl.kill();
     }, { once: true });
   }
