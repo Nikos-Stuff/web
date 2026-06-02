@@ -11,15 +11,21 @@ const { text, icon, href } = Astro.props;
 <a
   href={href}
   target="_blank"
-  class="w-fit px-3 py-2 group rounded border flex gap-2 items-center border-neutral-700 hover:scale-110 hover:bg-neutral-800 blend"
+  rel="noopener noreferrer"
+  class="group relative flex flex-col justify-between w-full h-28 p-5 rounded-xl border border-white/10 bg-transparent transition-all duration-300 overflow-hidden"
 >
-  <svg height={20} width={20}>
-    <use href={`/stack.svg#${icon}`}></use>
-  </svg>
-  <span
-    class="text-sm capitalize text-neutral-400 group-hover:text-white blend"
-  >
-    {text}
-  </span>
-</a>
+  <div class="absolute inset-0 z-0 bg-white/1 group-hover:bg-white/4 transition-all duration-500 ease-out"></div>
 
+
+  <div class="relative z-10 max-w-[65%] pointer-events-none mt-auto">
+    <h4 class="font-bold text-lg text-white tracking-tight group-hover:text-neutral-200 transition-colors duration-300 leading-tight capitalize">
+      {text}
+    </h4>
+  </div>
+
+  <div class="absolute -right-2 -bottom-2 w-24 h-24 flex items-center justify-center z-0 opacity-25 group-hover:opacity-45 scale-100 group-hover:scale-105 group-hover:-rotate-3 origin-bottom-right transition-all duration-500 ease-out select-none pointer-events-none filter brightness-[0.7] contrast-[1.1]">
+    <svg class="w-full h-full object-contain pointer-events-none">
+      <use href={`/stack.svg#${icon}`}></use>
+    </svg>
+  </div>
+</a>

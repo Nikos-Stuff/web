@@ -315,13 +315,18 @@ try {
 
     <FancyDiv isAnimated={true}>
       <section class="animate">
-        <div class="space-y-4">
-          <h3
-            class="text-xs font-semibold uppercase tracking-widest text-neutral-400"
+        <div class="space-y-6">
+          <div class="space-y-1">
+            <h3
+              class="text-xs font-semibold uppercase tracking-widest text-neutral-400"
+            >
+              Uczę się / Moje umiejętności
+            </h3>
+          </div>
+
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 w-full"
           >
-            Uczę się / Moje umiejętności
-          </h3>
-          <div class="flex flex-wrap items-center gap-2 mt-4">
             {
               stack.map((item) => (
                 <StackCard text={item.text} icon={item.icon} href={item.href} />
@@ -342,7 +347,11 @@ try {
           </h3>
         </div>
 
-        <div class="relative">
+        <div class="relative w-full">
+          <div
+            class="absolute left-6 top-2 bottom-2 w-px bg-white/10 md:hidden z-0"
+          >
+          </div>
           <div
             class="hidden md:block absolute top-7.75 left-6 right-6 h-px bg-white/10 z-0"
           >
@@ -352,84 +361,89 @@ try {
             class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 relative z-10"
           >
             <div
-              class="flex flex-col items-start md:items-center text-left md:text-center space-y-4"
+              class="flex flex-row md:flex-col items-start md:items-center gap-5 md:gap-0 relative"
             >
               <div
-                class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-900 border border-white/10 shadow-xl"
+                class="flex items-center justify-center h-12 w-12 min-w-12 md:h-16 md:w-16 md:min-w-16 rounded-full bg-neutral-950 border border-white/10 shadow-xl z-10 md:mb-4"
               >
                 <div
-                  class="h-3 w-3 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]"
+                  class="h-2.5 w-2.5 md:h-3 md:w-3 rounded-full bg-emerald-500 shadow-[0_0_12px_rgba(16,185,129,0.6)]"
                 >
                 </div>
               </div>
-              <div class="space-y-2">
-                <span
-                  class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/10"
-                >
-                  Ukończona
-                </span>
+
+              <div class="space-y-2 pt-0.5 md:pt-0 text-left md:text-center">
+                <div>
+                  <span
+                    class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/10"
+                  >
+                    Ukończona
+                  </span>
+                </div>
                 <h4 class="text-sm font-bold text-white tracking-tight">
                   Szkoła Branżowa I Stopnia
                 </h4>
-                <p
-                  class="text-xs text-neutral-500 max-w-50 leading-relaxed"
-                >
+                <p class="text-xs text-neutral-500 md:max-w-50 leading-relaxed">
                   Zdobycie solidnych fundamentów zawodowych i praktycznych.
                 </p>
               </div>
             </div>
 
             <div
-              class="flex flex-col items-start md:items-center text-left md:text-center space-y-4"
+              class="flex flex-row md:flex-col items-start md:items-center gap-5 md:gap-0 relative"
             >
               <div
-                class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-900 border border-white/10 shadow-xl"
+                class="flex items-center justify-center h-12 w-12 min-w-12 md:h-16 md:w-16 md:min-w-16 rounded-full bg-neutral-950 border border-white/10 shadow-xl z-10 md:mb-4"
               >
                 <div
-                  class="h-3 w-3 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.6)]"
+                  class="h-2.5 w-2.5 md:h-3 md:w-3 rounded-full bg-amber-500 shadow-[0_0_12px_rgba(245,158,11,0.6)]"
                 >
                 </div>
               </div>
-              <div class="space-y-2">
-                <span
-                  class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/10"
-                >
-                  Przyszły rok
-                </span>
+
+              <div class="space-y-2 pt-0.5 md:pt-0 text-left md:text-center">
+                <div>
+                  <span
+                    class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/10"
+                  >
+                    Przyszły rok
+                  </span>
+                </div>
                 <h4 class="text-sm font-bold text-neutral-200 tracking-tight">
                   Egzamin Maturalny
                 </h4>
-                <p
-                  class="text-xs text-neutral-500 max-w-50 leading-relaxed"
-                >
+                <p class="text-xs text-neutral-500 md:max-w-50 leading-relaxed">
                   Aktualny priorytet i przygotowania do dalszej ścieżki.
                 </p>
               </div>
             </div>
 
             <div
-              class="flex flex-col items-start md:items-center text-left md:text-center space-y-4"
+              class="flex flex-row md:flex-col items-start md:items-center gap-5 md:gap-0 relative"
             >
               <div
-                class="flex items-center justify-center h-16 w-16 rounded-full bg-neutral-900 border border-white/10 shadow-xl"
+                class="flex items-center justify-center h-12 w-12 min-w-12 md:h-16 md:w-16 md:min-w-16 rounded-full bg-neutral-950 border border-white/10 shadow-xl z-10 md:mb-4"
               >
                 <div
-                  class="h-3 w-3 rounded-full bg-indigo-500 animate-pulse shadow-[0_0_12px_rgba(99,102,241,0.6)]"
+                  class="h-2.5 w-2.5 md:h-3 md:w-3 rounded-full bg-indigo-500 animate-pulse shadow-[0_0_12px_rgba(99,102,241,0.6)]"
                 >
                 </div>
               </div>
-              <div class="space-y-2">
-                <span
-                  class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/10"
-                >
-                  Kolejny krok
-                </span>
+
+              <div class="space-y-2 pt-0.5 md:pt-0 text-left md:text-center">
+                <div>
+                  <span
+                    class="inline-block text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/10"
+                  >
+                    Kolejny krok
+                  </span>
+                </div>
                 <h4 class="text-sm font-bold text-neutral-400 tracking-tight">
                   Technik Programista — TEB
                 </h4>
                 <div class="space-y-2">
                   <p
-                    class="text-xs text-neutral-500 max-w-50 leading-relaxed"
+                    class="text-xs text-neutral-500 md:max-w-50 leading-relaxed"
                   >
                     Zaawansowana inżynieria oprogramowania w Nowym Sączu.
                   </p>

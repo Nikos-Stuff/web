@@ -12,7 +12,10 @@ import { Image } from "astro:assets";
     id="parallax-container"
     class="relative w-full max-w-6xl px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center justify-center slide-in-top"
   >
-    <div class="lg:col-span-5 flex items-center justify-center order-1">
+    <div
+      id="visual-stage-container"
+      class="lg:col-span-5 flex items-center justify-center order-1 w-full"
+    >
       <div
         id="visual-stage"
         class="relative w-48 h-48 md:w-64 md:h-64 rounded-3xl bg-neutral-900/30 border border-neutral-800/50 backdrop-blur-sm flex items-center justify-center shadow-2xl shadow-black/20"
@@ -39,125 +42,117 @@ import { Image } from "astro:assets";
       </div>
     </div>
 
-    <div
-      id="contentWrapper"
-      class="parallax-content lg:col-span-7 text-center lg:text-left space-y-6 order-2"
-    >
-      <div class="flex items-center justify-center lg:justify-start gap-3">
-        <span class="w-8 h-px bg-neutral-600"></span>
-        <p
-          id="subtitle"
-          class="text-xs md:text-sm font-semibold tracking-widest uppercase text-neutral-400"
-        >
-          {sub}
-        </p>
-      </div>
-
-      <h1
-        id="title"
-        class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase leading-none"
-      >
-        {text}
-      </h1>
-
-      {
-        typewriter == true && (
-          <div
-            id="typewriter-text"
-            class="py-2 min-h-8 text-neutral-300 font-medium text-base md:text-lg"
-          >
-            <p class="typewriter w-full" />
-          </div>
-        )
-      }
-
+    <div id="content-wrapper-container" class="lg:col-span-7 order-2 w-full">
       <div
-        id="ctaButtons"
-        class="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-4 pt-4"
+        id="contentWrapper"
+        class="parallax-content text-center lg:text-left space-y-6"
       >
+        <div class="flex items-center justify-center lg:justify-start gap-3">
+          <span class="w-8 h-px bg-neutral-600"></span>
+          <p
+            id="subtitle"
+            class="text-xs md:text-sm font-semibold tracking-widest uppercase text-neutral-400"
+          >
+            {sub}
+          </p>
+        </div>
+
+        <h1
+          id="title"
+          class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tighter uppercase leading-none"
+        >
+          {text}
+        </h1>
+
         {
-          buttons == true && (
-            <div class="flex flex-col sm:flex-row items-center gap-4">
-              <a
-                href="/blog"
-                class="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-medium tracking-wide bg-white text-black hover:bg-neutral-100 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-white/5 text-center"
-              >
-                Mój Blog
-              </a>
-              <a
-                href="/projects"
-                class="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-medium tracking-wide border border-neutral-800 bg-neutral-900/50 backdrop-blur-md hover:bg-neutral-800/80 transition-all duration-300 ease-out hover:-translate-y-0.5 text-center"
-              >
-                Moje Projekty
-              </a>
-              <a
-                href="/pricing"
-                class="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-medium tracking-wide border border-neutral-800 bg-neutral-900/50 backdrop-blur-md hover:bg-neutral-800/80 transition-all duration-300 ease-out hover:-translate-y-0.5 text-center"
-              >
-                Usługi
-              </a>
+          typewriter == true && (
+            <div
+              id="typewriter-text"
+              class="py-2 min-h-8 text-neutral-300 font-medium text-base md:text-lg"
+            >
+              <p class="typewriter w-full" />
             </div>
           )
         }
+
+        <div
+          id="ctaButtons"
+          class="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-4 pt-4"
+        >
+          {
+            buttons == true && (
+              <div class="flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+                <a
+                  href="/blog"
+                  class="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-medium tracking-wide bg-white text-black hover:bg-neutral-100 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-lg hover:shadow-white/5 text-center"
+                >
+                  Mój Blog
+                </a>
+                <a
+                  href="/projects"
+                  class="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-medium tracking-wide border border-neutral-800 bg-neutral-900/50 backdrop-blur-md hover:bg-neutral-800/80 transition-all duration-300 ease-out hover:-translate-y-0.5 text-center"
+                >
+                  Moje Projekty
+                </a>
+                <a
+                  href="/pricing"
+                  class="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-medium tracking-wide border border-neutral-800 bg-neutral-900/50 backdrop-blur-md hover:bg-neutral-800/80 transition-all duration-300 ease-out hover:-translate-y-0.5 text-center"
+                >
+                  Usługi
+                </a>
+              </div>
+            )
+          }
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-  import { gsap } from "gsap";
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-  function run() {
-    const data = [
+  gsap.registerPlugin(ScrollTrigger);
+
+  interface DataItem {
+    text: string;
+    iconClass: string;
+  }
+
+  function run(): void {
+    const data: DataItem[] = [
       { text: "Nowoczesne aplikacje webowe", iconClass: "ph ph-cpu" },
-      {
-        text: "Dedykowane systemy e-commerce",
-        iconClass: "ph ph-shopping-bag",
-      },
+      { text: "Dedykowane systemy e-commerce", iconClass: "ph ph-shopping-bag" },
       { text: "Projektowanie UI/UX i makiet", iconClass: "ph ph-browser" },
-      {
-        text: "Optymalizacja wydajności SEO",
-        iconClass: "ph ph-chart-line-up",
-      },
-      {
-        text: "Niezawodne wsparcie techniczne",
-        iconClass: "ph ph-shield-check",
-      },
+      { text: "Optymalizacja wydajności SEO", iconClass: "ph ph-chart-line-up" },
+      { text: "Niezawodne wsparcie techniczne", iconClass: "ph ph-shield-check" },
       { text: "Innowacyjne podejście do kodu", iconClass: "ph ph-code" },
-      {
-        text: "Skalowalne rozwiązania chmurowe",
-        iconClass: "ph ph-cloud-arrow-up",
-      },
+      { text: "Skalowalne rozwiązania chmurowe", iconClass: "ph ph-cloud-arrow-up" },
       { text: "Automatyzacja procesów biznesowych", iconClass: "ph ph-gear" },
       { text: "Bezpieczeństwo i stabilność danych", iconClass: "ph ph-lock" },
       { text: "Strategia i konsulting IT", iconClass: "ph ph-strategy" },
     ];
 
-    const typewriterElement = document.querySelector(
-      "#typewriter-text .typewriter",
-    );
-    const iconContainer = document.querySelector("#icon-container")!;
+    const typewriterElement = document.querySelector<HTMLElement>("#typewriter-text .typewriter");
+    const iconContainer = document.querySelector<HTMLElement>("#icon-container");
     const visualStage = document.getElementById("visual-stage");
-    const parallaxContent = document.querySelector(".parallax-content");
+    const parallaxContent = document.querySelector<HTMLElement>(".parallax-content");
 
-    if (!typewriterElement || !iconContainer) return;
+    if (!typewriterElement || !iconContainer || !visualStage || !parallaxContent) return;
 
     let index = 0;
 
-    function showNextEntry() {
+    function showNextEntry(): void {
       const currentItem = data[index];
 
       typewriterElement!.innerHTML = currentItem.text
         .split("")
-        .map(
-          (char) =>
-            `<span class="char transform inline-block">${char === " " ? "&nbsp;" : char}</span>`,
-        )
+        .map((char) => `<span class="char transform inline-block">${char === " " ? "&nbsp;" : char}</span>`)
         .join("");
 
-      iconContainer.innerHTML = `<i class="${currentItem.iconClass} text-7xl md:text-8xl"></i>`;
-      const currentIcon = iconContainer.querySelector("i");
-
+      iconContainer!.innerHTML = `<i class="${currentItem.iconClass} text-7xl md:text-8xl"></i>`;
+      const currentIcon = iconContainer!.querySelector<HTMLElement>("i");
       const chars = typewriterElement!.querySelectorAll<HTMLElement>(".char");
 
       const tl = gsap.timeline({
@@ -180,18 +175,14 @@ import { Image } from "astro:assets";
       });
 
       if (currentIcon) {
-        tl.from(
-          currentIcon,
-          {
-            opacity: 0,
-            scale: 0.3,
-            rotation: -45,
-            y: 30,
-            duration: 0.6,
-            ease: "back.out(1.7)",
-          },
-          0,
-        );
+        tl.from(currentIcon, {
+          opacity: 0,
+          scale: 0.3,
+          rotation: -45,
+          y: 30,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+        }, 0);
       }
 
       tl.to({}, { duration: 2.8 });
@@ -200,8 +191,8 @@ import { Image } from "astro:assets";
     function fadeOut(
       chars: NodeListOf<HTMLElement>,
       icon: HTMLElement | null,
-      onComplete: () => void,
-    ) {
+      onComplete: () => void
+    ): void {
       const mainTl = gsap.timeline({ onComplete });
 
       mainTl.to(chars, {
@@ -215,18 +206,14 @@ import { Image } from "astro:assets";
       });
 
       if (icon) {
-        mainTl.to(
-          icon,
-          {
-            opacity: 0,
-            scale: 0.5,
-            rotation: 45,
-            y: -30,
-            duration: 0.4,
-            ease: "back.in(1.5)",
-          },
-          0,
-        );
+        mainTl.to(icon, {
+          opacity: 0,
+          scale: 0.5,
+          rotation: 45,
+          y: -30,
+          duration: 0.4,
+          ease: "back.in(1.5)",
+        }, 0);
       }
     }
 
@@ -236,12 +223,12 @@ import { Image } from "astro:assets";
     const current = { x: 0, y: 0 };
     const easeFactor = 0.05;
 
-    const handleMouseMove = (e: MouseEvent) => {
+    const handleMouseMove = (e: MouseEvent): void => {
       target.x = (e.clientX / window.innerWidth - 0.5) * 2;
       target.y = (e.clientY / window.innerHeight - 0.5) * 2;
     };
 
-    const updateParallax = () => {
+    const updateParallax = (): void => {
       current.x += (target.x - current.x) * easeFactor;
       current.y += (target.y - current.y) * easeFactor;
 
@@ -259,10 +246,38 @@ import { Image } from "astro:assets";
     document.addEventListener("mousemove", handleMouseMove);
     gsap.ticker.add(updateParallax);
 
+    const stageContainer = document.getElementById("visual-stage-container");
+    const contentContainer = document.getElementById("content-wrapper-container");
+
+    let scrollTl: gsap.core.Timeline | undefined;
+    if (stageContainer && contentContainer) {
+      scrollTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: document.body,
+          start: "top top",
+          end: "top -450px",
+          scrub: 1.5,
+        },
+      });
+
+      scrollTl
+        .to(stageContainer, {
+          x: "-150%",
+          scale: 0,
+          ease: "power2.inOut",
+        }, 0)
+        .to(contentContainer, {
+          x: "150%",
+          scale: 0,
+          ease: "power2.inOut",
+        }, 0);
+    }
+
     document.addEventListener("astro:before-swap", () => {
       document.removeEventListener("mousemove", handleMouseMove);
       gsap.ticker.remove(updateParallax);
-    });
+      if (scrollTl) scrollTl.kill();
+    }, { once: true });
   }
 
   if (document.readyState === "loading") {
@@ -270,57 +285,6 @@ import { Image } from "astro:assets";
   } else {
     run();
   }
+  document.addEventListener("astro:page-load", run);
 </script>
 
-<script>
-  import gsap from "gsap";
-  import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  function setupScrollAnimation() {
-    const animateElement = document.getElementById("animate");
-    if (!animateElement) return;
-
-    // Tworzymy płynną animację powiązaną ze scrollem (scrub)
-    const trigger = ScrollTrigger.create({
-      trigger: document.body, // Punktem odniesienia jest cała strona
-      start: "top top", // Zaczynamy od samej góry
-      end: "top -450px", // Animacja kończy się, gdy przesuniesz o 150px w dół
-      scrub: true, // Łączy postęp scrolla bezpośrednio z osią czasu animacji
-
-      // Definiujemy co dokładnie ma się dziać podczas przewijania
-      animation: gsap.fromTo(
-        animateElement,
-        {
-          opacity: 1,
-          scale: 1,
-          pointerEvents: "auto",
-        },
-        {
-          opacity: 0,
-          scale: 0.93,
-          pointerEvents: "none",
-          ease: "none", // Przy scrub: true najlepiej dać "none" dla idealnej liniowości
-        },
-      ),
-    });
-
-    // Czyszczenie instancji dla Astro View Transitions (zapobiega wyciekom pamięci)
-    document.addEventListener(
-      "astro:before-swap",
-      () => {
-        trigger.kill();
-      },
-      { once: true },
-    );
-  }
-
-  // Odpalanie skryptu przy ładowaniu strony i przejściach Astro
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", setupScrollAnimation);
-  } else {
-    setupScrollAnimation();
-  }
-  document.addEventListener("astro:page-load", setupScrollAnimation);
-</script>
