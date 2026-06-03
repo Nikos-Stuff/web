@@ -116,7 +116,7 @@ export default function SearchCollection({ data, tags }: Props) {
                       "w-full px-3 py-2 rounded-lg text-sm font-medium flex gap-3 items-center border transition-all duration-200 text-left",
                       filter().has(tag)
                         ? "bg-neutral-800/60 text-white border-white/30"
-                        : "bg-neutral-800/10 text-neutral-400 border-transparent hover:border-black/10 hover:text-white",
+                        : "bg-neutral-800/30 text-neutral-400 border-transparent hover:border-black/10 hover:text-white",
                     )}
                   >
                     <div class="relative shrink-0 size-4 flex items-center justify-center">
