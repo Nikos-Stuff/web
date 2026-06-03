@@ -111,8 +111,8 @@ img {
 html,
 body {
   @apply h-full w-full antialiased;
-  @apply bg-black;
   @apply text-white/75;
+  background-color: rgb(12, 12, 12);
 }
 
 body {
@@ -121,7 +121,7 @@ body {
 }
 
 main {
-  @apply flex flex-col flex-1 bg-neutral-900/50;
+  @apply flex flex-col flex-1;
 }
 
 header {
