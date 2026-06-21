@@ -17,6 +17,7 @@ import WhyMe from "@components/WhyMe.astro";
 import Reviews from "@components/Reviews.astro";
 
 import DynamicTitle from "@components/TitleHeader.astro";
+import DynamicElement from "@components/DynamicElement.astro" 
 import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
 import Image1 from "@assets/vid_montage.png";
@@ -160,6 +161,8 @@ try {
     />
   </section>
   <AIChat />
+
+  <DynamicElement/>
 
   <div class="relative">
     <FancyDiv margin_bottom="50" isAnimated={true}>

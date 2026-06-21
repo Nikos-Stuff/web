@@ -1,0 +1,318 @@
+---
+// DynamicElement.astro
+---
+
+<div id="perf-section-wrapper" class="relative w-full text-white overflow-x-hidden">
+  <div id="perf-container" class="relative flex h-svh w-full flex-col items-center justify-center overflow-hidden perspective-distant transform-style-3d px-4">
+    
+    <div id="pagespeed-mockup" class="relative z-10 flex flex-col items-center justify-center rounded-2xl border border-zinc-800/80 bg-zinc-950/20 p-8 shadow-[0_0_50px_rgba(0,0,0,0.5)] w-full max-w-xl aspect-auto backdrop-blur-xl transition-none">
+      
+      <div class="w-full text-center mb-8 relative min-h-[4rem] flex items-center justify-center">
+        <h2 id="perf-title-bad" class="text-2xl font-bold tracking-tight md:text-4xl w-full block">
+          Masz dosyć swojej wolnej witryny?
+        </h2>
+        <h2 id="perf-title-good" class="absolute inset-0 flex items-center justify-center text-2xl font-bold tracking-tight text-emerald-400 opacity-0 md:text-4xl w-full block">
+          Twoja strona, zoptymalizowana.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-5 gap-8 items-center w-full">
+        <div class="sm:col-span-2 flex flex-col items-center justify-center">
+          <div class="relative h-32 w-32 md:h-36 md:w-36 flex items-center justify-center">
+            <svg class="absolute inset-0 h-full w-full -rotate-90 transform" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="42" class="stroke-zinc-900/60" stroke-width="8" fill="transparent"/>
+              <circle id="gauge-circle" cx="50" cy="50" r="42" stroke-width="8" fill="transparent" stroke-dasharray="263.89" stroke-dashoffset="263.89"/>
+            </svg>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <span id="gauge-score" class="text-4xl font-black md:text-5xl font-mono tracking-tighter">38</span>
+            </div>
+          </div>
+          <p class="mt-3 text-[11px] font-bold tracking-widest text-zinc-500 uppercase font-mono">Performance</p>
+        </div>
+
+        <div class="sm:col-span-3 grid grid-cols-2 gap-4 text-xs md:text-sm">
+          <div class="border-l-2 border-zinc-800/80 pl-3 py-0.5">
+            <p class="text-zinc-500 text-[10px] font-mono uppercase tracking-wider">FCP</p>
+            <p id="metric-fcp" class="text-base font-bold mt-0.5 font-mono">3.4 s</p>
+            <span class="flex items-center gap-1 text-[11px] mt-0.5 text-zinc-400 whitespace-nowrap">
+              <i id="icon-fcp" class="ph ph-warning-octagon"></i> First Contentful Paint
+            </span>
+          </div>
+
+          <div class="border-l-2 border-zinc-800/80 pl-3 py-0.5">
+            <p class="text-zinc-500 text-[10px] font-mono uppercase tracking-wider">LCP</p>
+            <p id="metric-lcp" class="text-base font-bold mt-0.5 font-mono">5.8 s</p>
+            <span class="flex items-center gap-1 text-[11px] mt-0.5 text-zinc-400 whitespace-nowrap">
+              <i id="icon-lcp" class="ph ph-warning"></i> Largest Contentful Paint
+            </span>
+          </div>
+
+          <div class="border-l-2 border-zinc-800/80 pl-3 py-0.5">
+            <p class="text-zinc-500 text-[10px] font-mono uppercase tracking-wider">TBT</p>
+            <p id="metric-tbt" class="text-base font-bold mt-0.5 font-mono">840 ms</p>
+            <span class="flex items-center gap-1 text-[11px] mt-0.5 text-zinc-400 whitespace-nowrap">
+              <i id="icon-tbt" class="ph ph-warning-octagon"></i> Total Blocking Time
+            </span>
+          </div>
+
+          <div class="border-l-2 border-zinc-800/80 pl-3 py-0.5">
+            <p class="text-zinc-500 text-[10px] font-mono uppercase tracking-wider">CLS</p>
+            <p id="metric-cls" class="text-base font-bold mt-0.5 font-mono">0.28</p>
+            <span class="flex items-center gap-1 text-[11px] mt-0.5 text-zinc-400 whitespace-nowrap">
+              <i id="icon-cls" class="ph ph-warning"></i> Cumulative Layout Shift
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="raw-content" class="absolute z-10 flex flex-col items-center justify-center opacity-0 scale-95 pointer-events-none px-4 w-full max-w-3xl backdrop-blur-xl">
+      <div class="w-full rounded-2xl border border-zinc-800/80 bg-zinc-950/20 font-mono text-xs md:text-sm shadow-[0_0_50px_rgba(0,0,0,0.5)] p-6 md:p-8 overflow-hidden text-left">
+        
+        <div class="space-y-3 md:space-y-4 overflow-x-auto leading-relaxed">
+          <div class="w-full text-center mb-6">
+            <h2 class="text-2xl font-bold tracking-tight text-emerald-400 md:text-4xl">Czysta Architektura</h2>
+          </div>
+
+          <div>
+            <span class="text-teal-400">&lt;main</span> <span class="text-amber-400">class</span>=<span class="text-emerald-400">"czysta-wydajnosc"</span><span class="text-teal-400">&gt;</span>
+          </div>
+          
+          <div class="relative grid grid-cols-1 items-start min-h-[160px] md:min-h-[110px]">
+            
+            <div id="code-state-1" class="col-start-1 row-start-1 space-y-3 md:space-y-4 w-full">
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;h1&gt;</span><span class="text-white font-sans font-bold text-xl md:text-3xl tracking-tight px-1">Czysta wydajność</span><span class="text-teal-400">&lt;/h1&gt;</span>
+              </div>
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;p&gt;</span><span class="text-zinc-300 font-sans text-sm md:text-base px-1">Zero niepotrzebnego bloatu. Tylko czysty, zoptymalizowany kod semantyczny dostarczany błyskawicznie do przeglądarki.</span><span class="text-teal-400">&lt;/p&gt;</span>
+              </div>
+            </div>
+
+            <div id="code-state-2" class="col-start-1 row-start-1 space-y-3 md:space-y-4 opacity-0 w-full">
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;h1&gt;</span><span class="text-emerald-400 font-sans font-bold text-xl md:text-3xl tracking-tight px-1">Generowanie Hybrid / SSR</span><span class="text-teal-400">&lt;/h1&gt;</span>
+              </div>
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;p&gt;</span><span class="text-zinc-300 font-sans text-sm md:text-base px-1">Strony kompilowane do ultra-szybkiego HTML bezpośrednio na brzegu sieci (Edge). Maksymalny współczynnik konwersji i bezbłędne SEO.</span><span class="text-teal-400">&lt;/p&gt;</span>
+              </div>
+            </div>
+
+            <div id="code-state-3" class="col-start-1 row-start-1 space-y-3 md:space-y-4 opacity-0 w-full">
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;h1&gt;</span><span class="text-teal-400 font-sans font-bold text-xl md:text-3xl tracking-tight px-1">Static HTML Exports</span><span class="text-teal-400">&lt;/h1&gt;</span>
+              </div>
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;p&gt;</span><span class="text-zinc-300 font-sans text-sm md:text-base px-1">Pełna prekompilacja do niezależnych plików statycznych. Natychmiastowe ładowanie bez opóźnień serwerowych i zerowy koszt hostingu globalnego.</span><span class="text-teal-400">&lt;/p&gt;</span>
+              </div>
+            </div>
+
+            <div id="code-state-4" class="col-start-1 row-start-1 space-y-3 md:space-y-4 opacity-0 w-full">
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;h1&gt;</span><span class="text-cyan-400 font-sans font-bold text-xl md:text-3xl tracking-tight px-1">Astro Islands Architecture</span><span class="text-teal-400">&lt;/h1&gt;</span>
+              </div>
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;p&gt;</span><span class="text-zinc-300 font-sans text-sm md:text-base px-1">Komponenty interaktywne są izolowane. JavaScript ładuje się i aktywuje wyłącznie tam, gdzie użytkownik wejdzie w realną interakcję.</span><span class="text-teal-400">&lt;/p&gt;</span>
+              </div>
+            </div>
+
+            <div id="code-state-5" class="col-start-1 row-start-1 space-y-3 md:space-y-4 opacity-0 w-full">
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;h1&gt;</span><span class="text-amber-400 font-sans font-bold text-xl md:text-3xl tracking-tight px-1">Automated Asset Pipeline</span><span class="text-teal-400">&lt;/h1&gt;</span>
+              </div>
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;p&gt;</span><span class="text-zinc-300 font-sans text-sm md:text-base px-1">Automatyczna konwersja obrazów do formatów nowej generacji (AVIF/WebP) i bezstratny resizing w locie. Zero marnowania pasma.</span><span class="text-teal-400">&lt;/p&gt;</span>
+              </div>
+            </div>
+
+            <div id="code-state-6" class="col-start-1 row-start-1 space-y-3 md:space-y-4 opacity-0 w-full">
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;h1&gt;</span><span class="text-red-400 font-sans font-bold text-xl md:text-3xl tracking-tight px-1">Zero-JS Vulnerabilities</span><span class="text-teal-400">&lt;/h1&gt;</span>
+              </div>
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;p&gt;</span><span class="text-zinc-300 font-sans text-sm md:text-base px-1">Brak bazy danych po stronie klienta i brak podatności w runtime chroni witrynę przed atakami. Statyczny i hybrydowy kod jest bezpieczny.</span><span class="text-teal-400">&lt;/p&gt;</span>
+              </div>
+            </div>
+
+            <div id="code-state-7" class="col-start-1 row-start-1 space-y-3 md:space-y-4 opacity-0 w-full">
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;h1&gt;</span><span class="text-purple-400 font-sans font-bold text-xl md:text-3xl tracking-tight px-1">100/100 Core Web Vitals</span><span class="text-teal-400">&lt;/h1&gt;</span>
+              </div>
+              <div class="pl-2">
+                <span class="text-teal-400">&lt;p&gt;</span><span class="text-zinc-300 font-sans text-sm md:text-base px-1">Perfekcyjne wskaźniki INP, LCP oraz CLS przekładają się bezpośrednio na wyższe pozycje w wyszukiwarce Google oraz znacznie niższy bounce-rate.</span><span class="text-teal-400">&lt;/p&gt;</span>
+              </div>
+            </div>
+
+          </div>
+
+          <div>
+            <span class="text-teal-400">&lt;/main&gt;</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const maxOffset = 263.89;
+  const getOffset = (score: number) => maxOffset - (score / 100) * maxOffset;
+
+  const getColorForScore = (score: number) => {
+    if (score < 50) {
+      const ratio = score / 50;
+      return gsap.utils.interpolate("#ef4444", "#f97316", ratio); 
+    } else if (score < 90) {
+      const ratio = (score - 50) / 40;
+      return gsap.utils.interpolate("#f97316", "#eab308", ratio); 
+    } else {
+      const ratio = (score - 90) / 10;
+      return gsap.utils.interpolate("#eab308", "#10b981", ratio); 
+    }
+  };
+
+  const wrapper = document.getElementById("perf-section-wrapper");
+  const container = document.getElementById("perf-container");
+  const titleBad = document.getElementById("perf-title-bad");
+  const titleGood = document.getElementById("perf-title-good");
+  const mockup = document.getElementById("pagespeed-mockup");
+  const circle = document.getElementById("gauge-circle");
+  const scoreText = document.getElementById("gauge-score");
+  const rawContent = document.getElementById("raw-content");
+
+  const states = [
+    document.getElementById("code-state-1"),
+    document.getElementById("code-state-2"),
+    document.getElementById("code-state-3"),
+    document.getElementById("code-state-4"),
+    document.getElementById("code-state-5"),
+    document.getElementById("code-state-6"),
+    document.getElementById("code-state-7")
+  ];
+
+  const metricElements = ["#metric-fcp", "#metric-lcp", "#metric-tbt", "#metric-cls"];
+  const iconElements = ["#icon-fcp", "#icon-lcp", "#icon-tbt", "#icon-cls"];
+  const allElementsToColor = [scoreText, circle, ...metricElements, ...iconElements];
+
+  const metrics = {
+    score: 38,
+    fcp: 3.4,
+    lcp: 5.8,
+    tbt: 840,
+    cls: 0.28,
+  };
+
+  gsap.set(allElementsToColor, { color: "#ef4444", stroke: "#ef4444" });
+  if (circle) circle.style.strokeDashoffset = String(getOffset(38));
+
+  const mainTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: wrapper,
+      start: "top top",
+      end: "+=950%", 
+      pin: container,
+      scrub: 0.1,
+    },
+  });
+
+  mainTl.to(metrics, {
+    score: 100,
+    fcp: 0.5,
+    lcp: 1.2,
+    tbt: 0,
+    cls: 0.01,
+    duration: 3,
+    onUpdate: () => {
+      const currentScore = Math.floor(metrics.score);
+      if (scoreText) scoreText.innerText = String(currentScore);
+      if (circle) circle.style.strokeDashoffset = String(getOffset(metrics.score));
+
+      const fcpEl = document.getElementById("metric-fcp");
+      const lcpEl = document.getElementById("metric-lcp");
+      const tbtEl = document.getElementById("metric-tbt");
+      const clsEl = document.getElementById("metric-cls");
+
+      if (fcpEl) fcpEl.innerText = `${metrics.fcp.toFixed(1)} s`;
+      if (lcpEl) lcpEl.innerText = `${metrics.lcp.toFixed(1)} s`;
+      if (tbtEl) tbtEl.innerText = `${Math.floor(metrics.tbt)} ms`;
+      if (clsEl) clsEl.innerText = metrics.cls.toFixed(2);
+
+      const dynamicColor = getColorForScore(metrics.score);
+      gsap.set(allElementsToColor, { color: dynamicColor, stroke: dynamicColor });
+
+      if (metrics.score > 85) {
+        document.getElementById("icon-fcp")?.setAttribute("class", "ph ph-check-circle");
+        document.getElementById("icon-lcp")?.setAttribute("class", "ph ph-check-circle");
+        document.getElementById("icon-tbt")?.setAttribute("class", "ph ph-check-circle");
+        document.getElementById("icon-cls")?.setAttribute("class", "ph ph-check-circle");
+      } else if (metrics.score > 55) {
+        document.getElementById("icon-fcp")?.setAttribute("class", "ph ph-warning");
+        document.getElementById("icon-lcp")?.setAttribute("class", "ph ph-warning");
+        document.getElementById("icon-tbt")?.setAttribute("class", "ph ph-warning");
+        document.getElementById("icon-cls")?.setAttribute("class", "ph ph-warning");
+      } else {
+        document.getElementById("icon-fcp")?.setAttribute("class", "ph ph-warning-octagon");
+        document.getElementById("icon-lcp")?.setAttribute("class", "ph ph-warning");
+        document.getElementById("icon-tbt")?.setAttribute("class", "ph ph-warning-octagon");
+        document.getElementById("icon-cls")?.setAttribute("class", "ph ph-warning");
+      }
+    },
+  })
+  .to(titleBad, { opacity: 0, duration: 1.2 }, "<")
+  .to(titleGood, { opacity: 1, duration: 1.2 }, "<+0.4")
+  
+  .to({}, { duration: 0.5 })
+
+  .to(mockup, {
+    rotationX: 65,
+    z: -600,
+    y: "-150%",
+    opacity: 0,
+    duration: 2,
+    ease: "power2.inOut",
+  })
+  .to(rawContent, {
+    opacity: 1,
+    scale: 1,
+    pointerEvents: "auto",
+    duration: 2,
+    ease: "power2.out",
+  }, "=-1.5")
+  
+  .to({}, { duration: 0.3 });
+
+  states.forEach((currentState, index) => {
+    if (index === states.length - 1) return;
+    
+    const nextState = states[index + 1];
+
+    mainTl.set(nextState, {
+      y: "20px",
+      opacity: 0
+    });
+
+    mainTl.to(currentState, {
+      y: "-20px",
+      opacity: 0,
+      duration: 1.2,
+      ease: "power1.in"
+    })
+    .to(nextState, {
+      y: "0px",
+      opacity: 1,
+      duration: 1.2,
+      ease: "power2.out"
+    }, "=-0.9");
+    
+    if (index < states.length - 2) {
+      mainTl.to({}, { duration: 0.6 });
+    }
+  });
+</script>
