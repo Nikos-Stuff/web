@@ -1,0 +1,98 @@
+<script>
+import gsap from "gsap";
+
+// cache layout boundaries globally to avoid layout thrashing on mousemove
+let cachedRect: DOMRect | null = null;
+let currentGlowTarget: HTMLElement | null = null;
+
+document.addEventListener("mousemove", (e: MouseEvent) => {
+  const target = (e.target as HTMLElement).closest<HTMLElement>(
+    "button, a, [data-glow], .glow-card",
+  );
+
+  if (!target) {
+    currentGlowTarget = null;
+    cachedRect = null;
+    return;
+  }
+
+  if (!target.hasAttribute("data-glow-initialized")) {
+    const computedStyle = window.getComputedStyle(target);
+    const borderRadius = computedStyle.borderRadius ? computedStyle.borderRadius.trim() : "";
+
+    if (!borderRadius || borderRadius === "0px") {
+      return; 
+    }
+
+    target.setAttribute("data-glow-initialized", "true");
+
+    if (window.getComputedStyle(target).position === "static") {
+      target.style.position = "relative";
+    }
+
+    const borderGlow = document.createElement("span");
+    borderGlow.classList.add("border-glow-layer");
+
+    const offsetSize = "1px";
+
+    Object.assign(borderGlow.style, {
+      position: "absolute",
+      top: `-${offsetSize}`,
+      left: `-${offsetSize}`,
+      right: `-${offsetSize}`,
+      bottom: `-${offsetSize}`,
+      padding: "1px", 
+      borderRadius: `calc(${borderRadius} + ${offsetSize})`,
+      pointerEvents: "none",
+      opacity: "0",
+      zIndex: "1",
+      background:
+        "radial-gradient(280px circle at var(--x, 0px) var(--y, 0px), rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.02) 60%, transparent 100%)",
+      webkitMask:
+        "linear-gradient(#fff, #fff) content-box, linear-gradient(#fff, #fff)",
+      webkitMaskComposite: "xor",
+      maskComposite: "exclude",
+    });
+
+    target.appendChild(borderGlow);
+
+    target.addEventListener("mouseleave", () => {
+      currentGlowTarget = null;
+      cachedRect = null;
+      gsap.to(borderGlow, {
+        opacity: 0,
+        duration: 0.4,
+        ease: "power2.out",
+      });
+    });
+  }
+
+
+  if (!target.matches(":hover")) {
+    const borderGlow = target.querySelector<HTMLElement>(".border-glow-layer");
+    if (borderGlow) {
+      gsap.to(borderGlow, { opacity: 0, duration: 0.3 });
+    }
+    return;
+  }
+
+  if (currentGlowTarget !== target || !cachedRect) {
+    currentGlowTarget = target;
+    cachedRect = target.getBoundingClientRect();
+  }
+
+  const borderGlow = target.querySelector<HTMLElement>(".border-glow-layer");
+  if (borderGlow) {
+    const x = e.clientX - cachedRect.left + 1;
+    const y = e.clientY - cachedRect.top + 1;
+
+    gsap.to(borderGlow, {
+      "--x": `${x}px`,
+      "--y": `${y}px`,
+      opacity: 1,
+      duration: 0.1,
+      ease: "power1.out",
+    } as any);
+  }
+});
+</script>

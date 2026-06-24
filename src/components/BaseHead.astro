@@ -12,6 +12,7 @@ const { title, description, image = "/open-graph.jpg" } = Astro.props;
 // import { ViewTransitions } from  "astro:transitions"
 import CursorEffect from "@components/page_effects/CursorHoverEffect.astro";
 import PageAnimations from "@components/page_effects/CustomAnimations.astro";
+import CursorBorderAnim from "@components/page_effects/CursorBorderAnim.astro";
 ---
 
 <!-- Preconnect -->
@@ -61,6 +62,7 @@ import PageAnimations from "@components/page_effects/CustomAnimations.astro";
 
 <PageAnimations />
 <CursorEffect />
+<CursorBorderAnim />
 <!--<script is:inline async src="/js/bg.js"/>-->
 <!--<script is:inline data-astro-rerun async src="/js/typewriter.js"/>-->
 

@@ -422,3 +422,7 @@ article img {
     width: 0px;
     background: transparent;
 }
+
+.border-glow-layer {
+  box-sizing: border-box;
+}
