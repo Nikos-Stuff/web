@@ -56,6 +56,18 @@ document.addEventListener("mousemove", (e: MouseEvent) => {
 
     target.appendChild(borderGlow);
 
+    target.addEventListener("mousemove", (elEvent: MouseEvent) => {
+      if (elEvent.currentTarget === target) {
+        gsap.to(borderGlow, {
+          "--x": `${elEvent.offsetX}px`,
+          "--y": `${elEvent.offsetY}px`,
+          opacity: 1,
+          duration: 0.1,
+          ease: "power1.out",
+        } as any);
+      }
+    });
+
     target.addEventListener("mouseleave", () => {
       currentGlowTarget = null;
       cachedRect = null;
@@ -67,32 +79,11 @@ document.addEventListener("mousemove", (e: MouseEvent) => {
     });
   }
 
-
   if (!target.matches(":hover")) {
     const borderGlow = target.querySelector<HTMLElement>(".border-glow-layer");
     if (borderGlow) {
       gsap.to(borderGlow, { opacity: 0, duration: 0.3 });
     }
-    return;
-  }
-
-  if (currentGlowTarget !== target || !cachedRect) {
-    currentGlowTarget = target;
-    cachedRect = target.getBoundingClientRect();
-  }
-
-  const borderGlow = target.querySelector<HTMLElement>(".border-glow-layer");
-  if (borderGlow) {
-    const x = e.clientX - cachedRect.left + 1;
-    const y = e.clientY - cachedRect.top + 1;
-
-    gsap.to(borderGlow, {
-      "--x": `${x}px`,
-      "--y": `${y}px`,
-      opacity: 1,
-      duration: 0.1,
-      ease: "power1.out",
-    } as any);
   }
 });
 </script>
