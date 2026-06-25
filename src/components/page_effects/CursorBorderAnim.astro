@@ -1,25 +1,18 @@
 <script>
 import gsap from "gsap";
 
-// cache layout boundaries globally to avoid layout thrashing on mousemove
-let cachedRect: DOMRect | null = null;
-let currentGlowTarget: HTMLElement | null = null;
-
 document.addEventListener("mousemove", (e: MouseEvent) => {
   const target = (e.target as HTMLElement).closest<HTMLElement>(
     "button, a, [data-glow], .glow-card",
   );
 
-  if (!target) {
-    currentGlowTarget = null;
-    cachedRect = null;
-    return;
-  }
+  if (!target) return;
 
   if (!target.hasAttribute("data-glow-initialized")) {
     const computedStyle = window.getComputedStyle(target);
     const borderRadius = computedStyle.borderRadius ? computedStyle.borderRadius.trim() : "";
 
+    // ignore sharp elements
     if (!borderRadius || borderRadius === "0px") {
       return; 
     }
@@ -56,21 +49,30 @@ document.addEventListener("mousemove", (e: MouseEvent) => {
 
     target.appendChild(borderGlow);
 
+    // cache boundaries locally per-element to completely block Layout Thrashing
+    let bounds = target.getBoundingClientRect();
+
+    // update the cache only on mouseenter 
+    target.addEventListener("mouseenter", () => {
+      bounds = target.getBoundingClientRect();
+    });
+
+    // viewport positioning 
     target.addEventListener("mousemove", (elEvent: MouseEvent) => {
-      if (elEvent.currentTarget === target) {
-        gsap.to(borderGlow, {
-          "--x": `${elEvent.offsetX}px`,
-          "--y": `${elEvent.offsetY}px`,
-          opacity: 1,
-          duration: 0.1,
-          ease: "power1.out",
-        } as any);
-      }
+      // cursor position relative to the button boundary box ( i guess that works? )
+      const x = elEvent.clientX - bounds.left;
+      const y = elEvent.clientY - bounds.top;
+
+      gsap.to(borderGlow, {
+        "--x": `${x}px`,
+        "--y": `${y}px`,
+        opacity: 1,
+        duration: 0.1,
+        ease: "power1.out",
+      } as any);
     });
 
     target.addEventListener("mouseleave", () => {
-      currentGlowTarget = null;
-      cachedRect = null;
       gsap.to(borderGlow, {
         opacity: 0,
         duration: 0.4,
@@ -79,6 +81,7 @@ document.addEventListener("mousemove", (e: MouseEvent) => {
     });
   }
 
+  // cleanup stuck stuff
   if (!target.matches(":hover")) {
     const borderGlow = target.querySelector<HTMLElement>(".border-glow-layer");
     if (borderGlow) {
