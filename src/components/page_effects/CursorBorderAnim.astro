@@ -7,12 +7,11 @@ document.addEventListener("mousemove", (e: MouseEvent) => {
   );
 
   if (!target) return;
-
+  
   if (!target.hasAttribute("data-glow-initialized")) {
     const computedStyle = window.getComputedStyle(target);
     const borderRadius = computedStyle.borderRadius ? computedStyle.borderRadius.trim() : "";
 
-    // ignore sharp elements
     if (!borderRadius || borderRadius === "0px") {
       return; 
     }
@@ -22,6 +21,14 @@ document.addEventListener("mousemove", (e: MouseEvent) => {
     if (window.getComputedStyle(target).position === "static") {
       target.style.position = "relative";
     }
+
+
+    Array.from(target.children).forEach((child) => {
+      const htmlChild = child as HTMLElement;
+      if (!htmlChild.classList.contains("border-glow-layer")) {
+        htmlChild.style.pointerEvents = "none";
+      }
+    });
 
     const borderGlow = document.createElement("span");
     borderGlow.classList.add("border-glow-layer");
@@ -49,27 +56,16 @@ document.addEventListener("mousemove", (e: MouseEvent) => {
 
     target.appendChild(borderGlow);
 
-    // cache boundaries locally per-element to completely block Layout Thrashing
-    let bounds = target.getBoundingClientRect();
-
-    // update the cache only on mouseenter 
-    target.addEventListener("mouseenter", () => {
-      bounds = target.getBoundingClientRect();
-    });
-
-    // viewport positioning 
     target.addEventListener("mousemove", (elEvent: MouseEvent) => {
-      // cursor position relative to the button boundary box ( i guess that works? )
-      const x = elEvent.clientX - bounds.left;
-      const y = elEvent.clientY - bounds.top;
-
-      gsap.to(borderGlow, {
-        "--x": `${x}px`,
-        "--y": `${y}px`,
-        opacity: 1,
-        duration: 0.1,
-        ease: "power1.out",
-      } as any);
+      if (elEvent.currentTarget === target) {
+        gsap.to(borderGlow, {
+          "--x": `${elEvent.offsetX}px`,
+          "--y": `${elEvent.offsetY}px`,
+          opacity: 1,
+          duration: 0.1,
+          ease: "power1.out",
+        } as any);
+      }
     });
 
     target.addEventListener("mouseleave", () => {
@@ -81,7 +77,6 @@ document.addEventListener("mousemove", (e: MouseEvent) => {
     });
   }
 
-  // cleanup stuck stuff
   if (!target.matches(":hover")) {
     const borderGlow = target.querySelector<HTMLElement>(".border-glow-layer");
     if (borderGlow) {
