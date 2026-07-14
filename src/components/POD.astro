@@ -67,6 +67,7 @@ console.log(" APOD will use URL:", finalUrl);
               id="apod-image"
               class="w-svw h-svh object-cover brightness-[0.3] saturate-[0.8] duration-500 opacity-0 transform scale-[1.5] transition-all"
               controls
+              muted
               autoplay
               loop
               onloadeddata={`document.getElementById('apod-image').classList.add('opacity-100'); document.getElementById('apod-image').classList.remove('opacity-0'); document.getElementById('pod-container').style.opacity = 1;`}
