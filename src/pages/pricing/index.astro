@@ -13,7 +13,6 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 ---
 
 <PageLayout title="Pricing" description={SITE.DESCRIPTION}>
-
   <!-- Dark Theme: Stars -->
   <div class="absolute inset-0 block">
     <div id="stars1" class="fixed inset-0"></div>
@@ -60,252 +59,127 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       <section class="animate">
         <div class="space-y-4">
           <div class="flex justify-between">
-            <p id="web" class="font-semibold text-white">
-              Strony WWW
-            </p>
+            <p id="web" class="font-semibold text-white">Strony WWW</p>
           </div>
           <div class="space-y-4 transition-all duration-300 ease-in-out">
-            <!-- Basic Plan -->
+            <!-- Starter Plan -->
             <div class="animate">
               <div
                 class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out relative"
               >
-                <div
-                  class="w-full z-10 relative group-hover:text-white blend"
-                >
-                  <div class="flex flex-wrap items-center gap-2">
-                    <div
-                      class="text-sm capitalize px-3 py-1 rounded-full border border-white/25"
-                    >
-                      ✏️ Web
-                    </div>
-                  </div>
+                <div class="w-full z-10 relative">
                   <div
-                    class="font-semibold mt-3 mb-3 text-white"
+                    class="text-sm capitalize px-3 py-1 rounded-full border border-white/25 w-max"
                   >
+                    ✏️ Web
+                  </div>
+                  <div class="font-semibold mt-3 mb-3 text-white text-xl">
                     ✨ Starter
                   </div>
-                  <div class="text-sm">
-                    Prosta, oraz funkcjonalna strona internetowa oparta na
-                    WordPressie, wyposażona we wszystkie niezbędne wtyczki i
-                    funkcje. Zaprojektowana z dbałością o nowoczesny wygląd,
-                    intuicyjną obsługę oraz niezawodne działanie, aby sprostać
-                    wymaganiom użytkowników.
-
-                    <div class="flex flex-col items-start mt-3 gap-1">
+                  <div class="text-sm text-gray-400">
+                    Prosta, funkcjonalna strona oparta na WordPressie. Idealna
+                    dla małych firm potrzebujących stabilnej obecności w sieci.
+                    <div class="flex flex-col mt-4 gap-2 text-white">
                       <div class="flex items-center gap-2">
-                        <i class="ph ph-shopping-bag text-xl"></i>
-                        <span>
-                          <strong>WooCommerce</strong> ready
-                        </span>
+                        <i class="ph ph-code-block text-xl"></i>
+                        <span><strong>WordPress CMS</strong> ready</span>
                       </div>
-
                       <div class="flex items-center gap-2">
                         <i class="ph ph-device-mobile text-xl"></i>
-                        <span>
-                          <strong>Mobile Friendly</strong>
-                        </span>
+                        <span><strong>Mobile Friendly</strong> design</span>
                       </div>
-
                       <div class="flex items-center gap-2">
-                        <i class="ph ph-person-arms-spread text-xl"></i>
-                        <span>
-                          <strong>Łatwe w użyciu</strong>
-                        </span>
+                        <i class="ph ph-shield-check text-xl"></i>
+                        <span
+                          ><strong>Aktualizacje</strong> i bezpieczeństwo</span>
                       </div>
                     </div>
                   </div>
-
-                  <div class="flex items-stretch mt-4 mb-4">
-                    <!-- Vertical line -->
-                    <div
-                      class="mr-3 rounded-full bg-white/20 w-1"
-                    >
-                    </div>
-
-                    <!-- Content -->
-                    <div class="font-semibold text-white">
-                      <span class="text-2xl">800–1900 PLN / yr</span>
-                      <p class="text-sm text-gray-400 mt-2">
-                        Breakdown:
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        150 PLN – Hosting i konfiguracja serwera
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        150–300 PLN – Aktualizacje, łatki bezpieczeństwa i
-                        konserwacja
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        200–500 PLN – Dodatkowe funkcje i personalizacja
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        100–300 PLN – Optymalizacja wydajności / Lighthouse
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        100–200 PLN – Raporty miesięczne + wsparcie
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        100–450 PLN – Aktualizacje motywu, pluginów, SEO
-                      </p>
-                    </div>
+                  <div class="mt-6 font-semibold text-white">
+                    <span class="text-2xl">350 PLN / mies.</span>
                   </div>
-
-                  <ul class="flex flex-wrap mt-2 gap-1">
-                    <li
-                      class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75"
-                    >
-                      BASIC
-                    </li>
-                    <li
-                      class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75"
-                    >
-                      WORDPRESS
-                    </li>
-                  </ul>
-
-                  <a
-                    href="#"
-                    onclick="openStripePopup('https://buy.stripe.com/6oUaEWa7abrm9GSdzBdAk00?locale=pl'); return false;"
-                    class="group p-4 mt-5 gap-3 flex items-center border rounded-lg hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out"
-                  >
-                    <span
-                      class="w-full z-10 relative group-hover:text-white text-center transition-color duration-300"
-                    >
-                      Szybki Zakup
-                    </span>
-                  </a>
                 </div>
               </div>
             </div>
 
-            <!-- Standard Plan -->
+            <!-- Hybrid Plan -->
+            <div class="animate">
+              <div
+                class="gray-shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-blue-400/10 border-blue-400/20 transition-all duration-300 ease-in-out relative"
+              >
+                <div class="w-full z-10 relative">
+                  <div
+                    class="text-sm capitalize px-3 py-1 rounded-full border border-blue-400/50 text-blue-200 w-max"
+                  >
+                    🚀 Hybrid
+                  </div>
+                  <div class="font-semibold mt-3 mb-3 text-white text-xl">
+                    ⚡ Headless + Astro SSR
+                  </div>
+                  <div class="text-sm text-gray-400">
+                    Najwyższa wydajność. WordPress pełni rolę bezpiecznego
+                    zaplecza (CMS), a Astro.js generuje błyskawiczną stronę.
+                    <div class="flex flex-col mt-4 gap-2 text-white">
+                      <div class="flex items-center gap-2">
+                        <i class="ph ph-rocket text-xl text-blue-400"></i>
+                        <span><strong>Astro.js</strong> SSR performance</span>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <i class="ph ph-gear text-xl text-blue-400"></i>
+                        <span><strong>Headless</strong> API architecture</span>
+                      </div>
+                      <div class="flex items-center gap-2">
+                        <i class="ph ph-chart-line text-xl text-blue-400"></i>
+                        <span><strong>Zaawansowana</strong> optymalizacja</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-6 font-semibold text-white">
+                    <span class="text-2xl">1200 PLN / mies.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Static Plan -->
             <div class="animate">
               <div
                 class="shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-yellow-400/10 border-yellow-400/20 transition-all duration-300 ease-in-out relative"
               >
-                <div
-                  class="w-full z-10 relative group-hover:text-white blend"
-                >
-                  <div class="flex flex-wrap items-center gap-2">
-                    <div
-                      class="text-sm capitalize px-3 py-1 rounded-full border border-white/25"
-                    >
-                      ✏️ Web
-                    </div>
-                  </div>
+                <div class="w-full z-10 relative">
                   <div
-                    class="font-semibold mt-3 mb-3 text-white"
+                    class="text-sm capitalize px-3 py-1 rounded-full border border-yellow-400/50 text-yellow-200 w-max"
                   >
+                    🧱 Static
+                  </div>
+                  <div class="font-semibold mt-3 mb-3 text-white text-xl">
                     ✨ Strona Statyczna
                   </div>
-                  <div class="text-sm">
-                    Popularna opcja – statyczna strona internetowa, podobna do
-                    mojej, zapewniająca niezawodne działanie. Integracja z
-                    GitHubem, pełna automatyzacja i maksymalna prostota przy
-                    zachowaniu pełnej funkcjonalności.
-
-                    <div class="flex flex-col items-start mt-3 gap-1">
+                  <div class="text-sm text-gray-400">
+                    Rozwiązanie dla wymagających szybkości. Wykorzystanie
+                    GitHuba i Astro do serwowania statycznych treści.
+                    <div class="flex flex-col mt-4 gap-2 text-white">
                       <div class="flex items-center gap-2">
-                        <i class="ph ph-markdown-logo text-xl"></i>
-                        <span>
-                          System <strong>Markdown</strong>
-                        </span>
+                        <i class="ph ph-markdown-logo text-xl text-yellow-400"
+                        ></i>
+                        <span><strong>System</strong> Markdown</span>
                       </div>
-
                       <div class="flex items-center gap-2">
-                        <i class="ph ph-speedometer text-xl"></i>
-                        <span>
-                          Powered by <strong>Astro.js</strong>
-                        </span>
+                        <i class="ph ph-lightning text-xl text-yellow-400"></i>
+                        <span><strong>Automatyzacja</strong> CI/CD</span>
                       </div>
-
                       <div class="flex items-center gap-2">
-                        <i class="ph ph-lightning text-xl"></i>
-                        <span>
-                          <strong>Szybka i Niezawodna</strong>
-                        </span>
+                        <i class="ph ph-github-logo text-xl text-yellow-400"
+                        ></i>
+                        <span><strong>Wersjonowanie</strong> kodu</span>
                       </div>
                     </div>
                   </div>
-
-                  <div class="flex items-stretch mt-4 mb-4">
-                    <!-- Vertical line -->
-                    <div
-                      class="mr-3 rounded-full bg-white/20 w-1"
-                    >
-                    </div>
-
-                    <!-- Content -->
-                    <div class="font-semibold text-white">
-                      <span class="text-2xl">2000–3700 PLN / yr</span>
-                      <p class="text-sm text-gray-400 mt-2">
-                        Breakdown:
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        300 PLN – Hosting i konfiguracja serwera
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        400–800 PLN – Dodatkowe funkcje i integracje
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        300–600 PLN – Optymalizacja wydajności / Lighthouse
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        600–1100 PLN – Aktualizacje komponentów i zabezpieczenia
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        250–500 PLN – UI/UX audyty i redesign micro-interakcji
-                      </p>
-                      <p class="text-xs text-gray-400">
-                        150–400 PLN – Raporty techniczne, analityka i wsparcie
-                      </p>
-                    </div>
+                  <div class="mt-6 font-semibold text-white">
+                    <span class="text-2xl">900 PLN / mies.</span>
                   </div>
-
-                  <ul class="flex flex-wrap mt-2 gap-1">
-                    <li
-                      class="text-xs uppercase py-0.5 px-1 rounded bg-yellow-300/20 text-yellow-200/75"
-                    >
-                      POPULARNE
-                    </li>
-                    <li
-                      class="text-xs uppercase py-0.5 px-1 rounded bg-white/20 text-white/75"
-                    >
-                      ASTRO
-                    </li>
-                  </ul>
                 </div>
               </div>
-            </div>
-
-            <!-- Premium Plan -->
-            <div class="animate">
-              <div
-                class="group h-117 p-4 content-center text-center border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out relative flex flex-col justify-center items-center"
-              >
-                <i class="ph ph-question-mark text-7xl"></i>
-                <p class="text-sm">
-                  Nie znalazłeś tego czego szukałeś?<br />
-                  Skontaktuj się ze mną i opisz swoje zamówienie.<br />
-                  Na pewno coś wymyślimy!
-                </p>
-              </div>
-            </div>
-
-            <!-- Fiverr -->
-            <div class="animate">
-              <a
-                href="https://www.fiverr.com/niko_fx?source=gig_page"
-                target="_blank"
-                class="group p-4 gap-3 flex items-center border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out"
-              >
-                <span
-                  class="w-full z-10 relative group-hover:text-white text-center transition-color duration-300"
-                >
-                  Zobacz więcej ofert na Fiverr
-                </span>
-              </a>
             </div>
           </div>
         </div>
@@ -316,10 +190,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       <section class="animate">
         <div class="space-y-4">
           <div class="flex justify-between">
-            <p
-              id="hosting_related"
-              class="font-semibold text-white"
-            >
+            <p id="hosting_related" class="font-semibold text-white">
               Konfiguracja i Zarządzanie Hostingiem
             </p>
           </div>
@@ -328,9 +199,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
             <div
               class="gray-shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out relative"
             >
-              <div
-                class="w-full z-10 relative group-hover:text-white blend"
-              >
+              <div class="w-full z-10 relative group-hover:text-white blend">
                 <div class="flex flex-wrap items-center gap-2">
                   <div
                     class="text-sm capitalize px-3 py-1 rounded-full border border-white/25"
@@ -373,17 +242,12 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
                 <div class="flex items-stretch mt-4 mb-4">
                   <!-- Vertical line -->
-                  <div
-                    class="mr-3 rounded-full bg-white/20 w-1"
-                  >
-                  </div>
+                  <div class="mr-3 rounded-full bg-white/20 w-1"></div>
 
                   <!-- Content -->
                   <div class="font-semibold text-white">
                     <span class="text-2xl">Do Uzgodnienia</span>
-                    <p class="text-sm text-gray-400 mt-2">
-                      Breakdown:
-                    </p>
+                    <p class="text-sm text-gray-400 mt-2">Breakdown:</p>
                     <p class="text-xs text-gray-400">
                       ? PLN - Cena wybranego pakietu
                     </p>
@@ -430,10 +294,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
       <section class="animate">
         <div class="space-y-4">
           <div class="flex justify-between">
-            <p
-              id="local_services"
-              class="font-semibold text-white"
-            >
+            <p id="local_services" class="font-semibold text-white">
               Lokalne Usługi
             </p>
           </div>
@@ -443,9 +304,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
               <div
                 class="gray-shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out relative"
               >
-                <div
-                  class="w-full z-10 relative group-hover:text-white blend"
-                >
+                <div class="w-full z-10 relative group-hover:text-white blend">
                   <div class="flex flex-wrap items-center gap-2">
                     <div
                       class="text-sm capitalize px-3 py-1 rounded-full border border-white/25"
@@ -453,9 +312,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                       🖨️ 3D Printing
                     </div>
                   </div>
-                  <div
-                    class="font-semibold mt-3 mb-3 text-white"
-                  >
+                  <div class="font-semibold mt-3 mb-3 text-white">
                     ⚙️ Średnie Wydruki 3D
                   </div>
                   <div class="text-sm">
@@ -483,7 +340,8 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                         <i class="ph ph-truck text-xl"></i>
                         <span>
                           Szybka Dostawa <small>(InPost)</small> i <strong
-                            >Realizacja</strong>
+                            >Realizacja</strong
+                          >
                         </span>
                       </div>
                     </div>
@@ -491,17 +349,12 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
 
                   <div class="flex items-stretch mt-4 mb-4">
                     <!-- Vertical line -->
-                    <div
-                      class="mr-3 rounded-full bg-white/20 w-1"
-                    >
-                    </div>
+                    <div class="mr-3 rounded-full bg-white/20 w-1"></div>
 
                     <!-- Content -->
                     <div class="font-semibold text-white">
                       <span class="text-2xl">Do Uzgodnienia</span>
-                      <p class="text-sm text-gray-400 mt-2">
-                        Breakdown:
-                      </p>
+                      <p class="text-sm text-gray-400 mt-2">Breakdown:</p>
                       <p class="text-xs text-gray-400">
                         ? PLN - Typ i zakres wydruku
                       </p>
