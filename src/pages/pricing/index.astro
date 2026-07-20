@@ -68,13 +68,17 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                 class="group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-white/10 border-white/20 transition-all duration-300 ease-in-out relative"
               >
                 <div class="w-full z-10 relative">
+                  <div class="absolute top-0 right-0 opacity-10">
+                    <i class="ph ph-browsers text-6xl text-gray-300"></i>
+                  </div>
+
                   <div
                     class="text-sm capitalize px-3 py-1 rounded-full border border-white/25 w-max"
                   >
-                    ✏️ Web
+                    Web
                   </div>
                   <div class="font-semibold mt-3 mb-3 text-white text-xl">
-                    ✨ Starter
+                    Starter
                   </div>
                   <div class="text-sm text-gray-400">
                     Prosta, funkcjonalna strona oparta na WordPressie. Idealna
@@ -91,7 +95,8 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                       <div class="flex items-center gap-2">
                         <i class="ph ph-shield-check text-xl"></i>
                         <span
-                          ><strong>Aktualizacje</strong> i bezpieczeństwo</span>
+                          ><strong>Aktualizacje</strong> i bezpieczeństwo</span
+                        >
                       </div>
                     </div>
                   </div>
@@ -108,13 +113,17 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                 class="gray-shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-blue-400/10 border-blue-400/20 transition-all duration-300 ease-in-out relative"
               >
                 <div class="w-full z-10 relative">
+                  <div class="absolute top-0 right-0 opacity-10">
+                    <i class="ph ph-database text-6xl text-gray-300"></i>
+                  </div>
+
                   <div
                     class="text-sm capitalize px-3 py-1 rounded-full border border-blue-400/50 text-blue-200 w-max"
                   >
-                    🚀 Hybrid
+                    Hybrid
                   </div>
                   <div class="font-semibold mt-3 mb-3 text-white text-xl">
-                    ⚡ Headless + Astro SSR
+                    Headless + Astro SSR
                   </div>
                   <div class="text-sm text-gray-400">
                     Najwyższa wydajność. WordPress pełni rolę bezpiecznego
@@ -147,13 +156,17 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                 class="shine group h-auto p-4 gap-3 flex flex-col items-start border rounded-lg hover:scale-105 hover:bg-yellow-400/10 border-yellow-400/20 transition-all duration-300 ease-in-out relative"
               >
                 <div class="w-full z-10 relative">
+                  <div class="absolute top-0 right-0 opacity-10">
+                    <i class="ph ph-file-html text-6xl text-gray-300"></i>
+                  </div>
+
                   <div
                     class="text-sm capitalize px-3 py-1 rounded-full border border-yellow-400/50 text-yellow-200 w-max"
                   >
-                    🧱 Static
+                    Static
                   </div>
                   <div class="font-semibold mt-3 mb-3 text-white text-xl">
-                    ✨ Strona Statyczna
+                    Strona Statyczna
                   </div>
                   <div class="text-sm text-gray-400">
                     Rozwiązanie dla wymagających szybkości. Wykorzystanie
@@ -181,6 +194,63 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                 </div>
               </div>
             </div>
+
+            <div class="flex justify-center my-4">
+              <i
+                class="ph ph-arrow-down text-2xl animate-bounce"
+              ></i>
+            </div>
+
+            <!-- All stuff thingy -->
+            <div class="animate">
+              <div
+                class="relative overflow-hidden rounded-lg border border-indigo-500/30 p-6 hover:bg-indigo-900/10 hover:scale-105 transition-all duration-300 ease-in-out"
+              >
+                <div class="relative z-10">
+                  <div class="flex items-center gap-3 mb-4">
+                    <h3 class="font-semibold text-white text-lg">
+                      Kompleksowy pakiet w cenie projektu
+                    </h3>
+                  </div>
+
+                  <p class="text-sm text-gray-300 mb-6 leading-relaxed">
+                    Wybierając współpracę ze mną, nie otrzymujesz tylko kodu.
+                    Każdy projekt to w pełni przygotowane, bezpieczne i
+                    zoptymalizowane środowisko pracy:
+                  </p>
+
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+                    <div class="flex items-center gap-2 text-indigo-200">
+                      <i class="ph ph-rocket-launch text-base"></i>
+                      <span><strong>Stabilny hosting</strong> WWW</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-indigo-200">
+                      <i class="ph ph-package text-base"></i>
+                      <span>Projekt gotowy pod <strong>deploy</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2 text-indigo-200">
+                      <i class="ph ph-shield-check text-base"></i>
+                      <span>Zabezpieczenia <strong>CrowdSec</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2 text-indigo-200">
+                      <i class="ph ph-wrench text-base"></i>
+                      <span
+                        >Ciągłe <strong>poprawki i optymalizacje</strong></span
+                      >
+                    </div>
+                    <div
+                      class="flex items-center gap-2 text-indigo-200 col-span-full"
+                    >
+                      <i class="ph ph-envelope-simple text-base"></i>
+                      <span
+                        >Pełna konfiguracja <strong>domeny i poczty</strong
+                        ></span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -204,11 +274,11 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                   <div
                     class="text-sm capitalize px-3 py-1 rounded-full border border-white/25"
                   >
-                    ⌨️ Server Management
+                    Server Management
                   </div>
                 </div>
                 <div class="font-semibold mt-3 mb-3 text-white">
-                  🗃️ Profesjonalna Opieka Serwera
+                  Profesjonalna Opieka Serwera
                 </div>
                 <div class="text-sm">
                   Hosting, konfiguracja i bezpieczeństwo - bez kompromisów. <br
@@ -309,11 +379,11 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                     <div
                       class="text-sm capitalize px-3 py-1 rounded-full border border-white/25"
                     >
-                      🖨️ 3D Printing
+                      3D Printing
                     </div>
                   </div>
                   <div class="font-semibold mt-3 mb-3 text-white">
-                    ⚙️ Średnie Wydruki 3D
+                    Wydruki 3D
                   </div>
                   <div class="text-sm">
                     Potrzebujesz wydrukować coś w 3D lub stworzyć model? <br />
@@ -324,7 +394,7 @@ import BackgroundFX from "@components/page_effects/BackgroundFX.astro";
                       <div class="flex items-center gap-2">
                         <i class="ph ph-arrows-out text-xl"></i>
                         <span>
-                          Max <strong>250 x 250 x 250 mm³</strong>
+                          Max <strong>330 x 320 x 325 mm³</strong>
                         </span>
                       </div>
 
