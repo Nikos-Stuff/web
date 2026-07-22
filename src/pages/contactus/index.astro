@@ -1,7 +1,7 @@
 ---
 // export const prerender = false;
 import PageLayout from "@layouts/PageLayout.astro";
-import { SITE } from "@consts";
+import { SITE, SOCIALS } from "@consts";
 import TwinklingStars from "@components/TwinklingStars.astro";
 import MeteorShower from "@components/MeteorShower.astro";
 
@@ -48,6 +48,29 @@ import POD from "@components/POD.astro";
   </section>
 
   <div class="relative">
+    <FancyDiv margin_bottom="10" isAnimated={true}>
+      <section class="animate space-y-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto">
+          {
+            SOCIALS.map((social) => (
+              <a
+                href={social.HREF}
+                target="_blank"
+                class="flex justify-between items-center px-4 py-3 rounded-lg border border-white/5 bg-neutral-900/20 hover:bg-neutral-900/50 hover:border-white/10 transition-all text-sm group"
+              >
+                <span class="text-neutral-400 group-hover:text-white transition-colors">
+                  {social.NAME}
+                </span>
+                <span class="text-xs text-neutral-500 font-mono truncate max-w-40">
+                  {social.TEXT}
+                </span>
+              </a>
+            ))
+          }
+        </div>
+      </section>
+    </FancyDiv>
+
     <FancyDiv isAnimated={true} theme="default_big" margin_bottom="10">
       <div class="transition-all">
         <p
